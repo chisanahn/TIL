@@ -10,8 +10,8 @@
 
 ### Algorithm
 
-> - 종만북
-> - ICPC 준비
+> - [종만북](https://github.com/chisan01/Algorithm/tree/main/%EC%A2%85%EB%A7%8C%EB%B6%81)
+> - [ICPC 준비](https://github.com/chisan01/Algorithm/tree/main/ICPC)
 
 ### JavaScript
 
