@@ -155,3 +155,93 @@ CSS 코드는 .css 파일 말고도 다양한 곳에서 적용될 수 있다.
 ```
 
 ### 5. CSS layout 관련
+
+> CSS box model: CSS는 HTML의 요소들을 padding, borders, margins 등의 다양한 속성을 가진 하나의 box로 취급한다.
+
+    HTML에서 요소(elements)와 태그(tags)
+    : 혼용해서 쓰는 경우가 많기는 하지만 정확하게는 "요소 = 태그 + 그 사이의 내용"이다.
+
+> box는 크게 두 가지 종류가 있다. block, inline  
+> HTML의 모든 요소들은 default box type이 있는데 예를 들어 \<p>, \<h1> 등은 block-level elements, \<strong>, \<em> 등은 inline elements이다.
+
+> CSS의 background-color 속성을 이용하면 각각의 box들의 영역을 더 직관적으로 이해할 수 있다.
+
+- Block box들은 항상 그 전 block element의 밑에 위치한다. 이것을 HTML 문서의 "natural" 혹은 "static" flow라고 한다.
+- Block box들의 너비는 부모 container에 의해 자동으로 결정된다.
+- Block box들의 높이는 box안의 내용물을 기반으로 결정된다.
+- Inline box들은 레이아웃을 결정하는데 사용하지 않는다. box 안의 내용물을 디자인하는데 사용된다.
+- Inline box들의 너비는 그 안의 내용물을 기반으로 결정된다.
+
+> CSS의 display 속성을 이용해 box type을 덮어씌울 수 있다.
+
+```css
+em,
+strong {
+  background-color: #b2d6ff;
+  display: block;
+}
+```
+
+> 기본적으로 inline boxes인 \<a>요소를 버튼으로 바꾸거나 \<img/> 요소를 관리할 떄 유용하게 사용할 수 있다.
+
+- Margin > Border > Padding > Content
+
+> **Content** - 요소 안의 글자, 사진 등의 내용물
+
+> **Padding** - box 안의 content와 border 사이의 빈 공간
+
+```css
+h1 {
+  padding: 50px;
+}
+```
+
+> padding-top과 같은 속성을 사용해 더 세세하게 설정할 수 있다. 그리고 px뿐만 아니라 em 등 다양한 단위를 사용할 수 있다.  
+> 또한, padding의 속성을 간편하게 정의할 수 있는 shorthand도 존재한다.
+
+```css
+h1 {
+  padding: 20px 10px; /* Vertical  Horizontal */
+}
+p {
+  padding: 20px 0 20px 10px; /* Top  Right  Bottom  Left */
+}
+```
+
+> **Border** - box의 padding과 margin 사이의 선
+
+> Border를 정의하기 위해서는 새로운 문법이 사용된다.  
+> border: size, style, color
+
+```css
+h1 {
+  border: 1px solid #5d6063;
+}
+```
+
+> padding처럼 border-bottom과 같은 속성이 존재해 더 세세한 설정이 가능하다.
+
+> border를 이용하면 box의 padding, margin을 명확하게 확인할 수 있어 디버깅을 할 때 유용하게 사용할 수 있다.
+
+> **Margin** - box와 다른 box들 사이의 공간
+
+```css
+p {
+  margin-bottom: 50px;
+}
+```
+
+> margin도 마찬가지로 margin-bottom과 같은 속성이 존재해 세세한 설정이 가능하다.  
+> 또한 padding처럼 shorthand가 존재한다.
+
+> padding과 margin의 차이점
+>
+> 1. margin은 배경색이 항상 투명하다.
+> 2. margin은 클릭영역에 포함되지 않는다.
+> 3. margin collapse vertically
+
+> inline element에서 상하 margin은 무시된다. 또한 inline element의 padding은 해당 inline element가 포함된 box들의 크기에 영향을 미치지도 않는다.  
+> 왜냐하면 inline element는 block box 안에 있는 내용물에 영향을 미치기 때문에 페이지의 레이아웃에 주는 영향이 제한적이기 때문이다.  
+> 따라서 상하의 여백을 조절하기 위해서는 block-level element의 속성을 조절해야한다.(parent block box를 조절하거나 box type을 inline에서 block을 바꾼다.)
+
+>
