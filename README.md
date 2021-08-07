@@ -104,3 +104,71 @@ if (k > 1) cout << k << "\n";
 ```
 
 > 나중에 정렬을 해줄 필요가 없어서 수행시간을 단축할 수 있다.
+
+#### 모둘러 연산
+
+> 아주 큰 정수가 계산 과정에 나오는 경우  
+> 아주 작은 유리수를 다루는 경우
+
+- 연산들의 구현(modular int)
+  - 연산할때마다 결과에 모듈러 연산을 적용
+  - 기초 연산들을 함수로 구현
+  - Modular int 구조체를 만들어 사용  
+    (보통 레퍼런스 노트를 가지고 문제를 풀 때 사용)
+
+```c++
+const long long MOD = 998244353;
+//상수로 만들면 소수를 직접 입력하는 것보다 실수를 줄일 수 있다.
+//C++에서는 const를 쓰는 것이 #define을 쓰는 것보다 수행시간이 빠르다.
+long long madd(long long a, long long b) {
+  return (a + b) % MOD;
+}
+long long msub(long long a, long long b) {
+  return (a - b + MOD) % MOD;
+}
+long long mmul(long long a, long long b) {
+  return (a * b) % MOD;
+}
+```
+
+> 뺄셈의 경우 결과값이 음수가 될 수 있으므로 (a-b)%p의 경우 (a-b+p)%p로 게산하는것이 편리하다.
+
+> 곱셈의 경우 오버플로우가 발생할 수 있어서 64-bit 정수 자료형(long long)을 사용하는 것이 안전하다.
+
+> 나눗셈. 곡셈의 역원.  
+> 조합론에서 큰 수로 이루어진 분수를 약분해야 할 때 유용하게 사용할 수 있다.  
+> 페르마의 소정리 사용.
+
+- 페르마의 소정리
+
+> a^p = a mod p  
+> a \* a^(p-2) = 1 mod p  
+> 여기서 a^(p-2)를 a에 대한 곰셈의 역원이라고 한다.
+
+> 미트마스크를 이용한 방식은 이해하지 못함.
+
+[BOJ 13977 이항 계수와 쿼리](https://www.acmicpc.net/problem/13977)
+
+> 예제를 출력할때 터무니 없이 큰 값이 나온다. <del>아직 모듈러 연산에서 곱셈 역원을 잘 이해하지 못해서 구현에 실패한 것 같다.</del> modpow 연산을 잘못 구현했었다.
+
+> ![분할 정복을 통한 거듭제곱 예시](./pow_example.jpg)
+
+> 시간초과 - 큰 수의 팩토리얼을 구하는 만큼 미리 팩토리얼을 구해서 배열로 저장해 놓아야 한다.
+> (그런데 팩토리얼을 벡터로 저장하면 오류가 나지 않는데 배열로 저장하면 stack overflow 오류가 나는데 이유를 잘 모르겠다.)
+
+```c++
+ll fact[4000001];
+fact[0] = 1;
+for (int i = 1; i < 4000001; i++) {
+  fact[i] = mmul(fact[i - 1], i, MOD);
+}
+```
+
+> ![배열 사용시 stack overflow](./stack_overflow.png)
+
+> 그리고 앞에서 쓴적이 있는 cin, cout 실행 시간 개선 코드를 추가해줘야한다.
+
+```c++
+  ios_base::sync_with_stdio(0);
+  cin.tie(0);
+```
