@@ -240,8 +240,59 @@ p {
 > 2. margin은 클릭영역에 포함되지 않는다.
 > 3. margin collapse vertically
 
-> inline element에서 상하 margin은 무시된다. 또한 inline element의 padding은 해당 inline element가 포함된 box들의 크기에 영향을 미치지도 않는다.  
+> inline element에서 상하 margin은 무시된다. 또한 inline element의 padding은 해당 inline element가 포함된 box들의 크기에 영향을 미치지도 않는다.
 > 왜냐하면 inline element는 block box 안에 있는 내용물에 영향을 미치기 때문에 페이지의 레이아웃에 주는 영향이 제한적이기 때문이다.  
 > 따라서 상하의 여백을 조절하기 위해서는 block-level element의 속성을 조절해야한다.(parent block box를 조절하거나 box type을 inline에서 block을 바꾼다.)
 
+- vertical margin collapse
+
+> 수직으로 겹치는 box들의 margin은 그 중에서 값이 더 큰 margin만 표시된다.
 >
+> 1. box사이에 보이지 않는 element를 추가해서 이를 막을 수 있다. (단, 높이가 0이 아니여야한다.)
+> 2. padding이 사용되지 않는 경우 padding은 겹침 현상이 없으므로 padding을 사용한다.
+> 3. 위나 아래 중 한가지 margin만 사용한다.
+> 4. flexbox
+
+- "container" element - \<div>, \<span>
+
+> 일반적인 HTML의 element와 달리 오직 디자인에만 영향을 미치는 element
+
+> \<div>는 block-level, \<span>은 inline
+
+width, height property
+
+box-sizing property  
+box size에 border나 padding을 포함시킬지 설정 가능  
+border-box를 사용하는 것이 더 직관적이긴 하다.
+
+```css
+div {
+  width: 200px;
+  box-sizing: border-box;
+}
+```
+
+block-level 정렬
+
+- auto-margins: 가운데 정렬
+
+```css
+div {
+  width: 200px;
+  box-sizing: border-box;
+  margin: 20px auto;
+}
+```
+
+- floats: 왼/오 정렬
+- flexbox: 종합
+
+브라우저마다 기본 style이 있는데 통일성 있는 디자인을 위해서는 기본 style을 reset 하고 시작하는 것이 좋다.
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+```

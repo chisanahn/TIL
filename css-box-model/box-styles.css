@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 h1,
 p {
   background-color: #dde0e3;
@@ -16,9 +22,29 @@ h1 {
 
 p {
   padding: 20px 0 20px 10px;
+
+  margin-top: 25px;
   margin-bottom: 50px;
 }
 
 strong {
-  padding: 50px;
+  margin: 50px;
+}
+
+div {
+  color: #fff;
+  background-color: #5995da;
+  font-weight: bold;
+  padding: 20px;
+  text-align: center;
+  border: 2px solid #5d6063;
+  border-radius: 5px;
+
+  width: 200px;
+  box-sizing: border-box;
+  margin: 20px auto;
+}
+
+body {
+  text-align: center;
 }
