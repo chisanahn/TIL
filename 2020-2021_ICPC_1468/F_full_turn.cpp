@@ -21,20 +21,19 @@ int main() {
 
 			int v1 = x - u, v2 = y - v;
 			// 벡터 크기 통일
-			int abs_v1 = abs(v1), abs_v2 = abs(v2);
-			if (v1 == 0) v2 /= abs_v2;
+			if (v1 == 0) v2 /= abs(v2);
 			else if (v2 == 0) v1 /= abs(v1);
-			else if (abs_v1 > abs_v2 && v1 % v2 == 0) {
-				v1 /= abs_v2;
-				v2 /= abs_v2;
+			else if (abs(v1) > abs(v2) && v1 % v2 == 0) {
+				v1 /= abs(v2);
+				v2 /= abs(v2);
 			}
-			else if (abs_v1 < abs_v2 && v2 % v1 == 0) {
-				v1 /= abs_v1;
-				v2 /= abs_v1;
+			else if (abs(v1) < abs(v2) && v2 % v1 == 0) {
+				v1 /= abs(v1);
+				v2 /= abs(v1);
 			}
-			else if (abs_v1 == abs_v2) {
-				v1 /= abs_v1;
-				v2 /= abs_v2;
+			else if (abs(v1) == abs(v2)) {
+				v1 /= abs(v1);
+				v2 /= abs(v2);
 			}
 
 			people.push_back({ v1, v2 });
