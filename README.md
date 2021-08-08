@@ -6,7 +6,7 @@ ICPC 대회 준비
 
 ### 1주차 강의 - 정수론
 
-이론 강의를 진행하기전 Codeforces Round #713 (Div. 3)를 1h30m 동안 풀어보는 시간을 가졌는데 7문제 중 3문제를 풀었다.
+이론 강의를 진행하기전 [Codeforces Round #713 (Div. 3)](https://codeforces.com/group/sPvRZDMiQz/contest/1512)를 1h30m 동안 풀어보는 시간을 가졌는데 7문제 중 3문제를 풀었다.
 
 #### 소인수분해, 에라토스테네스의 체
 
@@ -172,3 +172,11 @@ for (int i = 1; i < 4000001; i++) {
   ios_base::sync_with_stdio(0);
   cin.tie(0);
 ```
+
+#### 1주차 과제
+
+[2020-2021 ICPC, NERC, Southern and Volga Russian Regional Contest (Online Mirror, ICPC Rules)](https://codeforces.com/group/sPvRZDMiQz/contest/1468)
+
+> 14문제 중 3문제 해결. 3문제는 시도했지만 실패.
+
+> F문제에서 시간 초과 오류가 났는데 알고리즘을 어떻게 개선해야 할지 감이 잡히지 않는다. 종만북 등의 방법을 통해 필수 알고리즘을 빨리 숙지해야 할 것 같다.
