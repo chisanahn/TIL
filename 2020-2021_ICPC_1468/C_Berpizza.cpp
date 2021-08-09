@@ -9,12 +9,6 @@ struct customer {
 	int money;
 };
 
-struct time_compare {
-	bool operator()(customer& a, customer& b) {
-		return a.index > b.index;
-	}
-};
-
 struct money_compare {
 	bool operator()(customer& a, customer& b) {
 		if (a.money != b.money)
@@ -25,7 +19,7 @@ struct money_compare {
 
 int main() {
 	// 먼저 온 순서대로 저장
-	priority_queue<customer, vector<customer>, time_compare> time_q;
+	queue<customer> time_q;
 	// VIP 고객 순서대로 저장
 	priority_queue<customer, vector<customer>, money_compare> money_q;
 	// 주문을 받았는지 여부 저장.
@@ -48,10 +42,10 @@ int main() {
 			money_q.push(new_customer);
 		}
 		else if (sort == 2) {
-			customer ret = time_q.top();
+			customer ret = time_q.front();
 			time_q.pop();
 			while (ordered[ret.index - 1] != 0) {  // 3번 웨이터가 이미 주문을 받은 손님 예외 처리
-				ret = time_q.top();
+				ret = time_q.front();
 				time_q.pop();
 			}
 			ordered[ret.index - 1] = 1;
