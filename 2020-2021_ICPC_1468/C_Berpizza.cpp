@@ -17,7 +17,9 @@ struct time_compare {
 
 struct money_compare {
 	bool operator()(customer& a, customer& b) {
-		return a.money < b.money;
+		if (a.money != b.money)
+			return a.money < b.money;
+		return a.index > b.index;
 	}
 };
 

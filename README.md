@@ -184,4 +184,5 @@ for (int i = 1; i < 4000001; i++) {
 > C문제 풀어보기.  
 > [우선순위 큐 사용해보기](https://codingdog.tistory.com/entry/c-priority-queue-%EC%98%88%EC%A0%9C-compare-%EA%B5%AC%EC%A1%B0%EC%B2%B4%EB%A7%8C-%EC%9E%98-%EC%A0%95%EC%9D%98%ED%95%A9%EC%8B%9C%EB%8B%A4)  
 > 시간순, 금액순 우선순위큐 2개랑 주문을 받았는지 체크하는 벡터1개를 사용해서 구현.  
-> test 6에서 실패
+> test 6에서 실패  
+> 3번웨이터가 손님의 돈이 같으면 더 빨리 온 손님을 받는다는 조건을 빼먹었다. **문제를 꼼꼼히 읽자...**
