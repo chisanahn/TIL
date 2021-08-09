@@ -216,7 +216,7 @@ for (int i = 1; i < 4000001; i++) {
 
 > 실패 - 문제를 잘못 이해했었다...
 
-> 1주차 과제 [F. Full Turn](https://codeforces.com/group/sPvRZDMiQz/contest/1468/problem/F)  
+[1주차 과제 - F. Full Turn](https://codeforces.com/group/sPvRZDMiQz/contest/1468/problem/F)  
 > 강사님의 설명을 들으니깐 풀이 자체는 동일한것같은데 구현을 잘못해서 틀린거같다.
 
 - **실패** - int형을 쓰면 뒤쪽 test case에서 실패. override 때문이려나.
