@@ -204,6 +204,7 @@ long long mmul(long long a, long long b) {
 
 > 시간초과 - 큰 수의 팩토리얼을 구하는 만큼 미리 팩토리얼을 구해서 배열로 저장해 놓아야 한다.
 > (그런데 팩토리얼을 벡터로 저장하면 오류가 나지 않는데 배열로 저장하면 stack overflow 오류가 나는데 이유를 잘 모르겠다.)
+> **vector는 범위를 벗어나면 자동으로 종료하는 기능이 있다고 하니 배열로 구현할때 범위를 벗어나게 코드를 짰는지 다시 한번 살펴볼것.**
 
 ```c++
 ll fact[4000001];
@@ -262,7 +263,7 @@ for (int i = 1; i < 4000001; i++) {
 
 > 실패 - 문제를 잘못 이해했었다...
 
-> 1주차 과제 [F. Full Turn](https://codeforces.com/group/sPvRZDMiQz/contest/1468/problem/F)  
+[1주차 과제 - F. Full Turn](https://codeforces.com/group/sPvRZDMiQz/contest/1468/problem/F)  
 > 강사님의 설명을 들으니깐 풀이 자체는 동일한것같은데 구현을 잘못해서 틀린거같다.
 
 - **실패** - int형을 쓰면 뒤쪽 test case에서 실패. override 때문이려나.
