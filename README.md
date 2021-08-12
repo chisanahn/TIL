@@ -146,6 +146,7 @@ if (k > 1) cout << k << "\n";
 [BOJ 1747 소수&팰린드롬](https://www.acmicpc.net/problem/1747)
 
 > [실패](https://www.acmicpc.net/submit/1747/32097156) - 소수인지 체크하는 함수, 팰린드롬인지 체크하는 함수를 만들어서 N부터 1씩 증가시키면서 찾는 방식으로 구현했다. 시간초과는 나올 수도 있을거라고 생각했는데 그냥 틀렸다고 나와버려서 좀 막막하다.
+> [해결!](https://www.acmicpc.net/submit/1747/32136437) - 소수를 체크하는 함수에서 2보다 작은 수에 대한 예외처리를 하지않아서 오답이 나왔었다.
 
 [BOJ 어려운 소인수분해](https://www.acmicpc.net/problem/16563)
 
@@ -296,3 +297,11 @@ bool operator<(const 클래스명& 변수명) const
 
     pair 클래스의 경우 sort 알고리즘에 의해 정렬이 가능하기 때문에 2가지 값을 묶어서 사용할떄는 구조체보다 편리하게 사용할 수 있다.
     (첫번째 인자 기준, 첫번쨰가 같으면 두번째 인자로 판단)
+
+#### 2주차 과제
+
+[2018-2019 ICPC, NEERC, Southern Subregional Contest (Online Mirror, ACM-ICPC Rules, Teams Preferred)](https://codeforces.com/group/sPvRZDMiQz/contest/1070)
+
+D - 해결. H - 시간초과, K - 오답(문제에서 출력을 Yes랑 No로 하라고 했는데 YES랑 NO를 출력해서 틀렸었다 ㅋㅋㅋㅋ. **문제를 잘 읽자**)
+
+####
