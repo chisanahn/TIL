@@ -255,7 +255,8 @@ p {
 
 - "container" element - \<div>, \<span>
 
-> 일반적인 HTML의 element와 달리 오직 디자인에만 영향을 미치는 element
+> 일반적인 HTML의 element와 달리 오직 디자인에만 영향을 미치는 element  
+> 따라서 페이지의 구조를 설계할때 정말 유용하다.
 
 > \<div>는 block-level, \<span>은 inline
 
@@ -274,7 +275,7 @@ div {
 
 block-level 정렬
 
-- auto-margins: 가운데 정렬
+- auto-margins: 가운데 정렬, 젤 간단하다.
 
 ```css
 div {
@@ -284,7 +285,7 @@ div {
 }
 ```
 
-- floats: 왼/오 정렬
+- floats: 왼쪽/오른쪽 정렬
 - flexbox: 종합
 
 브라우저마다 기본 style이 있는데 통일성 있는 디자인을 위해서는 기본 style을 reset 하고 시작하는 것이 좋다.
@@ -294,5 +295,117 @@ div {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+```
+
+### 6. CSS selectors
+
+그동안 사용했던건 "type selector"
+
+```css
+p {
+  font-size: 10px;
+}
+```
+
+> "class selector"  
+>  : 해당 클래스를 속성으로 가지고 있는 요소에만 적용이 된다.
+
+클래스 이름이 문서에 직접적인 영향을 주진 않지만 개발의 편의성을 위해 적절한 이름을 붙이는 것이 좋다.
+
+```html
+<p class="synopsis"></p>
+```
+
+```css
+.synopsis {
+  font-style: italic;
+}
+```
+
+> 8/11/2021 9:20PM - 서버 점검을 하는지 500 orgin error가 떴다.
+
+클래스를 여러개 사용할 수 있다. 공백으로 구분해서 사용.  
+적용되는 순서는 css 파일에서 정의된 순서. 뒤에서 정의된 클래스가 앞에서 정의된 클래스를 override. HTML 속성에서의 클래스의 순서는 상관없다.
+
+```html
+<div class="class1 class2">Contents</div>
+```
+
+HTML 요소 안의 요소를 특정해서 디자인하기 위해서 "descendant selectors"를 사용할 수 있다.
+
+```css
+.synopsis em {
+  font-style: normal;
+}
+
+h1 em {
+  /* Some other styles */
+}
+```
+
+> "pseudo-classes"  
+> : 유저의 동작에 따라 디자인을 설정. ex)하이퍼링크를 클릭하면 해당 링크의 색상 변경
+
+- interactive-link
+
+```css
+a:link {
+  color: #eeb75a;
+  text-decoration: none;
+}
+a:visited {
+  color: purple;
+}
+a:hover {
+  color: aqua;
+  text-decoration: underline;
+}
+a:active {
+  color: red;
+}
+```
+
+더 상세하게 설정할 수도 있음
+
+```css
+a:visited:hover {
+  color: orange;
+}
+a:visited:active {
+  color: red;
+}
+```
+
+- interactive-button
+
+```css
+.button:link,
+.button:visited {
+  display: block;
+  text-decoration: none;
+
+  color: #fff;
+  background-color: #5995da;
+  font-weight: bold;
+  padding: 20px;
+  text-align: center;
+  border: 2px solid #5d6063;
+  border-radius: 5px;
+
+  width: 200px;
+  margin: 20px auto;
+}
+
+.button:hover,
+.button:visited:hover {
+  color: #fff;
+  background-color: #76aeed;
+}
+
+.button:active,
+.button:visited:active {
+  color: #fff;
+  background-color: #5995da;
 }
 ```
