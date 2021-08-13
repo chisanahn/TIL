@@ -31,5 +31,7 @@ vscode, pycharm 등 다른 에디터의 경우도 비슷한 방법으로 설정�
 visual studio는 c++로 알고리즘 문제풀때만 사용해서 TIL에도 더 편하게 작성하고 vscode에 더 익숙해질겸 설정해봤다.
 
     설정하는 도중 ctrl+alt+c를 누르면 모든 창이 닫혀버려서 당황했는데   
-    알고보니 winsplit revolution이라는 프로그램에서 그렇게 설정되어 있어서 그런것이었다.
-    참고: https://www.sevenforums.com/general-discussion/107035-am-i-only-one-who-has-ctrl-alt-c-shortcut-3.html?s=6e564b46782027208221b4b938ecc884
+    알고보니 winsplit revolution이라는 프로그램에서 그렇게 설정되어 있어서 그런것이었다.   
+    참고: https://www.sevenforums.com/general-discussion/107035-am-i-only-one-who-has-ctrl-alt-c-shortcut-3.html?s=6e564b46782027208221b4b938ecc884   
+    단축키 설정하는김에 기능을 한번 살펴보니깐 유용한 기능도 몇개 발견했다.   
+    창 최소화 단축키 / 창 투명도 조절 / 창 맨 위에 표시
