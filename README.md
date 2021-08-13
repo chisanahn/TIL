@@ -40,3 +40,4 @@ visual studio는 c++로 알고리즘 문제풀때만 사용해서 TIL에도 더 
     
     터미널에서 한글이 깨져서 보이는 오류. encoding방식을 UTF-8로 설정하고 기본 터미널을 cmd를 UTF-8로 설정해서 사용하니깐 한글이 제대로 출력됐다.   
     https://meoru-tech.tistory.com/9   
+    그런데 실행 파일은 잘 만들어지는데 execute로 실행이 제대로 되지 않는다.
