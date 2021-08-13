@@ -35,3 +35,5 @@ visual studio는 c++로 알고리즘 문제풀때만 사용해서 TIL에도 더 
     참고: https://www.sevenforums.com/general-discussion/107035-am-i-only-one-who-has-ctrl-alt-c-shortcut-3.html?s=6e564b46782027208221b4b938ecc884   
     단축키 설정하는김에 기능을 한번 살펴보니깐 유용한 기능도 몇개 발견했다.   
     창 최소화 단축키 / 창 투명도 조절 / 창 맨 위에 표시
+    
+    g++로 컴파일할때 경로에서 \가 없어지면서 오류가 났는데 기본 터미널을 bash에서 다시 powershell로 바뀌니깐 오류가 해결됐다.
