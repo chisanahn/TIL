@@ -49,4 +49,5 @@ vscode, pycharm 등 다른 에디터의 경우도 비슷한 방법으로 설정�
 > -> 이 방법으로 하면 터미널을 열때는 잘 바뀌는데 execute로 실행할때는 cmd.exe를 바로 실행시켜버려서 적용이 안되는 것 같다.   
 > 
 > 결국 레지스트리에 cmd를 실행시키면 자동으로 `chcp 65001`이 실행되도록 Autorun항목을 추가했다. https://ryanking13.github.io/2018/09/03/cmd-deafult-command.html
-
+> 
+> [디버깅할때 WATCH에서 동적할당된 array 보는 방법](https://stackoverflow.com/questions/63278898/how-to-watch-char-values-of-strings-pointed-by-a-pointer-to-pointers-in-debugger)
