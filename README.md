@@ -53,3 +53,4 @@ vscode, pycharm 등 다른 에디터의 경우도 비슷한 방법으로 설정�
 > [디버깅할때 WATCH에서 동적할당된 array 보는 방법](https://stackoverflow.com/questions/63278898/how-to-watch-char-values-of-strings-pointed-by-a-pointer-to-pointers-in-debugger)
 > 
 > [c++ code formatting](https://code.visualstudio.com/docs/cpp/cpp-ide) `Shift+Alt+F`
+> auto-formatting: setting -> editor.formatOnType
