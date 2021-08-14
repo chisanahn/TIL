@@ -1,3 +1,7 @@
+#button-2 {
+  background-color: #d55c5f;
+}
+
 .synopsis {
   color: #7e8184;
   font-style: italic;
@@ -94,4 +98,17 @@ a:visited:active {
 .call-to-action:active,
 .call-to-action:visited:active {
   background-color: #eeb75a;
+}
+
+p:last-of-type {
+  margin-bottom: 50px;
+}
+
+.page > p:first-of-type {
+  color: #7E8184;
+  font-style: italic;
+}
+
+#button-2 {
+  color: #5d6063;
 }

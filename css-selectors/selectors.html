@@ -4,14 +4,6 @@
     <meta charset="UTF-8"/>
     <title>CSS Selectors</title>
     <link rel="stylesheet" href="styles.css"/>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-    </style>
   </head>
   <body>
     <div class="page">
@@ -30,7 +22,14 @@
       </p>
       
       <a class="button" href="nowhere.html">Button One</a>
-      <a class="button call-to-action" href="nowhere.html">Button Two</a>
+      <a id="button-2" class="button call-to-action" href="nowhere.html">Button Two</a>
+
+      <div class="sidebar">
+        <p>If this page had a sidebar...</p>
+        <p>We'd have some problems with pseudo-classes.</p>
+      </div>
+
+      <a href="#button-2">Go to Button Two</a>
     </div>
   </body>
 </html>

@@ -410,3 +410,51 @@ a:visited:active {
   background-color: #5995da;
 }
 ```
+
+- pseudo-classes for structure   
+: HTML에 따로 클래스를 추가하지 않고도 특정 요소만 디자인하고 싶을 때에도 유용하게 사용할 수 있다.
+```css
+p:last-of-type {
+  margin-bottom: 50px;
+}
+```
+child selector를 사용해서 특정 container에만 적용할수도 있다.
+```css
+.page > p:first-of-type {
+  color: #7E8184;
+  font-style: italic;
+}
+```
+
+- ID selectors   
+: class selectors와 비슷하지만 ID selectors는 재사용이 되지 않는다.
+```html
+<a id='button-2' class='button'>Button Two</a>
+```
+```css
+#button-2 {
+  color: #5D6063;
+}
+```
+
+- URL fragments   
+: 페이지의 특정 부분을 가리키는 링크   
+TIL을 작성할때 README.md에서도 이런 기능을 활용해서 목차를 만들 수 있다.
+```html
+<a href="#button-2">Go to Button Two</a>
+```
+ID selectors를 사용하면 안 좋은 이유 중에 하나이기도 하다.   
+HTML과 CSS의 통일성을 해치면서 유지 보수가 어려워진다.
+
+
+- CSS specificity
+CSS는 기본적으로 위에서 아래 순으로 override 되면서 적용되는데   
+그 이전에 selector의 종류에 따라서 우선순위가 결정된다.
+* `#button-2`
+* `.button:link`
+* `a:link` and `.synpsis em`
+* `.button`
+* a
+
+이러한 순서 때문에 개발하면서 굉장히 헷갈리는 경우가 많은데   
+그래서 보통 "**BEM**"(class selector만을 사용) 등과 같은 방법을 주로 사용한다.
