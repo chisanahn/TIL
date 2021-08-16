@@ -23,3 +23,8 @@
 [BOJ 1018 체스판 다시 칠하기](https://www.acmicpc.net/problem/1018) - 성공   
 >https://www.acmicpc.net/submit/1018/32219355 성공한 코드들이랑 다를게 없는 거 같은데 채점해보면 틀렸다고 나온다.
 
+[BOJ 15829 Hashing](https://www.acmicpc.net/problem/15829)   
+> 성공 - modular 연산만 잘 알고 있다면 쉽게 풀수있는 것 같다.   
+
+[BOJ 1436 영화감독 숌](https://www.acmicpc.net/problem/1436)
+> 몇번째 숫자를 어떻게 구해야할지 생각하기가 좀 어려웠다.
