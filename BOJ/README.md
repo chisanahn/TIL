@@ -45,7 +45,7 @@
 > 성공. stack만 안다면 쉽게 풀 수 있는 문제인것 같다.
 
 [BOJ 2108 통계학](https://www.acmicpc.net/problem/2108)
-> 보류.
+> 성공. 엄청 간단할 줄 알았는데 최빈값을 어떻게 구할지 생각이 잘 안나서 좀 힘들었다.
 
 [BOJ 4949 The Balance of the World](https://www.acmicpc.net/problem/4949)
 > 성공. 괄호 종류만 2개로 늘어나고 전에 풀어봤던 문제랑 비슷해서 수월하게 풀 수 있었다.
