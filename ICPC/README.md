@@ -305,6 +305,14 @@ bool operator<(const 클래스명& 변수명) const
 
 D - 해결. H - 시간초과, K - 오답(문제에서 출력을 Yes랑 No로 하라고 했는데 YES랑 NO를 출력해서 틀렸었다 ㅋㅋㅋㅋ. **문제를 잘 읽자**)
 
+[H. BerOS File Suggestion](https://codeforces.com/group/sPvRZDMiQz/contest/1070/problem/H)
+> 강사님의 설명(문자열마다 해당 문자열의 substring을 다 만들어두고 체크.)을 듣고 다시 한번 풀어봤다.    
+> 메모리초과 - 이것저것 다 저장하느라 `vector<pair<string, map<string, int>>> files;` 이런 자료형을 사용해서 그런 것 같다.     
+
+> 강사님 코드에서 어떤 자료형을 사용했는지 참고해서 다시 시도.      
+> 실패 - 같은 문자열에서 substr이 중복되는 경우를 생각하지 못했다.   
+> 성공.
+
 #### 1주차 연습문제
 
 [BOJ 11689 GCD(n, k) = 1](https://www.acmicpc.net/problem/11689) - 성공(수많은 실패 후..)  

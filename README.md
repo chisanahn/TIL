@@ -34,3 +34,25 @@ bool operator<(const 클래스명& 변수명) const
 왜냐하면 pair 클래스의 경우 sort 알고리즘에 의해 정렬이 가능하기 때문에 그냥 사용할 수 있다.   
 (첫번째 인자 기준, 첫번째가 같으면 두번째 인자 기준으로 정렬한다.)
 
+#### 프로그램을 짜기전에 템플릿 미리 만들어두기.
+>`#include`   
+ `using`    
+ `cin, cout 최적화`   
+ 이러한 기초 환경을 템플릿처럼 만들어놓고 시작하면 시간도 줄이고 편리할 것 같다.
+
+#### vscode 괄호 자동 줄바꿈 설정
+> https://velog.io/@esmin/VSCode-Visual-Studio-Code%EC%97%90%EC%84%9C-C%EC%BD%94%EB%94%A9-%EC%A4%91%EA%B4%84%ED%98%B8-%EC%9E%90%EB%8F%99-%EC%A4%84%EB%B0%94%EA%BF%88-%EC%84%A4%EC%A0%95
+
+#### vscode c++ 빨간줄 끄기
+![ErrorSquiggles](C_Cpp-ErrorSquiggles.png)
+
+#### STL sort 사용자정의 비교함수 사용
+```c++
+bool comp(int a, int b) {
+  retrun a > b;
+}
+
+sort(v.begin(), v.end(), comp);
+```
+https://godog.tistory.com/entry/C-vector-%EC%98%A4%EB%A6%84%EC%B0%A8%EC%88%9C-%EB%82%B4%EB%A6%BC%EC%B0%A8%EC%88%9C-%EC%A0%95%EB%A0%AC
+
