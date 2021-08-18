@@ -471,7 +471,13 @@ block-level element들을 수평으로 배치할 수 있게 해준다.
 
 parent element를 기준으로 정렬된다.   
 
-float 속성을 가진 box-element는 normal flow에서 제거되면서 container의 높이에 영향을 미치지 않는다. 따라서 normal flow에 속해있는 다른 box-element 위에 표시되고 container에 floats만 있는 경우 높이가 0이 된다. (=> container의 배경색이 표시되지 않는다.)  
+* **content after a float**   
+>float 속성을 가진 box-element는 normal flow에서 제거되면서 container의 높이에 영향을 미치지 않는다.    
+
+>따라서 normal flow에 속해있는 다른 box-element 위에 표시된다.   
+(해당 box-element의 contents는 자동으로 겹치지 않는 곳으로 이동한다. 그리고 이때 해당 box-element에 `overflow: hidden` property를 사용하면 floats들의 세로 방향으로도 contents가 겹치지 않게 된다.)    
+
+>또한, container에 floats만 있는 경우 높이가 0이 된다. (=> container의 배경색이 표시되지 않는다.)  
    
 이를 해결하는 방법은 2가지가 있다.   
 1. clearing floats - clearing with child element
@@ -480,9 +486,14 @@ float 속성을 가진 box-element는 normal flow에서 제거되면서 containe
 동일한 container에 포함되어있어야 사용할 수 있다.
 
 2. hiding overflow = clearing with parent element
-container에 `overflow` propery를 이용해서 해당 container안의 floats들의 높이를 포함하도록 설정 할 수 있다.   
+container에 `overflow` property를 이용해서 해당 container안의 floats들의 높이를 포함하도록 설정 할 수 있다.   
 `overflow: hidden;`    
 
+* full-bleed layouts
+floats들을 가운데로 정렬하면서 full-bleed layout을 만들기 위해 2가지 container을 사용.    
+`배경설정 div > 가운데정렬 div > floats`
 
+px 대신 % 단위를 사용해서 parent element의 크기에 따라 사이즈를 설정할 수 있다. (responsive design)
 
-
+- floats for grids
+컨텐츠를 배치하기에 width가 부족하다면 자동으로 다음 줄로 넘어간다.
