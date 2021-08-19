@@ -5,13 +5,13 @@
 ### React
 
 참고 자료: https://www.taniarascia.com/getting-started-with-react/
-- [HTML&CSS 기초다지기](https://github.com/chisan01/HTML_CSS/tree/master)
+- [HTML&CSS 기초다지기](https://github.com/chisan01/TIL/tree/main/HTML_CSS)
 
-### [Algorithm](https://github.com/chisan01/Algorithm)
+### [Algorithm](https://github.com/chisan01/TIL/tree/main/Algorithm)
 
-- [종만북](https://github.com/chisan01/Algorithm/tree/master/JongmanBook)
-- [ICPC 준비 - 2021 SW개발능력향상 프로그램](https://github.com/chisan01/Algorithm/tree/master/ICPC)
-- [BOJ](https://github.com/chisan01/Algorithm/tree/master/BOJ)
+- [종만북](https://github.com/chisan01/TIL/tree/main/Algorithm/JongmanBook)
+- [ICPC 준비 - 2021 SW개발능력향상 프로그램](https://github.com/chisan01/TIL/tree/main/Algorithm/ICPC)
+- [BOJ](https://github.com/chisan01/TIL/tree/main/Algorithm/BOJ)
 
 ### JavaScript
 
