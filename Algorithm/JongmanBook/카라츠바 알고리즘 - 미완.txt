@@ -1,0 +1,120 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+// num[]의 자릿수 올림을 처리한다.
+void normalize(vector<int>& num) {
+	num.push_back(0);
+	// 자릿수 올림을 처리한다.
+	for (int i = 0; i < num.size() - 1; i++) {
+		if (num[i] < 0) {
+			int borrow = (abs(num[i]) + 9) / 10;
+			num[i + 1] -= borrow;
+			num[i] += borrow * 10;
+		}
+		else {
+			num[i + 1] -= num[i] / 10;
+			num[i] %= 10;
+		}
+	}
+	while (num.size() > 1 && num.back() == 0) num.pop_back();
+}
+
+vector<int> multiply(const vector<int>& a, const vector<int>& b) {
+	vector<int> c(a.size() + b.size() + 1, 0);
+	for (int i = 0; i < a.size(); i++) {
+		for (int j = 0; j < b.size(); j++) {
+			c[i + j] += a[i] * b[j];
+		}
+	}
+	normalize(c);
+	return c;
+}
+
+// a += b*(10^k)를 구현한다.
+// 1. 내가 구현한 거
+//void addTo(vector<int>& a, const vector<int>& b) {
+//	//b가 a보다 클 경우 고려
+//	for (int i = a.size(); i < b.size() + k; i++) a.push_back(0);
+//
+//	for (int i = 0; i < b.size(); i++) {
+//		a[i + k] += b[i];
+//	}
+//	normalize(a);
+//}
+// 2. 구글링해서 찾은 거
+void addTo(vector<int>& a, vector<int>& b, int k=0) {
+	int newsize = a.size() < b.size() + k ? b.size() + k : a.size();
+	while (a.size() != newsize) a.push_back(0);
+	for (int i = k; i < newsize; i++) {
+		a[i] = a[i] + b[i - k];
+	}
+	normalize(a);
+}
+
+// a-=b를 구현한다. a>=b를 가정한다.
+void subFrom(vector<int>& a, vector<int>& b) {
+	for (int i = 0; i < b.size(); i++) {
+		a[i] -= b[i];
+	}
+	normalize(a);
+}
+
+vector<int> karatsuba(const vector<int>& a, const vector<int>& b) {
+	int an = a.size(), bn = b.size();
+	// a가 b보다 짧을 경우 둘을 바꾼다.
+	if (an > bn) return karatsuba(b, a);
+
+	// 기저 사례: a나 b가 비어있는 경우
+	if (an == 0 || bn == 0) return vector<int>();
+	if (an <= 5) return multiply(a, b);
+
+	int half = an / 2;
+	//a와 b를 밑에서 half 자리와 나머지로 분리한다.
+	vector<int> a0(a.begin(), a.begin() + half);
+	vector<int> a1(a.begin() + half, a.end());
+	vector<int> b0(b.begin(), b.begin() + min(half, bn));
+	vector<int> b1(b.begin() + min(half, bn), b.end());
+
+	//z2 = a1*b1
+	vector<int> z2 = karatsuba(a1, b1);
+
+	//z0 = a0 * b0
+	vector<int> z0 = karatsuba(a0, b0);
+
+	//z1 = (a0 + a1) * (b0 + b1) - z0 - z2;
+	addTo(a0, a1); addTo(b0, b1);
+	vector<int> z1 = karatsuba(a0, b0);
+	subFrom(z1, z0);
+	subFrom(z1, z2);
+
+	vector<int> result;
+	addTo(result, z0);
+	addTo(result, z1, half);
+	addTo(result, z2, an);
+	
+	return result;	
+}
+
+int main() {
+	while (1) {
+		string temp;
+		vector<int> a, b;
+
+		cin >> temp;
+		for (int i = 1; i <= temp.size(); i++) a.push_back(temp[temp.size() - i] - '0');
+		cin >> temp;
+		for (int i = 1; i <= temp.size(); i++) b.push_back(temp[temp.size() - i] - '0');
+
+		vector<int> c = karatsuba(a, b);
+		for (int i = a.size() - 1; i >= 0; i--) cout << a[i];
+		cout << " * ";
+		for (int i = b.size() - 1; i >= 0; i--) cout << b[i];
+		cout << " = ";
+		for (int i = c.size() - 1; i >= 0; i--) cout << c[i];
+		cout << "\n";
+	}
+}

@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int cal_size(int index, int height, const vector<int>& fence) {
+	int size = 0;
+	for (int i = index; i < fence.size(); i++) {
+		if (fence[i] < height)
+			break;
+		size += height;
+	}
+	return size;
+}
+
+int reuse(int index, const vector<int>& fence) {
+	int result, max = 0;
+	for (int height = 1; height <= fence[index]; height++) {
+		result = cal_size(index, height, fence);
+		if (max < result) max = result;
+	}
+	return max;
+}
+
+int main() {
+	int C;
+	cin >> C;
+	while (C--) {
+		int N;
+		cin >> N;
+		vector<int> fence;
+		int temp;
+		for (int i = 0; i < N; i++) {
+			cin >> temp;
+			fence.push_back(temp);
+		}
+		int result, max = 0;
+		for (int i = 0; i < N; i++) {
+			result = reuse(i, fence);
+			if (max < result) max = result;
+		}
+		cout << max << "\n";
+	}
+}

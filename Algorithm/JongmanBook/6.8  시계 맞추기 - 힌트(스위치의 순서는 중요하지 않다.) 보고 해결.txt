@@ -1,0 +1,96 @@
+#include <iostream>
+#include <vector>
+
+#define INF 123456789
+
+using namespace std;
+
+// 시계의 시간
+int clocks_status[16];
+// 스위치별 연결된 시계
+vector<int> clock_by_switch[10] = {
+	{0, 1, 2},
+	{3, 7, 9, 11},
+	{4, 10, 14, 15},
+	{0, 4, 5, 6, 7},
+	{6, 7, 8, 10, 12},
+	{0, 2, 14, 15},
+	{3, 14, 15},
+	{4, 5, 7, 14, 15},
+	{1, 2, 3, 4, 5},
+	{3, 4, 5, 9, 13}
+};
+// 시계별 연결된 스위치
+//vector<int> switch_by_clock[16] = {
+//	{0, 3, 5},
+//	{0, 8},
+//	{0, 5, 8},
+//	{1, 6, 8, 9},
+//	{2, 3, 7, 8, 9},
+//	{}
+//};
+
+// 스위치를 눌렀을때 시계의 시간을 바꿔주는 함수
+void push_switch(int num) {
+	vector<int>::iterator it;
+	for (it = clock_by_switch[num].begin(); it != clock_by_switch[num].end(); it++) {
+		clocks_status[*it] = (clocks_status[*it] + 3 - 1) % 12 + 1;
+	}
+}
+
+// 스위치 누르기 전 상태로 복구
+void restore(int num) {
+	vector<int>::iterator it;
+	for (it = clock_by_switch[num].begin(); it != clock_by_switch[num].end(); it++) {
+		clocks_status[*it] = (clocks_status[*it] + 12 - 4) % 12 + 1;
+	}
+}
+
+// 전부 다 12시가 되기 위해서 돌아가야 하는 시계 수. 숫자 3인 시계는 3번 돌아가야 하므로 3으로 센다.
+int clock_count() {
+	int result = 0;
+	for (int i = 0; i < 16; i++) {
+		result += (12 - clocks_status[i]) / 3;
+	}
+	return result;
+}
+
+// 메인함수 - 경우의 수가 아닌 누르는 스위치 수를 반환하도록 수정하기.
+// 스위치별로 0번 1번 2번 3번 누르는 경우 고려해서 완전탐색. 4^10
+int cal(int num) {
+	int min = INF;
+	if (num == 10) {
+		if (clock_count() == 0) return 0;
+		else return -1;
+	}
+	 //모두 12시인 경우 0 반환.
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < i; j++) {
+			push_switch(num);
+		}
+		int next = cal(num + 1);
+		if (next != -1)
+			if (min > next + i)
+				min = next + i;
+		for (int j = 0; j < i; j++) {
+			restore(num);
+		}
+	}
+	if (min == INF)
+		return -1;
+	else
+		return min;
+}
+
+int main() {
+	int C;
+	cin >> C;
+	for (int testcase = 0; testcase < C; testcase++) {
+		for (int i = 0; i < 16; i++) {
+			cin >> clocks_status[i];
+		}
+
+		cout << cal(0) << endl;
+	}
+}

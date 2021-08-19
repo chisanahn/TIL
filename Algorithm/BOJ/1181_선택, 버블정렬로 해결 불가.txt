@@ -1,0 +1,85 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct linked_list {
+	char str[50];
+	struct linked_list* next;
+};
+
+struct linked_list* head;
+
+void input();
+void print();
+void deallocate();
+int overlap(struct linked_list* temp);
+
+int main() {
+	int N;
+	scanf("%d", &N);
+	for (int i = 0; i < N; i++) {
+		input();
+	}
+	print();
+	deallocate();
+}
+
+int overlap(struct linked_list* temp) {
+	struct linked_list* search;
+	search = head;
+	while (search != NULL) {
+		if (strcmp(temp->str,search->str)==0)
+			return 1;
+		search = search->next;
+	}
+	return 0;
+}
+
+void input() {
+	struct linked_list* temp, * previous, * search;
+	temp = (struct linked_list*)malloc(sizeof(struct linked_list));
+	scanf("%s", temp->str);
+
+	search = head;
+	previous = head;
+
+	if (overlap(temp) == 0) {
+		while (search != NULL) {
+			if (strlen(temp->str) < strlen(search->str))
+				break;
+			else if (strlen(temp->str) == strlen(search->str))
+				if (strcmp(temp->str, search->str) < 0)
+					break;
+			previous = search;
+			search = previous->next;
+		}
+		if (search == head) {
+			temp->next = head;
+			head = temp;
+		}
+		else {
+			temp->next = previous->next;
+			previous->next = temp;
+		}
+	}
+}
+
+void print() {
+	struct linked_list* temp;
+	temp = head;
+	while (temp != NULL) {
+		printf("%s\n", temp->str);
+		temp = temp->next;
+	}
+}
+
+void deallocate() {
+	struct linked_list* temp;
+	while (head != NULL) {
+		temp = head->next;
+		free(head);
+		head = temp;
+	}
+}

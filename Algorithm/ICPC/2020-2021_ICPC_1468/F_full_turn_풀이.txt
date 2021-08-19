@@ -1,0 +1,51 @@
+#include <iostream>
+#include <map>
+
+using namespace std;
+
+using ll = long long;
+
+// 유클리드 알고리즘 - 최대공약수(gcd)
+ll gcd(ll a, ll b) {
+	// 절댓값을 구할때 abs를 사용하는 것보다 따로 처리를 해주는것이 수행 시간 단축에 도움이 된다.
+	if (a < 0) a = -a;
+	if (b < 0) b = -b;
+	if (b == 0) return a;
+	// 만약 b가 a보다 크다면 아래 과정에서 swap이 되므로 따로 예외처리를 해줄 필요가 없다.
+	return gcd(b, a % b);
+}
+
+int main() {
+	int T;
+	cin >> T;
+	while (T--) {
+		int n;
+		cin >> n;
+		map<pair<ll, ll>, ll> people;
+		for (int i = 0; i < n; i++) {
+			ll x, y, u, v;
+			cin >> x >> y >> u >> v;
+
+			// 벡터 약분
+			ll v1 = x - u, v2 = y - v;
+			ll g = gcd(v1, v2);
+			v1 /= g;
+			v2 /= g;
+
+			pair<ll, ll> sight = { v1, v2 };
+			people[sight] += 1;  // 동일한 시야를 가지고 있는 사람들 묶어서 처리.
+		}
+		ll count = 0;
+		for (auto& p: people) {
+			auto& p_sight = p.first;
+			pair<ll, ll> sight_rev = { -p_sight.first, -p_sight.second };
+			if (people.find(sight_rev) != people.end()) {
+				// 이렇게 짜면 반복횟수를 줄일 수 있어서 수행시간을 단축할 수 있다.
+				// 맵으로 묶어서 처리한 경우: 3*3
+				// 벡터의 경우 1+1+1+...
+				count += p.second * people[sight_rev];
+			}
+		}
+		cout << count/2 << "\n";
+	}
+}

@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 무식하게 짜기
+// 시간복잡도 O(mf), 최대 4*10^10;
+// 멤버의 수: m, 팬의 수: f
+int hug_count(const string& member, const string& fan) {
+	int count = 0;
+	for (int start = 0; start <= fan.size() - member.size(); start++) {
+		int i;
+		for (i = 0; i < member.size(); i++) {
+			if (member[i] == 'M' && fan[start + i] == 'M')
+				break;
+		}
+		if (i == member.size()) count++;
+	}
+	return count;
+}
+
+int main() {
+	int C;
+	cin >> C;
+	while (C--) {
+		string member, fan;
+		cin >> member;
+		cin >> fan;
+		cout << hug_count(member, fan) << endl;
+	}
+}
