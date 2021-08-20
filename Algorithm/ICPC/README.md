@@ -507,3 +507,16 @@ max_index = max(len[max_index], len[i]);
 
 성공.
 
+### 연습문제   
+
+[BOJ 1912 연속합](https://www.acmicpc.net/problem/1912)    
+
+실패. 음수 다음에 양수를 더해서 0보다 커지는 경우를 고려하지 않았다.     
+
+성공. dp에 좀 익숙해져서 그런가 두번째 시도에서는 꽤 수월하게 풀었다.
+
+[BOJ 11051 이항 계수 2](https://www.acmicpc.net/problem/11051)    
+
+성공. dp를 이용해서 풀어봤다. (이항 계수 피라미드) 4ms
+
+성공. 모듈러 연산으로도 풀어봤다. 0ms     
