@@ -520,3 +520,21 @@ max_index = max(len[max_index], len[i]);
 성공. dp를 이용해서 풀어봤다. (이항 계수 피라미드) 4ms
 
 성공. 모듈러 연산으로도 풀어봤다. 0ms     
+
+[BOJ 11660 구간 합 구하기 5](https://www.acmicpc.net/problem/11660)    
+
+성공. 행마다 열의 누적합을 배열로 저장해서 풀었다. 392ms.    
+
+### 3주차 과제
+
+[2019-2020 ICPC, Asia Jakarta Regional Contest (Online Mirror, ICPC Rules, Teams Preferred)](https://codeforces.com/group/sPvRZDMiQz/contest/1252)    
+
+A문제 해결.    
+C(어떻게 풀어야할지 잘 모르겠다), H(오답), K(시간초과) 시도.    
+
+[BOJ 12852 1로 만들기 2](https://www.acmicpc.net/problem/12852)    
+
+성공. 60ms. 최소값이랑 다음 숫자를 각각 다른 배열에 저장해서 풀었다.
+
+[BOJ 9251 LCS](https://www.acmicpc.net/problem/9251)    
+
