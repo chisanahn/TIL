@@ -419,7 +419,7 @@ p:last-of-type {
 }
 ```
 
-child selector를 사용해서 특정 container에만 적용할수도 있다.
+child selector를 사용해서 특정 container에만 적용할수도 있다. `descendant selectors`와 비슷하지만 `descendant selectors`는 child 뿐만 아니라 grandchildren 등 모든 자식들을 포함한다는 차이점이 있다.
 
 ```css
 .page > p:first-of-type {
@@ -620,9 +620,76 @@ width: 300px;
 
 ```css
 .signup {
-  margin-left: auto;
+	margin-left: auto;
 }
 ```
-`flex-container`의 남는 공간을 `auto-margin`이 다 사용하기 때문에 div를 사용하지 않고도 특정 items들을 왼쪽, 오른쪽으로 나눠서 정렬할 수 있다.     
-위의 예시의 경우 .signup 클래스를 가진 flex-item을 기준으로 왼쪽, 오른쪽으로 정렬하게 된다.     
 
+`flex-container`의 남는 공간을 `auto-margin`이 다 사용하기 때문에 div를 사용하지 않고도 특정 items들을 왼쪽, 오른쪽으로 나눠서 정렬할 수 있다.  
+위의 예시의 경우 .signup 클래스를 가진 flex-item을 기준으로 왼쪽, 오른쪽으로 정렬하게 된다.
+
+## 9. Advanced positioning
+
+지금까지 우리가 사용했던 static 말고도 relative, absolute, fixed 총 3가지의 positioning scheme이 더 존재한다. 그리고 이것들을 활용해서 더 자세하게 위치를 지정할 수 있다.
+
+웹사이트의 대부분은 static으로 구성하되 relative, absolute를 추가적으로 사용한다면 유용하게 사용할 수 있다.
+
+### positioned elements
+
+>`position` property를 이용해서 element의 positioning scheme을 변경할 수 있다.  
+기본값은 static이고 기본값이 아닌 다른 positioning scheme을 가지고 있는 element를 `positioned elements`라고 부른다.
+
+### relative positioning
+
+>static을 기준으로 위치를 바꾸는 positioing scheme.  
+`top`, `bottom`, `left`, `right` property를 통해 기존 위치에서 얼만큼 움직일지 설정할 수 있다.    
+
+```css
+position: relative;
+top: 30px;
+left: 30px;
+```
+>위치만 변경되어서 나타나고 element 자체는 static flow에 동일하게 남아있다.     따라서 다른 element들은 영향을 받지 않는다.    
+page layout이 결정된 이후에 추가적으로 변경된다고 생각하는 것이 이해하기 좋다.    
+>
+>또한 값으로 음수를 설정할 수 있어 `top: -30px;`와 `bottom: 30px`는 같은 의미를 갖는다.
+
+### absolute positioning
+
+>`relative`와 비슷하지만 `absolute`는 브라우저 창을 기준으로 위치를 정할 수 있다.    
+
+```css
+position: absolute;
+top: 10px;
+left: 10px;
+```
+>`relative`와 마찬가지로 다른 element에 영향을 주지 않는다. 하지만 `relative`와 달리 해당 element는 static flow에서 완전히 제거된다. 따라서 위치가 겹치더라도 동일한 위치에 겹쳐서 나타난다.    
+>
+>이러한 특성 때문에 의도치않게 다른 element들을 가릴 수 있다는 단점이 있어서 보통 `relatively absolute`를 주로 사용한다.     
+
+### relatively absolute
+
+>`absolute` element는 자신이 속해있고 positioned element인 container 중 가장 가까운 것을 기준으로 위치를 결정한다. 그리고 만약 그러한 container가 없다면 browser를 기준으로 위치를 결정한다.    
+이러한 특성을 이용해서 주로 `absolute`의 container를 `relative` element로 만들어서 사용한다.
+
+### fixed positioning
+
+>`absolute`와 비슷하지만 scroll되지 않고 위치가 고정되어있다는 차이점이 있다.    
+
+### positioned elements for animation
+
+>`positioned elements`는 다른 element에 영향을 주지 않기 때문에 JS를 이용해서 animation 효과를 줄 때 유용하게 사용할 수 있다.    
+
+### Z-index
+
+>`positioned elements`에 한해서 `z-index` property로 element의 depth(몇 번째로 표시될건지)를 설정할 수 있다.    
+
+### positioned elements for menus
+
+>menu를 만들때 `ul`, `li` 등의 element를 사용해서 semantic하게 만드는 것이 좋다.    
+>
+>flexbox, positioned elements, z-index, pseudo-class 등을 이용해서 만들 수 있다.    
+>
+>다음의 property를 활용해서 선택적으로 element를 표시할 수 있다.
+>- `cursor: pointer;`
+>- `:hover pseudo-class`
+>- `display: none;`
