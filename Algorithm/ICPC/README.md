@@ -503,38 +503,82 @@ max_index = max(len[max_index], len[i]);
 
 [BOJ 12015 가장 긴 증가하는 부분 수열 2](https://www.acmicpc.net/problem/12015)
 
-실패. 이분탐색을 할때 조건을 잘못 설정했었다.   
+실패. 이분탐색을 할때 조건을 잘못 설정했었다.
 
 성공.
 
-### 연습문제   
+### 연습문제
 
-[BOJ 1912 연속합](https://www.acmicpc.net/problem/1912)    
+[BOJ 1912 연속합](https://www.acmicpc.net/problem/1912)
 
-실패. 음수 다음에 양수를 더해서 0보다 커지는 경우를 고려하지 않았다.     
+**실패**. 음수 다음에 양수를 더해서 0보다 커지는 경우를 고려하지 않았다.
 
-성공. dp에 좀 익숙해져서 그런가 두번째 시도에서는 꽤 수월하게 풀었다.
+**성공**. dp에 좀 익숙해져서 그런가 두번째 시도에서는 꽤 수월하게 풀었다.
 
-[BOJ 11051 이항 계수 2](https://www.acmicpc.net/problem/11051)    
+[BOJ 11051 이항 계수 2](https://www.acmicpc.net/problem/11051)
 
-성공. dp를 이용해서 풀어봤다. (이항 계수 피라미드) 4ms
+**성공**. dp를 이용해서 풀어봤다. (이항 계수 피라미드) 4ms
 
-성공. 모듈러 연산으로도 풀어봤다. 0ms     
+**성공**. 모듈러 연산으로도 풀어봤다. 0ms
 
-[BOJ 11660 구간 합 구하기 5](https://www.acmicpc.net/problem/11660)    
+[BOJ 11660 구간 합 구하기 5](https://www.acmicpc.net/problem/11660)
 
-성공. 행마다 열의 누적합을 배열로 저장해서 풀었다. 392ms.    
+**성공**. 행마다 열의 누적합을 배열로 저장해서 풀었다. 392ms.
 
 ### 3주차 과제
 
-[2019-2020 ICPC, Asia Jakarta Regional Contest (Online Mirror, ICPC Rules, Teams Preferred)](https://codeforces.com/group/sPvRZDMiQz/contest/1252)    
+[2019-2020 ICPC, Asia Jakarta Regional Contest (Online Mirror, ICPC Rules, Teams Preferred)](https://codeforces.com/group/sPvRZDMiQz/contest/1252)
 
-A문제 해결.    
-C(어떻게 풀어야할지 잘 모르겠다), H(오답), K(시간초과) 시도.    
+A문제 해결.  
+C(어떻게 풀어야할지 잘 모르겠다), H(오답), K(시간초과) 시도.
 
-[BOJ 12852 1로 만들기 2](https://www.acmicpc.net/problem/12852)    
+[BOJ 12852 1로 만들기 2](https://www.acmicpc.net/problem/12852)
 
-성공. 60ms. 최소값이랑 다음 숫자를 각각 다른 배열에 저장해서 풀었다.
+**성공**. 60ms. 최소값이랑 다음 숫자를 각각 다른 배열에 저장해서 풀었다.
 
-[BOJ 9251 LCS](https://www.acmicpc.net/problem/9251)    
+[BOJ 9251 LCS](https://www.acmicpc.net/problem/9251)
 
+**실패**. 한 문자열에서 부분 수열을 하나씩 추출해서 다른 문자열에 해당 부분 수열이 있는지 검사해서 가장 긴 문자열을 찾는 방법으로 구현하려고 했는데 부분 수열을 구하는 과정에서 무조건 시간초과가 날 것 같다. 어떻게 dp로 풀어야할지도 감이 잘 안 온다.
+
+참고해서 푼 블로그: https://hini7.tistory.com/68
+
+**부분문제**로 나눠서 생각하면 a_i=0, b_i=0부터 시작해서 3가지 경우중 최대값을 출력하면 된다.
+
+**부분 문제로 나눠서 생각해보는 연습을 해야겠다. 특히 dp 문제에서**
+
+```c++
+int lcs(string& a, string& b, int a_i, int b_i) {
+    // base case
+    if (a_i == a.size() - 1 || b_i == b.size() - 1) return 1;
+    int ret = 0;
+    if (a[a_i] == b[b_i]) ret = lcs(a, b, a_i + 1, b_i + 1) + 1;
+    ret = max(ret, lcs(a, b, a_i + 1, b_i));
+    ret = max(ret, lcs(a, b, a_i, b_i + 1));
+    return ret;
+}
+```
+
+하지만 이렇게 하면 시간초과가 나오는데 이를 해결하기 위해 dp를 사용하면 된다.
+결과값을 map에 저장해서 구현했다.
+
+**오답**. 문자열의 마지막 글자가 다른 문자열에 무조건 포함된다고 가정하고 basecase를 잘못 정했었다.
+
+**시간초과**. 98%에서 시간초과가 났다.
+-> map.find 함수 때문인거같다.
+
+**오답**. map대신 이차원배열에 값을 저장했는데 98%에서 오답이 나온다.  
+-> 1000글자짜리 문자열을 사용할때 범위를 벗어나면서 오류가 나서 그렇다.  
+`int arr[1001][1001]`를 사용하거나 함수 맨 처음부분에서 범위를 벗어나면 0을 반환하도록 작성하면 된다.
+
+```c++
+if (a_i >= a.size() || b_i >= b.size()) {
+        return 0;
+    }
+```
+
+**성공**. 참고로 a[a_i] == b[b_i]이면 다른 경우는 고려하지 않고 바로 a_i+1, b_i+1로 넘어가면 된다.(12ms->8ms)
+
+```c++
+    if (a[a_i] == b[b_i]) ret = lcs(a, b, a_i + 1, b_i + 1) + 1;
+    else ret = max(lcs(a, b, a_i, b_i + 1), lcs(a, b, a_i + 1, b_i));
+```
