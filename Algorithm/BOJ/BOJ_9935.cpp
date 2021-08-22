@@ -5,7 +5,6 @@
 #include <stack>
 #include <string>
 #include <vector>
-#include <deque>
 
 using namespace std;
 using ll = long long;
@@ -13,24 +12,24 @@ using pii = pair<int, int>;
 using pll = pair<long, long>;
 
 void explode(string& str, string& explosion) {
-    stack<deque> s;  // 문자열 저장.
+    stack<int> index;  // 폭발물 시작지점 저장.
+    deque<char> ret;
     int check = 0;
-    for (int i = 0; i < str.size(); i++) {
-        if (str[i] == explosion[check] || str[i] == explosion[0]) {
-            // 폭발물 시작 지점.
-            if (str[i] == explosion[0]) {
-                s.push(i);
+    for (auto& s : str) {
+        ret.push_back(s);
+        if (s == explosion[check] || s == explosion[0]) {
+            // 폭발물 중간에 폭발물이 있는 경우
+            if (s == explosion[0] && check != 0) {
+                index.push(check);
                 check = 0;
             }
-            // 폭발물 종료 지점.
+            // 폭발
             if (check == explosion.size() - 1) {
-                // 폭발
-                str.erase(s.top(), explosion.size());
-                s.pop();
-                i -= explosion.size();
+                for (int i = 0; i < explosion.size(); i++) ret.pop_back();
                 // 이전 폭발물 이어서 시작
-                if (!s.empty()) {
-                    check = i - s.top();
+                if (!index.empty()) {
+                    check = index.top() - 1;
+                    index.pop();
                 } else
                     check = -1;
             }
@@ -39,13 +38,16 @@ void explode(string& str, string& explosion) {
         // 폭발물이 중간에 끊긴 경우
         else {
             check = 0;
-            while (!s.empty()) {
-                s.pop();
+            while (!index.empty()) {
+                index.pop();
             }
         }
-
-        if (str == "") break;
     }
+    if (ret.empty())
+        cout << "FRULA";
+    else
+        for (auto& r : ret) cout << r;
+    cout << '\n';
 }
 
 int main() {
@@ -56,8 +58,4 @@ int main() {
     cin >> s >> explosion;
 
     explode(s, explosion);
-    if (s == "")
-        cout << "FRULA\n";
-    else
-        cout << s << '\n';
 }

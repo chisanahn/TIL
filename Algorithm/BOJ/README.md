@@ -111,5 +111,27 @@
 -> find랑 erase로 코드를 엄청 짧게 짤수있지만 2%에서 시간초과.        
 -> stack을 활용해서 한번에 처리할 수 있지 않을까. 폭발물인지 검사하다가 끊겼는데 폭발물의 첫글자인경우는 이어서 셀 수 있다.     
 -> Segfault. 폭발물이 중간에 끊겼을때 check를 0으로 초기화하지 않으면서 이상한 곳을 참조하면 오류가 났다.    
--> 시간초과. 아무래도 erase를 수행하면서 시간이 많이 걸리는것같다.
+-> 시간초과. 아무래도 erase를 수행하면서 시간이 많이 걸리는것같다. erase대신 문자열을 deque에 저장해버리자.     
+-> 성공. 36ms.    
+
+[BOJ 9659 돌 게임 5](https://www.acmicpc.net/problem/9659)    
+
+성공. 0ms. 규칙만 찾아낸다면 정말 쉬운 문제.    
+
+[BOJ 1927 최소 힙](https://www.acmicpc.net/problem/1927)    
+
+성공. priority_queue를 사용하면 쉽게 풀 수 있긴하다 (16ms)    
+
+자료구조 복습겸 직접 heap을 구현.     
+
+런타임에러(segfault).      
+
+성공. 배열을 동적할당해서 썼다가 100000 크기 배열을 썼더니 성공했다.
+
+### heap
+
+    heap property(heap-order)를 만족하는 complete binary tree.
+
+    heap property(heap-order)    
+    : parent 노드가 child node보다 무조건 작다.
 
