@@ -585,7 +585,7 @@ flex-direction: row-reverse;
 order: 1;
 ```
 
-값으로 0(기본값), -1(뒤로 이동), 1(앞으로 이동) 등이 있다.
+값으로 0(기본값), -1, -2, ..(뒤로 이동), 1, 2, ..(앞으로 이동) 등이 있다.
 
 `flex-direction`과 달리 전체적인 순서를 기준으로 순서가 바뀐다.
 
@@ -635,61 +635,110 @@ width: 300px;
 
 ### positioned elements
 
->`position` property를 이용해서 element의 positioning scheme을 변경할 수 있다.  
-기본값은 static이고 기본값이 아닌 다른 positioning scheme을 가지고 있는 element를 `positioned elements`라고 부른다.
+> `position` property를 이용해서 element의 positioning scheme을 변경할 수 있다.  
+> 기본값은 static이고 기본값이 아닌 다른 positioning scheme을 가지고 있는 element를 `positioned elements`라고 부른다.
 
 ### relative positioning
 
->static을 기준으로 위치를 바꾸는 positioing scheme.  
-`top`, `bottom`, `left`, `right` property를 통해 기존 위치에서 얼만큼 움직일지 설정할 수 있다.    
+> static을 기준으로 위치를 바꾸는 positioing scheme.  
+> `top`, `bottom`, `left`, `right` property를 통해 기존 위치에서 얼만큼 움직일지 설정할 수 있다.
 
 ```css
 position: relative;
 top: 30px;
 left: 30px;
 ```
->위치만 변경되어서 나타나고 element 자체는 static flow에 동일하게 남아있다.     따라서 다른 element들은 영향을 받지 않는다.    
-page layout이 결정된 이후에 추가적으로 변경된다고 생각하는 것이 이해하기 좋다.    
+
+> 위치만 변경되어서 나타나고 element 자체는 static flow에 동일하게 남아있다. 따라서 다른 element들은 영향을 받지 않는다.  
+> page layout이 결정된 이후에 추가적으로 변경된다고 생각하는 것이 이해하기 좋다.
 >
->또한 값으로 음수를 설정할 수 있어 `top: -30px;`와 `bottom: 30px`는 같은 의미를 갖는다.
+> 또한 값으로 음수를 설정할 수 있어 `top: -30px;`와 `bottom: 30px`는 같은 의미를 갖는다.
 
 ### absolute positioning
 
->`relative`와 비슷하지만 `absolute`는 브라우저 창을 기준으로 위치를 정할 수 있다.    
+> `relative`와 비슷하지만 `absolute`는 브라우저 창을 기준으로 위치를 정할 수 있다.
 
 ```css
 position: absolute;
 top: 10px;
 left: 10px;
 ```
->`relative`와 마찬가지로 다른 element에 영향을 주지 않는다. 하지만 `relative`와 달리 해당 element는 static flow에서 완전히 제거된다. 따라서 위치가 겹치더라도 동일한 위치에 겹쳐서 나타난다.    
+
+> `relative`와 마찬가지로 다른 element에 영향을 주지 않는다. 하지만 `relative`와 달리 해당 element는 static flow에서 완전히 제거된다. 따라서 위치가 겹치더라도 동일한 위치에 겹쳐서 나타난다.
 >
->이러한 특성 때문에 의도치않게 다른 element들을 가릴 수 있다는 단점이 있어서 보통 `relatively absolute`를 주로 사용한다.     
+> 이러한 특성 때문에 의도치않게 다른 element들을 가릴 수 있다는 단점이 있어서 보통 `relatively absolute`를 주로 사용한다.
 
 ### relatively absolute
 
->`absolute` element는 자신이 속해있고 positioned element인 container 중 가장 가까운 것을 기준으로 위치를 결정한다. 그리고 만약 그러한 container가 없다면 browser를 기준으로 위치를 결정한다.    
-이러한 특성을 이용해서 주로 `absolute`의 container를 `relative` element로 만들어서 사용한다.
+> `absolute` element는 자신이 속해있고 positioned element인 container 중 가장 가까운 것을 기준으로 위치를 결정한다. 그리고 만약 그러한 container가 없다면 browser를 기준으로 위치를 결정한다.  
+> 이러한 특성을 이용해서 주로 `absolute`의 container를 `relative` element로 만들어서 사용한다.
 
 ### fixed positioning
 
->`absolute`와 비슷하지만 scroll되지 않고 위치가 고정되어있다는 차이점이 있다.    
+> `absolute`와 비슷하지만 scroll되지 않고 위치가 고정되어있다는 차이점이 있다.
 
 ### positioned elements for animation
 
->`positioned elements`는 다른 element에 영향을 주지 않기 때문에 JS를 이용해서 animation 효과를 줄 때 유용하게 사용할 수 있다.    
+> `positioned elements`는 다른 element에 영향을 주지 않기 때문에 JS를 이용해서 animation 효과를 줄 때 유용하게 사용할 수 있다.
 
 ### Z-index
 
->`positioned elements`에 한해서 `z-index` property로 element의 depth(몇 번째로 표시될건지)를 설정할 수 있다.    
+> `positioned elements`에 한해서 `z-index` property로 element의 depth(몇 번째로 표시될건지)를 설정할 수 있다.
 
 ### positioned elements for menus
 
->menu를 만들때 `ul`, `li` 등의 element를 사용해서 semantic하게 만드는 것이 좋다.    
+> menu를 만들때 `ul`, `li` 등의 element를 사용해서 semantic하게 만드는 것이 좋다.
 >
->flexbox, positioned elements, z-index, pseudo-class 등을 이용해서 만들 수 있다.    
+> flexbox, positioned elements, z-index, pseudo-class 등을 이용해서 만들 수 있다.
 >
->다음의 property를 활용해서 선택적으로 element를 표시할 수 있다.
->- `cursor: pointer;`
->- `:hover pseudo-class`
->- `display: none;`
+> 다음의 property를 활용해서 선택적으로 element를 표시할 수 있다.
+>
+> -   `cursor: pointer;`
+> -   `:hover pseudo-class`
+> -   `display: none;`
+
+## 10. responsive design
+
+PC, 스마트폰 등 사용자의 환경에 따라 그에 알맞은 디자인을 적용시켜서 보여주는 방법. 기기에 따라 다른 웹사이트를 만들 필요없이 한 웹사이트만 관리하면 되서 유지 보수가 간편해진다는 장점이 있다.
+
+### CSS의 "media queries"를 통해 구현할 수 있다.
+
+"at-rule" / "media type" / "media feature"로 이루어져있고 해당 조건을 적용시킬 CSS 문장들을 중괄호로 묶어서 사용한다.
+
+```css
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+	body {
+		background-color: #f5cf8e;
+	}
+}
+```
+
+`only screen` media type은 스크린에서만 적용된다는 것을 의미한다. 예를 들어 해당 문서를 프린트할때는 적용되지 않는다.
+
+`min-width`, `max-width` 외에도 해상도, 마우스의 여부, 가로/세로 모드 여부 등 다양한 media features가 있다.
+
+`min-width`, `max-width` media feature는 breakpoints라고도 불린다.
+
+> **responsive web design patterns**  
+> https://developers.google.com/web/fundamentals/design-and-ux/responsive/patterns?hl=en#mostly_fluid  
+> mostly fluid, column drop, layout shifter, tiny tweaks 등의 pattern들을 주로 사용한다.
+
+보통 mobile/tablet 환경에서는 갤럭시, 애플 등 다양한 기기에 맞게 디자인을 적용하기 위해서 일정 범위의 breakpoints에 fluid layouts (기기의 width에 맞게 옆으로 늘리는 방법 - flexible boxes)을 많이 사용한다.
+
+그리고 PC 환경에서는 가독성을 위해 일정 px로 고정해두는 경우가 많다.
+
+### base styles - mobile
+
+media queries를 사용하기 전에 base styles를 하나 정해두고 진행하면 전체적인 디자인을 한번에 관리할 수 있어 편리하다.
+
+이때 모바일 환경을 base styles로 사용하는 것이 좋은데 왜냐하면 모바일 환경이 아무래도 표현할 수 있는 정보의 양이 더 제한적이기 때문이다.  
+모바일 환경을 기반으로 태블릿, PC 환경 순으로 점차 뼈대에 살을 붙여나가는 방식으로 디자인하는 것이 CSS의 재사용성도 높일 수 있고 편리하다.
+
+모바일 환경에서 웹사이트는 기본적으로 PC 크기에 맞게 자동으로 축소되어서 보여지는데 이를 방지하기 위해서는 viewport를 다음과 같이 설정해주어야 한다.    
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+```
+
+chrome의 개발자도구를 이용하면 PC에도 쉽게 모바일환경에서 웹페이지가 어떻게 보이는지 확인할 수 있다.
+
