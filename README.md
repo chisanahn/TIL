@@ -54,3 +54,7 @@ vscode, pycharm 등 다른 에디터의 경우도 비슷한 방법으로 설정�
 > 
 > [c++ code formatting](https://code.visualstudio.com/docs/cpp/cpp-ide) `Shift+Alt+F`
 > auto-formatting: setting -> editor.formatOnType
+
+- [git-bash 백슬래시 경로 인식 문제 해결](https://k-chan-l.github.io/etc/2021/03/07/vscode-errorcheck.html)    
+> 이유는 모르겠지만 이 블로그를 참고해서 다시 기본 터미널을 git-bash로 설정해보다가 안되서 작은 따옴표로 감싸지 않고 그냥 해보니깐 성공했다.  
+> 그리고 컴파일 후 실행에서 문제가 생겨서 이 부분은 블로그를 참고해서 해결했다.
