@@ -582,3 +582,86 @@ if (a_i >= a.size() || b_i >= b.size()) {
     if (a[a_i] == b[b_i]) ret = lcs(a, b, a_i + 1, b_i + 1) + 1;
     else ret = max(lcs(a, b, a_i, b_i + 1), lcs(a, b, a_i + 1, b_i));
 ```
+
+## 4주차 강의
+
+### 3주차 과제 문제풀이
+
+ICPC의 경우 해당 contest의 해설이 첨부되어있는 경우도 있으니 공부할때 참고하자.     
+contest meterials -> tutorial(en)    
+
+[이번 과제 해설](https://github.com/jonathanirvings/icpc-jakarta-2019/blob/master/problem_analysis.pdf)
+
+[BOJ](https://www.acmicpc.net/category/detail/2235)에도 해당 문제셋이 올라와있다.
+
+[C - Even Path](https://codeforces.com/group/sPvRZDMiQz/contest/1252/problem/C)     
+다시 한번 풀어보기. 행과 열의 구간을 나눠서 생각하면 된다.   
+그리고 뭔가 DSU로도 풀 수 있을것같다. 
+
+[H - Twin Buildings](https://codeforces.com/group/sPvRZDMiQz/contest/1252/problem/H)     
+
+[K - Addition Robot](https://codeforces.com/group/sPvRZDMiQz/contest/1252/problem/K)      
+
+### DSU
+
+DSU란 해당 원소가 같은 집합 내에 포함되어 있는지 빠르게 확인하기 위해서 사용되는 자료구조     
+* find 연산: 해당 element가 속해있는 집합의 대표원소를 반환
+* merge 연산: 2개의 집합을 1개의 집합으로 합침
+
+https://kangminjun.tistory.com/74 참고     
+
+[BOJ 1717 집합의 표현](https://www.acmicpc.net/problem/1717)    
+
+성공. 개념만 안다면 구현 자체는 그렇게 어렵진 않은 것 같다.    
+
+<del>struct도 class처럼 생성자, 멤버함수같은걸 사용할 수 있는것 같은데 한번 알아보자.</del>
+
+struct로도 다시 한번 풀어보기.
+
+    offline query      
+    : query를 입력받아서 나중에 처리하는 방식
+
+### SCC
+
+SCC 하나하나를 한 개의 노드로 압축시켜서 포현할 수 있다.    
+
+이때 압축된 그래프는 항상 DAG(싸이클 없는 방향 그래프)이다.     
+왜냐하면 싸이클은 이미 SCC에 포함되어 있기 때문이다.    
+
+타잔알고리즘. DFS 응용분야이므로 DFS 복습하고 한번 구현해보자.     
+
+[BOJ 2150 Strongly Connected Component](https://www.acmicpc.net/problem/2150)    
+
+#### 2-SAT
+
+### MST
+
+최소 스패닝 트리. 개념 자체는 그렇게 어렵진 않은 것 같다. 한번 구현해보자.     
+
+### 추가정보
+
+Atcoder - 개인대회 연습하기 좋다. ABC 대회 추천.
+레퍼런스가 허용되는 대회의 경우 atcoder 라이브러리를 연습하면 좋다.    
+atcoder에 라이브러리 연습하라고 만들어놓은 대회도 있음.     
+
+백준에 라이브러리 별로 잘 정리되어 있기 때문에 라이브러리 연습하기에 상당히 유용하다.    
+
+### 4주차 강의 - 그래프(이전 강의자료)
+
+### DFS, BFS 복습
+
+[BOJ 2606 바이러스](https://www.acmicpc.net/problem/2606)    
+
+DFS, BFS로 풀 수 있는 문제     
+
+DFS 시도. 오답. 더 이상 방문할 노드가 없는지 체크하는 부분에서 노드를 찾은 경우 index의 값이 바뀐다는걸 미처 생각하지 못했다.          
+성공.      
+
+BFS 시도. 성공.    
+
+[BOJ 1260 DFS와 BFS](https://www.acmicpc.net/problem/1260)    
+
+성공. DFS와 BFS 구현하는 문제.    
+
+[BOJ 1697 Catch That Cow](https://www.acmicpc.net/problem/1697)     
+
