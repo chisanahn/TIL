@@ -17,10 +17,9 @@ class DSU {
     vector<int> count;
 
    public:
-    DSU(int n) {
+    DSU(int n) : parent(n), count(n, 0) {
         for (int i = 0; i <= n; i++) {
-            parent.push_back(i);
-            count.push_back(0);
+            parent[i] = i;
         }
     }
     int find(int n) {

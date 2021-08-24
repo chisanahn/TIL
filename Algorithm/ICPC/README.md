@@ -587,81 +587,165 @@ if (a_i >= a.size() || b_i >= b.size()) {
 
 ### 3주차 과제 문제풀이
 
-ICPC의 경우 해당 contest의 해설이 첨부되어있는 경우도 있으니 공부할때 참고하자.     
-contest meterials -> tutorial(en)    
+ICPC의 경우 해당 contest의 해설이 첨부되어있는 경우도 있으니 공부할때 참고하자.  
+contest meterials -> tutorial(en)
 
 [이번 과제 해설](https://github.com/jonathanirvings/icpc-jakarta-2019/blob/master/problem_analysis.pdf)
 
 [BOJ](https://www.acmicpc.net/category/detail/2235)에도 해당 문제셋이 올라와있다.
 
-[C - Even Path](https://codeforces.com/group/sPvRZDMiQz/contest/1252/problem/C)     
-다시 한번 풀어보기. 행과 열의 구간을 나눠서 생각하면 된다.   
-그리고 뭔가 DSU로도 풀 수 있을것같다. 
+[C - Even Path](https://codeforces.com/group/sPvRZDMiQz/contest/1252/problem/C)  
+다시 한번 풀어보기. 행과 열의 구간을 나눠서 생각하면 된다.  
+그리고 뭔가 DSU로도 풀 수 있을것같다.
 
-[H - Twin Buildings](https://codeforces.com/group/sPvRZDMiQz/contest/1252/problem/H)     
+[H - Twin Buildings](https://codeforces.com/group/sPvRZDMiQz/contest/1252/problem/H)
 
-[K - Addition Robot](https://codeforces.com/group/sPvRZDMiQz/contest/1252/problem/K)      
+[K - Addition Robot](https://codeforces.com/group/sPvRZDMiQz/contest/1252/problem/K)
 
 ### DSU
 
-DSU란 해당 원소가 같은 집합 내에 포함되어 있는지 빠르게 확인하기 위해서 사용되는 자료구조     
-* find 연산: 해당 element가 속해있는 집합의 대표원소를 반환
-* merge 연산: 2개의 집합을 1개의 집합으로 합침
+DSU란 해당 원소가 같은 집합 내에 포함되어 있는지 빠르게 확인하기 위해서 사용되는 자료구조
 
-https://kangminjun.tistory.com/74 참고     
+-   find 연산: 해당 element가 속해있는 집합의 대표원소를 반환
+-   merge 연산: 2개의 집합을 1개의 집합으로 합침
 
-[BOJ 1717 집합의 표현](https://www.acmicpc.net/problem/1717)    
+https://kangminjun.tistory.com/74 참고
 
-성공. 개념만 안다면 구현 자체는 그렇게 어렵진 않은 것 같다.    
+[BOJ 1717 집합의 표현](https://www.acmicpc.net/problem/1717)
 
-<del>struct도 class처럼 생성자, 멤버함수같은걸 사용할 수 있는것 같은데 한번 알아보자.</del>
+성공. 개념만 안다면 구현 자체는 그렇게 어렵진 않은 것 같다.
 
-struct로도 다시 한번 풀어보기.
+### C++에서의 struct
 
-    offline query      
+C++에서 struct는 class와 동작방식이 일치한다. 단, struct의 접근 지시자는 항상 public로 통일되어 있다는 차이점이 있다.
+
+```c++
+class DSU {
+    vector<int> parent;
+    vector<int> count;
+
+   public:
+    DSU(int n) : parent(n), count(n, 0) {
+        for (int i = 0; i <= n; i++) {
+            parent[i] = i;
+        }
+    }
+```
+이런 식으로 구조체와 클래스에서 생성자를 이용해 벡터의 값도 초기화 할 수도 있다.
+
+    offline query
     : query를 입력받아서 나중에 처리하는 방식
 
 ### SCC
 
-SCC 하나하나를 한 개의 노드로 압축시켜서 포현할 수 있다.    
+SCC 하나하나를 한 개의 노드로 압축시켜서 포현할 수 있다.
 
-이때 압축된 그래프는 항상 DAG(싸이클 없는 방향 그래프)이다.     
-왜냐하면 싸이클은 이미 SCC에 포함되어 있기 때문이다.    
+이때 압축된 그래프는 항상 DAG(싸이클 없는 방향 그래프)이다.  
+왜냐하면 싸이클은 이미 SCC에 포함되어 있기 때문이다.
 
-타잔알고리즘. DFS 응용분야이므로 DFS 복습하고 한번 구현해보자.     
+타잔알고리즘. DFS 응용분야이므로 DFS 복습하고 한번 구현해보자.
 
-[BOJ 2150 Strongly Connected Component](https://www.acmicpc.net/problem/2150)    
+[BOJ 2150 Strongly Connected Component](https://www.acmicpc.net/problem/2150)
 
 #### 2-SAT
 
 ### MST
 
-최소 스패닝 트리. 개념 자체는 그렇게 어렵진 않은 것 같다. 한번 구현해보자.     
+최소 스패닝 트리. 개념 자체는 그렇게 어렵진 않은 것 같다. 한번 구현해보자.
 
 ### 추가정보
 
 Atcoder - 개인대회 연습하기 좋다. ABC 대회 추천.
-레퍼런스가 허용되는 대회의 경우 atcoder 라이브러리를 연습하면 좋다.    
-atcoder에 라이브러리 연습하라고 만들어놓은 대회도 있음.     
+레퍼런스가 허용되는 대회의 경우 atcoder 라이브러리를 연습하면 좋다.  
+atcoder에 라이브러리 연습하라고 만들어놓은 대회도 있음.
 
-백준에 라이브러리 별로 잘 정리되어 있기 때문에 라이브러리 연습하기에 상당히 유용하다.    
+백준에 라이브러리 별로 잘 정리되어 있기 때문에 라이브러리 연습하기에 상당히 유용하다.
 
 ### 4주차 강의 - 그래프(이전 강의자료)
 
 ### DFS, BFS 복습
 
-[BOJ 2606 바이러스](https://www.acmicpc.net/problem/2606)    
+[BOJ 2606 바이러스](https://www.acmicpc.net/problem/2606)
 
-DFS, BFS로 풀 수 있는 문제     
+DFS, BFS로 풀 수 있는 문제
 
-DFS 시도. 오답. 더 이상 방문할 노드가 없는지 체크하는 부분에서 노드를 찾은 경우 index의 값이 바뀐다는걸 미처 생각하지 못했다.          
-성공.      
+DFS 시도. 오답. 더 이상 방문할 노드가 없는지 체크하는 부분에서 노드를 찾은 경우 index의 값이 바뀐다는걸 미처 생각하지 못했다.  
+성공.
 
-BFS 시도. 성공.    
+BFS 시도. 성공.
 
-[BOJ 1260 DFS와 BFS](https://www.acmicpc.net/problem/1260)    
+[BOJ 1260 DFS와 BFS](https://www.acmicpc.net/problem/1260)
 
-성공. DFS와 BFS 구현하는 문제.    
+성공. DFS와 BFS 구현하는 문제.
 
-[BOJ 1697 Catch That Cow](https://www.acmicpc.net/problem/1697)     
+[BOJ 1697 Catch That Cow](https://www.acmicpc.net/problem/1697)
+
+뭔가 DP로 풀 수 있을 것 같아서 시도 -> 시작값과 끝값에 따라서 그때그때 값이 달라져서 dp로 풀기에 적합하지 않은 것 같다.  
+(찾아보니 cycle이 생겨서 무한루프에 빠지기 때문에 dp로는 풀 수 없다고 한다. https://blog.encrypted.gg/33)
+
+BFS로 시도. 오답.
+
+성공. n==k인 경우를 고려하지 못했었다.
+
+[BOJ 2178 미로 탐색](https://www.acmicpc.net/problem/2178)
+
+성공. 2차원이라 구현하면서 조금 복잡해서 헤매긴했지만 그래도 수월하게 풀었다.
+
+[BOJ 13914 숨바꼭질 4](https://www.acmicpc.net/problem/13913)
+
+성공. 1697번 문제에서 경로 출력만 추가된 문제라 쉽게 풀 수 있었다.
+
+### 최단경로
+
+1. 플로이드-워셜 알고리즘
+
+   모든 중간점 k에 대해서 k를 지나치는 모든 경로를 검사 후 업데이트한다.
+
+   모든 시작점, 음수 가중치 가능, 시간복잡도 O(v^3)
+
+   ```c++
+   for (int k=0; k<n; k++) {
+   	for (int i=0; i<n; i++) {
+   		for (int j=0; j<n; j++) {
+   			path[i][j] = min(path[i][j], path[i][k]+path[k][j]);
+           }
+       }
+   }
+   ```
+
+   [BOJ 11404 플로이드](https://www.acmicpc.net/problem/11404)
+
+   시작 도시와 도착도 시가 같다는 조건과 시작도시와 도착도시를 연결하는 노선이 하나가 아닐 수 있다는 조건을 놓쳐서 좀 헤맸다.
+
+   실패. 한번에 가는 버스가 없는 경우 최소 비용이 최대 100,000*100까지 증가한다는걸 고려하지 못했다.    
+   
+   성공.
+
+2. 다익스트라 알고리즘
+
+   시작점에서 출발해서 시작점부터의 거리가 가장 가까운 점을 하나씩 방문하면서 그 점과 인접한 점에 대해 시작점까지의 경로를 업데이트한다.
+
+   단일 시작점에서 다른 모든 정점. 음수 가중치 불가능.
+
+   배열을 사용하면 O(v^2), 힙을 사용하면 O(E+VlogE)로 구현가능.
+
+   가장 빠르고, 가장 자주 사용한다.
+
+   [BOJ 1916 최소비용 구하기](https://www.acmicpc.net/problem/1916)
+
+   성공. 배열 이용. 36ms.
+
+   11404 문제랑 거의 같고 다익스트라 알고리즘은 이미 자료구조 수업때 잘 공부해둬서 그런지 수월하게 풀었다.
+
+   힙으로 풀어보기. 메모리 초과. 아무래도 배열 + 우선순위큐를 사용하다보니 메모리 초과가 나오는것같다.
+
+   구글링을 해보니깐 힙으로 푼 사람이 있는데 은근 풀이가 많이 달라서 이해하려면 시간이 좀 필요할 것 같다.
+
+   https://ongveloper.tistory.com/69
+
+   [BOJ 11779 최소비용 구하기 2](https://www.acmicpc.net/problem/11779)
+
+   성공. 1916번 문제에서 경로만 추가하면 되는 문제라 수월하게 풀었다. 32ms.
+
+   
 

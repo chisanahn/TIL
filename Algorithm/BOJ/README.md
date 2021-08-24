@@ -135,3 +135,4 @@
     heap property(heap-order)    
     : parent 노드가 child node보다 무조건 작다.
 
+
