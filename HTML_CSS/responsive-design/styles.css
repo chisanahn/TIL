@@ -47,12 +47,32 @@
 	background-color: #c8c6fa;
 }
 
+.illustration {
+	width: 100%;
+}
+
+.illustration img {
+	width: 100%;
+	display: block;
+}
+
 /* Mobile Styles */
 @media only screen and (max-width: 400px) {
 	body {
 		background-color: #f09a9d;
 	}
 }
+
+.header {
+	height: auto;
+	justify-content: inherit;
+	align-items: inherit;
+  }
+  
+  .photo img {
+	width: 100%;
+	display: block;
+  }
 
 /* Tablet Styles */
 @media only screen and (min-width: 401px) and (max-width: 960px) {

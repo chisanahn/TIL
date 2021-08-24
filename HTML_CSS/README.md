@@ -27,7 +27,7 @@ head 태그 안에서 link태그를 이용해 CSS와 HTML 파일을 연결한다
 참고로 로고 설정과 폰트 설정은 다음과 같이 할 수 있다.
 
     <link rel="icon" href="https://image.flaticon.com/icons/png/512/1053/1053367.png" type="image/x-icon">
-
+    
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
 CSS와 브라우저는 직접적으로 연결되어 있지 않다. 이미지, JS 파일과 같은 다른 모든 파일들은 HTML을 통해서 간접적으로 연결되어 있다.
@@ -38,7 +38,7 @@ px는 pixel로 절대적인 수치, em은 현재 글자 크기를 나타낸다. 
     body {
       font-size: 18px;
     }
-
+    
     h1 {
       font-size: 2em;
     }
@@ -59,7 +59,7 @@ ul, ol 리스트의 bullet icon을 변경할 수 있다.
     ul {
       list-style-type: circle;
     }
-
+    
     ol {
       list-style-type: lower-roman;
     }
@@ -478,6 +478,7 @@ block-level element들을 수평으로 배치할 수 있게 해준다.
 parent element를 기준으로 정렬된다.
 
 -   **content after a float**
+    
     > float 속성을 가진 box-element는 normal flow에서 제거되면서 container의 높이에 영향을 미치지 않는다.
 
 > 따라서 normal flow에 속해있는 다른 box-element 위에 표시된다.  
@@ -699,7 +700,9 @@ left: 10px;
 
 ## 10. responsive design
 
-PC, 스마트폰 등 사용자의 환경에 따라 그에 알맞은 디자인을 적용시켜서 보여주는 방법. 기기에 따라 다른 웹사이트를 만들 필요없이 한 웹사이트만 관리하면 되서 유지 보수가 간편해진다는 장점이 있다.
+동일한 웹페이지를 PC, 스마트폰 등 다양한 사용자의 환경에 맞추어 적절한 형식으로 보여주기 위한 기술.
+
+기기에 따라 다른 웹사이트를 만들 필요없이 한 웹사이트만 관리하면 되서 유지 보수가 간편해진다는 장점이 있다.
 
 ### CSS의 "media queries"를 통해 구현할 수 있다.
 
@@ -734,11 +737,108 @@ media queries를 사용하기 전에 base styles를 하나 정해두고 진행�
 이때 모바일 환경을 base styles로 사용하는 것이 좋은데 왜냐하면 모바일 환경이 아무래도 표현할 수 있는 정보의 양이 더 제한적이기 때문이다.  
 모바일 환경을 기반으로 태블릿, PC 환경 순으로 점차 뼈대에 살을 붙여나가는 방식으로 디자인하는 것이 CSS의 재사용성도 높일 수 있고 편리하다.
 
-모바일 환경에서 웹사이트는 기본적으로 PC 크기에 맞게 자동으로 축소되어서 보여지는데 이를 방지하기 위해서는 viewport를 다음과 같이 설정해주어야 한다.    
+모바일 환경에서 웹사이트는 기본적으로 PC 크기에 맞게 자동으로 축소되어서 보여지는데 이를 방지하기 위해서는 viewport를 다음과 같이 설정해주어야 한다.
 
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 ```
 
 chrome의 개발자도구를 이용하면 PC에도 쉽게 모바일환경에서 웹페이지가 어떻게 보이는지 확인할 수 있다.
+
+## 11. responsive images
+
+iamge의 경우 단순히 화면 크기에 맞춰서 늘리게 되면 이미지가 깨져버리기 때문에 일반적인 responsive design보다 까다롭다.
+
+### 고려할 점
+
+> 1. 기기의 크기
+> 2. 이미지의 크기
+> 3. 기기의 해상도
+
+
+
+**retina display**는 일반 display에 비해 4배 또는 9배의 해상도를 가진다.
+
+> **4** 2x retina pixel == **1** pixel  
+> **9** 3x retina pixel == **3** pixel
+
+따라서 예를 들어 500\*250 크기의 2x retina display에 맞는 이미지 크기는 1000\*500px이다.
+
+**SVG images**는 벡터 이미지라 해상도 문제에서 자유롭다.  width를 지정하면 자동으로 이미지의 height가 결정된다.
+
+**inline style**을 이용해서 이미지의 크기를 제한할수도 있다.
+
+(inline style을 유용하게 사용할 수 있는 몇 안되는 경우이기도 하다.)
+
+```html
+<img class="illustration" src="images/illustration.svg" style="max-width: 500px" />
+```
+
+**flexbox**는 이미지의 높이를 container에 맞게 강제로 변경해버리기 때문에 주의해야한다.
+
+이 때문에 보통 container에 `descendant selectors`를 사용해서 `img`를 예외처리 해준다.
+
+```css
+.illustration img {
+  width: 100%;
+  display: block;
+}
+```
+
+JPG, PNG, GIF와 같은 **레스터 이미지**의 경우 최적화를 위해 `srcset`로 기기에 따라 다른 이미지를 사용한다.
+
+### 스크린 종류에 따라 이미지 사용
+
+```html
+<img src='illustration-small.png'
+     srcset='images/illustration-small.png 1x,
+             images/illustration-big.png 2x'
+     style='max-width: 500px'/>
+```
+
+`1x`는 기본 해상도 스크린, `2x`는 2x retina 스크린에 적용됨을 의미한다.
+
+### 스크린 width에 따라 이미지 사용
+
+(retina mobile의 경우 화면이 작다보니 굳이 고해상도 이미지를 사용할 필요가 없다.)
+
+```html
+<img src='images/photo-small.jpg'
+     srcset='images/photo-big.jpg 2000w,
+             images/photo-small.jpg 1000w'
+     sizes='(min-width: 960px) 960px,
+            100vw'/>
+```
+
+`sizes`로 화면에 표시될 이미지의 사이즈를 설정할 수 있다.
+
+(`media queries`) , `이미지 width`로 이루어져있다.
+
+`100vw`는 100% of "viewport width"(=screen width)를 의미한다.
+
+```
+참고: Chrome의 경우 한번 고해상도 이미지가 캐싱되면 고해상도 이미지만을 사용한다.
+```
+
+### 스크린에 따라 완전히 다른 이미지 사용
+
+```html
+<picture>
+    <source media="(min-width: 401px)" srcset="images/photo-big.jpg" />
+    <source media="(max-width: 400px)" srcset="images/photo-tall.jpg" />
+    <img src="images/photo-small.jpg" />
+</picture>
+```
+
+지금까지는 해상도만 다른 이미지를 사용했지만 `<picure>`, `<source>`를 사용해서 크기도 다른 이미지를 사용할 수 있다.
+
+하지만 이때 해상도까지 고려하려면 많이 복잡해진다.
+
+> 600px보다 작은 이미지를 사용할때는 `srcset 1x, 2x`를 사용하고
+>
+> 그보다 큰 이미지에서는 `sizes`를 추가적으로 사용하고
+>
+> 디자인적으로 필요할때 `<picture>`를 사용하는 것이 좋다.
+
+
 
