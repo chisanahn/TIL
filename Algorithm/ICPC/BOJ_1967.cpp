@@ -12,50 +12,59 @@ using ll = long long;
 using pii = pair<int, int>;
 using pll = pair<long, long>;
 
-vector<vector<int>> graph(100001);
-
-int bfs(int n, int k) {
-    if (n == k) return 0;
-
-    vector<int> visited(100001, 0);
-    vector<int> count(100001, 0);
-
-    queue<int> Q;
-    Q.push(n);
-    visited[n] = 1;
-
-    while (!Q.empty()) {
-        int cur = Q.front();
-        Q.pop();
-        vector<int>& adj = graph[cur];
-        for (auto& a : adj) {
-            if (a == k) {
-                return count[cur] + 1;
-            }
-            if (visited[a] == 0) {
-                visited[a] = 1;
-                Q.push(a);
-                count[a] = count[cur] + 1;
-            }
-        }
-    }
-}
-
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
-    graph[0].push_back(1);
-    for (int i = 1; i < graph.size(); i++) {
-        graph[i].push_back(i - 1);
-        if (i < graph.size() - 1)
-            graph[i].push_back(i + 1);
-        if (2 * i <= graph.size() - 1)
-            graph[i].push_back(2 * i);
+    int n;
+    cin >> n;
+
+    vector<vector<pii>> graph(n);
+
+    for (int i = 0; i < n - 1; i++) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        a--;
+        b--;
+        graph[a].push_back({b, c});
+        graph[b].push_back({a, c});
     }
 
-    int n, k;
-    cin >> n >> k;
+    queue<int> Q;
+    // 루트 노드부터의 길이
+    vector<int> len(n, -1);
+    Q.push(0);
+    len[0] = 0;
+    int x = 0;
+    while (!Q.empty()) {
+        int cur = Q.front();
+        Q.pop();
+        vector<pii>& adj = graph[cur];
+        for (auto& a : adj) {
+            if (len[a.first] == -1) {
+                len[a.first] = len[cur] + a.second;
+                if (len[a.first] > len[x]) x = a.first;
+                Q.push(a.first);
+            }
+        }
+    }
 
-    cout << bfs(n, k) << '\n';
+    // x 노드부터의 길이
+    for (auto& l : len) l = -1;
+    Q.push(x);
+    len[x] = 0;
+    int ret = 0;
+    while (!Q.empty()) {
+        int cur = Q.front();
+        Q.pop();
+        vector<pii>& adj = graph[cur];
+        for (auto& a : adj) {
+            if (len[a.first] == -1) {
+                len[a.first] = len[cur] + a.second;
+                ret = max(ret, len[a.first]);
+                Q.push(a.first);
+            }
+        }
+    }
+    cout << ret << '\n';
 }

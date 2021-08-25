@@ -747,5 +747,65 @@ BFS로 시도. 오답.
 
    성공. 1916번 문제에서 경로만 추가하면 되는 문제라 수월하게 풀었다. 32ms.
 
-   
+### 트리
+
+길이가 3 이상인 사이클이 없는 연결 그래프
+
+* #### 지름: 트리 위에서 가장 먼 두 점의 거리
+
+  ```
+  임의의 정점 a에 대해 가장 먼 정점 x
+  정점 x에 대해 가장 먼 정점 y
+  x, y 사이의 거리가 트리의 지름이다.
+  ```
+
+  귀류법으로 증명할 수 있다.
+
+[BOJ 9372 Flying Safely](https://www.acmicpc.net/problem/9372)
+
+성공. 처음에 좀 헤맸는데 알고보면 N개의 국가를 방문하려면 N-1개의 비행기를 이용할 수 밖에 없다. 트리에 대해서 잘 알고 있다면 쉽게 해결할 수 있을 것 같다.
+
+[BOJ 1967 트리의 지름](https://www.acmicpc.net/problem/1967)
+
+성공. BFS로 풀었다. 이때 트리는 일반 그래프와 다르게 노드 간의 경로가 유일하다는 점을 이용한다면 어렵지 않게 구현할 수 있다.
+
+* #### Binary Search Tree (BST)
+
+  : 검색이나 삽입/삭제를 O(log n)만에 할 수 있다.
+
+  Pefect Binary Tree가 아닐 경우 최대 O(n)이 걸릴 수 있다.
+
+  * #### Balanced Binary Search Tree
+
+    : 전체 높이를 log n에 가깝게 유지하는 BST
+
+    AVL-trees, Red-black trees, Splay trees 등 다양한 알고리즘이 있다.
+
+    언어마다 라이브러리가 구현되어 있는데 보통 Red-black trees를 사용한다.
+
+    C++의 경우 map과 set
+
+    [BOJ 1269 대칭 차집합](https://www.acmicpc.net/problem/1269)
+
+    성공. 72ms. 벡터로 정렬해서 중복되는 숫자들을 세서 풀었다.
+
+    성공. 264ms. 벡터와 같은 방법으로 set을 이용해서 풀었다.
+
+    성공. 400ms. map을 이용해서 한번만 나온 숫자들만 세서 풀었다.
+
+    [BOJ 7785 Easy work](https://www.acmicpc.net/problem/7785)
+
+    성공. 104ms. set을 이용해서 풀었는데 set을 내림차순으로 어떻게 사용하는지 모르겠어서 벡터에 결과값을 넣고 다시 출력하는 방식으로 풀었다.
+
+    ```c++
+    std::set<int, std::greater> s;
+    ```
+
+    http://cplusplus.com/forum/general/205795/
+
+    내림차순 set을 사용해서 풀었는데 메모리가 절반가까이 줄었지만 시간은 오히려 116ms로 증가했다.
+
+    [BOJ 7662 Dual Priority Queue](https://www.acmicpc.net/problem/7662)
+
+    배운지 좀 시간이 지나서 잊어버리기도 했고 AVL-trees를 직접 구현하려니깐 쉽지 않다.
 
