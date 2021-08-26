@@ -300,7 +300,7 @@ bool operator<(const 클래스명& 변수명) const
     pair 클래스의 경우 sort 알고리즘에 의해 정렬이 가능하기 때문에 2가지 값을 묶어서 사용할떄는 구조체보다 편리하게 사용할 수 있다.
     (첫번째 인자 기준, 첫번쨰가 같으면 두번째 인자로 판단)
 
-#### 2주차 과제
+### 2주차 과제
 
 [2018-2019 ICPC, NEERC, Southern Subregional Contest (Online Mirror, ACM-ICPC Rules, Teams Preferred)](https://codeforces.com/group/sPvRZDMiQz/contest/1070)
 
@@ -663,7 +663,7 @@ atcoder에 라이브러리 연습하라고 만들어놓은 대회도 있음.
 
 ### 4주차 강의 - 그래프(이전 강의자료)
 
-### DFS, BFS 복습
+#### DFS, BFS 복습
 
 [BOJ 2606 바이러스](https://www.acmicpc.net/problem/2606)
 
@@ -695,7 +695,7 @@ BFS로 시도. 오답.
 
 성공. 1697번 문제에서 경로 출력만 추가된 문제라 쉽게 풀 수 있었다.
 
-### 최단경로
+#### 최단경로
 
 1. 플로이드-워셜 알고리즘
 
@@ -747,11 +747,11 @@ BFS로 시도. 오답.
 
    성공. 1916번 문제에서 경로만 추가하면 되는 문제라 수월하게 풀었다. 32ms.
 
-### 트리
+#### 트리
 
 길이가 3 이상인 사이클이 없는 연결 그래프
 
-* #### 지름: 트리 위에서 가장 먼 두 점의 거리
+* ##### 지름: 트리 위에서 가장 먼 두 점의 거리
 
   ```
   임의의 정점 a에 대해 가장 먼 정점 x
@@ -769,13 +769,13 @@ BFS로 시도. 오답.
 
 성공. BFS로 풀었다. 이때 트리는 일반 그래프와 다르게 노드 간의 경로가 유일하다는 점을 이용한다면 어렵지 않게 구현할 수 있다.
 
-* #### Binary Search Tree (BST)
+* ##### Binary Search Tree (BST)
 
   : 검색이나 삽입/삭제를 O(log n)만에 할 수 있다.
 
   Pefect Binary Tree가 아닐 경우 최대 O(n)이 걸릴 수 있다.
 
-  * #### Balanced Binary Search Tree
+  * ##### Balanced Binary Search Tree
 
     : 전체 높이를 log n에 가깝게 유지하는 BST
 
@@ -783,7 +783,7 @@ BFS로 시도. 오답.
 
     언어마다 라이브러리가 구현되어 있는데 보통 Red-black trees를 사용한다.
 
-    C++의 경우 map과 set
+    C++의 경우 `map`과 `set`
 
     [BOJ 1269 대칭 차집합](https://www.acmicpc.net/problem/1269)
 
@@ -807,5 +807,29 @@ BFS로 시도. 오답.
 
     [BOJ 7662 Dual Priority Queue](https://www.acmicpc.net/problem/7662)
 
-    배운지 좀 시간이 지나서 잊어버리기도 했고 AVL-trees를 직접 구현하려니깐 쉽지 않다.
+    배운지 좀 시간이 지나서 잊어버리기도 했고 AVL-trees를 직접 구현하려니깐 쉽지 않다. 우선 BST만 구현해보자. BST 구현성공. 자료구조 강의자료를 참고해서 AVL-tree까지 구현은 했지만 메모리초과가 나온다.
+
+    실패. set은 같은 숫자를 한번씩만 저장한다는걸 깜빡하고 set으로 구현했다가 틀렸다.
+
+    성공. 840ms. map으로 중복된 숫자의 경우 수를 세서 따로 처리해줬다.
+
+    ```
+    multiset
+    : 동일한 원소를 여러번 저장할 수 있는 set
+    ```
+
+    성공. 1780ms. `multiset`을 이용해서 풀었다.
+
+    [BOJ 22968 균형](https://www.acmicpc.net/problem/22968)
+
+    성공. 0ms. AVL-tree가 뭔지 알고 규칙만 조금 찾는다면 쉽게 풀 수 있는 문제.
+
+    ````
+    unordered_map, unordered_set
+    : 해쉬로 구현된 구조, 정렬되어 있진 않지만 삽입과 검색은 더 빠르다.
+    ````
+
+#### 힙
+
+
 
