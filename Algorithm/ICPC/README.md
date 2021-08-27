@@ -831,5 +831,39 @@ BFS로 시도. 오답.
 
 #### 힙
 
+Heapify
+
+In-place Heap Sort
+
+[BOJ 11279 최대 힙](https://www.acmicpc.net/problem/11279)
+
+성공. 힙은 최근에 구현한적이 있어 priority queue STL을 사용해서 가볍게 풀었다.
+
+[BOJ 2751 수 정렬하기 2](https://www.acmicpc.net/problem/2751)
+
+Heapify, In-place Heap Sort 복습.
+
+성공. 이전에 merge sort로 풀었을때 380ms가 나왔는데 In-place heap sort로 풀었더니 352ms가 나왔고 메모리 사용량도 2배 가까이 적게 사용했다.
+
+time complexity는 둘다 O(nlogn)으로 동일하다.
+
+[BOJ 2696 Running Median](https://www.acmicpc.net/problem/2696)
+
+벡터로 정렬해서 풀었는데 100%에서 시간초과. 홀수번째 입력에서만 정렬을 했더니 성공. 672ms.
+
+priority queue 2개로 홀수번째마다 비어있는 쪽으로 옮기면서 중간값을 확인하는 방식으로 풀었는데 시간초과.
+
+성공. 4ms. 중앙값을 기준으로 나눠서 2개의 힙에 저장하는식으로 풀 수 있다. 참고한 블로그: https://zoosso.tistory.com/503
+
+* ##### 최단경로 - 다익스트라 알고리즘에 적용
+
+  [BOJ 1753 최단경로](https://www.acmicpc.net/problem/1753)
+
+  최대 정점이 20,000개라 O(V^2) 다익스트라 알고리즘을 사용하면 4*10^8라서 시간초과가 날 것이다. 힙을 이용한 O(ElogV) 알고리즘을 사용하자.
+
+  방문여부를 체크하지 않고 일단 넣고 경로가 크면 무시하는 식으로 구현했더니 시간초과가 됐다. [블로그](https://velog.io/@woga1999/BOJ-1753%EB%B2%88-%EC%B5%9C%EB%8B%A8%EA%B2%BD%EB%A1%9C-C)를 참고해서 이 방식으로 다시 풀었다. 성공. 132ms. 알고보니 처음에 풀었을때 시간초과가 났던 이유는 minheap을 사용해야되는데 maxheap을 사용해서 무한루프가 걸렸던거같다.
+
+  성공. 168ms.
+
 
 
