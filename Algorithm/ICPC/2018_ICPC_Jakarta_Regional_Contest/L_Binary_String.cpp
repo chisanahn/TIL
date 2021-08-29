@@ -41,8 +41,8 @@ int main() {
     vector<ll> arr(S.size(), 0);
     arr[0] = 1;  // no leading zero
     ll count = 1;
-    for (ll i = 1; i < S.size(); i++) {
-        if (count == ksize) break;
+    for (ll i = 0; i < S.size(); i++) {
+        if (count == ksize) break; // 이 부분을 if 문 뒤에 놨을때 예외 상황 발생.
         if (S[i] == '0') {
             arr[i] = 1;
             count++;
