@@ -28,23 +28,28 @@ int main() {
     }
 
     vector<int> visited(v, 0);
-    priority_queue<pii, vector<pii>, greater<pii>> Q;
-    Q.push({0, 0});
+    vector<int> weight(v, 10000000);
+    weight[0] = 0;
     int ret = 0;
-    while(!Q.empty()) {
-        int cur = Q.top().second;
-        int w = Q.top().first;
-        Q.pop();
-        if(visited[cur] == 0) {
-            visited[cur] = 1;
-            ret += w;
-        }else continue;
-
+    int cur = 0;
+    while(1) {
+        visited[cur] = 1;
+        ret += weight[cur];
         for(auto& adj: graph[cur]) {
             if(visited[adj.first] == 0) {
-                Q.push({adj.second, adj.first});
+                weight[adj.first] = min(weight[adj.first], adj.second);
             }
         }
+
+        int i=0;
+        int min = 10000000;
+        for(; i<v; i++) {
+            if(visited[i] == 0 && weight[i] < min) {
+                min = weight[i];
+                cur = i;
+            }
+        }
+        if(min == 10000000) break;
     }
 
     cout << ret << '\n';

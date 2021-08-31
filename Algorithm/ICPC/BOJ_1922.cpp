@@ -16,32 +16,33 @@ int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
-    int v, e;
-    cin >> v >> e;
-    vector<vector<pii>> graph(v);
-    while(e--) {
+    int n, m;
+    cin >> n >> m;
+    vector<vector<pii>> graph(n);
+    while(m--) {
         int a, b, c;
-        cin>>a>>b>>c;
+        cin >> a >> b >> c;
         a--;b--;
         graph[a].push_back({b, c});
-        graph[b].push_back({a, c});
+        graph[b].push_back({a,c});
     }
 
-    vector<int> visited(v, 0);
     priority_queue<pii, vector<pii>, greater<pii>> Q;
+    vector<int> visit(n, 0);
     Q.push({0, 0});
     int ret = 0;
     while(!Q.empty()) {
         int cur = Q.top().second;
         int w = Q.top().first;
         Q.pop();
-        if(visited[cur] == 0) {
-            visited[cur] = 1;
+        if(visit[cur] == 0) {
+            visit[cur] = 1;
             ret += w;
-        }else continue;
+        }
+        else continue;
 
-        for(auto& adj: graph[cur]) {
-            if(visited[adj.first] == 0) {
+        for(auto& adj : graph[cur]) {
+            if(visit[adj.first] == 0) {
                 Q.push({adj.second, adj.first});
             }
         }
