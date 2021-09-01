@@ -840,5 +840,140 @@ JPG, PNG, GIF와 같은 **레스터 이미지**의 경우 최적화를 위해 `s
 >
 > 디자인적으로 필요할때 `<picture>`를 사용하는 것이 좋다.
 
+## 12. Semantic HTML
 
+### sectioning elements
+
+일반적인 `<div>`에 의미가 추가되었다고 생각하면 될 것 같다.
+
+(정형화된 class name을 사용하는 `<div>`)
+
+이것을 이용해서 web pages를 더 짜임새 있게 만들 수 있고
+
+검색엔진들이 웹페이지를 보다 효율적으로 해석할 수 있게 된다.
+
+- `<header>`
+- `<section>`
+
+- `<article>`
+- `<figure>`
+- `<aside>`
+- `<footer>`
+
+```
+주의: 부적절한 사용은 오히려 의미적으로 혼란을 가져오기 때문에 신중하게 사용해야한다.
+단순히 디자인을 위해서라면 <div>를 사용하자.
+```
+
+### Outline
+
+h1, h2 등의 heading elements를 사용해서 문서에서 새로운 section을 구성할 수 있다.
+
+이때 h1, h2 등 숫자가 개별적으로 의미를 가지진 않고 작은 숫자가 큰 숫자를 subsection으로 가진다. 예를 들어 아래의 두 코드는 동일한 의미를 갖는다.
+
+```html
+<h1>
+    One
+</h1>
+<h3>
+    Two
+</h3>
+```
+
+```html
+<h1>
+    One
+</h1>
+<h4>
+    Two
+</h4>
+```
+
+### Article
+
+본문을 의미한다.
+
+페이지의 다른 부분과 독립적인 headers, footers, document outline을 가진다. 또 하나의 작은 web pages라고 생각하면 쉽다.
+
+하나의 web pages에서는 하나의 articles를 가지는 것이 일반적이지만 여러개의 articles을 가질 수 있다. ex) Flipboard
+
+### Section
+
+문서의 section을 보다 명확하게 정의한다.
+
+그리고 독립적인 headings를 갖는다.
+
+하지만 그렇다고 section에만 의존한다면 잘못된 해석을 야기할 수 있기 때문에 기본적으로 h1, h2 등의 heading elements를 통해 문서의 outline을 정하고 <section>은 <div>처럼 container 역할을 하도록 사용하는 것이 좋다.
+
+또한 section은 최소 한개의 heading을 가져야한다. 만약 heading이 없을 경우 section에 임의로 untitled section이 생기기 때문에 주의해야 한다.
+
+### Nav
+
+다양한 navigation section을 정의하는데 사용된다.
+
+검색 엔진이 문서의 전반적인 구조를 빠르게 파악할 수 있도록 도움을 준다.
+
+### Header
+
+section, article, 웹페이지 전체 등에 대한 개요를 나타낸다.
+
+주로 회사의 로고, 메뉴 등을 넣는다.
+
+### Footer
+
+마지막 부분에 오는 header라고 생각하면 된다.
+
+보통 저작권, 저자경력 등을 넣는다.
+
+### Aside
+
+article에서 분리해서 사용하고 싶은 내용을 넣을때 사용한다.
+
+인용구처럼 강조하고 싶은 내용이나
+
+광고 같은 상관 없는 내용을 넣을 때 사용된다.
+
+article 밖에서 사용될 수도 있는데 보통 site-wide sidebar를 만들때 사용된다.
+
+### dates and times
+
+`<time>` element를 사용해서 `datetime` 형식으로 시간과 날짜를 보다 명확하게 표시할 수 있다.
+
+```html
+<p>By Troy McClure. Published <time datetime='2017-1-3'>January
+    3rd</time></p>
+```
+
+### address
+
+이메일을 나타내기 위해 사용되는 element
+
+```html
+<address>
+    Please contact <a href='mailto:troymcclure@example.com'>Troy
+    McClure</a> for questions about this article.
+</address>
+```
+
+figures and captions
+
+그림, 다이어그램, 코드 블럭 등에 대해 눈에 보이는 설명을 추가할 수 있다.
+
+```html
+<figure>
+    <img src='semantic-elements.png'
+         alt='Diagram showing <article>, <section>, and <nav> elements'/>
+    <figcaption>New HTML5 semantic elements</figcaption>
+</figure>
+```
+
+이전에 배웠던 `alt` attribute와 비슷하지만 `figcaption`은 눈에 보이는 설명을 추가한다. 또한 이미지뿐만 아니라 텍스트 기반의 내용에도 적용할 수 있다.
+
+### 추가공부 - technical SEO
+
+검색 엔진에서 해당 site가 어떻게 보이는지, facebook이나 twitter 같은 sns에서 내 웹사이트가 어떻게 보여지는지 설정할 수 있다.
+
+## CSS 최신 기능 - 노마드 코더
+
+https://www.youtube.com/watch?v=lkTpOHv1Ros
 
