@@ -969,11 +969,182 @@ figures and captions
 
 이전에 배웠던 `alt` attribute와 비슷하지만 `figcaption`은 눈에 보이는 설명을 추가한다. 또한 이미지뿐만 아니라 텍스트 기반의 내용에도 적용할 수 있다.
 
-### 추가공부 - technical SEO
+
+
+## 13. HTML forms
+
+사용자에게서 입력을 받을때 사용하는 element
+
+form element는 여러개의 attribute를 사용하는데 그중에서 `action`과 `method`가 가장 중요하다.
+
+* `action`해당 입력을 처리하는 URL 주소. 비워두면 입력받는 주소에서 처리한다.
+
+  AJAX queries를 이용해서 form을 제출할 수도 있다.
+
+* `method`서버에 정보를 전송하는 방식 (post, get)
+
+form element안에는 `<label>`, `<input>` 등 다양한 element들이 들어간다.
+
+### <label\>
+
+semantic html element, form element 부가 설명
+
+`for` 속성과 form element의 id 속성의 값을 동일하게 사용해야한다.
+
+### <input/\>
+
+입력처리
+
+* `id` 속성 값을 label element의 for 속성 값과 동일하게 사용한다.
+
+* `type` 속성을 통해 다양한 입력 방식을 지정할 수 있다. text, email, radio 등
+* form을 통해 입력받은 값은 서버에서 변수처럼 처리되는데 `name` 속성으로 변수명을 지정할 수 있다.
+
+- `value` 속성을 통해 input 변수의 초기값을 지정할 수 있다.
+
+- `placeholder` 속성을 통해 입력 예시를 사용자에게 보여줄 수 있다.
+
+이 외에도 `required` 등 유용한 속성들이 많다.
+
+#### email
+
+`type='email'`을 사용하면 올바른 이메일 형식인지 자동으로 검사할 수 있고 유저의 사용성을 더 좋게 할 수 있다. 에를 들어 스마트폰에서 type이 email인 input element에 데이터를 입력하려고 한다면 @가 포함된 키보드가 자동으로 사용된다. 
+
+#### radio button
+
+`type=radio`를 사용해서 라디오 버튼 형식을 사용할 수 있다. `text`나`email`에 비해 좀 더 복잡하다.
+
+1. 여러 개의 선택지를 묶기 위해 `fieldset`과 `legend` element를 사용한다.
+
+2. 같은 그룹에 속한 모든 선택지에 동일한 `name` 값을 사용한다. 
+
+   (동일한 그룹에 속해있다는 것을 나타내기 위해서)
+
+3. 선택지마다 다른 `value` 값과 `label`을 사용한다.
+
+   (사용자가 직접 입력하는 것이 아니라 라디오 버튼마다 이미 정해진 값을 고르기 때문)
+
+\+ `fieldset`는 `flexbox`를 사용할 수 없다. 따라서 `floats`를 주로 사용한다.
+
+```html
+<fieldset>
+    <legend>제목</legend>
+    <input id='one' name='example' type='radio' value='value-one' />
+    <label for='one'>선택지 1</label>
+    <input id='two' name='example' type='radio' value='value-two' checked />
+    <label for='two'>선택지 2</label>
+</fieldset>
+```
+
+* `checked` attribute
+
+  : `boolean attribute`로 값을 설정하지 않는다. radio나 checkbox에서 기본적으로 체크되는 항목에 사용된다. 
+
+* 추가 공부: custom radio button css
+
+#### dropdown menus
+
+라디오 버튼과 비슷하다.
+
+```html
+<label for='example'>예시</label>
+<select id='example' name='ex'>
+    <option value='1'>One</option>
+    <option value='2'>Two</option>
+    <option value='3'>Three</option>
+</select>
+```
+
+하지만 browser에 따라 각 항목들이 어떻게 표시되는지가 다르기 때문에 디자인하기 굉장히 어렵다. 따라서 보통 라디오버튼이나 JavaScript UI widgets(Bootstrap Dropdowns, jQuery Selectmenu's 등)을 주로 사용한다.
+
+#### textareas
+
+여러 줄의 text를 입력받을 때 사용한다.
+
+```html
+<label for='example'>Example</label>
+<textarea id='example' name='ex'>기본값</textarea>
+```
+
+`self closing` element가 아니므로 주의.
+
+기본값도 `value` property 대신 tag 사이에 들어간다.
+
+#### checkboxes
+
+라디오 버튼과 비슷하지만 여러 개의 선택지를 고를 수 있다는 차이점이 있다.
+
+또한 이러한 이유로 라디오 버튼처럼 묶어서 관리할 필요가 없다.
+
+```html
+<label for="ex">
+<input id="ex" name="example" type="checkbox" value="check" />
+<span>Example</span>
+</label>
+```
+
+이런 식으로 label로 form을 감싸서 사용할 수도 있다. 또한 레이아웃 설정이 간편해진다는 장점도 있다.
+
+#### submit buttons
+
+해당 form의 데이터들을 제출할때 사용할 버튼
+
+```html
+<div>
+    <button>Submit</button>
+</div>
+```
+
+버튼을 누르면 데이터들이 `action`에 지정된 주소로 `method`에 지정된 방법으로 전송된다.
+
+URL을 통해 query형태로 데이터들이 서버로 전달된다는 것을 간접적으로 확인할 수 있다.
+
+```markdown
+speaker-submission.html?full-name=Chisan+Ahn&email=chisan2001%40naver.com&talk-type=main-stage&t-shirt=xs&abstract=faefasgea&available=is-available
+```
+
+### pseudo-classes
+
+- `:invalid`, `:valid` 
+
+  입력값이 올바른지 여부에 따라 디자인을 다르게 할 수 있다.
+
+- `:focus` 
+
+  선택되었는지 여부에 따라 디자인을 다르게 할 수 있다.
+
+### CSS selector - "attribute selector"
+
+특정 속성값을 가진 element만 선택해서 디자인 할 수 있다.
+
+원하는 부분만 특정해서 디자인할 수 있도록 CSS를 연습하는 것이 좋다.
+
+```css
+input[type='text'] {
+    back-ground-color: gray;
+    ...
+}
+```
+
+
+
+## 14. Web Typography
+
+
+
+
+
+## 추가공부 
+
+### technical SEO
 
 검색 엔진에서 해당 site가 어떻게 보이는지, facebook이나 twitter 같은 sns에서 내 웹사이트가 어떻게 보여지는지 설정할 수 있다.
 
-## CSS 최신 기능 - 노마드 코더
+### CSS 최신 기능 - 노마드 코더
 
 https://www.youtube.com/watch?v=lkTpOHv1Ros
+
+### custom radio button css
+
+### AJAX queries
 
