@@ -457,6 +457,8 @@ else {
 
 ### LIS
 
+Longest Increasing Subsequence
+
 강의 영상 시점: 2:00~2:37PM쯤
 
 부분수열을 처음에 숫자들이 무조건 연속해서 있어야 한다고 잘못 이해했었다.
@@ -525,13 +527,6 @@ max_index = max(len[max_index], len[i]);
 
 **성공**. 행마다 열의 누적합을 배열로 저장해서 풀었다. 392ms.
 
-### 3주차 과제
-
-[2019-2020 ICPC, Asia Jakarta Regional Contest (Online Mirror, ICPC Rules, Teams Preferred)](https://codeforces.com/group/sPvRZDMiQz/contest/1252)
-
-A문제 해결.  
-C(어떻게 풀어야할지 잘 모르겠다), H(오답), K(시간초과) 시도.
-
 [BOJ 12852 1로 만들기 2](https://www.acmicpc.net/problem/12852)
 
 **성공**. 60ms. 최소값이랑 다음 숫자를 각각 다른 배열에 저장해서 풀었다.
@@ -582,6 +577,21 @@ if (a_i >= a.size() || b_i >= b.size()) {
     if (a[a_i] == b[b_i]) ret = lcs(a, b, a_i + 1, b_i + 1) + 1;
     else ret = max(lcs(a, b, a_i, b_i + 1), lcs(a, b, a_i + 1, b_i));
 ```
+
+### 3주차 과제
+
+[2019-2020 ICPC, Asia Jakarta Regional Contest (Online Mirror, ICPC Rules, Teams Preferred)](https://codeforces.com/group/sPvRZDMiQz/contest/1252)
+
+A문제 해결.  
+C(어떻게 풀어야할지 잘 모르겠다), H(오답), K(시간초과) 시도.
+
+문제 C - [BOJ 19157 Even Path](https://www.acmicpc.net/problem/19157)
+
+강사님의 해설을 들으면서 열이나 행이 홀수->짝수나 짝수->홀수로 바뀌면 경로가 있을 수 없다는 점을 놓쳤다는 것을 알았다. 그리고 누적합으로 풀면 수월하게 풀 수 있다는 점도 알았다.
+
+![C_Even_Path](..\C_Even_Path.png)
+
+성공.
 
 ## 4주차 - 그래프
 
