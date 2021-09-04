@@ -274,6 +274,16 @@ map을 이용해서 풀었다. 성공.
 
 (벡터에 좌표랑 인덱스를 같이 저장해서 정렬을 하고 맨 앞부터 차례대로 검사해서 숫자가 같으면 같은 순위를 사용하고 이외에는 순위를 점차 증겨시켜나가면서 크기가 n인 결과값을 저장할 배열의 해당 인덱스에 순위를 저장시킨뒤 출력.)
 
+[BOJ 1074 Z](https://www.acmicpc.net/problem/1074)
+
+while(n--)
+
+0 + 2^(2\*n)\*(r/(2^n)\*2 + c/(2^n)) + ...
+
+r%=(2^n)	c%=(2^n)
+
+성공.
+
 ### Codefoces Round #739 (Div. 3)
 
 [D, Make a Power of Two](https://codeforces.com/contest/1560/problem/D)
