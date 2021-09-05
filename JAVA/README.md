@@ -125,7 +125,11 @@ int num = Integer.parseInt(input);
 
 `nextInt()`나 `nextFloat()`와 같은 메서드들을 사용하면 변환하지 않고 바로 받을 수 있지만 연속적으로 값을 입력받기 까다롭기 때문에 `nextLine()`으로 입력받고 적절하게 변환해서 사용하는 것이 더 편하다.
 
-### 
+### 입력 - 커맨드 라인 이용
+
+터미널에서 프로그램을 실행할 때 클래스 이름 뒤에 공백문자로 구분하여 여러 개의 문자열을 프로그램에 전달할 수 있다. 공백이 있는 문자열은 큰 따옴표로 묶어서 입력한다.
+
+전달된 문자열은 main 메서드의 args 매개변수에 전달된다.
 
 ## 변수
 
@@ -350,18 +354,6 @@ char c5 = 'a' + 1;  // OK.
 // 리터럴 간의 연산은 실행과정 동안 변하는 값이 아니기 때문에 컴파일 시 컴파일러가 계산해서 그 결과로 대체한다.
 ```
 
-### 문자열 비교
-
-```java
-String s1 = new String("abc");
-String s2 = "abc";  // 객체 중 String만 new를 사용하지 않고 간단하게 객체생성 가능
-String s3 = "Abc";
-
-System.out.println(s1 == s2);  // false. 객체 자체를 비교.
-System.out.println(s1.equals(s2));  // true. 문자열의 내용을 비교.
-System.out.println(s1.equalsIgnoreCase(s2));  // 대소문자 구별없이 비교.
-```
-
 ### 논리 연산자
 
 OR연산의 경우 한쪽만 참이면 참이므로 좌측 피연산자가 참이면 우측 피연산자는 평가하지 않는다. 마찬가지로 AND연산의 경우 한쪽만 거짓이면 거짓이므로 좌측 피연산자가 거짓이면 우측 피연산자는 평가하지 않는다.
@@ -429,17 +421,13 @@ skstn
 
 ### 난수
 
-`Math.random()` 사용. 0.0~1.0 사이의 double형 실수 반환. (1.0은 범위에 포함되지 않는다.)
+`Math.random()` 사용.
 
-### 문자열에 저장된 문자
+0.0~1.0 사이의 double형 실수 반환. (1.0은 범위에 포함되지 않는다.)
 
-`문자열.charAt(index)`
+## 반복문
 
 ### 향상된 for문
-
-c++에서 `for (auto& s : S)`랑 비슷하다.
-
-하지만 값을 읽어오는것만 가능하고 값을 변경할 수는 없다.
 
 배열이나 컬렉션에 저장된 요소에 접근할 떄 기존보다 편리한 방법으로 처리할 수 있다.
 
@@ -450,7 +438,11 @@ for(int a : arr) {
 }
 ```
 
-지금까지 배운 내용 복습 - [BOJ 2577 숫자의 개수](https://www.acmicpc.net/problem/2577)
+c++에서 `for (auto& s : S)`랑 비슷하다.
+
+하지만 c++과는 다르게 자로형도 직접 지정해줘야 하고 값을 변경하는 것은 가능하지 않다.
+
+[BOJ 2577 숫자의 개수](https://www.acmicpc.net/problem/2577)
 
 ### 이름 붙은 반복문
 
@@ -464,3 +456,104 @@ Loop1 : while(true) {
 }
 ```
 
+## 배열
+
+```java
+// 배열의 생성, 초기화
+int[] arr = new int[5];  // OK.
+int arr[] = new int[5];  // OK.
+
+int[] arr = new int[]{ 10, 20, 30 };  // OK.
+int[] arr = { 10, 20, 30 };  // OK.
+
+// 생성과 동시에 초기화를 하는 경우에만 new int[] 부분을 생략할 수 있다.
+int[] arr;
+arr = new int[]{ 10, 20, 30 };  // OK.
+arr = { 10, 20, 30 };  // Error.
+
+```
+
+각 배열요소는 기본값 0을 갖는다.
+
+
+
+유효한 범위를 벗어난 값을 index로 사용했을때 컴파일에서 오류가 나지 않고 실행 시 오류가 나는 이유
+
+> 배열의 index로 변수를 많이 사용하는데, 변수의 값은 실행 시에 결정되므로 컴파일러는 이 값의 범위를 확인할 수 없기 때문이다.
+
+
+
+배열의 길이의 최대값은 int타입의 최대값, 약 20억이다.
+
+```java
+arr.length;  // 배열의 길이, 상수이다.
+```
+
+### 길이가 0인 배열
+
+java에서는 길이가 0인 배열도 지원한다. 따라서 다른 언어와 달리 배열이 비어있는 경우를 따로 예외처리를 하지 않고 사용할 수 있어서 좀 더 간편하다.
+
+ex) 입력값이 없는 경우 : 배열의 기본값은 null이라 배열을 생성하지 않는다면 다른 부분에서 예외가 날 수 있는데 이때 크기가 0인 배열을 생성해서 사용하면 따로 예외처리를 해주지 않아도 된
+
+
+
+배열은 한번 선언되고 나면 길이를 변경할 수 없다. 배열의 길이를 변경하기 위해서는 더 큰 길이의 배열을 새로 생성하고 기존 배열의 값을 새로운 배열에 복사해야 한다.
+
+for문으로 직접 구현할 수도 있지만 Sytem 클래스의 `arraycopy()`를 사용해서 더 빠르게 간편하게 배열을 복사할 수 있다.
+
+```java
+System.arraycopy(원본, 원본 시작인덱스, 목적지, 목적지 시작인덱스, 복사할 문자열의 길이);
+```
+
+`Arrays.toString(배열이름)` 메서드를 사용해 배열의 모든 요소를 일정한 형식의 문자열로 출력할 수 있다.
+
+배열을 그대로 출력하면 `타입@주소` 형식으로 출력된다. 예외적으로 char 배열은 print, println 로 출력하면 각 요소가 구분자 없이 그대로 출력된다.
+
+### 가변 배열
+
+java에서는 2차원 이상의 배열을 `배열의 배열` 형태로 저장하기 때문에 다음과 같이 배열을 구성하는 것이 가능하다.
+
+```java
+int[][] arr = new int[3][];
+arr[0] = new int[5];
+arr[1] = new int[3];
+arr[2] = new int[4];
+```
+
+[BOJ 14912 숫자 빈도수]()
+
+[BOJ 5691 Mean Median Problem](https://www.acmicpc.net/problem/5691)
+
+### 문자열
+
+```java
+String s1 = new String("abc");
+String s2 = "abc";  // 객체 중 String만 new를 사용하지 않고 간단하게 객체생성 가능
+String s3 = "Abc";
+
+System.out.println(s1 == s2);  // false. 객체 자체를 비교.
+System.out.println(s1.equals(s2));  // true. 문자열의 내용을 비교.
+System.out.println(s1.equalsIgnoreCase(s2));  // 대소문자 구별없이 비교.
+```
+
+String 클래스는 char배열에 기능(메서드)를 추가한 것.
+
+이때 char배열과 달리 String객체는 읽을 수만 있고 내용을 변경할 수는 없다는 점에 주의.
+
+#### String 클래스 주요 메서드
+
+* `char charAt(int index)`
+
+  C++과는 달리 괄호연산자를 기본적으로 지원하지 않는다.
+
+* `int length()`
+
+* `String substring(int fromt, int to)`
+
+* `boolean equals(Object obj)`
+
+* `boolean equalsIgnoreCase(Object obj)`
+
+* `char[] toCharArray()`
+
+#### 
