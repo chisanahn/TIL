@@ -425,3 +425,42 @@ x >> n  // x/2^n
 
 참이면 `식1` return, 거짓이면 `식2` return
 
+skstn
+
+### 난수
+
+`Math.random()` 사용. 0.0~1.0 사이의 double형 실수 반환. (1.0은 범위에 포함되지 않는다.)
+
+### 문자열에 저장된 문자
+
+`문자열.charAt(index)`
+
+### 향상된 for문
+
+c++에서 `for (auto& s : S)`랑 비슷하다.
+
+하지만 값을 읽어오는것만 가능하고 값을 변경할 수는 없다.
+
+배열이나 컬렉션에 저장된 요소에 접근할 떄 기존보다 편리한 방법으로 처리할 수 있다.
+
+```java
+int arr[] = {10,20,30,40,50};
+for(int a : arr) {
+    System.out.println(a);
+}
+```
+
+지금까지 배운 내용 복습 - [BOJ 2577 숫자의 개수](https://www.acmicpc.net/problem/2577)
+
+### 이름 붙은 반복문
+
+break, continue문은 근접한 단 하나의 반복문만 벗어날 수 있기 때문에 반복문에 이름을 붙이고 break문과 continue문에 이름을 지정하고 사용해서 둘 이상의 반복문을 벗어날 수 있다.
+
+```java
+Loop1 : while(true) {
+    while(true) {
+        break Loop1;
+    }
+}
+```
+

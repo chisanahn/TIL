@@ -2,10 +2,23 @@ import java.util.*;
 
 class Main {
     public static void main(String args[]) {
-        String s1 = new String("abc");
-        String s2 = new String("abc");
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.println(s1 == s2);
-        System.out.println(s1.equals(s2));
+        int count[] = new int[10];
+        for (int i=0; i<10; i++) {
+            count[i] = 0;
+        }
+
+        int A = scanner.nextInt();
+        int B = scanner.nextInt();
+        int C = scanner.nextInt();
+        
+        int ret = A*B*C;
+        while(ret > 0) {
+            count[ret%10]++;
+            ret/=10;
+        }
+
+        for(int c : count) System.out.println(c);
     }
 }
