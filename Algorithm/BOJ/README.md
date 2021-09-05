@@ -284,6 +284,16 @@ r%=(2^n)	c%=(2^n)
 
 성공.
 
+[BOJ 7576 토마토](https://www.acmicpc.net/problem/7576)
+
+상자 최대 크기 1000,000
+
+O(n^2) 알고리즘으로 구현하면 시간초과가 나올 것이다.
+
+bfs로 풀면 될 것 같다. 입력받으면서 익은 토마토들 위치를 queue에 넣고 인접한 안 익은 토마토들 익은 토마토로 바꾸고 queue에 넣기.
+
+성공.
+
 ### Codefoces Round #739 (Div. 3)
 
 [D, Make a Power of Two](https://codeforces.com/contest/1560/problem/D)
