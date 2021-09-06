@@ -294,6 +294,12 @@ bfs로 풀면 될 것 같다. 입력받으면서 익은 토마토들 위치를 q
 
 성공.
 
+solved.ac CLASS 4
+
+[BOJ 15650 N과 M(2)](https://www.acmicpc.net/problem/15650)
+
+성공. 재귀함수로 쉽게 풀었다.
+
 ### Codefoces Round #739 (Div. 3)
 
 [D, Make a Power of Two](https://codeforces.com/contest/1560/problem/D)
