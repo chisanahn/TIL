@@ -294,11 +294,15 @@ bfs로 풀면 될 것 같다. 입력받으면서 익은 토마토들 위치를 q
 
 성공.
 
-solved.ac CLASS 4
+### solved.ac CLASS 4
 
 [BOJ 15650 N과 M(2)](https://www.acmicpc.net/problem/15650)
 
 성공. 재귀함수로 쉽게 풀었다.
+
+[BOJ 15652 N과 M (4)](https://www.acmicpc.net/problem/15652)
+
+성공. BOJ 15650이랑 거의 똑같은 문제. 요즘 java를 공부중이라 연습삼아 java로 풀었다.
 
 ### Codefoces Round #739 (Div. 3)
 
