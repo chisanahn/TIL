@@ -1,18 +1,18 @@
-import java.util.*;
+class Tv {
+    boolean power;
+    int channel;
 
-class A {
-    int a;
-}
-
-class B : public A {
-    int b;
-}
-
-class Main {
-    public static void main(String[] args) {
-        A temp = new A();
-        temp.a = 10;
-        A temp = new B();
-
+    void power() {
+        power = !power;
     }
+    void channelUp() {
+        channel++;
+    }
+    void channelDown() {
+        channel--;
+    }
+}
+
+class CaptionTv extends Tv {
+    boolean caption;
 }
