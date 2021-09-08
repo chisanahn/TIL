@@ -304,6 +304,12 @@ bfs로 풀면 될 것 같다. 입력받으면서 익은 토마토들 위치를 q
 
 성공. BOJ 15650이랑 거의 똑같은 문제. 요즘 java를 공부중이라 연습삼아 java로 풀었다.
 
+[BOJ 15654 N과 M (5)](https://www.acmicpc.net/problem/15654)
+
+성공.
+
+
+
 ### Codefoces Round #739 (Div. 3)
 
 [D, Make a Power of Two](https://codeforces.com/contest/1560/problem/D)
