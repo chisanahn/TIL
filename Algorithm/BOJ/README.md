@@ -308,6 +308,18 @@ bfs로 풀면 될 것 같다. 입력받으면서 익은 토마토들 위치를 q
 
 성공.
 
+[BOJ 15657 N과 M(8)](https://www.acmicpc.net/problem/15657)
+
+성공.
+
+[BOJ 2407 조합](https://www.acmicpc.net/problem/2407)
+
+일반적인 방법으로 구현하면 8byte 자료형을 쓰더라도 overflow가 생긴다.
+
+최대값인 100C50의 경우 결과값도 8byte를 넘어가버린다.
+
+문자열을 이용해서 계산해야 할 것 같은데 나눗셈은 어떻게 계산해야할지 감이 잘 안잡힌다.
+
 
 
 ### Codefoces Round #739 (Div. 3)
