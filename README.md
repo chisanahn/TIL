@@ -22,6 +22,20 @@
 
 - [Git Repository 합치기 (commit log 유지) - subtree 이용](http://yeoseon.kr/git-repository-habcigi-commit-log-yuji-subtree-iyong/)
 
+- #### rebase
+
+  우아한형제들 기술블로그에서 git-flow 관련 글을 보다가 우연히 rebase에 관한 글을 읽었는데
+
+  rebase로 병합뿐만 아니라 과거 커밋들을 수정하거나 다른 브랜치들로 옮길 수도 있다는걸 알았다. https://suhwan.dev/2018/01/21/Git-Rebase-1/
+
+  그 전에는 commit --amend로 바로 직전 커밋만 수정 가능하고 다른 작업은 못하는줄 알아서 한번 커밋할때 신중하게 해야되겠다고 생각했는데
+
+  다음에 한번 rebase를 제대로 한번 사용해봐야겠다.
+
+  단, 역시나 공동 프로젝트를 하는 경우에는 커밋내역이 꼬일 수 있기 때문에 안하는게 좋다.
+
+  
+
 ### 기타
 - [disable context menu for open in visual studio](https://developercommunity.visualstudio.com/t/disable-context-menu-for-open-in-visual-studio/26397)   
 파일 탐색기에서 마우스 오른쪽 클릭을 했을때 `open in visual studio`가 안나오게 하는 방법. SHIFT키를 누르고 클릭해야만 나오게 설정할 수도 있다.   
@@ -58,3 +72,4 @@ vscode, pycharm 등 다른 에디터의 경우도 비슷한 방법으로 설정�
 - [git-bash 백슬래시 경로 인식 문제 해결](https://k-chan-l.github.io/etc/2021/03/07/vscode-errorcheck.html)    
 > 이유는 모르겠지만 이 블로그를 참고해서 다시 기본 터미널을 git-bash로 설정해보다가 안되서 작은 따옴표로 감싸지 않고 그냥 해보니깐 성공했다.  
 > 그리고 컴파일 후 실행에서 문제가 생겨서 이 부분은 블로그를 참고해서 해결했다.
+
