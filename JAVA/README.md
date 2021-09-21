@@ -1385,9 +1385,240 @@ new 인터페이스명 () {
 
 ### 예외처리
 
+#### 오류의 종류
 
+컴파일, 런타임, 논리적 오류
 
+그 중 실행시 발생할 수 있는 오류를 에러, 예외로 구분한다.
 
+##### 에러
+
+`OutOfMemoryError`나 `StackOverflowError`와 같이 일단 발생하면 복구할 수 없는 심각한 오류
+
+##### 예외
+
+발생하더라도 수습될 수 있는 비교적 덜 심각한 것.
+
+프로그램의 비정상 종료를 막고 정상적인 실행상태를 유지하기 위해 보통 프로그래머가 미리 예외처리를 해준다.
+
+java에서는 실행 시 발생할 수 있는 오류들을 클래스로 정의했다. 따라서 Exception와 Error 클래스 역시 Object 클래스의 자식클래스다.
+
+```
+Object > Throwable > Exception, Error
+```
+
+모든 예외의 최고 조상은 Exception 클래스.
+
+#### unchecked Exception
+
+주로 프로그래머의 실수에 의해서 발생할 수 있는 예외. 프로그래밍 요소들과 관계가 깊다.
+
+컴파일러가 예외처리를 확인하지 않는다.
+
+ArrayIndexOutOfBoundsException 등의 클래스들이 있고 RuntimeException 클래스를 공통조상으로 갖는다.
+
+#### checked Exception
+
+컴파일러가 예외처리를 확인하기 때문에 예외처리를 필수로 해야 한다.
+
+프로그램 사용자들의 동작에 의해서 발생하는 경우가 많다.
+
+IOException, ClassNotFoundException 등이 있다.
+
+#### try-catch문
+
+```java
+try {
+    // 예외가 발생할 가능성이 있는 문장들
+} catch (ArithmeticException e) {
+    // 예외가 발생했을 경우, 예외를 처리하기 위한 문장들
+} catch (Exception e) {
+    // 1개 이상의 catch 블럭이 있을 수 있다.
+}
+```
+
+예외가 발생하면 첫번째 catch 블럭부터 괄호 내에 선언된 참조변수의 종류와 발생한 예외에 instaceof 연산자를 이용해서 검사하고 동일하면 해당 catch문을 실행한다.
+
+모든 예외의 최고 조상인 Exception 클래스를 사용하면 모든 예외에 대해서 해당 catch 문이 실행되도록 할 수 있다.
+
+##### printStackTrace(), getMessage()
+
+catch 블럭의 괄호에 선언된 참조변수를 통해 생성된 예외 클래스의 인스턴스에 접근할 수 있다.
+
+```java
+catch (Exception e) {
+	// 예외발생 당시의 Call Stack에 있었던 메서드의 정보와 예외 메시지.
+    println(e.printStackTrace());
+    
+    // 발생한 예외클래스의 인스턴스에 저장된 메시지.
+	println("예외메시지 : " + e.getMessage());
+}
+```
+
+##### 멀티 catch 블럭
+
+```java
+try {
+} catch (ExceptionA | ExceptionB e) {
+    
+}
+```
+
+JDK 1.7부터 `|`로 여러 예외 클래스를 묶어서 사용할 수 있다.
+
+단, 예외 클래스가 상속 관계에 있을 경우 에러가 난다.
+
+그리고 예외 클래스의 공통 조상에 선언된 메서드만 사용할 수 있다.
+
+(앞에서 배웠던 상속을 생각해보면 이유를 쉽게 알 수 있을 것이다.)
+
+##### finally
+
+try-catch 문의 끝에 선택적으로 덧붙여 사용할 수 있는 코드
+
+예외 발생여부에 관계없이 실행되는 부분이다.
+
+```java
+try {
+    return;
+} catch (Exception e) {
+    
+} finally {
+    
+}
+```
+
+참고로 try나 catch 문 안에서 해당 메서드를 종료하는 부분이 있더라도 메서드가 종료되기 전에 finally 문이 실행된다.
+
+> finally 블럭 내에서 retrun문을 사용할 경우 try블럭이나 catch블럭의 return 문 다음에 수행되기 때문에 최종적으로 fianlly 블럭 내의 return 문의 값이 반환된다.
+
+#### 예외 발생시키기 - throw
+
+```java
+Exception e = new Exception("에러 메시지");
+throw e;
+```
+
+#### 메서드에 예외 선언
+
+메서드의 선언부에 키워드 throws를 사용해서 메서드 내에 발생할 수 있는 예외를 적어준다.
+
+```java
+void method() throws ExceptionA, ExceptionB, ... {
+    
+}
+```
+
+해당 메서드에 예외를 선언하면 해당 메서드에서 예외를 처리하지 않아도 된다. 단, 언젠가는 반드시 해당 예외가 처리되어야 한다.
+
+보통 RuntimeException클래스들은 적지 않고 반드시 처리해주어야 하는 예외들만 선언해준다.
+
+#### try-with-resources
+
+자동 자원 반환
+
+```java
+try (FileInputStream fis = new FileInputStream("sample.txt");
+    DataInputStream dis = new DataInputStream(fis)) {
+    
+} catch (EOFException e) {
+    
+} catch (IOException e) {
+    
+}
+```
+
+try블럭의 괄호 안에 객체를 생성하는 문장을 넣으면, try블럭을 벗어나는 순간 해당 객체의 close()가 자동으로 호출된다.
+
+단, AutoCloseable 인터페이스를 구현한 클래스의 객체만 자동으로 close()가 호출될 수 있다.
+
+이미 예외가 발생하고 close()에서 예외가 발생한 경우 close()에서 발생한 예외를 억제된 예외로 다룬다. 억제된 예외는 실제 발생된 예외에 저장되어 관리된다.
+
+>  두 예외가 동시에 발생할 수 없기 때문에 try-catch 문의 경우 먼저 발생한 예외는 무시된다.
+>
+> Throwable 인터페이스에 억제된 예외와 관련된 메소드가 정의되어 있다.
+
+#### 사용자정의 예외
+
+기존 예외 클래스를 상속받아 사용자정의 예외를 만들 수 있다.
+
+```java
+class MyException extends Exception {
+    MyException (String msg) {
+        super(msg);
+    }
+}
+```
+
+보통 예외처리를 선택적으로 할 수 있도록 RuntimeException을 상속받아서 unchecked Exception으로 만든다.
+
+> Exception을 상속받아서 checked예외를 만들어서 사용하면 예외처리가 불필요한 경우에도 예외 처리를 해야되서 코드가 복잡해질수있다.
+
+#### exception re-throwing
+
+예외를 처리한 후에 인위적으로 다시 발생시키는 방법
+
+하나의 예외에 대해서 예외가 발생한 메서드와 이를 호출한 메서드 양쪽 모두에서 처리해줘야 할 작업이 있을 때 사용된다.
+
+```java
+class Ex {
+    public static void main(String[] args) {
+        try {
+            method();
+        } catch (Exception e) {
+            
+        }
+    }
+    
+    static void method() throws Exception {
+        try {
+            throw new Exception();
+        } catch (Exception e) {
+            // 예외처리 후 다시 발생.
+            throw e;
+        }
+    }
+}
+```
+
+예외 되던지기를 하는 경우, catch 블럭 내에 retrun 문이 없어도 된다.
+
+#### chained exception
+
+한 예외가 다른 예외를 발생시키는 경우
+
+```java
+try {
+    
+} catch (Exception_A ae) {
+    Exception_C ce = new Exception_C("발생된 예외");
+    ce.initCause(ae);  // 원인 예외 지정
+    throw ce;
+} catch (Exception_B be) {
+    Exception_C ce = new Exception_C("발생된 예외");
+    ce.initCause(be);  // 원인 예외 지정
+    throw ce;
+}
+```
+
+Exception 클래스의 조상인 Throwable 클래스에 정의되어 있는 관련 메서드
+
+* 원인 예외 지정 - Throwable initCause (Throwable cause)
+* 원인 예외 반환 - Throwable getCause()
+
+##### 사용하는 이유
+
+1. 여러가지 예외를 하나의 예외로 묶어서 다루기 위해서
+
+   > 공통 조상 클래스로 묶기에는 상속관계를 변경해야 해서 불편하다.
+
+2. checked 예외를 unchecked 예외로 바꾸기 위해서
+
+   ```java
+   throw new RuntimeException(new Exception("원인 예외"));
+   ```
+
+   참고로 RuntimeException의 생성자를 이용해서 원인 예외를 등록할 수 있다.
 
 
 
