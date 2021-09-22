@@ -4,7 +4,7 @@
 
 최근에 알고리즘을 공부하면서 C++에 생각보다 기능이 되게 많아서 시간이 지나면서 업데이트 된건가 했는데 C++이 오히려 원조였다
 
-## 자바의 역사
+## 00 자바의 역사
 
 가전제품에 탑재될 소프트웨어 제작
 
@@ -20,7 +20,7 @@
 
 하지만 현재는 보안상의 이유로 애플릿은 더 이상 지원되지 않고 서버 쪽 프로그래밍과 안드로이드에서 주로 사용되고 있다.
 
-## Java 언어의 특징
+## 01 Java 언어의 특징
 
 1. 운영체제에 독립적
 
@@ -44,7 +44,7 @@
 
    애플리케이션의 변경사항이 발생해도 비교 적은 작업만으로 처리 가능
 
-## JVM
+## 02 JVM
 
 Java virtual machine
 
@@ -84,7 +84,7 @@ JVM은 운영체제에 종속적이라 다양한 OS용 JVM이 존재한다.
 
 
 
-## path
+## path 환경변수
 
 그동안 사용한적도 있고 어렴풋이 알고 있었지만 이번에 정확하게 알게되었다.
 
@@ -92,7 +92,7 @@ JVM은 운영체제에 종속적이라 다양한 OS용 JVM이 존재한다.
 path는 OS가 파일의 위치(디렉토리)를 파악하는데 사용하는 경로(path)로, path에 디렉토리를 등록하면, 해당 디렉토리에 포함된 파일을 파일 경로없이 파일 이름만으로도 사용할 수 있게 된다.
 ```
 
-## Hello.java
+## 03 Hello.java
 
 ### 클래스
 
@@ -177,9 +177,9 @@ int num = Integer.parseInt(input);
 
 전달된 문자열은 main 메서드의 args 매개변수에 전달된다.
 
-## 변수
+## 04 변수
 
-### 1. 기본형
+### a. 기본형
 
 실제 값 저장, 총 8개
 
@@ -247,7 +247,7 @@ ex) int형의 범위: -2^31 ~ 2^31-1 대략적으로 2*10^9 정도의 음수/양
 
 `지수` 부분에는 따로 부호 비트가 없기때문에 `bias 표현법`을 사용한다.
 
-### 2. 참조형
+### b. 참조형
 
 * `null`또는 객체의 주소를 값으로 갖는다.
 * C언어와 달리 참조형 변수간의 연산을 할 수 없다.
@@ -265,7 +265,7 @@ Date today = new Date()
 
 오버라이딩해서 원하는 문자열을 반환하도록 할 수 있다.
 
-### 3. 상수
+### c. 상수
 
 java에서 상수는 `final`를 앞에 붙여서 사용한다.
 
@@ -273,7 +273,7 @@ java에서 상수는 `final`를 앞에 붙여서 사용한다.
 final int MAX_SPEED = 10;
 ```
 
-### 4. 리터럴
+### d. 리터럴
 
 정확한 정의는 모르고 있었는데 프로그래밍에서 상수가 다른 의미로 사용되면서 우리가 일반적으로 사용하는 상수를 리터럴이라고 부르는 것이었다.
 
@@ -376,7 +376,80 @@ int형의 크기와 워드의 크기가 동일한 것 같아서 찾아봤는데 
 0111  // 71000  // -8
 ```
 
-## 연산자
+
+
+## 05 배열
+
+```java
+// 배열의 생성, 초기화
+int[] arr = new int[5];  // OK.
+int arr[] = new int[5];  // OK.
+int[] arr = new int[]{ 10, 20, 30 };  // OK.
+int[] arr = { 10, 20, 30 };  // OK.
+
+// 생성과 동시에 초기화를 하는 경우에만 new int[] 부분을 생략할 수 있다.
+int[] arr;
+arr = new int[]{ 10, 20, 30 };  // OK.
+arr = { 10, 20, 30 };  // Error.
+```
+
+각 배열요소는 기본값으로 0을 갖는다.
+
+유효한 범위를 벗어난 값을 index로 사용했을때 컴파일에서 오류가 나지 않고 실행 시 오류가 나는 이유
+
+> 배열의 index로 변수를 많이 사용하는데, 변수의 값은 실행 시에 결정되므로 컴파일러는 이 값의 범위를 확인할 수 없기 때문이다.
+
+`Arrays.toString(배열이름)` 메서드를 사용해 배열의 모든 요소를 일정한 형식의 문자열로 출력할 수 있다.
+
+배열을 그대로 출력하면 `타입@주소` 형식으로 출력된다 (`toString()` 메서드가 오버라이딩 되어있지 않아서 그런 것 같다)
+
+예외적으로 char 배열은 print, println 로 출력하면 각 요소가 구분자 없이 그대로 출력된다.
+
+배열의 길이의 최대값은 int타입의 최대값, 약 20억이다.
+
+```java
+arr.length;  // 배열의 길이, 상수이다.
+```
+
+배열은 한번 선언되고 나면 길이를 변경할 수 없다. 배열의 길이를 변경하기 위해서는 더 큰 길이의 배열을 새로 생성하고 기존 배열의 값을 새로운 배열에 복사해야 한다.
+
+### 배열의 복사
+
+깊은 복사를 하는 방법
+
+* `clone()`
+* `System.arraycopy(원본, 원본 시작인덱스, 목적지, 목적지 시작인덱스, 복사할 문자열의 길이)`
+
+### 길이가 0인 배열
+
+java에서는 길이가 0인 배열도 지원한다. 따라서 다른 언어와 달리 배열이 비어있는 경우를 따로 예외처리를 하지 않고 사용할 수 있어서 좀 더 간편하다.
+
+```
+ex. 입력값이 없는 경우 배열의 기본값은 null이라 배열을 생성하지 않는다면 다른 부분에서 예외가 날 수 있다.
+이때 크기가 0인 배열을 생성해서 사용하면 따로 예외처리를 해주지 않아도 된다.
+```
+
+### 가변 배열
+
+java에서는 2차원 이상의 배열을 `배열의 배열` 형태로 저장하기 때문에 다음과 같이 배열을 구성하는 것이 가능하다.
+
+```java
+int[][] arr = new int[3][];arr[0] = new int[5];arr[1] = new int[3];arr[2] = new int[4];
+```
+
+연습문제 - BOJ 14912 숫자 빈도수
+
+연습문제 - BOJ 5691 Mean Median Problem
+
+### 문자열
+
+java에서는 char형 배열 대신 String 클래스로 문자열을 다룬다.
+
+자세한 내용은 10. java.lang.package - `String 클래스` 참고
+
+
+
+## 06 연산자
 
 대입 연산자의 반환값은 저장된 값.
 
@@ -452,7 +525,9 @@ skstn
 
 0.0~1.0 사이의 double형 실수 반환. (1.0은 범위에 포함되지 않는다.)
 
-## 반복문
+
+
+## 07 반복문
 
 ### 향상된 for문
 
@@ -483,104 +558,9 @@ Loop1 : while(true) {
 }
 ```
 
-## 배열
+## 08 객체지향언어
 
-```java
-// 배열의 생성, 초기화
-int[] arr = new int[5];  // OK.
-int arr[] = new int[5];  // OK.
-int[] arr = new int[]{ 10, 20, 30 };  // OK.
-int[] arr = { 10, 20, 30 };  // OK.
-
-// 생성과 동시에 초기화를 하는 경우에만 new int[] 부분을 생략할 수 있다.
-int[] arr;
-arr = new int[]{ 10, 20, 30 };  // OK.
-arr = { 10, 20, 30 };  // Error.
-```
-
-각 배열요소는 기본값 0을 갖는다.
-
-
-
-유효한 범위를 벗어난 값을 index로 사용했을때 컴파일에서 오류가 나지 않고 실행 시 오류가 나는 이유
-
-> 배열의 index로 변수를 많이 사용하는데, 변수의 값은 실행 시에 결정되므로 컴파일러는 이 값의 범위를 확인할 수 없기 때문이다.
-
-
-
-배열의 길이의 최대값은 int타입의 최대값, 약 20억이다.
-
-```java
-arr.length;  // 배열의 길이, 상수이다.
-```
-
-### 길이가 0인 배열
-
-java에서는 길이가 0인 배열도 지원한다. 따라서 다른 언어와 달리 배열이 비어있는 경우를 따로 예외처리를 하지 않고 사용할 수 있어서 좀 더 간편하다.
-
-ex) 입력값이 없는 경우 : 배열의 기본값은 null이라 배열을 생성하지 않는다면 다른 부분에서 예외가 날 수 있는데 이때 크기가 0인 배열을 생성해서 사용하면 따로 예외처리를 해주지 않아도 된
-
-
-
-배열은 한번 선언되고 나면 길이를 변경할 수 없다. 배열의 길이를 변경하기 위해서는 더 큰 길이의 배열을 새로 생성하고 기존 배열의 값을 새로운 배열에 복사해야 한다.
-
-for문으로 직접 구현할 수도 있지만 Sytem 클래스의 `arraycopy()`를 사용해서 더 빠르게 간편하게 배열을 복사할 수 있다.
-
-```java
-System.arraycopy(원본, 원본 시작인덱스, 목적지, 목적지 시작인덱스, 복사할 문자열의 길이);
-```
-
-`Arrays.toString(배열이름)` 메서드를 사용해 배열의 모든 요소를 일정한 형식의 문자열로 출력할 수 있다.
-
-배열을 그대로 출력하면 `타입@주소` 형식으로 출력된다. 예외적으로 char 배열은 print, println 로 출력하면 각 요소가 구분자 없이 그대로 출력된다.
-
-### 가변 배열
-
-java에서는 2차원 이상의 배열을 `배열의 배열` 형태로 저장하기 때문에 다음과 같이 배열을 구성하는 것이 가능하다.
-
-```java
-int[][] arr = new int[3][];arr[0] = new int[5];arr[1] = new int[3];arr[2] = new int[4];
-```
-
-연습문제 - BOJ 14912 숫자 빈도수
-
-연습문제 - BOJ 5691 Mean Median Problem
-
-### 문자열
-
-```java
-String s1 = new String("abc");
-String s2 = "abc";  // 객체 중 String만 new를 사용하지 않고 간단하게 객체생성 가능
-String s3 = "Abc";
-
-System.out.println(s1 == s2);  // false. 객체 자체를 비교.
-System.out.println(s1.equals(s2));  // true. 문자열의 내용을 비교.
-System.out.println(s1.equalsIgnoreCase(s2));  // 대소문자 구별없이 비교.
-```
-
-String 클래스는 char배열에 기능(메서드)를 추가한 것.
-
-이때 char배열과 달리 String객체는 읽을 수만 있고 내용을 변경할 수는 없다는 점에 주의.
-
-#### String 클래스 주요 메서드
-
-* `char charAt(int index)`
-
-  C++과는 달리 괄호연산자를 기본적으로 지원하지 않는다.
-
-* `int length()`
-
-* `String substring(int fromt, int to)`
-
-* `boolean equals(Object obj)`
-
-* `boolean equalsIgnoreCase(Object obj)`
-
-* `char[] toCharArray()`
-
-## 객체지향언어
-
-### 객체지향이론
+### a. 객체지향이론
 
 ```기본개념
 <기본개념>
@@ -595,7 +575,7 @@ String 클래스는 char배열에 기능(메서드)를 추가한 것.
 
 시간이 지나면서 프로그램의 규모가 커지고 사용자들의 요구가 빠르게 변화해가면서 절차적언어의 한계를 느끼고 객체지향언어의 입지가 점차 커지다가 `java`의 등장 이후 널리 사용되게 되었다.
 
-### 객체지향언어
+### b. 객체지향언어
 
 ```
 기존의 언어에 몇 가지 규칙들을 추가해 코드 간에 관계를 형성해
@@ -654,7 +634,7 @@ arr[0] = new String("first");
 arr[1] = "second";  // String 클래스는 유일하게 객체를 생성할때 new 생략 가능.
 ```
 
-### 변수
+### c. 변수
 
 * 멤버변수
 
@@ -737,7 +717,7 @@ class EX {
 
 
 
-### 메서드
+### d. 메서드
 
 내부적인 동작 과정을 몰라도 입출력만 알고있다면 사용할 수 있기 때문에 `블랙박스`라고도 한다.
 
@@ -807,7 +787,7 @@ String func(int a, String... str);
 
 가변인자는 내부적으로 배열을 사용한다. 하지만 배열을 매개변수로 사용하는 경우와 달리 인자를 생략할 수 있어 더 간편하다.
 
-### 생성자
+### e. 생성자
 
 인스턴스가 생성될 때 호출되는 "인스턴스 초기화 메서드"
 
@@ -892,7 +872,7 @@ class Ex {
 
 
 
-### 클래스 간의 관계 - 상속
+### f. 클래스 간의 관계 - 상속
 
 **is-a 관계**
 
@@ -916,6 +896,8 @@ static 멤버들은 자신들이 정의된 클래스에 묶여있다고 생각�
 객체지향 프로그래밍에 있어서 프로그램을 구성하는 클래스들을 분석하여 적절한 상속관게를 맺어주는 것이 가장 중요하다.
 ```
 
+
+
 #### 오버라이딩
 
 부모클래스에서 상속받은 메서드를 자식클래스에서 내용을 변경하는 것.
@@ -926,6 +908,16 @@ static 멤버들은 자신들이 정의된 클래스에 묶여있다고 생각�
 1. 접근 제어자를 부모클래스의 메서드보다 좁은 범위로 변경할 수 없다.
 2. 부모클래스의 메서드보다 많은 수의 예외를 선언할 수 없다.
 3. 메서드의 종류를 변경할 수 없다. (인스턴스, static)
+
+##### 공변 반환타입
+
+JDK 1.5부터 부모 메서드의 반환타입을 자식 클래스 타입으로 변경할 수 있다.
+
+메서드를 오버라이딩할때 반환값을 바꾸기 위해서 유용하게 사용한다.
+
+캡슐화.
+
+
 
 #### 단일 상속
 
@@ -941,24 +933,17 @@ C++과 달리 다중 상속은 가능하지 않다.
 
 보통 두 개의 클래스로부터 상속받아야하는 경우, 비중이 더 높은 클래스를 부모 클래스로 상속받고 다른 클래스를 멤버변수로 포함시키는 것이 일반적이다.
 
-#### Object 클래스 - 모든 클래스의 조상
+#### Object 클래스
 
-상속계측도 최상위 클래스
+모든 클래스의 조상. 상속계측도 최상위 클래스
 
 다른 클래스로부터 상속을 받지 않을 경우 컴파일러가 자동으로 `extends Object`를 추가한다.
 
 `toString()`, `equals(Object o)`와 같은 메서드들이 Object 클래스에 정의되어 있다.
 
-```java
-// 원하는 문자열을 반환하도록 클래스 내에서 toString()을 오버라이딩해서 사용할 수 있다.
-class TV {
-    ...
-    public String toString() { return "TV"; }
-    ...
-}
-```
+자세한 내용은 10. java.lang 패키지 - `Object 클래스` 참고
 
-#### 참조변수 super
+#### super
 
 자식 클래스에서 부모 클래스로부터 상속받은 멤버를 참조하는데 사용되는 참조변수
 
@@ -970,7 +955,7 @@ super를 이용해서 구별할 수 있기 때문에 부모 클래스에 선언�
 
 상속받은 멤버인지 구별하는데 사용된다는 점을 제외하곤 super와 this는 근본적으로 같다.
 
-#### 부모 클래스 생성자 super()
+#### super()
 
 자식 클래스에서 부모 클래스의 멤버가 사용될 수 있기 때문에 자식 클래스의 생성자를 호출하면 부모 클래스 멤버의 초기화 작업이 수행되어야 한다.
 
@@ -982,7 +967,7 @@ Object 클래스를 제외한 모든 클래스의 생성자 첫줄에 this() 또
 
 
 
-### 클래스 간의 관계 - 포함
+### g. 클래스 간의 관계 - 포함
 
 **has-a 관계**
 
@@ -1000,7 +985,7 @@ class Car {
 
 
 
-### 패키지
+### h. 패키지
 
 클래스의 묶음. 클래스의 효율적인 관리가 가능해진다.
 
@@ -1061,7 +1046,7 @@ import static java.lang.System.out;
 
 
 
-### 제어자
+### i. 제어자
 
 #### 접근제어자
 
@@ -1122,7 +1107,7 @@ java에서는 final 멤버변수도 생성자에서 다른 변수처럼 초기�
 
 
 
-### 다형성
+### j. 다형성
 
 부모클래스 타입의 참조변수로 자식클래스의 인스턴스를 참조할 수 있다.
 
@@ -1194,7 +1179,7 @@ Object 타입 참조변수를 사용하면 모든 타입의 인스턴스를 처�
 
 
 
-### 추상화
+### k. 추상화
 
 기존의 클래스의 공통부분을 뽑아내서 조상 클래스를 만드는 것.
 
@@ -1223,7 +1208,7 @@ abstract 리턴타입 메서드이름();
 
 추상메서드는 자식클래스가 자신의 클래스에 알맞게 반드시 구현해야한다는 의미가 담겨있는 것이기도 하다.
 
-### 인터페이스
+### l. 인터페이스
 
 일종의 추상클래스. 하지만 추상화 정도가 높아서 오직 추상메서드와 상수만을 멤버로 가질 수 있다. 따라서 인터페이스명으로 able을 붙이는 경우가 많다.
 
@@ -1333,7 +1318,7 @@ JDK 1.8부터 인터페이스에서 추상 메서드 외에도 static, 디폴트
 
 
 
-### 내부 클래스
+### m. 내부 클래스
 
 외부에 불필요한 클래스를 감춤으로써 코드의 복잡성을 줄일 수 있다(캡슐화)
 
@@ -1383,19 +1368,19 @@ new 인터페이스명 () {
 
 
 
-### 예외처리
+## 09 예외처리
 
-#### 오류의 종류
+### 오류의 종류
 
 컴파일, 런타임, 논리적 오류
 
 그 중 실행시 발생할 수 있는 오류를 에러, 예외로 구분한다.
 
-##### 에러
+#### 에러
 
 `OutOfMemoryError`나 `StackOverflowError`와 같이 일단 발생하면 복구할 수 없는 심각한 오류
 
-##### 예외
+#### 예외
 
 발생하더라도 수습될 수 있는 비교적 덜 심각한 것.
 
@@ -1409,7 +1394,7 @@ Object > Throwable > Exception, Error
 
 모든 예외의 최고 조상은 Exception 클래스.
 
-#### unchecked Exception
+### unchecked Exception
 
 주로 프로그래머의 실수에 의해서 발생할 수 있는 예외. 프로그래밍 요소들과 관계가 깊다.
 
@@ -1417,7 +1402,7 @@ Object > Throwable > Exception, Error
 
 ArrayIndexOutOfBoundsException 등의 클래스들이 있고 RuntimeException 클래스를 공통조상으로 갖는다.
 
-#### checked Exception
+### checked Exception
 
 컴파일러가 예외처리를 확인하기 때문에 예외처리를 필수로 해야 한다.
 
@@ -1425,7 +1410,7 @@ ArrayIndexOutOfBoundsException 등의 클래스들이 있고 RuntimeException �
 
 IOException, ClassNotFoundException 등이 있다.
 
-#### try-catch문
+### try-catch문
 
 ```java
 try {
@@ -1441,7 +1426,7 @@ try {
 
 모든 예외의 최고 조상인 Exception 클래스를 사용하면 모든 예외에 대해서 해당 catch 문이 실행되도록 할 수 있다.
 
-##### printStackTrace(), getMessage()
+#### printStackTrace(), getMessage()
 
 catch 블럭의 괄호에 선언된 참조변수를 통해 생성된 예외 클래스의 인스턴스에 접근할 수 있다.
 
@@ -1455,7 +1440,7 @@ catch (Exception e) {
 }
 ```
 
-##### 멀티 catch 블럭
+#### 멀티 catch 블럭
 
 ```java
 try {
@@ -1472,7 +1457,7 @@ JDK 1.7부터 `|`로 여러 예외 클래스를 묶어서 사용할 수 있다.
 
 (앞에서 배웠던 상속을 생각해보면 이유를 쉽게 알 수 있을 것이다.)
 
-##### finally
+#### finally
 
 try-catch 문의 끝에 선택적으로 덧붙여 사용할 수 있는 코드
 
@@ -1492,14 +1477,14 @@ try {
 
 > finally 블럭 내에서 retrun문을 사용할 경우 try블럭이나 catch블럭의 return 문 다음에 수행되기 때문에 최종적으로 fianlly 블럭 내의 return 문의 값이 반환된다.
 
-#### 예외 발생시키기 - throw
+### 예외 발생시키기 - throw
 
 ```java
 Exception e = new Exception("에러 메시지");
 throw e;
 ```
 
-#### 메서드에 예외 선언
+### 메서드에 예외 선언
 
 메서드의 선언부에 키워드 throws를 사용해서 메서드 내에 발생할 수 있는 예외를 적어준다.
 
@@ -1513,7 +1498,7 @@ void method() throws ExceptionA, ExceptionB, ... {
 
 보통 RuntimeException클래스들은 적지 않고 반드시 처리해주어야 하는 예외들만 선언해준다.
 
-#### try-with-resources
+### try-with-resources
 
 자동 자원 반환
 
@@ -1538,7 +1523,7 @@ try블럭의 괄호 안에 객체를 생성하는 문장을 넣으면, try블럭
 >
 > Throwable 인터페이스에 억제된 예외와 관련된 메소드가 정의되어 있다.
 
-#### 사용자정의 예외
+### 사용자정의 예외
 
 기존 예외 클래스를 상속받아 사용자정의 예외를 만들 수 있다.
 
@@ -1554,7 +1539,7 @@ class MyException extends Exception {
 
 > Exception을 상속받아서 checked예외를 만들어서 사용하면 예외처리가 불필요한 경우에도 예외 처리를 해야되서 코드가 복잡해질수있다.
 
-#### exception re-throwing
+### exception re-throwing
 
 예외를 처리한 후에 인위적으로 다시 발생시키는 방법
 
@@ -1583,7 +1568,7 @@ class Ex {
 
 예외 되던지기를 하는 경우, catch 블럭 내에 retrun 문이 없어도 된다.
 
-#### chained exception
+### chained exception
 
 한 예외가 다른 예외를 발생시키는 경우
 
@@ -1606,7 +1591,7 @@ Exception 클래스의 조상인 Throwable 클래스에 정의되어 있는 관�
 * 원인 예외 지정 - Throwable initCause (Throwable cause)
 * 원인 예외 반환 - Throwable getCause()
 
-##### 사용하는 이유
+#### 사용하는 이유
 
 1. 여러가지 예외를 하나의 예외로 묶어서 다루기 위해서
 
@@ -1618,20 +1603,388 @@ Exception 클래스의 조상인 Throwable 클래스에 정의되어 있는 관�
    throw new RuntimeException(new Exception("원인 예외"));
    ```
 
-   참고로 RuntimeException의 생성자를 이용해서 원인 예외를 등록할 수 있다.
+   > 참고로 RuntimeException의 생성자를 이용해서 원인 예외를 등록할 수 있다.
+
+## 10 java.lang package
+
+가장 기본이 되는 패키지. import문 없이 사용할 수 있다.
+
+### Object 클래스
+
+#### 주요메서드
+
+##### equals(Object obj)
+
+> equals도 == 연산자와 마찬가지로 객체의 값을 비교할 때 주소값을 비교한다.
+>
+> 하지만 equals는 메서드이기 때문에 오버라이딩이 가능하다는 차이점이 있다.
+>
+> String 클래스의 equals()는 주소값이 아닌 실제 값을 비교하도록 오버라이딩이 되어있다.
+
+##### hashcode()
+
+> 해시함수를 구현한 것. 객체의 주소에 따라 해시코드를 만들어 반환한다.
+>
+> 경우에 따라 오버라이딩해서 사용한다. (ex. 주소가 아닌 객체의 값으로 객체를 비교하는 경우)
+
+##### toString()
+
+> 인스턴스에 대한 정보를 문자열로 제공
+>
+> ```java
+> public String toString() {
+>     // 기본적으로 정의된 내용
+>     return getClass().getName()+"@"+Integer.toHexString(hashCode());
+> }
+> ```
+>
+> 일반적으로 객체의 값에 맞게 오버라이딩해서 사용한다.
+
+##### clone()
+
+> 자신을 복제하여 새로운 인스턴스 생성.
+>
+> 기본적으로 얕은 복사로 구현되어 있기 때문에 깊은 복사가 필요한 경우 오버라이딩해서 사용한다. 대표적으로 배열의 clone()
+>
+> ```
+> 얕은 복사 : 단순히 객체의 참조변수가 갖는 주소값 복사 -> 같은 객체를 가리킴.
+> 깊은 복사 : 객체의 값을 복사해서 새로운 객체 생성 -> 다른 객체를 가리킴.
+> ```
+>
+> Cloneable 인터페이스를 구현해야 한다. (해당 클래스의 복제를 허용한다는 의미)
+>
+> ```java
+> public class Object {
+>     protected native Object clone() throws CloneNotSupportedException;
+> }
+> ```
+>
+> 반드시 예외처리를 해주어야 하고, 보통 공변 반환타입을 사용한다.
+>
+> ```java
+> class Ex implements Cloneable {
+>     MyClass m;
+>     int a;
+>     
+>     // 생성자 등 ...
+>     
+>     public Ex clone() {
+>         Object obj = null;
+>         try {
+>             obj = super.clone();
+>         } catch (CloneNotSupportedException e) {}
+>         
+>         // 깊은 복사
+>  		Ex e = (Ex)obj;
+>         e.m = MyClass(this.m);
+>     }
+> }
+> ```
+
+##### getClass()
+
+> 해당 클래스의 Class 객체 반환
+>
+> ##### Class 객체
+>
+> > 클래스의 모든 정보를 담고 있는 객체. 클래스가 메모리에 로드될때 Class 객체로 저장된다고 생각하면 될 것 같다.
 
 
 
-## 자료구조
+### String 클래스
+
+char 배열 + 기능(메서드)
+
+이때 String 객체는 내용을 변경할 수 없다. 따라서 문자열을 다루는 작업이 많은 경우에는 StringBuffer를 사용한다.
+
+```java
+String s1 = new String("abc");
+String s2 = "abc";  // 객체 중 String만 new를 사용하지 않고 간단하게 객체생성 가능.
+// 단순히 new 연산자를 생략하고 사용할 수 있는것인줄 알았는데 문자열 리터럴을 참조하는 것이다.
+// 따라서 엄밀히 얘기하면 new 연산자를 사용하는 것과 다르다.
+// 아래의 예시를 통해서 확인할 수 있다.
+String s3 = "abc";
+System.out.println(s1 == s3);  // false.
+System.out.println(s2 == s3);  // true. 같은 문자열 리터럴을 참조하고 있다.
+```
+
+#### 문자열 리터럴
+
+자바 소스파일에 포함된 문자열 리터럴들은 컴파일 시에 클래스 파일에 저장된다.
+
+따라서 기본적으로 문자열 리터럴도 String 인스턴스이다.
+
+#### 빈 문자열
+
+`String s = ""`는 내부적으로 길이가 0인 char형 배열을 저장하고 있다.
+
+#### 생성자
+
+* String(String s)
+* String(char[] value)
+* String(StringBuffer buf)
+
+#### 메서드
+
+* char charAt(int index)
+
+  > C++과는 달리 괄호연산자 `[]`를 기본적으로 지원하지 않는다.
+
+* int compareTo(String str)
+
+* String concat(String str)
+
+* boolean contains(CharSequence s)
+
+  > CharSequence는 String의 subclass. 따라서 String을 매개변수로 사용하는 것이 가능하다.
+
+* boolean endsWith(String suffix)
+
+* boolean equals(Object obj)
+
+* boolean equalsIgnoreCase(Object obj)
+
+* int indexOf(int ch)
+
+  > 확장된 유니코드를 다루기 위해서 int형 매개변수를 사용한다.
+
+* int indexOf(int ch, int pos)
+
+* int indexOf(String str)
+
+* String intern()
+
+* int lastIndexOf(int ch)
+
+* int lastIndexOf(String str)
+
+* int length()
+
+  > 일반적인 배열처럼 length 멤버변수를 갖지 않고
+  >
+  > length() 메서드를 갖는다.
+
+* String replace(char old, char new)
+
+* String replace(CharSequence old, CharSequence new)
+
+* String replaceAll(String regex, String replacement)
+
+* String replaceFirst(String regex, String replacement)
+
+  > replace와 replaceAll의 차이점 : `regex`(정규식) 사용 유무
+  >
+  > https://stackoverflow.com/questions/10827872/difference-between-string-replace-and-replaceall
+
+* String[] split(String regex)
+
+* String[] split(String regex, int limit)
+
+* boolean startsWith(String prefix)
+
+* String substring(int begin)
+
+* String substring(int begin, int end)
+
+  > end는 범위에 포함되지 않는다.
+
+* String toLowerCase()
+
+* String toUpperCase()
+
+* String toString()
+
+* String trim()
+
+  > 양 옆에 있는 공백을 제거한 결과값 반환
+
+* char[] toCharArray()
+
+##### 문자열 결합
+
+* String.join()
+
+  ```java
+  String[] arr = {"10", "20", "30"};
+  String str = String.join(", ", arr); // 10, 20, 30
+  String str2 = String.join(", ", arr[0], arr[1], arr[2]);
+  ```
+
+* java.util.StringJoiner 클래스
+
+  ```java
+  StringJoiner sj = new StringJoiner(",", "[", "]");
+  String[] arr = {"10", "20", "30"};
+  for(String a : arr)
+      sj.add(a);
+  System.out.println(sj.toString()); // [10,20,30]
+  ```
+
+##### 문자 인코딩 변환
+
+```java
+byte[] utf8_str = "가".getBytes("UTF-8");
+String str = new String(utf_str, "UTF-8");
+```
+
+##### String.format()
+
+형식화된 문자열 생성. printf문과 사용법이 동일하다.
+
+```java
+String str = String.format("%d + %d = %d", 3, 5, 3+5);
+```
+
+##### 기본형 -> String
+
+* 숫자 + 빈문자열
+* String.valueOf()
+
+```java
+int a = 100;
+String s1 = a+"";
+String s2 = String.valueOf(a);
+```
+
+##### String -> 기본형
+
+* parseInt()
+* valueOf()
+
+```java
+int a1 = Integer.parseInt("100");
+int a2 = Integer.valueOf("100");
+
+// 정수형 외에도 동일하다.
+boolean b1 = Boolean.parseBoolean("true");
+boolean b2 = Boolean.valueOf("true");
+```
+
+오토박싱에 의해 wrapper class -> 기본형으로 자동 변환된다.
+
+> wrapper class : 기본형 값을 감싸고 있는 클래스
+
+ 문자열을 숫자로 변환할때 예외가 발생하기 쉬우므로 주의해야 한다.
+
+### StringBuffer 클래스
+
+내부적으로 문자열편집을 위한 공간(buffer)을 가지고 있어 문자열 편집이 가능하다.
+
+이때 buffer로 배열을 사용하기 때문에 처음 인스턴스를 생성할때 생성자에 충분한 길이를 넣어주는 것이 좋다.
+
+> 배열의 길이를 변경하기 위해선 배열을 새로 생성하고 기존 값을 복사해서 넣는 과정을 거쳐야 하기 때문에 비효율적이다.
+
+#### 생성자
+
+* StringBuffer()
+* StringBuffer(int length)
+* StringBuffer(String str)
+
+```java
+public StringBuffer(int length) {
+    value = new char[length];
+    shared = false;
+}
+public StringBuffer() {
+    this(16);
+}
+public StringBuffer(String str) {
+    this(str.length() + 16);
+    append(str);
+}
+```
+
+#### 메서드
+
+* StringBuffer append(boolean b), StringBuffer append(String str), ...
+
+  > 매개변수로 입력된 값을 문자열로 변환하여 buffer 뒤에 추가한다.
+  >
+  > 자신의 주소를 반환하기 때문에 연속적인 호출이 가능하다.
+  >
+  > ```java
+  > StringBuffer sb = new StringBuffer("abc");
+  > sb.append("123").append("abc");  // abc123abc
+  > ```
+
+* StringBuffer insert(int pos, boolean b), ...
+
+* StringBuffer replace(int start, int end, String str)
+
+* void setCharAt(int index, char ch)
+
+* StringBuffer delete(int start, int end)
+
+* StringBuffer deleteCharAt(int index)
+
+* StringBuffer reverse()
+
+* int capacity()
+
+  > 버퍼 크기
+
+* int length()
+
+  > 버퍼에 담긴 문자열의 길이
+
+* void setLength(int newLength)
+
+  > 길이를 늘리는 경우 나머지 공간을 널문자로 채운다.
+
+* char charAt(int index)
+
+* String toString()
+
+* String substring(int start)
+
+* String substring(int start, int end)
+
+#### StringBuffer 비교
+
+String처럼 equals()가 오버라이딩 되어있지 않아서 주소값을 비교한다. 따라서 실제 내용을 비교하기 위해선 toString()을 호출해서 String으로 형변환을 하고 equals() 메서드를 이용해서 비교해야 한다.
+
+#### StringBuilder
+
+StringBuffer에서 쓰레드의 동기화만 뺀 클래스.
+
+StringBuffer는 멀티쓰레드에 안전하도록 동기화되어 있지만, 동기화로 인해 성능이 떨어진다.
+
+따라서 멀티쓰레드로 작성된 프로그램이 아닌 경우 StringBuffer 대신 StringBuilder를 사용하는 것이 좋다.
+
+다만, StringBuffer도 충분히 성능이 좋기 때문에 성능향상이 필요한 경우에만 교체하면 된다.
+
+### Math 클래스
+
+
+
+
+
+
+
+## # 자료구조
 
 ### Vector 클래스
 
 동적으로 크기가 관리되는 객체배열
 
 * Vector()
+
 * boolean add(Object o)
+
 * boolean remove(Object o)
+
 * boolean isEmpty()
+
 * Object get(int index)
+
 * int size()
 
+* Collections.reverse(Vector v)
+
+  > 순서 뒤집기
+
+* Collections.sort(Vector v)
+
+  > 정렬하기(오름차순)
+  >
+  > 내림차순으로 정렬하기 위해선 Comparator 인터페이스를 구현하고 compare method를 override한 클래스를 만들고 클래스의 인스턴스를 두번째 인자로 전달해줘야 한다.
