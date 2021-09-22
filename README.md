@@ -1,23 +1,64 @@
 # TIL
 
-## Today I Learned
+Today I Learned
 
-### React
-
-참고 자료: https://www.taniarascia.com/getting-started-with-react/
-- [HTML&CSS 기초다지기](https://github.com/chisan01/TIL/tree/main/HTML_CSS)
-
-### [Algorithm](https://github.com/chisan01/TIL/tree/main/Algorithm)
+## [Algorithm](https://github.com/chisan01/TIL/tree/main/Algorithm)
 
 - [종만북](https://github.com/chisan01/TIL/tree/main/Algorithm/JongmanBook)
 - [ICPC 준비 - 2021 SW개발능력향상 프로그램](https://github.com/chisan01/TIL/tree/main/Algorithm/ICPC)
 - [BOJ](https://github.com/chisan01/TIL/tree/main/Algorithm/BOJ)
 
+
+
+## 웹/앱
+
+개발 로드맵 참고 : https://roadmap.sh/
+
+https://www.youtube.com/watch?v=NeEaTeYcFhE&list=PLv2d7VI9OotQ1F92Jp9Ce7ovHEsuRQB3Y
+
 ### JavaScript
 
-- node.js(스터디)
+* JS 기초 문법 공부 : https://www.youtube.com/playlist?list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6h-2
 
-### Git
+- node.js
+- mongoose
+
+### React
+
+참고 자료: https://www.taniarascia.com/getting-started-with-react/
+
+- #### [HTML&CSS](https://github.com/chisan01/TIL/tree/main/HTML_CSS)
+
+### 기타
+
+#### 정규식
+
+[강의](https://www.youtube.com/watch?v=t3M6toIflyQ) 및 연습
+
+> https://regexone.com/
+>
+> https://regexone.com/problem/matching_decimal_numbers
+
+#### 디자인패턴
+
+* **MVC 패턴**
+
+  https://m.blog.naver.com/jhc9639/220967034588
+
+  | 구성요소   | 역할                                                         |
+  | ---------- | ------------------------------------------------------------ |
+  | Model      | 각종 데이터 저장 및 관리                                     |
+  | View       | 사용자에게 보여지는 부분                                     |
+  | Controller | Model과 View의 중개자<br />- 사용자의 입력을 받아 데이터 변경<br />- 데이터 변경사항 View에 반영 |
+
+  효율적인 역할 분담
+
+  > 유지보수성, 확장성, 유연성 증가
+
+  
+
+## Git
+
 - 깃헙에 올린 저장소에서 특정 파일들을 제거하고 싶은데 그냥 제거하면 커밋내역이 남고 다 지우기에는 다른 커밋내역이 날라가서 방법을 찾아보니 [repository의 하위폴더를 분리해서 새로운 repository를 만드는 방법](https://sustainable-dev.tistory.com/119)이 있었다.   
 
 - [Git Repository 합치기 (commit log 유지) - subtree 이용](http://yeoseon.kr/git-repository-habcigi-commit-log-yuji-subtree-iyong/)
@@ -36,7 +77,7 @@
 
   
 
-### 기타
+## 기타
 - [disable context menu for open in visual studio](https://developercommunity.visualstudio.com/t/disable-context-menu-for-open-in-visual-studio/26397)   
 파일 탐색기에서 마우스 오른쪽 클릭을 했을때 `open in visual studio`가 안나오게 하는 방법. SHIFT키를 누르고 클릭해야만 나오게 설정할 수도 있다.   
 vscode, pycharm 등 다른 에디터의 경우도 비슷한 방법으로 설정할 수 있다.   
