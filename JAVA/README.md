@@ -1955,9 +1955,107 @@ StringBuffer는 멀티쓰레드에 안전하도록 동기화되어 있지만, �
 
 ### Math 클래스
 
+클래스 내에 정적 메서드와 2개의 상수밖에 없다. 생성자의 접근 제어자도 private이다.
 
+#### 상수
 
+* public static final double E = 2.7182...
 
+  > 자연로그의 밑
+
+* public static final double PI = 3.1415...
+
+  > 원주율
+
+#### 메서드
+
+* static double abs(double a), ...float, int, long
+
+  > 절대값 반환
+
+* static double ceil(double a)
+
+  > 올림
+
+* static double floor(double a)
+
+  > 버림
+
+* static long round(double a), ...float
+
+  > 소수점 첫째자리에서 반올림한 정수값.
+  >
+  > n번째 자리에서 반올림을 하고 싶다면, 10의 n-1제곱으로 곱해주고 반올림한 뒤 다시 나눠주면 된다.
+  >
+  > 예를 들어 둘째자리에서 반올림하고 싶다면 10을 곱한 값을 반올림한뒤 10.0으로 나눠주면 된다.
+
+* static double rint(double a)
+
+  > 주어진 값과 가장 가까운 정수값 double 형으로 반환
+  >
+  > 소수 부분이 0.5인 경우는 짝수를 반환. ex) 1.5 -> 2
+
+  ```
+  // rint와 round 결과값이 다른 경우
+  
+  rint(2.5) = 2
+  round(2.5) = 3
+  
+  rint(-1.5) = -2
+  rint(-1.5) = -1
+  ```
+
+* static double max(double a, double b), ...float, int, long
+
+* static double min(double a, double b), ...float, int, long
+
+* static double random()
+
+  > 0.0~1.0 범위의 랜덤값 반환 (1.0은 범위에 포함되지 않는다.)
+
+#### 삼각함수, 지수, 로그 관련 메서드
+
+* static double sqrt(double a)
+
+* static double pow(double a, double b)
+
+* static double log(double a)
+
+* static double log10(double a)
+
+* static double sin(double a), ...cos, tan
+
+  > 삼각함수는 매개변수로 라디안 단위 값을 입력받는다.
+
+* static double asin(double a), ...acos, atan
+
+* static double atan2(double y, double x)
+
+  > 직각 삼각형에서 두 변의 길이 -> return 끼인각
+
+* static double toRadinas(double angdeg)
+
+  > 각도를 라디안 단위의 값으로 변환
+
+#### 예외를 발생시키는 메서드
+
+메서드 이름에 `Exact`가 포함된 메서드들이 JDK 1.8부터 추가되었다.
+
+오버플로우가 발생하면 `ArithmeticException`을 발생시킨다.
+
+* int addExact(int x, int y)
+* int subtractExact(int x, int y)
+* int multiplyExact(int x, int y)
+* int incrementExact(int x)
+* int decrementExact(int x)
+* int negateExact(int a)
+* int toIntExact(long value)
+
+#### StrictMath 클래스
+
+기존의 Math 클래스는 성능을 위해서 JVM이 설치된 OS의 메서드를 호출해서 사용하기 때문에 OS에 의존적이다.
+
+따라서 OS에 따라 계산 결과에 다소 차이가 발생할 수 있는데 이를 해결하기 위해서 성능을 조금 줄이는 대신 OS에 의존적이지 않도록 Math 클래스를 새롭게 작성한것이 StrictMath 클래스이다.
 
 
 
