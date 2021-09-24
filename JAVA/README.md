@@ -1082,6 +1082,10 @@ import static java.lang.System.out;
 > java에서 기본적으로 제공하는 Math 클래스의 경우 몇 개의 상수와 static 메서드만으로 구성되어 있기 때문에 불필요한 접근을 막기 위해 생성자의 접근 지정자를 private으로 지정하였다.
 > ```
 
+클래스의 경우 public, default 접근제어자 사용 가능
+
+> 한 파일에 여러 클래스를 선언할 경우 public 클래스는 하나만 있어야 한다. 이때, main 메서드가 있는 클래스는 무조건 public 클래스로 접근제어자를 생략하더라도 public으로 인식된다.
+
 #### 그 외
 
 ##### `static`
@@ -1097,6 +1101,10 @@ java에서는 final 멤버변수도 생성자에서 다른 변수처럼 초기�
 추상클래스, 추상메서드를 선언하는데 사용된다.
 
 > 이 밖에도 native, transient, synchronized, volatile, strictfp 제어자가 있다.
+
+클래스의 제어자
+
+
 
 #### 주의할 점
 
@@ -1691,6 +1699,67 @@ Exception 클래스의 조상인 Throwable 클래스에 정의되어 있는 관�
 
 
 
+### wrapper 클래스
+
+기본형 값을 객체로 다루기 위한 클래스.
+
+> Boolean, Character, Byte, Short, Integer, Long, Float, Double
+
+큰 범위의 정수와 부동 소수점값을 다루기 위한 클래스
+
+> BigInteger, BigDecimal
+
+#### 메서드
+
+* equals()
+
+* compareTo()
+
+* 문자열 숫자로 변환
+
+  * wrapper클래스.parse자료형(String s)
+
+    > Integer.parseInt("100")
+
+  * wrapper클래스.valueOf(String s)
+
+    > 반환값이 wrapper클래스이다.
+    >
+    > 오토박싱에 의해 기본형으로 변환되야 하기 때문에 parse타입보다 성능이 조금 느리다.
+
+    ```java
+    int a1 = Integer.parseInt("100");
+    int a2 = Integer.valueOf("100");  // 오토박싱에 의해 wrapper class -> 기본형으로 자동 변환된다.
+    
+    int c = Integer.parseInt("FF", 16);  // 10진수가 아닌 다른 진법의 숫자도 변환이 가능하다.
+    
+    // 정수형 외에도 동일하다.
+    boolean b1 = Boolean.parseBoolean("true");
+    boolean b2 = Boolean.valueOf("true");
+    ```
+
+#### static 상수
+
+* MAX_VALUE
+* MIN_VALUE
+* SIZE
+* BYTES
+* TYPE
+
+#### Number 클래스
+
+추상클래스. Boolean, Character를 제외한 wrapper 클래스들의 조상클래스.
+
+#### 오토박싱 & 언박싱
+
+`오토박싱`: 기본형 값을 래퍼 클래스의 객체로 자동 변환해주는 것
+
+`언박싱`: 오토박싱의 반대
+
+컴파일러가 자동으로 추가해준다.
+
+
+
 ### String 클래스
 
 char 배열 + 기능(메서드)
@@ -1848,23 +1917,12 @@ String s2 = String.valueOf(a);
 
 ##### String -> 기본형
 
-* parseInt()
-* valueOf()
+wrapper 클래스 메서드 사용
 
-```java
-int a1 = Integer.parseInt("100");
-int a2 = Integer.valueOf("100");
+* parse자료형(String s)
+* valueOf(String s)
 
-// 정수형 외에도 동일하다.
-boolean b1 = Boolean.parseBoolean("true");
-boolean b2 = Boolean.valueOf("true");
-```
-
-오토박싱에 의해 wrapper class -> 기본형으로 자동 변환된다.
-
-> wrapper class : 기본형 값을 감싸고 있는 클래스
-
- 문자열을 숫자로 변환할때 예외가 발생하기 쉬우므로 주의해야 한다.
+문자열을 숫자로 변환할때 예외(NumberFormat Exception)이 발생하기 쉬우므로 주의해야 한다.
 
 ### StringBuffer 클래스
 
@@ -2056,6 +2114,8 @@ StringBuffer는 멀티쓰레드에 안전하도록 동기화되어 있지만, �
 기존의 Math 클래스는 성능을 위해서 JVM이 설치된 OS의 메서드를 호출해서 사용하기 때문에 OS에 의존적이다.
 
 따라서 OS에 따라 계산 결과에 다소 차이가 발생할 수 있는데 이를 해결하기 위해서 성능을 조금 줄이는 대신 OS에 의존적이지 않도록 Math 클래스를 새롭게 작성한것이 StrictMath 클래스이다.
+
+
 
 
 
