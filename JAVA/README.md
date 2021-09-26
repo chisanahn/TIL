@@ -1999,15 +1999,13 @@ public StringBuffer(String str) {
 
 #### StringBuffer 비교
 
-String처럼 equals()가 오버라이딩 되어있지 않아서 주소값을 비교한다. 따라서 실제 내용을 비교하기 위해선 toString()을 호출해서 String으로 형변환을 하고 equals() 메서드를 이용해서 비교해야 한다.
+String처럼 equals()가 오버라이딩 되어있지 않다. 따라서 실제 내용을 비교하기 위해선 String으로 형변환을 하고 equals() 메서드를 이용해야 한다.
 
 #### StringBuilder
 
 StringBuffer에서 쓰레드의 동기화만 뺀 클래스.
 
-StringBuffer는 멀티쓰레드에 안전하도록 동기화되어 있지만, 동기화로 인해 성능이 떨어진다.
-
-따라서 멀티쓰레드로 작성된 프로그램이 아닌 경우 StringBuffer 대신 StringBuilder를 사용하는 것이 좋다.
+StringBuffer는 멀티쓰레드에 안전하도록 동기화되어 있지만, 동기화로 인해 성능이 떨어진다. 따라서 멀티쓰레드로 작성된 프로그램이 아닌 경우 StringBuffer 대신 StringBuilder를 사용하는 것이 좋다.
 
 다만, StringBuffer도 충분히 성능이 좋기 때문에 성능향상이 필요한 경우에만 교체하면 된다.
 
@@ -2017,103 +2015,310 @@ StringBuffer는 멀티쓰레드에 안전하도록 동기화되어 있지만, �
 
 #### 상수
 
-* public static final double E = 2.7182...
-
-  > 자연로그의 밑
-
-* public static final double PI = 3.1415...
-
-  > 원주율
+> E - 자연로그
+>
+> PI - 원주율
 
 #### 메서드
 
-* static double abs(double a), ...float, int, long
-
-  > 절대값 반환
-
-* static double ceil(double a)
-
-  > 올림
-
-* static double floor(double a)
-
-  > 버림
-
-* static long round(double a), ...float
-
-  > 소수점 첫째자리에서 반올림한 정수값.
-  >
-  > n번째 자리에서 반올림을 하고 싶다면, 10의 n-1제곱으로 곱해주고 반올림한 뒤 다시 나눠주면 된다.
-  >
-  > 예를 들어 둘째자리에서 반올림하고 싶다면 10을 곱한 값을 반올림한뒤 10.0으로 나눠주면 된다.
-
-* static double rint(double a)
-
-  > 주어진 값과 가장 가까운 정수값 double 형으로 반환
-  >
-  > 소수 부분이 0.5인 경우는 짝수를 반환. ex) 1.5 -> 2
-
-  ```
-  // rint와 round 결과값이 다른 경우
-  
-  rint(2.5) = 2
-  round(2.5) = 3
-  
-  rint(-1.5) = -2
-  rint(-1.5) = -1
-  ```
-
-* static double max(double a, double b), ...float, int, long
-
-* static double min(double a, double b), ...float, int, long
-
-* static double random()
-
-  > 0.0~1.0 범위의 랜덤값 반환 (1.0은 범위에 포함되지 않는다.)
+> abs(절대값), ceil(올림), floor(버림), round(반올림), rint
+>
+> ```
+> round - 소수점 첫째자리에서 반올림한 정수값 반환
+> 
+> n번째 자리에서 반올림을 하고 싶다면, 10의 n-1제곱으로 곱해주고 반올림한 뒤 다시 나눠주면 된다.
+> 
+> ex) 둘째자리 반올림
+> round(n*10)/10.0
+> ```
+>
+> ```
+> // rint - 주어진 값과 가장 가까운 정수값 double 형으로 반환
+> 
+> rint(2.5) = 2
+> round(2.5) = 3
+> 
+> rint(-1.5) = -2
+> rint(-1.5) = -1
+> ```
+>
+> min, max
+>
+> random - 0.0~1.0 사이의 값 리턴
 
 #### 삼각함수, 지수, 로그 관련 메서드
 
-* static double sqrt(double a)
+> sqrt, pow, log, log10, sin, asin, toRadians, ...
+>
+> atan2 - 직각삼각형에서 두 변의 길이를 입력하면 끼인각을 return
 
-* static double pow(double a, double b)
-
-* static double log(double a)
-
-* static double log10(double a)
-
-* static double sin(double a), ...cos, tan
-
-  > 삼각함수는 매개변수로 라디안 단위 값을 입력받는다.
-
-* static double asin(double a), ...acos, atan
-
-* static double atan2(double y, double x)
-
-  > 직각 삼각형에서 두 변의 길이 -> return 끼인각
-
-* static double toRadinas(double angdeg)
-
-  > 각도를 라디안 단위의 값으로 변환
-
-#### 예외를 발생시키는 메서드
-
-메서드 이름에 `Exact`가 포함된 메서드들이 JDK 1.8부터 추가되었다.
+#### 예외를 발생시키는 메서드 - 오버플로우 체크
 
 오버플로우가 발생하면 `ArithmeticException`을 발생시킨다.
 
-* int addExact(int x, int y)
-* int subtractExact(int x, int y)
-* int multiplyExact(int x, int y)
-* int incrementExact(int x)
-* int decrementExact(int x)
-* int negateExact(int a)
-* int toIntExact(long value)
+>  addExact, subtractExact, ...
 
 #### StrictMath 클래스
 
-기존의 Math 클래스는 성능을 위해서 JVM이 설치된 OS의 메서드를 호출해서 사용하기 때문에 OS에 의존적이다.
+OS 의존성을 제거한 대신 성능이 조금 저하된 Math클래스
 
-따라서 OS에 따라 계산 결과에 다소 차이가 발생할 수 있는데 이를 해결하기 위해서 성능을 조금 줄이는 대신 OS에 의존적이지 않도록 Math 클래스를 새롭게 작성한것이 StrictMath 클래스이다.
+
+
+### 기타 유용한 클래스
+
+#### java.util.Objects
+
+##### static 메서드
+
+###### isNull, nonNull
+
+###### requireNonNull
+
+> 매개변수 유효성 검사를 간편하게 할 수 있다.
+
+###### compare
+
+> 두 객체의 비교기준으로  Comparator를 매개변수로 전달받아 사용한다
+
+###### equals, toString, hashCode
+
+> Object클래스의 메서드 + null 검사
+>
+> 추가 기능
+>
+> * 둘 다 null일때도 참이 반환된다.
+>
+> * 널일때 대신 사용할 값을 지정할 수 있다.
+> * 널일때는 0을 반환한다.
+
+###### deepEquals
+
+> 객체를 재귀적으로 비교 -> 다차원 배열도 비교가 가능하다.
+
+
+
+#### java.util.Random
+
+Math.random()는 내부적으로 이 클래스의 인스턴스를 생성해서 사용한다.
+
+기본적으로 seed 값은 System.currentTimeMillis()이 사용되고 변경할 수 있다.
+
+> Random(), Random(long seed)
+>
+> new Random().nextInt(6);
+>
+> new Random().nextDouble();
+>
+> ...
+
+
+
+#### java.util.regex패키지 - 정규식
+
+Patter 인스턴스를 생성해 정규식을 정의하고 Matcher 인스턴스로 정규식을 데이터와 비교한다.
+
+정규식은 https://regexone.com/ 참고
+
+> String[] data = {"cat", ... };
+>
+> Pattern p = Patter.compile("c[a-z]*");
+>
+> Matcher m = p.matcher(data[i]);
+
+##### Matcher 메서드
+
+> **m.matches()** - 정규식과 매칭되는 부분이 있는지 체크
+>
+> **m.find()**
+>
+> **m.group(int i)** - 그룹 반환. group(0)이나 group()은 매칭된 부분 전체 반환
+>
+> **m.start()** - 정규식과 매칭된 부분 시작점
+>
+> **m.end()** - 다음 m.find() 시작점
+>
+> **m.appendReplacement(sb, s)** - m.find() 시작점부터 m.start()전까지 StringBuffer sb에 저장후 sb에 String s를 덧붙인다.
+>
+> **m.appendTail(sb)** - 마지막으로 치환된 이후의 부분을 sb에 덧붙인다.
+
+
+
+#### java.util.Scanner
+
+다양한 생성자를 지원해 String, File, InputStream 등 다양한 곳에서 입력을 받을 수 있다
+
+라인단위의 검색, 구분자에 정규식 표현을 사용할 수 있다.
+
+##### 구분자를 기준으로 문자열 자르는 방법
+
+* String의 `split(String regex)`
+
+* Scanner의 `useDelimiter(String regex)`
+
+  ```java
+  Scanner sc = new Scanner(new File("sample.txt"));
+  while(sc.hasNextLine()) {
+      String line = sc.nextLine();
+      Scanner sc2 = new Scanner(line).useDelimiter(" ");
+      while(sc2.hasNextInt()) {
+          
+      }
+  }
+  ```
+
+* java.util.StringTokenizer클래스
+
+  `split()`은 빈 문자열도 토큰으로 인식하지만 `StringTokenizer`는 빈 문자열을 토큰으로 인식하지 않는다.
+
+  `split()`은 결과값을 배열에 담아 반환하고 `StringTokenizer`는 데이터를 토큰으로 잘라 바로바로 반환하기 때문에 성능은 `split()`이 조금 떨어진다.
+
+##### StringTokenizer 클래스
+
+`StringTokenizer(String str, String delim)`
+
+`StringTokenizer(String str, String delim, boolean returnDelim)`
+
+`int countTokens()`
+
+`boolean hasMoreTokens()`
+
+`String nextToken()`
+
+```java
+StringTokenizer st = new StringTokenizer(source, " ");
+while(st.hasMoreTokens())
+    System.out.println(st.nextToken());
+```
+
+이때 구분자로 문자열을 전달하더라도 각각의 문자들을 하나의 구분자로 사용한다. 정규식에서 대괄호라고 생각하면 될거같다. `[abc]`
+
+
+
+#### java.math.BigInteger 클래스
+
+wrapper 클래스. 최대 60억 자리까지 표현할 수 있다.
+
+2의 보수를 사용하고, 내부적으로 int 배열을 사용해 값을 다룬다.
+
+> final int signum;
+>
+> final int[] mag;
+
+##### 생성자
+
+문자열, n진수 문자열, 숫자를 이용해 생성할 수 있다.
+
+> new BigInteger("1231415");
+
+##### 메서드
+
+> 문자열, byte[]로 변환 : toString(), toString(int radix), toByteArray()\
+>
+> 기본형으로 변환 : intValue(), ..., intValueExact(), ...
+>
+> 연산 : add(BigInteger val), ...
+>
+> 연산결과로 새로운 인스턴스가 반환된다.
+
+##### 비트연산메서드
+
+워낙 큰 숫자를 다루다보니 성능을 위해 비트연산을 활용하는 것이 권장된다.
+
+> bitCount(), bitLength()
+>
+> testBit(int n), setBit(int n), clearBit(int n), flipBit(int n)
+
+#### java.math.BigDecimal 클래스
+
+큰 실수를 저장하기 위한 클래스. 정수 * 10^(-scale) 형태로 값을 표현한다.
+
+정수부분의 값은 BigInteger로 저장한다.
+
+> private final BigInteger intVal;
+>
+> private final int scale;
+>
+> private transient int precision;
+
+##### 생성자
+
+문자열, double, int, long을 이용해서 생성할 수 있다.
+
+> new BigDecimal("123.543");
+
+이때 double을 이용해서 생성하면 10진수<->2진수로 변환하는 과정에서 오차가 발생할 수 있다.
+
+##### 메서드
+
+> 문자열로 변환 : toPlainString(), toString()
+>
+> intValue(), ..., intValueExact(), ...
+>
+> add(BigDecimal val), ...
+>
+> 연산결과로 새로운 인스턴스가 반환되고, 연산에 따라 scale, precision 또한 달라질 수 있다.
+
+##### 나눗셈 - 반올림 모드
+
+나눗셈의 경우 오차가 발생할 가능성이 높기 때문에 결과를 어디서 반올림할 것인지 지정할 수 있다.
+
+결과가 무한소수인 경우, 반올림 모드를 지정하지 않으면 오류가 발생한다.
+
+> divide(BigDecimal divisor)
+>
+> divide(divisor, int roundingMode)
+>
+> divide(divisor, RoundingMode roundingMode)
+>
+> divide(divisor, int scale, int roundingMode)
+>
+> divide(divisor, int scale, RoundingMode roundingMode)
+>
+> divide(divistor, MathContext mc)
+
+###### 열거형 RoundingMode
+
+>  CEILING, FLOOR, UP, DOWN, HALF_UP, HALF_EVEN, HALF_DOWN, UNNECESSARY
+
+###### MathContext
+
+정밀도(precision) + 반올림 모드
+
+> new MathContext(2, HALF_UP)
+
+이때 scale은 소수점이하만 포함한 자리수, precision은 정수부분까지 모두 포함한 자리수이다.
+
+##### scale 변경 - 10의 거듭제곱 곱셈/나눗셈
+
+10의 거듭제곱으로 나누거나 곱하는 경우 자리수만 변경하면 동일한 결과를 얻을 수 있다.
+
+단, 자리수를 낮추는 경우는 divide()처럼 오류가 날 수 있으므로 반올림 모드를 정해줘야 한다.
+
+> setScale(int newScale)
+>
+> setScale(int newScale, int roundingMode)
+>
+> setScale(int newScale, RoundingMode roundingMode)
+
+
+
+
+
+## Comparator
+
+**String.CASE_INSENSITIVE_ORDER**
+
+> 대소문자 구분 없이 문자비교
+>
+> String클래스에 상수로 정의되어 있는 Comparator
+
+
+
+## 람다
+
+
+
+## 스트림
 
 
 
@@ -2146,3 +2351,4 @@ StringBuffer는 멀티쓰레드에 안전하도록 동기화되어 있지만, �
   > 정렬하기(오름차순)
   >
   > 내림차순으로 정렬하기 위해선 Comparator 인터페이스를 구현하고 compare method를 override한 클래스를 만들고 클래스의 인스턴스를 두번째 인자로 전달해줘야 한다.
+
