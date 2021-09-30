@@ -54,7 +54,7 @@ class SegTree {
     // 인터페이스
     ll ret(int left, int right) {
         // 예외 처리
-        if(left < 0 || right >= a_size) return 0;
+        if (left < 0 || right >= a_size) return 0;
         return ret(left, right, 1, 0, start - 1);
     }
 };
