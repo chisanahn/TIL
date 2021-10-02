@@ -1218,9 +1218,7 @@ abstract 리턴타입 메서드이름();
 
 ### l. 인터페이스
 
-일종의 추상클래스. 하지만 추상화 정도가 높아서 오직 추상메서드와 상수만을 멤버로 가질 수 있다. 따라서 인터페이스명으로 able을 붙이는 경우가 많다.
-
-또한 `class` 대신 `interface` 키워드를 사용하며 클래스와 다르게 취급한다.
+일종의 추상클래스. 하지만 추상화 정도가 높아서 오직 추상메서드와 상수만을 멤버로 가질 수 있다. 따라서 인터페이스명으로 able을 붙이는 경우가 많다. 또한 `class` 대신 `interface` 키워드를 사용하며 클래스와 다르게 취급한다.
 
 ```java
 interface 인터페이스이름 {
@@ -2302,9 +2300,7 @@ wrapper 클래스. 최대 60억 자리까지 표현할 수 있다.
 
 
 
-
-
-## Comparator
+## 11 Comparator
 
 **String.CASE_INSENSITIVE_ORDER**
 
@@ -2314,22 +2310,23 @@ wrapper 클래스. 최대 60억 자리까지 표현할 수 있다.
 
 
 
-## 지네릭스(Generics)
-
-```java
-class Sample<T> {
-    T a;
-    T f(T b) {}
-}
-```
+## 12 지네릭스(Generics)
 
 객체의 타입을 컴파일시 체크 -> 타입 안정성 확보
 
 C++의 템플릿과 비슷
 
-> 기존에 다양한 타입의 객체를 하나의 메서드로 다루려면 Object 등 공통 조상 클래스를 사용해야 했는데, 이때 타입의 안정성을 확보하려면 추가적인 작업이 필요했다.
->
-> 이를 개선하기 위하여 나온것이 지네릭스.
+> 기존에 다양한 타입의 객체를 하나의 메서드로 다루려면 Object 등 공통 조상 클래스를 사용해야 했는데, 이때 타입의 안정성을 확보하려면 추가적인 작업이 필요했다. **이를 개선하기 위하여 나온것이 지네릭스**
+
+### 지네릭 타입의 제거
+
+컴파일러는 지네릭 타입을 이용해서 소스파일을 체크하고, 필요한 곳에 형변환을 넣어준뒤 지네릭 타입을 제거한다.
+
+> 목적: 이전의 소스 코드와의 호환성 유지
+
+<T\>의 경우 Object로 치환, <T extends Box\>인 경우 Box로 치환된다. + 타입을 일치하기 위한 형반환
+
+> 타입 변수에 타입이 대입된 후 컴파일이 되는 줄 알았는데 그 이전에 컴파일이 이루어진다. 따라서 원시 타입을 사용해서 코드를 작성하는 것과 결과물은 같다. 하지만 언젠가는 새로운 기능을 위해 원시 타입이 지원되지 않을 가능성이 높으므로 가능하면 원시 타입은 사용하지 않는 것이 좋다.
 
 ### 주의사항
 
@@ -2337,13 +2334,13 @@ C++의 템플릿과 비슷
 
   > 지네릭스는 기본적으로 인스턴스별로 동작하도록 만든 기능이라 타입 변수는 인스턴스 변수로 간주된다.
 
-* 타입 변수는 new 연산자, instanceof 연산자 사용불가
+* 타입 변수는 new 연산자(배열), instanceof 연산자 사용불가
 
   > 컴파일 시 타입이 뭔지 정해져 있지 않기 때문에 오류가 난다.
   >
   > ```java
   > class Sample<T> {
-  >     T[] arr = new T[5];  // 에러.
+  > T[] arr = new T[5];  // 에러.
   > }
   > ```
   >
@@ -2351,21 +2348,138 @@ C++의 템플릿과 비슷
   >
   > ```java
   > class Sample<T> {
-  >     ArrayList<T> list = new ArrayList<T>();
+  > ArrayList<T> list = new ArrayList<T>();
   > }
   > ```
   >
-  > 이런 식으로 다른 타입 변수를 사용하는 것은 가능하다.
-
+  > 이런 식으로 지네릭 인스턴스를 생성할 때 타입 변수를 사용하는 것은 가능하다.
+  >
+  > *인스턴스를 생성할때도 컴파일 시 타입이 뭔지 정해져 있지 않기 때문에 오류가 나야된다고 생각했는데 이유를 잘 모르겠다. 타입 변수를 직접적으로 사용하는 것은 불가능하지만 타입 변수를 대입해서 사용하는것은 괜찮은건가?*
   
 
-## Annotation
+### 타입변수의 생략
+
+지네릭 클래스의 객체를 생성할때 참조변수와 생성자에 대입된 타입이 일치해야된다.
+
+대입되는 타입은 상속관계이더라도 불가. 지네릭 클래스가 상속관계에 있는것은 괜찮다.
+
+> 대입되는 타입이 상속관계더라도 생성되는 클래스는 상속관계에 있지 않게된다.
+
+```java
+Box<Fruit> appleBox = new Box<Apple>(); // X
+Box<Apple> appleBox = new FruitBox<Apple>();
+```
+
+객체 생성이 완료된 지네릭 클래스의 메서드의 매개변수에는 자식 클래스가 들어갈 수 있다.
+
+```java
+Box<Fruit> fruitBox = new Box<Fruit>();
+fruitBox.add(new Apple());
+```
+
+> 클래스가 생성되면서 지네릭 타입의 제거가 일어나므로 생성된 클래스는 일반적인 클래스와 동일하다.
+
+### 제한된 지네릭 클래스
+
+```java
+class Sample<T extends 클래스명> {}
+```
+
+```java
+class Sample<T extends 인터페이스명> {}
+```
+
+```java
+class Sample<T extends 클래스명 & 인터페이스명> {}
+```
+
+### 와일드카드
+
+지네릭 클래스가 매개변수로 들어가는 경우 지네릭 타입이 다른 것만으로는 오버로딩이 성립하지 않는다.
+
+이때 와일드 카드를 사용하면 대입할 수 있는 타입 변수의 범위를 지정할 수 있다.
+
+```java
+class Juicer {
+    // static에 타입 변수 사용불가능
+    static Juice makeJuice(FruitBox<T> box) {} // X
+    // 오버로딩이 아닌 메서드 중복 정의
+    static Juice makeJuice(FruitBox<Fruit> box) {}
+    static Juice makeJuice(FruitBox<Fruit> box) {} // X
+    // 와일드 카드
+    static Juice makeJuice(FruitBox<? extends Fruit> box) {}
+}
+```
+
+```
+<?>            제한 없음. = <? extends Object>
+<? extends T>  하한 제한. T와 그 자식들만 가능
+<? super T>    상한 제한. T와 그 조상들만 가능
+```
+
+대표적으로 Comparator는 주로 <? extends T>를 사용한다.
+
+### 지네릭 메서드
+
+메서드 내에서만 사용되는 타입 변수를 정할 수 있다.
+
+```
+static <T extends Fruit> Juice makeJuice(FruitBox<T> box) {}
+```
+
+호출할때 타입 변수에 타입을 대입해서 사용해야 하지만 대부분의 경우 컴파일러가 타입을 추정할 수 있기 때문에 생략이 가능하다.
+
+```
+FruitBox<Fruit> fruitBox = new FruitBox<Fruit>();
+System.out.println(Juicer.<Fruit>makeJuice());
+System.out.println(Juicer.makeJuice()); // 타입 추정 가능 -> 생략 가능
+```
+
+주의: 타입을 생략할 수 없다면 참조변수나 클래스 이름 또한 생략할 수 없다. 
+
+### 형변환
+
+**raw타입 <-> 지네릭 타입**
+
+> raw타입: 타입 변수로 아무것도 넣지 않은 것
+>
+> 가능하지만 경고발생
+
+**지네릭 타입 <-> 지네릭 타입**
+
+```
+<Object> <-> <String>
+```
+
+> 불가
+
+**지네릭 타입 <-> 와일드카드**
+
+```
+Box<String> -> Box<? extends Object>
+```
+
+> 가능. 다형성 확보
+>
+> <- 도 가능하지만 확인되지 않은 형변환이라는 경고 발생
+
+와일드카드 <-> 와일드카드
+
+```
+<? extends String> <-> <? extends Object>
+```
+
+> 가능.  미확정타입 형변환 경고
+
+
+
+## 13 Annotation
 
 
 
 
 
-## 람다식
+## 14 람다식
 
 메서드를 하나의 식으로 표현한 것. **익명함수**
 
@@ -2486,15 +2600,11 @@ interface MyFunction<T, U, V, R> {
 }
 ```
 
-추상메서드 외에도 디폴트 메서드와 static 메서드가 정의되어 있다.
+#### UnaryOperator, BinaryOperator
 
+Function 함수형 인터페이스의 변형으로 매개변수와 타입이 모두 일치한다.
 
-
-## UnaryOperator, BinaryOperator
-
-매개변수와 타입이 모두 일치하는 Function의 변형.
-
-### 컬렉션 프레임워크 인터페이스
+#### 컬렉션 프레임워크 인터페이스
 
 컬렉션 프레임워크 인터페이스의 디폴트 메서드들 중 함수형 인터페이스를 매개변수로 사용하는 것들이 있다.
 
@@ -2505,9 +2615,9 @@ interface MyFunction<T, U, V, R> {
 > map.forEach((k,v)->System.out.println(k + ", " + v));
 > ```
 
-### 기본형을 사용하는 함수형 인터페이스
+#### 기본형을 사용하는 함수형 인터페이스
 
-Wrapper 클래스 대신 기본형을 사용하는 함수형 인터페이스
+Wrapper 클래스 대신 기본형을 사용하는 함수형 인터페이스. 성능 개선.
 
 > AToBFunction, ToBFunction, AFunction,ObjAFunction, ...
 >
@@ -2516,9 +2626,62 @@ Wrapper 클래스 대신 기본형을 사용하는 함수형 인터페이스
 > // 타입이 정해져있으므로 i/10*10과 같은 연산이 가능
 > ```
 >
-> 
 
+#### 디폴트 메서드, static 메서드
 
+* Function의 합성
+
+  > andThen, compose, identity
+  >
+  > ```
+  > default <V> Function<T, V> andThen(Function<? super R, ? extends V> after)
+  > ```
+  >
+  > ....
+
+* Predicate의 결합
+
+  > and, or, negate, isEqual
+  >
+  > ```
+  > static <T> Predicate<T> isEqual(Object targetRef)
+  > ```
+  >
+  > ....
+
+* ....
+
+### 메서드 참조
+
+람다식이 하나의 메서드만 호출하는 경우 더 간단히 표현하는 방법
+
+람다식을 마치 static 변수처럼 다룰 수 있어 코드를 간략화 할때 유용하다.
+
+* static 메서드 참조
+
+  ```java
+  클래스명::메서드명
+  ```
+
+* 인스턴스메서드 참조
+
+  ```java
+  클래스명::메서드명
+  ```
+
+* 특정 객체 인스턴스메서드 참조
+
+  ```ㅓㅁㅍㅁ
+  참조변수::메서드명
+  ```
+
+#### 생성자의 메서드 참조
+
+```java
+클래스명::new
+```
+
+매개변수가 있는 생성자라면 매개변수에 따라 알맞은 함수형 인터페이스를 사용한다. 필요에 따라 새로 정의해서 사용한다.
 
 
 
