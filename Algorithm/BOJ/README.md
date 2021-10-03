@@ -358,7 +358,7 @@ bruteforce 알고리즘. 언뜻보면 n이 최대 10^9라 시간복잡도가 커
 
 거의 다 맞은거였는데 조금 아쉽다.
 
-### 기타등등
+
 
 [BOJ 2206 벽 부수고 이동하기](https://www.acmicpc.net/problem/2206)
 
@@ -391,4 +391,62 @@ BFS가 어떤 알고리즘인지는 알고, 구현도 할 수 있지만 아직 �
 > 블로그를 보니깐 가중치가 없는 최단경로는 무조건 BFS라고 한다.
 
 조금 애먹긴 했지만 소스코드는 보지 않고 구현 성공.
+
+### 단계별로 풀어보기 - DFS와 BFS
+
+[BOJ 2667 단지번호붙이기](https://www.acmicpc.net/problem/2667)
+
+성공. DFS 재귀함수로 구현.
+
+성공. DFS 반복문으로 구현.
+
+[BOJ 7568 토마토](https://www.acmicpc.net/problem/7569)
+
+처음에 어떻게 풀어야할지 감이 잘 안왔는데 BFS를 조금 응용해서 풀면 된다.
+
+익은 토마토 위치를 다 queue에 넣어놓고 시작하면 된다.
+
+성공.
+
+[BOJ 7562 Knight Moves](https://www.acmicpc.net/problem/7562)
+
+성공. 전형적인 BFS 문제
+
+[BOj 1707 이분 그래프](https://www.acmicpc.net/problem/1707)
+
+BFS나 DFS를 하면서 adj list를 검색하면서 아직 방문하지 않은 경우 !visit[cur]으로 설정. 방문한 경우 visit 값이 visit[cur]와 같으면 NO
+
+오답. connected graph만 고려해서 그런 것 같다.
+
+성공.
+
+
+
+### 단계별로 풀어보기 - 최단경로
+
+[BOJ 1753 최단경로](https://www.acmicpc.net/problem/1753)
+
+
+
+[BOJ 1504 특정한 최단 경로](https://www.acmicpc.net/problem/1504)
+
+
+
+[BOJ 9370 Destination Unknown](https://www.acmicpc.net/problem/9370)
+
+
+
+[BOJ 11657 타임머신](https://www.acmicpc.net/problem/11657)
+
+
+
+[BOJ 11404 플로이드](https://www.acmicpc.net/problem/11404)
+
+
+
+[BOJ 10217 KCM Travel](https://www.acmicpc.net/problem/10217)
+
+
+
+[BOJ 1956 운동](https://www.acmicpc.net/problem/1956)
 
