@@ -16,6 +16,8 @@ Today I Learned
 
 https://www.youtube.com/watch?v=NeEaTeYcFhE&list=PLv2d7VI9OotQ1F92Jp9Ce7ovHEsuRQB3Y
 
+
+
 ### JavaScript
 
 * JS 기초 문법 공부 : https://www.youtube.com/playlist?list=PLv2d7VI9OotTVOL4QmPfvJWPJvkmv6h-2
@@ -23,15 +25,27 @@ https://www.youtube.com/watch?v=NeEaTeYcFhE&list=PLv2d7VI9OotQ1F92Jp9Ce7ovHEsuRQ
 - node.js
 - mongoose
 
+
+
 ### React
 
 참고 자료: https://www.taniarascia.com/getting-started-with-react/
 
 - #### [HTML&CSS](https://github.com/chisan01/TIL/tree/main/HTML_CSS)
 
+
+
 ### [Java Spring](https://github.com/chisan01/TIL/tree/main/Java_Spring)
 
 * Spring Boot
+
+
+
+### [팀플 (오픈소스개발프로젝트)](https://github.com/chisan01/TIL/tree/main/oss_dev_project)
+
+> Swing + MySQL + Spring Boot
+
+
 
 ### 기타
 
@@ -118,3 +132,6 @@ vscode, pycharm 등 다른 에디터의 경우도 비슷한 방법으로 설정�
 > 이유는 모르겠지만 이 블로그를 참고해서 다시 기본 터미널을 git-bash로 설정해보다가 안되서 작은 따옴표로 감싸지 않고 그냥 해보니깐 성공했다.  
 > 그리고 컴파일 후 실행에서 문제가 생겨서 이 부분은 블로그를 참고해서 해결했다.
 
+### GitHub Profile 꾸미기
+
+https://www.youtube.com/watch?v=ECuqb5Tv9qI&t=267s 참고

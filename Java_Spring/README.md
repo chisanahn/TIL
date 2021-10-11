@@ -182,7 +182,17 @@ public class GreetingController {
 >
 > Spring MVC가 메서드에서 반환된 HttpEntity와 HttpEntity에 포함된 인스턴스를 render해서 바로 response에 전달하도록 한다.
 
-[Accessing MongoDB Data with REST](https://spring.io/guides/gs/accessing-mongodb-data-rest/)
+
+
+### MySQL 연동
+
+> MySQL은 GPL 라이선스를 따른다.
+
+https://spring.io/guides/gs/accessing-data-mysql/
+
+DB에 접근하기 위해 JPA, JDBC를 사용해야 한다.
+
+
 
 
 
