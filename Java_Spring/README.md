@@ -192,6 +192,14 @@ https://spring.io/guides/gs/accessing-data-mysql/
 
 DB에 접근하기 위해 JPA, JDBC를 사용해야 한다.
 
+#### MySQL tutorial
+
+설치
+
+https://velog.io/@joajoa/MySQL-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%EB%B0%8F-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95
+
+https://www.mysqltutorial.org/what-is-mysql/
+
 
 
 
