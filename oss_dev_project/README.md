@@ -17,7 +17,7 @@
 
 
 
-### Swing 제작
+### Swing
 
 https://www.javatpoint.com/java-swing
 
@@ -77,29 +77,34 @@ public void setVisible(boolean b)
 
   https://docs.oracle.com/javase/tutorial/uiswing/components/table.html#show
 
-* 
 
 
 
+### Spring Boot
 
-
-
-
-
-
-
-
-Spring Boot로 백엔드 구축
+백엔드 구축 + MySQL 연동
 
 https://github.com/chisan01/TIL/tree/main/Java_Spring
 
 
 
-MySQL 연동 (시간이 된다면 +Docker)
+### MySQL
+
+설치
+
+https://velog.io/@joajoa/MySQL-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%EB%B0%8F-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95
+
+https://www.mysqltutorial.org/what-is-mysql/
+
+튜토리얼
+
+https://opentutorials.org/course/195
+
+https://www.mysqltutorial.org/
 
 
 
-http 연동
+### http 연동
 
 https://zetcode.com/java/getpostrequest/
 

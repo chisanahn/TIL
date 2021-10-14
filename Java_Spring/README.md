@@ -190,17 +190,56 @@ public class GreetingController {
 
 https://spring.io/guides/gs/accessing-data-mysql/
 
-DB에 접근하기 위해 JPA, JDBC를 사용해야 한다.
+https://memostack.tistory.com/163
 
-#### MySQL tutorial
+SpringBoot에서 DB에 접근하기 위해 JPA, JDBC를 사용한다.
 
-설치
+1. spring boot의 기본 DB는 `H2`로 다른 DB를 사용하려면 `application.properties`를 수정해줘야 한다.
 
-https://velog.io/@joajoa/MySQL-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%EB%B0%8F-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95
+   > 연결할 DB url, 유저명, 유저PW, 드라이버 등 명시
+   >
+   > ```java
+   > spring.datasource.url=jdbc.mysql://${MYSQL_HOST:localhost}:3306/db_example
+   > ```
+   >
+   > DB url을 명시할때 주석처럼 명시하기 때문에 빠뜨리지 않도록 주의하자.
 
-https://www.mysqltutorial.org/what-is-mysql/
+2. **`@Entity` Model** : table 생성
+
+   > * `@Id` : index primary key
+   > * `@GeneratedValue` : Primary Key 전략 설정.
+   > * `@Column` : DB Column을 명시
+   >
+   > 이때 Entity를 통해 실제로 생성되는 테이블 이름은 소문자로만 이루어지는 것 같다.
+
+3. **JpaRepository**: 따로 쿼리문 작성없이 CRUD를 수행할 수 있게 해준다.
+
+   > https://stackoverflow.com/questions/14014086/what-is-difference-between-crudrepository-and-jparepository-interfaces-in-spring
+   >
+   > `JpaRepository` extends `PagingAndSortingRepository`
+   >
+   > `PagingAndSortingRepository` extends `CrudRepository`
+
+   ```java
+   public interface UserRepository extends JpaRepository<Entity, PrimaryKey타입>
+   ```
+
+   이때, Spring이 자동으로 해당 interface를 생성해준다. 이때 맨 앞의 대문자가 소문자로 바뀌어서 생성된다. 위의 예제의 경우 userRepository가 생성된다.
+
+   > 제대로 이해하려면 @Repository, @Autowired를 annotation을 알아야 하는데 Bean, 의존성 주입과 밀접한 관련이 있는 것 같아서 아직 잘 이해가 되지 않는다.
+   >
+   > https://galid1.tistory.com/512
+
+   * **Create** : `save()`
+   * **Read** : `findall()`, `findById()`
+   * **Update** : `findById()`로 객체를 가져와서 수정한뒤 `save()`
+   * **Delete** : `deleteById()`
 
 
+
+## Talend API Tester
+
+> REST api 테스트할때 유용한 크롬 확장 도구
 
 
 
