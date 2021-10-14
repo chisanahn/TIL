@@ -1,0 +1,52 @@
+#include <iostream>
+
+using namespace std;
+
+int n, m;
+int road[1000][1000];
+int visit[1000][1000];
+
+int path(int i, int j) {
+	visit[i][j] = 1;
+	// road[i][j] 기준으로 동서남북 방향으로 가는 경로 체크
+	int xp[] = { -1,0,1,0 };
+	int yp[] = { 0,1,0,-1 };
+	int ret = -1;
+	for (int k = 0; k < 4; k++) {
+		int x = i + xp[k];
+		int y = j + yp[k];
+		// 범위를 벗어난 경우
+		if (x < 0 || y < 0 || x >= m || y >= n) continue;
+		// 도착한 경우
+		if (x == m - 1 && y == n - 1) {
+			visit[i][j] = 0;
+			return road[i][j] + road[x][y];
+		}
+		// 아직 방문한 적이 없는 곳
+		if (visit[x][y] == 0) {
+			int next = path(x, y);
+			if (next != -1) {
+				if (ret == -1) ret = next;
+				else if (ret > next) ret = next;
+			}
+		}
+	}
+	// 방문 기록 초기화
+	visit[i][j] = 0;
+	// 목적지까지 경로가 존재하지 않는 경우
+	if (ret == -1) return -1;
+	// 경로가 존재하는 경우
+	else return road[i][j] + ret;
+}
+
+int main() {
+	cin >> m >> n;
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			cin >> road[i][j];
+			if (road[i][j] == -1) visit[i][j] = 1;
+			else visit[i][j] = 0;
+		}
+	}
+	cout << path(0, 0) << '\n';
+}

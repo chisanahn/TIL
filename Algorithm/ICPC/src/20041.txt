@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <utility>
+#include <cmath>
+#include <queue>;
+
+using namespace std;
+
+inline pair<int,int> dist(pair<int, int>& P, pair<int, int>& T) {
+    int x_dist = P.first - T.first;
+    int y_dist = P.second - T.second;
+    return make_pair(x_dist, y_dist);
+}
+
+int main() {
+    int N, checked = true;
+    vector<pair<int, int>> P;
+    priority_queue<int> c1,c2,r1,r2;//1+2-
+    vector<bool> check;//초기값 true, 했으면 false
+    pair<int, int>T;
+    cin >> N;
+    for (int i = 0; i < N; i++) {
+        int x, y;
+        cin >> x >> y;
+        P.push_back(make_pair(x, y));
+    }
+
+    sort(P.begin(), P.end());
+    int x, y;
+    cin >> x >> y;
+    T = make_pair(x, y);
+    
+    for (auto& p : P) {
+        pair<int, int> res = dist(p, T);
+        if (res.first > 0) {
+            c1.push(res.first);
+        }
+        else if (res.first < 0) {
+            c2.push(abs(res.first));
+        }
+        if (res.second > 0) {
+            r1.push(res.second);
+        }
+        else if (res.second < 0)r2.push(res.second);
+    }
+    
+    
+}
+/*int main() {
+   int n;
+   cin >> n;
+   vector<int> S(n * 2);
+   for (auto& s : S) cin >> s;
+   sort(S.begin(), S.end());
+
+   int min = 123456789;
+   for (int i = 0; i < n; i++) {
+      int sum = S[i] + S[S.size() - i - 1];
+      if (min > sum) min = sum;
+   }
+   cout << min << '\n';
+}*/

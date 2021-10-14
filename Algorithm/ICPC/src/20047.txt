@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+	string s1, s2;
+	cin >> s1 >> s2;
+	int i, j;
+	cin >> i >> j;
+
+	int coins[2];
+	coins[0] = i;
+	coins[1] = j;
+	int coin = 0;
+	int k1 = 0, k2 = 0;
+	for (; k1 < n; k1++) {
+		if (k1 == i || k1 == j) continue;
+		if (s1[k1] != s2[k2]) {
+			if (coin >= 2) break;
+			if (s1[coins[coin++]] != s2[k2]) break;
+		}
+		k2++;
+	}
+	if (k1 == n) cout << "YES\n";
+	else cout << "NO\n";
+}
