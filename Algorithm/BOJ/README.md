@@ -579,13 +579,19 @@ BFS나 DFS를 하면서 adj list를 검색하면서 아직 방문하지 않은 �
 
 0이나 9를 제외한 숫자는 길이가 1씩 증가할때마다 2배씩 증가할 줄 알았는데 1을 예시로 들어서 생각해보니 1은 0, 2로 끝나는 계단 수만큼 증가하기 때문에 2배보다 적게 증가한다.
 
+마지막에 계단 수를 더할때 나머지 연산을 깜빡해서 틀렸다. 성공.
 
+[BOJ 오르막 수](https://www.acmicpc.net/problem/11057)
 
-https://www.acmicpc.net/problem/11057
+간단한 구현 문제. 성공.
 
-https://www.acmicpc.net/problem/2193
+[BOJ 이친수](https://www.acmicpc.net/problem/2193)
 
-https://www.acmicpc.net/problem/2156
+값이 커질 것을 고려하지못하고 int형으로 풀었다가 틀렸다. 성공.
+
+[BOJ 포도주 시식](https://www.acmicpc.net/problem/2156)
+
+구현이 생각보다 까다로웠지만 그림을 그려보니깐 수월하게 풀 수 있었다.
 
 https://www.acmicpc.net/problem/11055
 
