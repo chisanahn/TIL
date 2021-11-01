@@ -186,8 +186,6 @@ public class GreetingController {
 
 ### MySQL 연동
 
-> MySQL은 GPL 라이선스를 따른다.
-
 https://spring.io/guides/gs/accessing-data-mysql/
 
 https://memostack.tistory.com/163

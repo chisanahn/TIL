@@ -135,3 +135,15 @@ vscode, pycharm 등 다른 에디터의 경우도 비슷한 방법으로 설정�
 ### GitHub Profile 꾸미기
 
 https://www.youtube.com/watch?v=ECuqb5Tv9qI&t=267s 참고
+
+
+
+<details>
+    <summary>접기/펼치기 버튼</summary>
+    <div markdown="1">
+        html details 이용해서 접기/펼치기 버튼 만들기.
+    </div>
+</details>
+
+https://inasie.github.io/it%EC%9D%BC%EB%B0%98/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4-expander-control/
+

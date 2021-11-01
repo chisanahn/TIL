@@ -102,6 +102,18 @@ https://opentutorials.org/course/195
 
 https://www.mysqltutorial.org/
 
+> MySQL은 무료로 사용하려면 GPL 라이선스를 따라야 한다.
+>
+> 따라서 MariaDB를 사용하는 것으로 변경했다.
+
+
+
+### MariaDB로 변경
+
+카페에서 linux로 설치 시도. 책을 따라서 설치했는데 오류도 많이나고 결국 성공하지 못했다.
+
+오랜만에 linux를 사용해서 그런지 명령어도 많이 낯설고 개념도 좀 헷갈려서 더 어려움을 겪었다.
+
 
 
 ### http 연동
