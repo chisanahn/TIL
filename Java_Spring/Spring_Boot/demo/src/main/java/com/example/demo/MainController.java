@@ -10,13 +10,10 @@ public class MainController {
     @Autowired
     private TodoListRepository todoListRepository;
 
-    @PostMapping(path="/add")
-    public @ResponseBody String addNewTodoList (@RequestParam String time, @RequestParam String content) {
-        TodoList t = new TodoList();
-        t.setTime(time);
-        t.setContent(content);
+    @PostMapping(path = "/add")
+    public @ResponseBody String addNewTodoList (@RequestBody TodoList t) {
         todoListRepository.save(t);
-        return "Saved";
+        return t.getTime() + " " +  t.getContent() + " Saved";
     }
 
     @GetMapping(path="/all")

@@ -114,6 +114,46 @@ https://www.mysqltutorial.org/
 
 오랜만에 linux를 사용해서 그런지 명령어도 많이 낯설고 개념도 좀 헷갈려서 더 어려움을 겪었다.
 
+[linux 사용자와 그룹](https://nolboo.kim/blog/2015/08/18/linux-users-groups/)
+
+https://linuxize.com/post/how-to-install-mariadb-on-ubuntu-20-04/ 를 참고해서 다시 시도.
+
+key를 받아오는 과정에서 오류가 발생하는데 검색해봐도 잘 나오지 않아서 wsl 설치를 잘못 했던것같다.
+
+다음에 다시 해보기로 하고 일단 윈도우에 설치해서 사용하기로 했다.
+
+
+
+### CRUD 예제
+
+https://zetcode.com/java/getpostrequest/
+
+> POJO <-> json을 쉽게 하려면 jackson-databind를 사용하는게 좋을 것 같고 maven이나 gradle을 사용해서 의존성 관리를 하는것이 좋을 것 같아서 maven 프로젝트로 변경했다.
+>
+> https://ifuwanna.tistory.com/298
+
+
+
+* Create : 일정 추가
+
+  > RequestParam이 아닌 RequestBody에 json형식으로 전달하기 때문에 RequestBody로 받아서 처리해야한다.
+  >
+  > @RequestBody
+  >
+  > https://stackabuse.com/get-http-post-body-in-spring/
+  >
+  > https://docs.oracle.com/en/java/javase/16/docs/api/java.net.http/java/net/http/HttpRequest.BodyPublishers.html
+  >
+  > 
+
+* Read : 일정 추가 시 자동으로 일정들 불러오기
+
+* Update : editable Jtable 활용
+
+  https://www.codejava.net/java-se/swing/editable-jtable-example
+
+* Delete : 선택한 일정 삭제
+
 
 
 ### http 연동

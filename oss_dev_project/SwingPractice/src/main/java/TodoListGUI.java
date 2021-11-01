@@ -1,3 +1,5 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -7,6 +9,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,27 +35,50 @@ public class TodoListGUI extends JFrame {
 
         this.pack();
 
-        // addButton을 눌러서 일정 추가
-
-        // 2. GET - DB에서 일정 로드
-
+        // addButton 눌러서 일정 추가 & 일정 불러오기
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 1. POST - DB에 일정 추가
-//                String name = timeText.getText();
-//                String content = contentText.getText();
+                String time = timeText.getText();
+                String content = contentText.getText();
+                var values = new HashMap<String, String>() {{
+                    put("time", time);
+                    put("content", content);
+                }};
+
+                try {
+                    var objectMapper = new ObjectMapper();
+                    String requestBody = objectMapper.writeValueAsString(values);
+                    System.out.println(requestBody);
+
+                    HttpClient client = HttpClient.newHttpClient();
+                    HttpRequest request = HttpRequest.newBuilder()
+                            .uri(URI.create("http://localhost:8080/add"))
+                            .header("Content-Type", "application/json; charset=UTF-8")
+                            .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                            .build();
+
+                    HttpResponse<String> response = client.send(request,
+                            HttpResponse.BodyHandlers.ofString());
+
+                    System.out.println(response.body());
+                }
+                catch (Exception error) {
+                    System.out.println("오류 발생");
+                };
 
                 // 2. 테이블 초기화
                 dtm.setRowCount(0);
 
                 // 3. GET - DB에서 일정 로드, 테이블 구성.
-                HttpClient client = HttpClient.newHttpClient();
-                HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create("http://localhost:8080/all"))
-                        .build();
                 try {
+                    HttpClient client = HttpClient.newHttpClient();
                     // IOException, InterruptedException 처리 필요.
+                    HttpRequest request = HttpRequest.newBuilder()
+                            .uri(URI.create("http://localhost:8080/all"))
+                            .build();
+
                     HttpResponse<String> response = client.send(request,
                             HttpResponse.BodyHandlers.ofString());
 
@@ -61,10 +87,10 @@ public class TodoListGUI extends JFrame {
                     Pattern p = Pattern.compile("(\\{\"id\":\"?([^,\"]+)\"?,\"time\":\"?([^,\"]+)\"?,\"content\":\"?([^,\"]+)\"?\\})");
                     Matcher m = p.matcher(response.body());
                     while(m.find()) {
-                        String id = m.group(2);
-                        String time = m.group(3);
-                        String content = m.group(4);
-                        dtm.addRow(new Object[] {time, content});
+                        String _id = m.group(2);
+                        String _time = m.group(3);
+                        String _content = m.group(4);
+                        dtm.addRow(new Object[] {_time, _content});
                     }
                 }
                 catch (Exception error) {

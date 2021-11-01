@@ -235,6 +235,16 @@ SpringBoot에서 DB에 접근하기 위해 JPA, JDBC를 사용한다.
 
 
 
+### MariaDB 연동
+
+https://goddaehee.tistory.com/205
+
+MySQL이랑 거의 똑같아서 드라이버만 바꿔주면 되는 것 같다.
+
+
+
+
+
 ## Talend API Tester
 
 > REST api 테스트할때 유용한 크롬 확장 도구
