@@ -13,12 +13,14 @@
         <maven.compiler.target>16</maven.compiler.target>
     </properties>
 
+<!--    jackson-databind 라이브러리 사용-->
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.9.9.3</version>
         </dependency>
+
     </dependencies>
     
 </project>

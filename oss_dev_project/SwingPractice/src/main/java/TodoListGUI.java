@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.swing.*;
@@ -10,8 +11,43 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+class TodoList {
+    private Integer id;
+    private String time, content;
+    public TodoList(int id, String time, String content) {
+        this.id=id;
+        this.time=time;
+        this.content=content;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+}
 
 public class TodoListGUI extends JFrame {
     private JPanel mainPanel;
@@ -42,31 +78,34 @@ public class TodoListGUI extends JFrame {
                 // 1. POST - DB에 일정 추가
                 String time = timeText.getText();
                 String content = contentText.getText();
-                var values = new HashMap<String, String>() {{
-                    put("time", time);
-                    put("content", content);
-                }};
 
-                try {
-                    var objectMapper = new ObjectMapper();
-                    String requestBody = objectMapper.writeValueAsString(values);
-                    System.out.println(requestBody);
-
-                    HttpClient client = HttpClient.newHttpClient();
-                    HttpRequest request = HttpRequest.newBuilder()
-                            .uri(URI.create("http://localhost:8080/add"))
-                            .header("Content-Type", "application/json; charset=UTF-8")
-                            .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                            .build();
-
-                    HttpResponse<String> response = client.send(request,
-                            HttpResponse.BodyHandlers.ofString());
-
-                    System.out.println(response.body());
-                }
-                catch (Exception error) {
-                    System.out.println("오류 발생");
-                };
+//                // json으로 전달할 내용 객체로 저장
+//                var values = new HashMap<String, String>() {{
+//                    put("time", time);
+//                    put("content", content);
+//                }};
+//
+//                // 발생하는 exception을 처리하기 위해 try-catch문 사용
+//                try {
+//                    var objectMapper = new ObjectMapper();
+//                    // 위에서 저장된 객체 json으로 변환해서 저장
+//                    String requestBody = objectMapper.writeValueAsString(values);
+//                    System.out.println(requestBody);
+//
+//                    HttpClient client = HttpClient.newHttpClient();
+//                    HttpRequest request = HttpRequest.newBuilder()
+//                            .uri(URI.create("http://localhost:8080/add"))  // 요청을 보낼 주소
+//                            .header("Content-Type", "application/json; charset=UTF-8")  // content type, 인코딩형식 지정
+//                            .POST(HttpRequest.BodyPublishers.ofString(requestBody))  // 전달할 json 지정
+//                            .build();
+//
+//                    // response 저장
+//                    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+//                    System.out.println(response.body());
+//                }
+//                catch (Exception error) {
+//                    System.out.println("오류 발생");
+//                };
 
                 // 2. 테이블 초기화
                 dtm.setRowCount(0);
@@ -76,21 +115,17 @@ public class TodoListGUI extends JFrame {
                     HttpClient client = HttpClient.newHttpClient();
                     // IOException, InterruptedException 처리 필요.
                     HttpRequest request = HttpRequest.newBuilder()
-                            .uri(URI.create("http://localhost:8080/all"))
+                            .uri(URI.create("http://localhost:8080/all"))  // 요청을 보낼 주소
                             .build();
 
-                    HttpResponse<String> response = client.send(request,
-                            HttpResponse.BodyHandlers.ofString());
+                    // response 저장
+                    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-                    // JSON으로 변환해서 사용하려면 추가적으로 라이브러리를 다운해야 하는 것 같다.
-                    // 정규식 사용해서 데이터만 뽑아보자.
-                    Pattern p = Pattern.compile("(\\{\"id\":\"?([^,\"]+)\"?,\"time\":\"?([^,\"]+)\"?,\"content\":\"?([^,\"]+)\"?\\})");
-                    Matcher m = p.matcher(response.body());
-                    while(m.find()) {
-                        String _id = m.group(2);
-                        String _time = m.group(3);
-                        String _content = m.group(4);
-                        dtm.addRow(new Object[] {_time, _content});
+                    // response.body()에 들어있는 json array 객체로 변환
+                    ObjectMapper mapper = new ObjectMapper();
+                   Map<String, String>[] M = mapper.readValue(response.body(), Map[].class);
+                    for(Map<String, String> m : M) {
+                        dtm.addRow(new Object[] {m.get("time"), m.get("content")});
                     }
                 }
                 catch (Exception error) {

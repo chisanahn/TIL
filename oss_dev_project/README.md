@@ -124,6 +124,16 @@ key를 받아오는 과정에서 오류가 발생하는데 검색해봐도 잘 �
 
 
 
+### http 연동
+
+https://zetcode.com/java/getpostrequest/
+
+https://www.baeldung.com/java-9-http-client#2-specifying-the-http-method
+
+https://www.javaguides.net/2018/10/apache-httpclient-delete-http-request-example.html
+
+
+
 ### CRUD 예제
 
 https://zetcode.com/java/getpostrequest/
@@ -131,10 +141,12 @@ https://zetcode.com/java/getpostrequest/
 > POJO <-> json을 쉽게 하려면 jackson-databind를 사용하는게 좋을 것 같고 maven이나 gradle을 사용해서 의존성 관리를 하는것이 좋을 것 같아서 maven 프로젝트로 변경했다.
 >
 > https://ifuwanna.tistory.com/298
+>
+> https://4urdev.tistory.com/92
 
+* #### Create
 
-
-* Create : 일정 추가
+  일정 추가
 
   > RequestParam이 아닌 RequestBody에 json형식으로 전달하기 때문에 RequestBody로 받아서 처리해야한다.
   >
@@ -145,18 +157,250 @@ https://zetcode.com/java/getpostrequest/
   > https://docs.oracle.com/en/java/javase/16/docs/api/java.net.http/java/net/http/HttpRequest.BodyPublishers.html
   >
   > 
+  >
+  > 생각해보니 httpclient로 post 요청을 보낼때에도 parameter를 이용할 수 있는 방법이 있을 것 같다. (하지만 기존에 사용하던 라이브러리랑 달라서 나중에 좀 더 찾아봐야겠다.)
+  >
+  > https://stackoverflow.com/questions/8120220/how-to-use-parameters-with-httppost
 
-* Read : 일정 추가 시 자동으로 일정들 불러오기
+* #### Read
 
-* Update : editable Jtable 활용
+  일정 추가 시 자동으로 일정들 불러오기
+
+  > 원래 정규식을 사용해서 json string에서 필요한 부분을 추출해서 사용했는데 jackson-databind을 통해 Map으로 변환해서 사용할 수 있다.
+  >
+  > https://mkyong.com/java/jackson-convert-json-array-string-to-list/
+  >
+  > 클래스를 새로 만들어서 사용하는건 오류가 나서 일단 Map<String, String> 배열로 구현했다.
+
+* #### Update
+
+  editable Jtable 활용
 
   https://www.codejava.net/java-se/swing/editable-jtable-example
 
-* Delete : 선택한 일정 삭제
+* #### Delete
+
+  선택한 일정 삭제
 
 
 
-### http 연동
+# REST API 문서 작성
 
-https://zetcode.com/java/getpostrequest/
+참고자료: https://engineering.linecorp.com/ko/blog/document-engineering-api-documentation/
+
+Swagger를 사용하는 것도 괜찮아보인다. https://kim-jong-hyun.tistory.com/49
+
+github.io 이용. https://dreamgonfly.github.io/blog/jekyll-remote-theme/
+
+
+
+### API 문서 양식
+
+Swing에서만 사용될 것이라 parameter는 따로 사용하지 않고 json 형식의 데이터만 사용한다.
+
+````markdown
+# 제목
+
+### HTTP method / URI
+`GET|POST|PUT|DELETE` `http://example.com/api/test`
+
+### Request
+설명
+```json
+예시
+```
+
+### Respond
+설명
+```json
+예시
+```
+````
+
+
+
+API 문서 링크 : https://1m1s.github.io/
+
+
+
+## API 사용 안내
+
+### 필요 라이브러리
+
+request나 response가 모두 JSON 문자열 형태로 전달된다. 따라서 JSON <-> 객체 변환을 용이하게 하기 위해서 `jackson-databind` 라이브러리를 사용한다.
+
+maven을 이용한다면 이것을 편리하게 관리할 수 있다. ([Intellij에서 maven 프로젝트로 변경하는 방법](https://ifuwanna.tistory.com/298))
+
+```xml
+<!--    jackson-databind 라이브러리 사용 -->
+<dependencies>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.9.9.3</version>
+    </dependency>
+</dependencies>
+```
+
+(gradle같은 다른 프로젝트 관리 도구를 사용해도 된다.)
+
+HTTP request를 보내기 위해서 `java.net.http.HttpClient` 라이브러리를 사용하지만 java 11부터는 기본적으로 내장되어있다.
+
+
+
+## CRUD 예제
+
+[설명에서 사용된 CRUD 예제](https://github.com/chisan01/TIL/tree/main/oss_dev_project)
+
+### 1. Create
+
+API
+
+````markdown
+# todolist 일정 생성 
+
+### HTTP method / URI
+`POST` `http://localhost:8080/add`
+
+### Request
+추가할 일정 전달
+```json
+{
+	"time" : "6:00PM",
+	"content" : "dinner"
+}
+```
+
+### Response
+설명
+```json
+
+```
+````
+
+Swing에서 API 사용
+
+```java
+String time = timeText.getText();
+String content = contentText.getText();
+
+// json으로 전달할 내용 hashMap 객체로 저장
+var values = new HashMap<String, String>() {{
+    put("time", time);
+    put("content", content);
+}};
+
+// 발생하는 exception을 처리하기 위해 try-catch문 사용
+try {
+    var objectMapper = new ObjectMapper();
+    // 위에서 저장된 객체 json으로 변환해서 저장
+    String requestBody = objectMapper.writeValueAsString(values);
+    System.out.println(requestBody);
+
+    HttpClient client = HttpClient.newHttpClient();
+    HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create("http://localhost:8080/add"))  // 요청을 보낼 주소
+        .header("Content-Type", "application/json; charset=UTF-8")  // content type, 인코딩형식 지정
+        .POST(HttpRequest.BodyPublishers.ofString(requestBody))  // 전달할 json 지정
+        .build();
+
+    // response 저장
+    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+    System.out.println(response.body());
+}
+catch (Exception error) {
+    System.out.println("오류 발생");
+};
+```
+
+
+
+### 2. Read
+
+API
+
+````markdown
+# 모든 일정 가져오기
+
+### HTTP method / URI
+`GET` `http://localhost:8080/all`
+
+### Request
+없음
+
+### Respond
+모든 일정
+```json
+[
+    {
+        "id": 1,
+        "time": "3:00PM",
+        "content": "workout"
+    },
+    {
+        "id": 2,
+        "time": "7:00PM",
+        "content": "dinner"
+    }
+]
+```
+````
+
+Swing에서 API 사용
+
+```java
+try {
+    HttpClient client = HttpClient.newHttpClient();
+    // IOException, InterruptedException 처리 필요.
+    HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create("http://localhost:8080/all"))  // 요청을 보낼 주소
+        .build();
+
+    // response 저장
+    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+    // response.body()에 들어있는 json array 객체로 변환
+    ObjectMapper mapper = new ObjectMapper();
+    Map<String, String>[] M = mapper.readValue(response.body(), Map[].class);
+    for(Map<String, String> m : M) {
+        // 일정들 Jtable에 추가
+        dtm.addRow(new Object[] {m.get("time"), m.get("content")});
+    }
+}
+catch (Exception error) {
+    System.out.println("오류 발생");
+};
+```
+
+
+
+### 3. Update
+
+API
+
+```markdown
+
+```
+
+Swing에서 API 사용
+
+```java
+
+```
+
+
+
+### 4. Delete
+
+API
+
+```markdown
+
+```
+
+Swing에서 API 사용
+
+```java
+
+```
 
