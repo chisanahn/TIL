@@ -551,15 +551,29 @@ BFS나 DFS를 하면서 adj list를 검색하면서 아직 방문하지 않은 �
 
 성공.
 
+알고리즘 과제 하는겸 다시 구현해 봤다. 이번에도 오버플로우를 발견하지 못하긴 했지만 알고리즘 자체는 참고 자료 없이 구현 성공.
+
 [BOJ 11404 플로이드](https://www.acmicpc.net/problem/11404)
 
+몇몇 값이 최소 비용으로 나오지 않는데 이유를 잘 모르겠어서 그전 풀이를 참고했다. -> 저번처럼 시작도시와 도착도시가 같은 버스가 여러 개 존재할 수 있다는 걸 놓쳤다.
 
+성공.
 
 [BOJ 10217 KCM Travel](https://www.acmicpc.net/problem/10217)
 
 
 
 [BOJ 1956 운동](https://www.acmicpc.net/problem/1956)
+
+
+
+### Stack
+
+[BOJ 10828 스택](https://www.acmicpc.net/problem/10828)
+
+오랜만에 감도 다시 잡을겸 linked_list로 스택 구현.
+
+전에 풀었을때는 배열을 동적할당해서 4ms가 나왔고 이번에 0ms가 나왔다.
 
 
 
