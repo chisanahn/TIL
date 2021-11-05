@@ -607,7 +607,11 @@ BFS나 DFS를 하면서 adj list를 검색하면서 아직 방문하지 않은 �
 
 구현이 생각보다 까다로웠지만 그림을 그려보니깐 수월하게 풀 수 있었다.
 
-https://www.acmicpc.net/problem/11055
+[BOJ 가장 큰 증가 부분 수열](https://www.acmicpc.net/problem/11055)
+
+성공. 우선 recursive하게 구현하고 dp로 저장하는 방식으로 풀었다. 
+
+뭔가 구현이 마음에 들게 되진 않아서 나중에 다시 풀어보면 좋을거같다.
 
 https://www.acmicpc.net/problem/11722
 
