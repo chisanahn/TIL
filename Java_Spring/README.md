@@ -22,11 +22,7 @@ Intellij에서 prebuilt shared indexes를 설치할 수 있다고 나왔는데 �
 
 
 
-https://spring.io/guides/gs/spring-boot/
-
-https://jojoldu.tistory.com/250
-
-https://spring.io/quickstart
+[참고1](https://spring.io/guides/gs/spring-boot/) [참고2](https://jojoldu.tistory.com/250) [참고3](https://spring.io/quickstart)
 
 [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/) <- 여기가 가장 잘 정리되어있다.
 
@@ -68,13 +64,15 @@ public class GreetingController {
 >
 > @PostMapping
 >
-> @RequestMapping
+> @RequestMapping  // 기본적으로 GET, PUT, POST 등 모든 HTTP operations에 대해 동작한다.
 >
 > @RequestMapping(method=GET)
 
 **@RequestParam(value="", defualtValue="") 변수**
 
 > query string parameter와 변수를 묶어준다.
+>
+> https://www.baeldung.com/spring-request-param
 
 **MVC controller와 RESTful web service controller의 차이**
 
@@ -87,6 +85,12 @@ public class GreetingController {
 > 클래스의 모든 메서드가 view 대신 domain object를 반환한다는 것을 나타냄.
 >
 > object를 JSON으로 변환할때 HttpMessageConverter를 사용한다.
+
+**@ResponseBody**
+
+> @RestController에 포함되어 있다.
+>
+> Spring MVC가 메서드에서 반환된 HttpEntity와 HttpEntity에 포함된 인스턴스를 render해서 바로 response에 전달하도록 한다.
 
 **Spring's HTTP message converter support**
 
@@ -146,7 +150,7 @@ public class Greeting extends RepresentationModel<Greeting> {
 
 HATEOAS 타입에 맞춰 응답을 반환하기 위해서 RepresentationModel을 상속받아 클래스 생성.
 
-[참고](https://www.baeldung.com/jackson-annotations)
+[Jackson annotation 참고](https://www.baeldung.com/jackson-annotations)
 
 **@JsonCreator**
 
@@ -155,32 +159,6 @@ HATEOAS 타입에 맞춰 응답을 반환하기 위해서 RepresentationModel을
 **@JsonProperty("field")**
 
 > Jackson이 JSON의 field와 POJO의 어떤 변수를 매칭시킬지 표시.
-
-```java
-@RestController
-public class GreetingController {
-    private static final String TEMPLATE = "Hello, %s";
-
-    @RequestMapping("/greeting")
-    public HttpEntity<Greeting> greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        Greeting greeting = new Greeting(String.format(TEMPLATE, name));
-        greeting.add(linkTo(methodOn(GreetingController.class).greeting(name)).withSelfRel());
-        return new ResponseEntity<>(greeting, HttpStatus.OK);
-    }
-}
-```
-
-**@RequestMapping("주소")**
-
-**method()**
-
-> 기본적으로 GET, PUT, POST 등 모든 HTTP operations에 대해 동작한다.
-
-**@ResponseBody**
-
-> @RestController에 포함되어 있다.
->
-> Spring MVC가 메서드에서 반환된 HttpEntity와 HttpEntity에 포함된 인스턴스를 render해서 바로 response에 전달하도록 한다.
 
 
 
@@ -241,13 +219,35 @@ SpringBoot에서 DB에 접근하기 위해 JPA, JDBC를 사용한다.
 
 
 
+### param vs query vs body
+
+https://dar0m.tistory.com/222
+
+> resource 식별 -> path variable
+>
+> 정렬&필터링 -> query
+>
+> 매우 많은 수의 인수 -> body
+
+
+
+### RESTful API 설계 가이드
+
+https://sanghaklee.tistory.com/57
+
+> URL Rules - 마지막에 `/` 포함하지 않는다.
+>
+> Cotent-Type 되도록 json으로 일치.
+>
+> - "일정 생성 완료"처럼 String으로 반환했었는데 생성된 일정을 반환하고 클라이언트에서 따로 처리할 수 있도록 하는게 더 좋을 것 같다.
+
+
+
 ### MariaDB 연동
 
 https://goddaehee.tistory.com/205
 
 MySQL이랑 거의 똑같아서 드라이버만 바꿔주면 되는 것 같다.
-
-
 
 
 

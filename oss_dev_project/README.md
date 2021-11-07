@@ -161,7 +161,12 @@ https://zetcode.com/java/getpostrequest/
   > 생각해보니 httpclient로 post 요청을 보낼때에도 parameter를 이용할 수 있는 방법이 있을 것 같다. (하지만 기존에 사용하던 라이브러리랑 달라서 나중에 좀 더 찾아봐야겠다.)
   >
   > https://stackoverflow.com/questions/8120220/how-to-use-parameters-with-httppost
-
+  >
+  > 
+  >
+  > URI에 String으로 붙여서 사용하면 된다.
+  >
+  
 * #### Read
 
   일정 추가 시 자동으로 일정들 불러오기
@@ -184,9 +189,20 @@ https://zetcode.com/java/getpostrequest/
   
   DELETE에 body 넣어서 보내는 방법 https://stackoverflow.com/questions/57389571/httprequest-delete-with-body
 
+원래 body만 사용하다가 수정 후 HTTP 메소드 별로 사용한 request
+
+```
+POST - @RequestParam
+GET - x
+PUT - @PathVariable + @RequestBody
+DELETE - @PathVariable
+```
 
 
-# REST API 문서 작성
+
+
+
+# RESTful API 문서 작성
 
 참고자료: https://engineering.linecorp.com/ko/blog/document-engineering-api-documentation/
 
@@ -202,26 +218,62 @@ API는 하나만 캡쳐해서 예시로 올리고, GET/POST/PUT/DELETE 별로 �
 
 ### API 문서 양식
 
-Swing에서만 사용될 것이라 parameter는 따로 사용하지 않고 json 형식의 데이터만 사용한다.
+참고한 API 문서 : https://docs.microsoft.com/ko-kr/rest/api/sql/2021-02-01-preview/job-versions/get
 
-````markdown
+---
+
 # 제목
 
-### HTTP method / URI
+API 설명
+
 `GET|POST|PUT|DELETE` `http://example.com/api/test`
 
-### Request
-설명
+### URI Parameter
+
+| Name | In         | Required   | Type   | Description |
+| ---- | ---------- | ---------- | ------ | ----------- |
+| 이름 | path/query | true/false | 자료형 | 설명        |
+| ...  |            |            |        |             |
+
+### Request Body
+
+| Name | Type   | Description |
+| ---- | ------ | ----------- |
+| 이름 | 자료형 | 설명        |
+| ...  |        |             |
+
+### Response
+
+| Status code | Type   | Description |
+| ----------- | ------ | ----------- |
+| ex) 200 OK  | 자료형 | 설명        |
+| ...         |        |             |
+
+### 예제
+
+#### Sample Request
+
+`POST` `http://example.com/api/test`
+
+Request Body
 ```json
-예시
+{
+    "name" : "Mr.Kim"
+}
 ```
 
-### Respond
-설명
+#### Sample Response
+
+Status code: 200
+
 ```json
-예시
+{
+    "id" : 1,
+    "name" : "Mr.Kim"
+}
 ```
-````
+
+---
 
 
 
@@ -262,51 +314,60 @@ HTTP request를 보내기 위해서 `java.net.http.HttpClient` 라이브러리�
 
 API
 
-````markdown
-# 일정 생성 
+---
 
-### HTTP method / URI
-`POST` `http://localhost:8080/add`
+# [예제]일정 생성
 
-### Request
-추가할 일정 전달
+시간, 내용을 전달받아 일정을 생성하고, 생성된 일정을 반환한다.
+
+`POST` `http://localhost:8080`
+
+### URI Parameter
+
+| Name    | In    | Required | Type   | Description |
+| ------- | ----- | -------- | ------ | ----------- |
+| time    | query | true     | string | 시간        |
+| content | query | true     | string | 내용        |
+
+### Response
+
+| Status Code | Type     | Description      |
+| ----------- | -------- | ---------------- |
+| 200 OK      | TodoList | 새로 생성한 일정 |
+
+### 예제
+
+#### Sample Request
+
+`POST` `http://localhost:8080?time=6:00PM&content=dinner`
+
+#### Sample Response
+
+Status code: 200
+
 ```json
 {
-	"time" : "6:00PM",
-	"content" : "dinner"
+    "id": 34,
+    "time": "6:00PM",
+    "content": "dinner"
 }
 ```
 
-### Response
-```string
-
-```
-````
+---
 
 Swing에서 API 사용
 
 ```java
-String time = timeText.getText();
-String content = contentText.getText();
-
-// json으로 전달할 내용 객체로 저장
-var values = new HashMap<String, String>() {{
-    put("time", time);
-    put("content", content);
-}};
-
 // 발생하는 exception을 처리하기 위해 try-catch문 사용
 try {
-    var objectMapper = new ObjectMapper();
-    // 위에서 저장된 객체 json으로 변환해서 저장
-    String requestBody = objectMapper.writeValueAsString(values);
-    System.out.println(requestBody);
+    String uri = "http://localhost:8080"; // 요청 보낼 주소
+    // URI RequestParam 추가
+    uri = uri+"?time="+timeText.getText()+"&content="+contentText.getText();
 
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("http://localhost:8080/"))  // 요청을 보낼 주소
-        .header("Content-Type", "application/json; charset=UTF-8")  // content type, 인코딩형식 지정
-        .POST(HttpRequest.BodyPublishers.ofString(requestBody))  // 전달할 json 지정
+        .uri(URI.create(uri))  // 위에서 만든 uri
+        .POST(HttpRequest.BodyPublishers.noBody())
         .build();
 
     // response 저장
@@ -324,32 +385,51 @@ catch (Exception error) {
 
 API
 
-````markdown
-# 모든 일정 가져오기
+---
 
-### HTTP method / URI
+# [예제]모든 일정 가져오기
+
+시간 순서대로 정렬해서 모든 일정들을 반환한다.
+
 `GET` `http://localhost:8080/`
 
-### Request
-없음
+### Response
 
-### Respond
-모든 일정
+| Status code | Type                | Description |
+| ----------- | ------------------- | ----------- |
+| 200 OK      | Iterable\<TodoList> | 모든 일정들 |
+
+### 예제
+
+#### Sample Request
+
+`GET` `http://localhost:8080/`
+
+#### Sample Response
+
+Status code: 200
+
 ```json
 [
     {
-        "id": 1,
-        "time": "3:00PM",
+        "id": 32,
+        "time": "4:00PM",
         "content": "workout"
     },
     {
-        "id": 2,
-        "time": "7:00PM",
+        "id": 33,
+        "time": "6:00PM",
+        "content": "dinner"
+    },
+    {
+        "id": 34,
+        "time": "6:00PM",
         "content": "dinner"
     }
 ]
 ```
-````
+
+---
 
 Swing에서 API 사용
 
@@ -358,8 +438,9 @@ try {
     HttpClient client = HttpClient.newHttpClient();
     // IOException, InterruptedException 처리 필요.
     HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("http://localhost:8080/"))  // 요청을 보낼 주소
+        .uri(URI.create("http://localhost:8080"))  // 요청을 보낼 주소
         .build();
+
 
     // response 저장
     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -383,42 +464,80 @@ catch (Exception error) {
 
 API
 
-````markdown
-# 일정 수정하기
+---
 
-### HTTP method / URI
-`PUT` `http://localhost:8080/`
+# [예제]일정 수정
 
-### Request
-수정할 일정 id, 수정할 내용(time, content)
+수정할 일정의 id, 시간, 내용을 전달받아 일정을 수정하고 수정된 일정을 반환한다.
+
+`PUT` `http://localhost:8080/{id}`
+
+### URI Parameter
+
+| Name | In   | Required | Type | Description      |
+| ---- | ---- | -------- | ---- | ---------------- |
+| id   | path | true     | int  | 수정할 일정의 id |
+
+### Request Body
+
+time이나 content 중 한가지만 수정하려면 수정하지 않을 항목의 값은 ""로 보내면 된다.
+
+| Name    | Type   | Description |
+| ------- | ------ | ----------- |
+| time    | string | 시간        |
+| content | string | 내용        |
+
+### Response
+
+| Status code | Type     | Description |
+| ----------- | -------- | ----------- |
+| 200 OK      | TodoList | 수정한 일정 |
+
+### 예제
+
+#### Sample Request
+
+`PUT` `http://localhost:8080/34`
+
+Request Body
+
 ```json
 {
-	"id" : "1",
-	"time" : "",
-	"content" : "dinner"
+  "time":"6:30PM",
+  "content" : ""
 }
 ```
 
-### Respond
-수정 요청 처리 여부 문자열로 반환
-```string
-6:00PM dinner Edited
+#### Sample Response
+
+Status code: 200
+
+```json
+{
+    "id": 34,
+    "time": "6:30PM",
+    "content": "dinner"
+}
 ```
-````
+
+---
 
 Swing에서 API 사용
 
 ```java
-//E Selected Row
+//Edit Selected Row
 int editRow = todoTable.getSelectedRow();
 //Check if their is a row selected
 if (editRow >= 0) {
     int editId = (int)todoTable.getModel().getValueAt(editRow, 0);
+    String uri = "http://localhost:8080"; // 요청 보낼 주소
+    // URI PathVariable 추가
+    uri = uri+"/"+Integer.toString(editId);
+
     // json으로 전달할 내용 객체로 저장
     var values = new HashMap<String, String>() {{
         put("time", timeText.getText());
         put("content", contentText.getText());
-        put("id", Integer.toString(editId));
     }};
 
     // 발생하는 exception을 처리하기 위해 try-catch문 사용
@@ -426,11 +545,10 @@ if (editRow >= 0) {
         var objectMapper = new ObjectMapper();
         // 위에서 저장된 객체 json으로 변환해서 저장
         String requestBody = objectMapper.writeValueAsString(values);
-        System.out.println(requestBody);
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("http://localhost:8080/"))  // 요청을 보낼 주소
+            .uri(URI.create(uri))  // 위에서 만든 uri
             .header("Content-Type", "application/json; charset=UTF-8")  // content type, 인코딩형식 지정
             .PUT(HttpRequest.BodyPublishers.ofString(requestBody)) // 전달할 json 지정
             .build();
@@ -456,26 +574,45 @@ if (editRow >= 0) {
 
 API
 
-````markdown
-# 일정 수정하기
+---
 
-### HTTP method / URI
-`DELETE` `http://localhost:8080/`
+# [예제]일정 삭제
 
-### Request
-삭제할 일정 id
+삭제할 일정의 id를 전달받아 해당 일정을 삭제하고 삭제한 일정을 반환한다.
+
+`DELETE` `http://localhost:8080/{id}`
+
+### URI Parameter
+
+| Name | In   | Required | Type | Description      |
+| ---- | ---- | -------- | ---- | ---------------- |
+| id   | path | true     | int  | 삭제할 일정의 id |
+
+### Response
+
+| Status code | Type     | Description |
+| ----------- | -------- | ----------- |
+| 200 OK      | TodoList | 삭제한 일정 |
+
+### 예제
+
+#### Sample Request
+
+`DELETE` `http://localhost:8080/34`
+
+#### Sample Response
+
+Status code: 200
+
 ```json
 {
-	"id" : "1"
+    "id": 34,
+    "time": "6:30PM",
+    "content": "dinner"
 }
 ```
 
-### Respond
-삭제 요청 처리 여부 문자열로 반환
-```string
-6:00PM dinner Deleted
-```
-````
+---
 
 Swing에서 API 사용
 
@@ -485,23 +622,16 @@ int delRow = todoTable.getSelectedRow();
 //Check if their is a row selected
 if (delRow >= 0) {
     int delId = (int)todoTable.getModel().getValueAt(delRow, 0);
-    // json으로 전달할 내용 객체로 저장
-    var values = new HashMap<String, String>() {{
-        put("id", Integer.toString(delId));
-    }};
+    String uri = "http://localhost:8080"; // 요청을 보낼 주소
+    // URI PathVariable 추가
+    uri = uri+"/"+Integer.toString(delId);
 
     // 발생하는 exception을 처리하기 위해 try-catch문 사용
     try {
-        var objectMapper = new ObjectMapper();
-        // 위에서 저장된 객체 json으로 변환해서 저장
-        String requestBody = objectMapper.writeValueAsString(values);
-        System.out.println(requestBody);
-
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("http://localhost:8080/"))  // 요청을 보낼 주소
-            .header("Content-Type", "application/json; charset=UTF-8")  // content type, 인코딩형식 지정
-            .method("DELETE", HttpRequest.BodyPublishers.ofString(requestBody))  // 전달할 json 지정
+            .uri(URI.create(uri))  // 위에서 만든 uri
+            .DELETE()  // 전달할 json 지정
             .build();
 
         // response 저장
