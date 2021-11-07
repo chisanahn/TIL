@@ -9,9 +9,13 @@ int n;
 int dp[1001][1001];
 
 int f(int pre, int index) {
+    cout << "dp[" << pre << "][" << index << "]\n";
     // base case
     if(index==n) return 0;
-    if(dp[pre][index] != -1) return dp[pre][index];
+    if(dp[pre][index] != -1) {
+        cout << "중복되는 부분\n";  
+        return dp[pre][index];
+    }
     
     if(A[index] > pre) {
         return dp[pre][index] = max(f(pre, index+1), f(A[index], index+1)+A[index]);

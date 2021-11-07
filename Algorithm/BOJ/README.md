@@ -611,9 +611,39 @@ BFS나 DFS를 하면서 adj list를 검색하면서 아직 방문하지 않은 �
 
 성공. 우선 recursive하게 구현하고 dp로 저장하는 방식으로 풀었다. 
 
-뭔가 구현이 마음에 들게 되진 않아서 나중에 다시 풀어보면 좋을거같다.
+해결하긴 했지만 뭔가 dp로 풀어야 하는 이유가 잘 와닿지는 않았다.
 
-https://www.acmicpc.net/problem/11722
+recursive
+
+```c++
+int f(int pre, int index) {
+    if(index==n) return 0;
+    if(A[index] > pre)
+        return max(f(pre, index+1), f(A[index], index+1)+A[index]);
+    else
+        return f(pre, index+1);
+}
+```
+
+dp로 풀어야 하는 이유
+
+>완전탐색의 시간복잡도는 O(2^n) 최대 2^1000. 약 (10^3)^3 초과
+>
+>제출한 코드에서 함수마다 pre, index값을 출력하고 dp값이 이미 존재할때 중복된 값이라고 출력하는 코드를 추가하고 실행해봤더니 예제 테스트 케이스에서도 중복되는 부분이 꽤 많이 나왔다.
+
+그리고 내가 짠 코드가 dp\[마지막 값][인덱스] = 최대값 인줄 알았는데 dp\[마지막 값][인덱스] = 남은 값들로 만들 수 있는 최대값이였다.
+
+>풀었지만 이해가 잘 안됐던 이유가 이것 때문인 것 같다.
+
+더 직관적인 O(n^2) dp 풀이방법을 인터넷에서 찾았다.
+
+http://wookje.dance/2017/08/07/boj-11055-%EA%B0%80%EC%9E%A5-%ED%81%B0-%EC%A6%9D%EA%B0%80-%EB%B6%80%EB%B6%84-%EC%88%98%EC%97%B4/
+
+[BOJ 가장 긴 감소하는 부분 수열](https://www.acmicpc.net/problem/11722)
+
+인터넷에서 봤던 `boj 11055 가장 큰 증가 부분 수열 문제` 풀이랑 비슷하게 한번 풀어봤다. 성공.
+
+recursive하게 풀고 dp로 구현하는 방법으로도 풀어봤다. 성공.
 
 https://www.acmicpc.net/problem/11054
 
