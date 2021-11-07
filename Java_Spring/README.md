@@ -232,6 +232,12 @@ SpringBoot에서 DB에 접근하기 위해 JPA, JDBC를 사용한다.
    * **Read** : `findall()`, `findById()`
    * **Update** : `findById()`로 객체를 가져와서 수정한뒤 `save()`
    * **Delete** : `deleteById()`
+   
+   > `findById()` 등의 메소드 리턴값이 Optional인데 어떻게 사용하는건지 아직 잘 모르겠다.
+   >
+   > https://zetcode.com/springboot/findbyid/
+   >
+   > isPresent()로 값이 존재하는지 확인하고 존재하면 get()으로 받아와서 사용하면 된다.
 
 
 
