@@ -449,6 +449,8 @@ DP를 사용할 때 결과값이 결정되는 조건을 잘 파악하는 것이 
 
 ## 단계별로 풀어보기
 
+https://www.acmicpc.net/step
+
 ### DFS와 BFS
 
 [BOJ 2667 단지번호붙이기](https://www.acmicpc.net/problem/2667)
@@ -645,7 +647,9 @@ http://wookje.dance/2017/08/07/boj-11055-%EA%B0%80%EC%9E%A5-%ED%81%B0-%EC%A6%9D%
 
 recursive하게 풀고 dp로 구현하는 방법으로도 풀어봤다. 성공.
 
-https://www.acmicpc.net/problem/11054
+[BOJ 가장 긴 바이토닉 부분 수열](https://www.acmicpc.net/problem/11054)
+
+성공. recursive하게 풀고 dp로 구현.
 
 https://www.acmicpc.net/problem/2579
 
