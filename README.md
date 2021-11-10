@@ -147,3 +147,11 @@ https://www.youtube.com/watch?v=ECuqb5Tv9qI&t=267s 참고
 
 https://inasie.github.io/it%EC%9D%BC%EB%B0%98/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4-expander-control/
 
+
+
+### commit & push 자동화
+
+TIL의 경우 commit 메시지에 크게 신경을 쓰지 않아도 되서 자동화를 한다면 편리할 것 같았다. 그리고 나와 같은 생각을 하는 사람이 꽤 많았다. 시간날때 적용해보기.
+
+https://www.google.com/search?q=%EC%BB%A4%EB%B0%8B+%EC%9E%90%EB%8F%99%ED%99%94&sxsrf=AOaemvI0loVgHelpvYazw8_bKmEG6ISKiA%3A1636527092821&ei=9GuLYf_iMa_d2roPyMiW6AE
+

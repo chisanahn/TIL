@@ -37,6 +37,7 @@ public class TodoListGUI extends JFrame {
             // IOException, InterruptedException 처리 필요.
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("http://localhost:8080"))  // 요청을 보낼 주소
+                    .GET()
                     .build();
 
 

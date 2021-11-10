@@ -1,6 +1,4 @@
-# Java Spring
-
-## Spring Boot
+# Spring Boot
 
 Java Spring에서 다양한 설정들을 자동으로 관리해주는 등 Spring 보다 개발을 더 편리하게 진행할 수 있을 것 같아서 스프링 부트를 공부하게 되었다.
 
@@ -21,6 +19,8 @@ Intellij에서 prebuilt shared indexes를 설치할 수 있다고 나왔는데 �
 > 인덱싱은 class, method, object 등의 지도를 만들어서 IDE가 코드를 인식하고 여러 기능들을 지원하도록 하기 위한 기능인 것 같다.
 
 
+
+## Annotations
 
 [참고1](https://spring.io/guides/gs/spring-boot/) [참고2](https://jojoldu.tistory.com/250) [참고3](https://spring.io/quickstart)
 
@@ -162,7 +162,7 @@ HATEOAS 타입에 맞춰 응답을 반환하기 위해서 RepresentationModel을
 
 
 
-### MySQL 연동
+## MySQL 연동
 
 https://spring.io/guides/gs/accessing-data-mysql/
 
@@ -170,56 +170,88 @@ https://memostack.tistory.com/163
 
 SpringBoot에서 DB에 접근하기 위해 JPA, JDBC를 사용한다.
 
-1. spring boot의 기본 DB는 `H2`로 다른 DB를 사용하려면 `application.properties`를 수정해줘야 한다.
+### 환경설정
 
-   > 연결할 DB url, 유저명, 유저PW, 드라이버 등 명시
-   >
-   > ```java
-   > spring.datasource.url=jdbc.mysql://${MYSQL_HOST:localhost}:3306/db_example
-   > ```
-   >
-   > DB url을 명시할때 주석처럼 명시하기 때문에 빠뜨리지 않도록 주의하자.
+spring boot의 기본 DB는 `H2`로 다른 DB를 사용하려면 `application.properties`를 수정해줘야 한다.
 
-2. **`@Entity` Model** : table 생성
+> 연결할 DB url, 유저명, 유저PW, 드라이버 등 명시
+>
+> ```java
+> spring.datasource.url=jdbc.mysql://${MYSQL_HOST:localhost}:3306/db_example
+> ```
+>
+> DB url을 명시할때 주석처럼 명시하기 때문에 빠뜨리지 않도록 주의하자.
 
-   > * `@Id` : index primary key
-   > * `@GeneratedValue` : Primary Key 전략 설정.
-   > * `@Column` : DB Column을 명시
-   >
-   > 이때 Entity를 통해 실제로 생성되는 테이블 이름은 소문자로만 이루어지는 것 같다.
+### JPA annotation
 
-3. **JpaRepository**: 따로 쿼리문 작성없이 CRUD를 수행할 수 있게 해준다.
+* `@Entity` : table 생성
 
-   > https://stackoverflow.com/questions/14014086/what-is-difference-between-crudrepository-and-jparepository-interfaces-in-spring
-   >
-   > `JpaRepository` extends `PagingAndSortingRepository`
-   >
-   > `PagingAndSortingRepository` extends `CrudRepository`
+* `@Id` : index primary key
 
-   ```java
-   public interface UserRepository extends JpaRepository<Entity, PrimaryKey타입>
-   ```
+* `@GeneratedValue` : Primary Key 전략 설정.
 
-   이때, Spring이 자동으로 해당 interface를 생성해준다. 이때 맨 앞의 대문자가 소문자로 바뀌어서 생성된다. 위의 예제의 경우 userRepository가 생성된다.
+* `@Column` : DB Column을 명시
 
-   > 제대로 이해하려면 @Repository, @Autowired를 annotation을 알아야 하는데 Bean, 의존성 주입과 밀접한 관련이 있는 것 같아서 아직 잘 이해가 되지 않는다.
-   >
-   > https://galid1.tistory.com/512
+* `@JoinColumn` : 외래키, 단방향 관계
 
-   * **Create** : `save()`
-   * **Read** : `findall()`, `findById()`
-   * **Update** : `findById()`로 객체를 가져와서 수정한뒤 `save()`
-   * **Delete** : `deleteById()`
-   
-   > `findById()` 등의 메소드 리턴값이 Optional인데 어떻게 사용하는건지 아직 잘 모르겠다.
-   >
-   > https://zetcode.com/springboot/findbyid/
-   >
-   > isPresent()로 값이 존재하는지 확인하고 존재하면 get()으로 받아와서 사용하면 된다.
+  > 맨 처음에 name 속성으로 참고할 PK 이름을 명시하는건줄 알았는데 `@Column`처럼 외래키 이름을 명시하는거였다.
+  >
+  > https://www.inflearn.com/questions/113969
+
+  * mappedBy랑 함께 쓰면 양방향 관계.
+
+    https://jaegukim.github.io/posts/joincolumn-vs-mappedby-orm%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%A0%EB%95%8C-%EC%A3%BC%EC%9D%98%ED%95%A0%EC%A0%90/
+  
+* N:M 관계의 경우 연결 테이블을 추가해서 일대다, 다대일 관계로 구성하면 된다. https://ict-nroo.tistory.com/127
+
+잘 정리되어 있는 글을 발견했다.
+
+> https://velog.io/@leyuri/Spring-boot-JPA-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98-Entity-Table-Column-Id-Lombok
+
+이때 Entity를 통해 실제로 생성되는 테이블 이름은 소문자로만 이루어지는 것 같다.
+
+### JpaRepository
+
+따로 쿼리문 작성없이 CRUD를 수행할 수 있게 해준다.
+
+> https://stackoverflow.com/questions/14014086/what-is-difference-between-crudrepository-and-jparepository-interfaces-in-spring
+>
+> `JpaRepository` extends `PagingAndSortingRepository`
+>
+> `PagingAndSortingRepository` extends `CrudRepository`
+
+```java
+public interface UserRepository extends JpaRepository<Entity, PrimaryKey타입>
+```
+
+이때, Spring이 자동으로 해당 interface를 생성해준다. 이때 맨 앞의 대문자가 소문자로 바뀌어서 생성된다. 위의 예제의 경우 userRepository가 생성된다.
+
+> 제대로 이해하려면 @Repository, @Autowired를 annotation을 알아야 하는데 Bean, 의존성 주입과 밀접한 관련이 있는 것 같아서 아직 잘 이해가 되지 않는다.
+>
+> https://galid1.tistory.com/512
+
+* **Create** : `save()`
+* **Read** : `findall()`, `findById()`
+* **Update** : `findById()`로 객체를 가져와서 수정한뒤 `save()`
+* **Delete** : `deleteById()`
+
+> `findById()` 등의 메소드 리턴값이 Optional인데 어떻게 사용하는건지 아직 잘 모르겠다.
+>
+> https://zetcode.com/springboot/findbyid/
+>
+> -> isPresent()로 값이 존재하는지 확인하고 존재하면 get()으로 받아와서 사용하면 된다.
 
 
 
-### param vs query vs body
+### MariaDB로 변경
+
+https://goddaehee.tistory.com/205
+
+MySQL이랑 거의 똑같아서 드라이버만 바꿔주면 되는 것 같다.
+
+
+
+## param vs query vs body
 
 https://dar0m.tistory.com/222
 
@@ -231,7 +263,7 @@ https://dar0m.tistory.com/222
 
 
 
-### RESTful API 설계 가이드
+## RESTful API 설계 가이드
 
 https://sanghaklee.tistory.com/57
 
@@ -243,15 +275,7 @@ https://sanghaklee.tistory.com/57
 
 
 
-### MariaDB 연동
-
-https://goddaehee.tistory.com/205
-
-MySQL이랑 거의 똑같아서 드라이버만 바꿔주면 되는 것 같다.
-
-
-
-## Talend API Tester
+# Talend API Tester
 
 > REST api 테스트할때 유용한 크롬 확장 도구
 
