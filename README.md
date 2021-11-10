@@ -151,7 +151,25 @@ https://inasie.github.io/it%EC%9D%BC%EB%B0%98/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%
 
 ### commit & push 자동화
 
-TIL의 경우 commit 메시지에 크게 신경을 쓰지 않아도 되서 자동화를 한다면 편리할 것 같았다. 그리고 나와 같은 생각을 하는 사람이 꽤 많았다. 시간날때 적용해보기.
+TIL의 경우 commit 메시지에 크게 신경을 쓰지 않아도 되서 자동화를 한다면 편리할 것 같았다. 그리고 나와 같은 생각을 하는 사람이 꽤 많았다. 시간날때 적용해보기. https://www.google.com/search?q=%EC%BB%A4%EB%B0%8B+%EC%9E%90%EB%8F%99%ED%99%94&sxsrf=AOaemvI0loVgHelpvYazw8_bKmEG6ISKiA%3A1636527092821&ei=9GuLYf_iMa_d2roPyMiW6AE
 
-https://www.google.com/search?q=%EC%BB%A4%EB%B0%8B+%EC%9E%90%EB%8F%99%ED%99%94&sxsrf=AOaemvI0loVgHelpvYazw8_bKmEG6ISKiA%3A1636527092821&ei=9GuLYf_iMa_d2roPyMiW6AE
+우선 간단하게 매일 "년-월-일" 커밋 메시지를 하루의 마지막에 날리도록 만들었다. https://shlee0882.tistory.com/270
+
+나중에 좀 더 구체적인 커밋 메시지를 자동화하려면 이 블로그를 참고하면 좋을 것 같다. https://velog.io/@janeljs/git-8
+
+cron 윈도우 버전을 사용해서 자동화하려고 했지만 생각해보니깐 그 시간에 컴퓨터가 꺼져있다면 소용없다. 사람들이 서버를 따로 사용하는 이유도 이 때문인 것 같다. https://decdream08.tistory.com/67
+
+CDP f1-micro와 같은 무료서버를 사용하는 방법이 있지만 생각해보니 서버에 파일을 따로 올려야 한다. https://sup2is.github.io/2020/08/07/auto-commit-and-push-script.html
+
+윈도우 시작프로그램으로 지정해서 컴퓨터를 켰을때 그전 날 내용을 커밋&푸쉬 하는건 어떨까
+
+> 문제점 : 중간에 컴퓨터를 껐다가 다시 키는 경우 커밋이 여러번 이루어질 수 있다.
+>
+> 윈도우 시작프로그램을 지정하되 같은 이름의 커밋 내역이 이미 존재하면 패스하도록 만들면 가장 좋을 것 같다.
+>
+> https://unix.stackexchange.com/questions/48535/can-grep-return-true-false-or-are-there-alternative-methods
+>
+> https://stackoverflow.com/questions/1706882/get-the-date-a-day-before-current-time-in-bash
+>
+> 성공.
 
