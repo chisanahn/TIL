@@ -665,9 +665,13 @@ recursive relation을 이용해서 dp를 구현하면 보다 직관적으로 풀
 
 1. 시작점이 계단에 포함되지 않는다는 조건을 안 고려했다.
 2. 구현 실수
-3. 
+3. 계단이 2개만 있는 경우 출발점이 n-2지만 n-1, n번째 계단을 둘다 밟아야 한다.
 
-https://www.acmicpc.net/problem/1699
+성공.
+
+[BOJ 제곱수의 합](https://www.acmicpc.net/problem/1699)
+
+dp - 재귀적으로 구현성공. 반복문으로 구현성공.
 
 https://www.acmicpc.net/problem/2133
 

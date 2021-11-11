@@ -130,11 +130,11 @@ https://zetcode.com/java/getpostrequest/
 
 https://www.baeldung.com/java-9-http-client#2-specifying-the-http-method
 
-https://www.javaguides.net/2018/10/apache-httpclient-delete-http-request-example.html
+https://lts0606.tistory.com/455
 
 
 
-### CRUD 예제
+#### CRUD 예제
 
 https://zetcode.com/java/getpostrequest/
 
@@ -144,7 +144,7 @@ https://zetcode.com/java/getpostrequest/
 >
 > https://4urdev.tistory.com/92
 
-* #### Create
+* ##### Create
 
   일정 추가
 
@@ -167,7 +167,7 @@ https://zetcode.com/java/getpostrequest/
   > URI에 String으로 붙여서 사용하면 된다.
   >
   
-* #### Read
+* ##### Read
 
   일정 추가 시 자동으로 일정들 불러오기
 
@@ -177,11 +177,11 @@ https://zetcode.com/java/getpostrequest/
   >
   > 클래스를 새로 만들어서 사용하는건 오류가 나서 일단 Map<String, String> 배열로 구현했다.
 
-* #### Update
+* ##### Update
 
   간단하게 delete할때랑 비슷하게 구현했다. 하지만 editable Jtable을 활용하면 더 직관적일거 같다. https://www.codejava.net/java-se/swing/editable-jtable-example
 
-* #### Delete
+* ##### Delete
 
   선택한 일정 삭제, 해당 일정의 id를 저장하고 있어야한다.
   
