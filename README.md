@@ -77,23 +77,27 @@ https://www.youtube.com/watch?v=NeEaTeYcFhE&list=PLv2d7VI9OotQ1F92Jp9Ce7ovHEsuRQ
 
 ## Git
 
-- 깃헙에 올린 저장소에서 특정 파일들을 제거하고 싶은데 그냥 제거하면 커밋내역이 남고 다 지우기에는 다른 커밋내역이 날라가서 방법을 찾아보니 [repository의 하위폴더를 분리해서 새로운 repository를 만드는 방법](https://sustainable-dev.tistory.com/119)이 있었다.   
+### Git 하위폴더 새로운 repository로 분리
 
-- [Git Repository 합치기 (commit log 유지) - subtree 이용](http://yeoseon.kr/git-repository-habcigi-commit-log-yuji-subtree-iyong/)
+깃헙에 올린 저장소에서 특정 파일들을 제거하고 싶은데 그냥 제거하면 커밋내역이 남고 다 지우기에는 다른 커밋내역이 날라가서 방법을 찾아보니 [repository의 하위폴더를 분리해서 새로운 repository를 만드는 방법](https://sustainable-dev.tistory.com/119)이 있었다.   
 
-- #### rebase
+### Git commit log 유지하면서 repository 합치기
 
-  우아한형제들 기술블로그에서 git-flow 관련 글을 보다가 우연히 rebase에 관한 글을 읽었는데 rebase로 병합뿐만 아니라 과거 커밋들을 수정하거나 다른 브랜치들로 옮길 수도 있다는걸 알았다. https://suhwan.dev/2018/01/21/Git-Rebase-1/
+[Git Repository 합치기 (commit log 유지) - subtree 이용](http://yeoseon.kr/git-repository-habcigi-commit-log-yuji-subtree-iyong/)
 
-  그 전에는 commit --amend로 바로 직전 커밋만 수정 가능하고 다른 작업은 못하는줄 알아서 한번 커밋할때 신중하게 해야되겠다고 생각했는데 이런 기능이 있을 줄이야...
+### rebase
 
-  다음에 한번 rebase를 제대로 한번 사용해봐야겠다.
+우아한형제들 기술블로그에서 git-flow 관련 글을 보다가 우연히 rebase에 관한 글을 읽었는데 rebase로 병합뿐만 아니라 과거 커밋들을 수정하거나 다른 브랜치들로 옮길 수도 있다는걸 알았다. https://suhwan.dev/2018/01/21/Git-Rebase-1/
 
-  > 단, 역시나 공동 프로젝트를 하는 경우에는 커밋내역이 꼬일 수 있기 때문에 안하는게 좋다.
-  >
-  > 로컬 저장소에서 작업을 할 때 일단 최대한 자잘하게 나눠서 커밋을 하고 나중에 push 하기 전에 너무 자잘한 커밋들을 하나로 묶는 등 커밋 내역을 한번 관리하는 식으로 하면 되지 않을까 싶다.
+그 전에는 commit --amend로 바로 직전 커밋만 수정 가능하고 다른 작업은 못하는줄 알아서 한번 커밋할때 신중하게 해야되겠다고 생각했는데 이런 기능이 있을 줄이야...
 
-  
+다음에 한번 rebase를 제대로 한번 사용해봐야겠다.
+
+> 단, 역시나 공동 프로젝트를 하는 경우에는 커밋내역이 꼬일 수 있기 때문에 안하는게 좋다.
+>
+> 로컬 저장소에서 작업을 할 때 일단 최대한 자잘하게 나눠서 커밋을 하고 나중에 push 하기 전에 너무 자잘한 커밋들을 하나로 묶는 등 커밋 내역을 한번 관리하는 식으로 하면 되지 않을까 싶다.
+
+
 
 ## 기타
 - [disable context menu for open in visual studio](https://developercommunity.visualstudio.com/t/disable-context-menu-for-open-in-visual-studio/26397)   
@@ -137,6 +141,8 @@ vscode, pycharm 등 다른 에디터의 경우도 비슷한 방법으로 설정�
 https://www.youtube.com/watch?v=ECuqb5Tv9qI&t=267s 참고
 
 
+
+### md 접기/펼치기 버튼
 
 <details>
     <summary>접기/펼치기 버튼</summary>
@@ -188,4 +194,34 @@ GitHub에서 PR을 squash merge하면 일련의 커밋들을 하나로 합쳐서
 [vi 들어가지 않고 commit 메시지에 줄바꿈 추가하는 방법](https://stackoverflow.com/questions/5064563/add-line-break-to-git-commit-m-from-the-command-line)
 
 
+
+### Z shell 설치
+
+가끔 유튜브 같은데서 디자인이 굉장히 예쁜 터미널을 사용하는 것을 봤는데 z shell이라는 것을 알게 되어서 적용해보기로 했다.
+
+https://teddylee777.github.io/linux/linux%EC%97%90%EC%84%9C-%EA%B8%B0%EB%B3%B8%ED%84%B0%EB%AF%B8%EB%84%90-%EC%8A%A4%ED%83%80%EC%9D%BC%EB%A7%81%ED%95%98%EA%B8%B0
+
+기본적으로 mac이나 linux 환경에서 설정하는 것이 더 쉬운 것 같다.
+
+https://velog.io/@ehrbs2021/window%EC%97%90%EC%84%9C-Git-Bash%EC%97%90-oh-my-zsh-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+
+https://gist.github.com/fworks/af4c896c9de47d827d4caa6fd7154b6b
+
+https://github.com/diesire/git_bash_windows_powerline
+
+기본적인 방법은 zsh를 설치하고 oh-my-zsh를 설치한뒤 .zshrc에서 테마를 agnoster로 바꿔주면 된다. 이때 power-line 폰트 설치를 안하면 폰트가 깨지는데 윈도우에서 이것을 하기가 좀 어려웠다.
+
+https://velog.io/@cyongchoi/Window-Ubuntu-%ED%84%B0%EB%AF%B8%EB%84%90%EC%97%90-OH-MY-ZSH-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B03
+
+결국 다운받고 git bash 창에서 따로 폰트를 바꿔줘서 해결했다.
+
+[색상 변경하는 방법](https://github.com/agnoster/agnoster-zsh-theme/issues/30)
+
+solarize dark theme도 적용하고 싶어서 찾아보던중 Windows New Terminal이 괜찮아보였다. https://goax.tistory.com/11 시간될때 wsl도 다시 설치해봐야겠다는 생각도 들었다.
+
+그리고 windows git bash에서 테마 변경은 그냥 UI로 하면 된다.
+
+z shell로 변경하고 나니 git log 등의 명령어를 수행할때 다른 창으로 이동한뒤 q로 닫고 나면 내용이 보이지 않아서 불편했다.
+
+git core.pager가 기본적으로 less로 설정되어 있는데 bash랑 달리 zsh를 사용하게 되면 pager로 열리게 된다. 따라서 설정을 조금 수정해주면 된다. https://serebrov.github.io/html/2014-01-04-git-log-and-less-keep-output.html
 
