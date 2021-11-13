@@ -173,3 +173,19 @@ CDP f1-micro와 같은 무료서버를 사용하는 방법이 있지만 생각�
 >
 > 성공.
 
+GitHub에서 PR을 squash merge하면 일련의 커밋들을 하나로 합쳐서 할 수 있던데 이 방법을 응용해서 좀 더 구체적인 커밋 메시지를 날릴 수 있을 것 같다.
+
+> 1. 커밋할 날짜를 바탕으로 브랜치 생성
+>
+>    ex) 2021-11-12
+>
+> 2. 디렉토리별로 add, 수정사항이 있는 폴더의 경우 수정된 md파일들의 디렉토리명을 커밋 메시지로 커밋.
+>
+> 3. 오늘 커밋된 내역들을 merge --squash로 하나로 묶어서 main에 push
+
+생각하다보니 merge --squash를 안 하더라도 그냥 디렉토리별로 add 하면서 Tag같은 문자열에 하나씩 추가해서 커밋 메시지에 포함하면 될 것 같다.
+
+[vi 들어가지 않고 commit 메시지에 줄바꿈 추가하는 방법](https://stackoverflow.com/questions/5064563/add-line-break-to-git-commit-m-from-the-command-line)
+
+
+
