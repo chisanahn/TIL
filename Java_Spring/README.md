@@ -182,6 +182,8 @@ spring boot의 기본 DB는 `H2`로 다른 DB를 사용하려면 `application.pr
 >
 > DB url을 명시할때 주석처럼 명시하기 때문에 빠뜨리지 않도록 주의하자.
 
+https://www.mysqltutorial.org/
+
 ### JPA annotation
 
 * `@Entity` : table 생성
@@ -251,6 +253,22 @@ MySQL이랑 거의 똑같아서 드라이버만 바꿔주면 되는 것 같다.
 
 
 
+### query문
+
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
+
+##### query creation from method names
+
+> 함수명만 Entity 변수명과 일치하게 사용하면 된다.
+>
+> Member_id, MemberId 둘 다 정상적으로 동작했다.
+
+##### `getById()` vs `findById()`
+
+> 외래키를 사용할때는 `getById()`를 사용하면 될 것 같다.
+
+
+
 ## param vs query vs body
 
 https://dar0m.tistory.com/222
@@ -260,6 +278,14 @@ https://dar0m.tistory.com/222
 > 정렬&필터링 -> query
 >
 > 매우 많은 수의 인수 -> body
+
+
+
+### Request Body
+
+request body에서 항목이 비어있을 경우 자동으로 null 값이 지정된다. 지금까지 PUT 요청을 보낼때 수정하지 않더라도 빈문자열을 값으로 지정해서 보냈는데 알고보니 그럴 필요가 없었다.
+
+심지어 LocalDateTime 값으로 빈문자열이 전달될 경우 null 값으로 처리하기 위해서 getter를 사용자 지정해서 처리해 줬는데 그럴 필요가 없었다.
 
 
 

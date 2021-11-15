@@ -193,6 +193,8 @@ GitHub에서 PR을 squash merge하면 일련의 커밋들을 하나로 합쳐서
 
 [vi 들어가지 않고 commit 메시지에 줄바꿈 추가하는 방법](https://stackoverflow.com/questions/5064563/add-line-break-to-git-commit-m-from-the-command-line)
 
+.bashrc에 zshell을 실행하는 옵션을 추가했더니 bash script가 제대로 실행되지 않아서 특정 폴더(여기서는 Startup)에서는 zshell을 실행하지 않도록 .bashrc를 좀 수정했다.
+
 
 
 ### Z shell 설치
