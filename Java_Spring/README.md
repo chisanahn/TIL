@@ -257,6 +257,8 @@ MySQL이랑 거의 똑같아서 드라이버만 바꿔주면 되는 것 같다.
 
 https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
 
+https://sundries-in-myidea.tistory.com/91
+
 ##### query creation from method names
 
 > 함수명만 Entity 변수명과 일치하게 사용하면 된다.
@@ -289,7 +291,13 @@ https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-me
 >
 > https://www.bloger.kr/51
 >
-> query문에서 처음보는 것들이 많아서 헤맸는데 잘 정리되어있는 블로그를 하나 찾았다. http://nodapiseverywhere.blogspot.com/2016/11/mysql-ranking-query.html
+> query문에서 처음보는 것들이 많아서 헤맸는데 잘 정리되어있는 블로그를 하나 찾았다. http://nodapiseverywhere.blogspot.com/2016/11/mysql-ranking-query.html 이 블로그에 댓글에서 알게된건데 mysql 0.8 업데이트 이후 RANK() 함수가 추가되었다.
+>
+> https://www.mysqltutorial.org/mysql-window-functions/mysql-rank-function/
+>
+> dense_rank() 함수를 사용하면 동점자들 처리가 더 간편하다.
+>
+> https://www.javatpoint.com/mysql-ranking-functions
 
 ## param vs query vs body
 
@@ -331,6 +339,16 @@ request body에서 항목이 비어있을 경우 자동으로 null 값이 지정
   생각해보니 Response로 전달될때 외래키값들이 객체로 변환되어서 전달되는데 보안 상으로 문제가 없을지 좀 궁금해졌다.
 
 * boolean type은 primitive type으로 null 값을 가질 수 없다. null 값을 가질 수 있게 하려면 Boolean 자료형을 사용하면 된다. 
+
+
+
+## Integer.getInteger()
+
+계속 null이 반환되어서 한참 헤맸는데 여기서 문제가 있었다.
+
+String을 int형으로 변환하고 싶다면 `Integer.parseInt()` 메소드를 사용해야 한다.
+
+https://stackoverflow.com/questions/3123349/why-does-int-num-integer-getinteger123-throw-nullpointerexception
 
 
 

@@ -197,6 +197,10 @@ GitHub에서 PR을 squash merge하면 일련의 커밋들을 하나로 합쳐서
 
 처음에 조건문으로 `if (cd | grep -q "Startup")`을 사용했는데 오늘 작동이 잘 안되서 생각해보니깐 `if (pwd | grep -q "Startup")`로 조건을 설정하는게 맞는것같다. 어제는 왜 정상적으로 작동했다고 생각했던거지 ㅋㅋ
 
+`Startup` 폴더에 있지만 실행경로가 Startup폴더는 아닌 것 같다. 폴더에 직접 실행해보면 잘 동작하지만 시작프로그램으로 실행되었을때는 여전히 zshell로 실행된다.
+
+bash script에 아예 cd문을 적어서 실행해야겠다.
+
 
 
 ### Z shell 설치

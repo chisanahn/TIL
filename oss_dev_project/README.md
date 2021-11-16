@@ -208,7 +208,13 @@ DELETE - @PathVariable
 
 Swagger를 사용하는 것도 괜찮아보인다. https://kim-jong-hyun.tistory.com/49
 
-github.io 이용. https://dreamgonfly.github.io/blog/jekyll-remote-theme/
+github.io을 이용하는게 디자인도 괜찮고 커스터마이징하기도 좋고 가장 간단할 것 같아서 github.io를 사용하기로 결정했다. https://dreamgonfly.github.io/blog/jekyll-remote-theme/
+
+
+
+문서가 많아지다보니 확인하는데 어려움이 있어서 카테고리 별로 정리하는 기능을 추가하기로 했다. https://ansohxxn.github.io/blog/category/
+
+프로필이 꺼져있으면 사이드바도 표시가 안되는 것 같다.
 
 
 
