@@ -267,7 +267,29 @@ https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-me
 
 > 외래키를 사용할때는 `getById()`를 사용하면 될 것 같다.
 
+##### [Sort.by() No property found for type](https://stackoverflow.com/questions/69973192/spring-boot-sort-by-no-property-found-for-type)
 
+> MemberSchedule에서 "time_table"을 기준으로 sort.by()를 사용했더니 `No property start found for type MemberSchedule!` 에러가 나온다. 다른 property를 넣었을때는 잘 작동하는걸보면 `_`가 포함되어있으면 인식을 제대로 못하는 것 같다. 어떻게 해결해야 될지 모르겠어서 stackoverflow에 질문을 올렸다.
+>
+> -> 간단하게 카멜 규칙으로 변수명을 변경했더니 해결됐다.
+>
+> 자바 명명 규칙이 기본적으로 CamelCase라서 이러한 문자가 생긴거였다. https://stackoverflow.com/questions/47341811/how-can-i-sort-by-a-property-with-underscore-in-jpa-hibernate
+>
+> [자바 명명 규칙](https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html)
+>
+> 앞으로 어떤 언어를 사용할때 naming convention을 꼭 알아둬야 겠다.
+
+##### get row number in order by using JPA
+
+> Ranking entity에서 유저의 순위를 리턴하려면 sorting, filtering을 수행한뒤 몇번째 행에 위치하는지 알아야 하는데 방법을 잘 모르겠다.
+>
+> https://stackoverflow.com/questions/29082677/get-row-number-in-order-by-using-jpa
+>
+> https://www.google.com/search?q=mysql+%EC%88%9C%EC%9C%84%ED%91%9C&oq=mysql+%EC%88%9C%EC%9C%84%ED%91%9C&aqs=chrome..69i57j0i333l4.2460j0j7&sourceid=chrome&ie=UTF-8
+>
+> https://www.bloger.kr/51
+>
+> query문에서 처음보는 것들이 많아서 헤맸는데 잘 정리되어있는 블로그를 하나 찾았다. http://nodapiseverywhere.blogspot.com/2016/11/mysql-ranking-query.html
 
 ## param vs query vs body
 
@@ -286,6 +308,29 @@ https://dar0m.tistory.com/222
 request body에서 항목이 비어있을 경우 자동으로 null 값이 지정된다. 지금까지 PUT 요청을 보낼때 수정하지 않더라도 빈문자열을 값으로 지정해서 보냈는데 알고보니 그럴 필요가 없었다.
 
 심지어 LocalDateTime 값으로 빈문자열이 전달될 경우 null 값으로 처리하기 위해서 getter를 사용자 지정해서 처리해 줬는데 그럴 필요가 없었다.
+
+* POST로 외래키값 ID를 전달했을때 객체가 null로 간주되면서 제대로 생성되지 않는 문제가 생겼다.
+
+  https://stackoverflow.com/questions/29342486/spring-requestbody-does-not-look-up-object
+
+  https://www.baeldung.com/spring-boot-customize-jackson-objectmapper
+
+  HashMap<String, Object>로 json을 변환하고 매칭해서 사용. 아니면 클라이언트 쪽에서 id 대신 객체를 포함시켜서 전달.
+
+  클라이언트 쪽에서 어차피 해당 객체들의 값을 가지고 있을거라 후자가 효율적일 것 같다. 하지만 값이 제대로 전달되었는지 확인하려면 전자가 좋을 것 같다. 값이 제대로 전달되지 않더라도 row는 생성되어버린다. 이 부분도 클라이언트 측에서 유효성 검사를 해주면 될 것 같다. 기본값도 지정해주고
+
+  외래키를 객체로 전달할때 "id" 값만 제대로 전달해주면 알아서 다른 항목 값이 없거나 잘못전달되었더라도 정상적으로 매칭시켜준다.
+
+  ```json
+  // interest_id 외래키를 갖는 경우
+  "interest" : {
+      "id" : 2
+  }
+  ```
+
+  생각해보니 Response로 전달될때 외래키값들이 객체로 변환되어서 전달되는데 보안 상으로 문제가 없을지 좀 궁금해졌다.
+
+* boolean type은 primitive type으로 null 값을 가질 수 없다. null 값을 가질 수 있게 하려면 Boolean 자료형을 사용하면 된다. 
 
 
 

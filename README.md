@@ -195,6 +195,8 @@ GitHub에서 PR을 squash merge하면 일련의 커밋들을 하나로 합쳐서
 
 .bashrc에 zshell을 실행하는 옵션을 추가했더니 bash script가 제대로 실행되지 않아서 특정 폴더(여기서는 Startup)에서는 zshell을 실행하지 않도록 .bashrc를 좀 수정했다.
 
+처음에 조건문으로 `if (cd | grep -q "Startup")`을 사용했는데 오늘 작동이 잘 안되서 생각해보니깐 `if (pwd | grep -q "Startup")`로 조건을 설정하는게 맞는것같다. 어제는 왜 정상적으로 작동했다고 생각했던거지 ㅋㅋ
+
 
 
 ### Z shell 설치
