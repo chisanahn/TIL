@@ -577,6 +577,14 @@ BFS나 DFS를 하면서 adj list를 검색하면서 아직 방문하지 않은 �
 
 전에 풀었을때는 배열을 동적할당해서 4ms가 나왔고 이번에 0ms가 나왔다.
 
+[BOJ 오큰수](https://www.acmicpc.net/problem/17298)
+
+stack에 저장해서 오른쪽에서부터 하나씩 빼면서 결과값 배열을 업데이트 해나가는 식으로 풀었다. 시간초과
+
+오른쪽에서 왼쪽 순으로 오른쪽 수가 더 크면 오른쪽 수가 그 수의 오큰수, 아니면 오른쪽 수의 오큰수가 그 수의 오큰수. 오른쪽 수의 오큰수가 그 수보다 작은 경우가 있어서 while문으로 구현했다. dp? stack으로 푼 건 아니지만 성공.
+
+다른 사람들은 어떻게 풀었는지 한번 찾아보자.
+
 
 
 ## [plzrun's algorithm](https://plzrun.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C%ED%92%80%EC%9D%B4PS-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0)
@@ -673,7 +681,9 @@ recursive relation을 이용해서 dp를 구현하면 보다 직관적으로 풀
 
 dp - 재귀적으로 구현성공. 반복문으로 구현성공.
 
-https://www.acmicpc.net/problem/2133
+[BOJ Tri Tiling](https://www.acmicpc.net/problem/2133)
+
+
 
 https://www.acmicpc.net/problem/9461
 
