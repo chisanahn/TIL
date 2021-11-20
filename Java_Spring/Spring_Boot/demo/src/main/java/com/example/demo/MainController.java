@@ -15,8 +15,12 @@ import java.util.Optional;
 @Controller
 @RequestMapping
 public class MainController {
+//    @Autowired
+    private final TodoListRepository todoListRepository;
     @Autowired
-    private TodoListRepository todoListRepository;
+    public MainController(TodoListRepository todoListRepository) {
+        this.todoListRepository = todoListRepository;
+    }
 
     @PostMapping
     public @ResponseBody ResponseEntity<TodoList> addTodoList (@RequestParam String time, @RequestParam String content) {
