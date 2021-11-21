@@ -311,6 +311,14 @@ https://dar0m.tistory.com/222
 
 
 
+### LocalDateTime
+
+@RequestParam으로 년월일을 입력받을때 LocalDateTime으로 변환하려면 LocalDate로 변환하고 `atStartOfDay()` 메소드로 LocalDateTime으로 바꾸면 된다. https://stackoverflow.com/questions/27454025/unable-to-obtain-localdatetime-from-temporalaccessor-when-parsing-localdatetime
+
+
+
+
+
 ### Request Body
 
 request body에서 항목이 비어있을 경우 자동으로 null 값이 지정된다. 지금까지 PUT 요청을 보낼때 수정하지 않더라도 빈문자열을 값으로 지정해서 보냈는데 알고보니 그럴 필요가 없었다.
@@ -375,3 +383,12 @@ https://sanghaklee.tistory.com/57
 https://www.youtube.com/watch?v=9SGDpanrc8U&t=197s
 
 https://www.baeldung.com/spring-boot
+
+
+
+# 배포
+
+## docker
+
+설치 : https://www.lainyzine.com/ko/article/a-complete-guide-to-how-to-install-docker-desktop-on-windows-10/
+
