@@ -1,5 +1,3 @@
-# Spring Boot
-
 Java Spring에서 다양한 설정들을 자동으로 관리해주는 등 Spring 보다 개발을 더 편리하게 진행할 수 있을 것 같아서 스프링 부트를 공부하게 되었다.
 
 https://velog.io/@deannn/Spring-IntelliJ-Springboot-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%83%9D%EC%84%B1-%EB%B0%8F-%EC%8B%A4%ED%96%89
@@ -299,6 +297,29 @@ https://sundries-in-myidea.tistory.com/91
 >
 > https://www.javatpoint.com/mysql-ranking-functions
 
+
+
+## 개선할 점
+
+#### 1. 테스트 코드 활용하기
+
+- 단위 테스트 / 통합 테스트
+- 단위 테스트가 시간도 빠르고 훨씬 좋을 테스트일 확률이 높다.
+
+> 테스트 코드가 뭔지 몰라서 사용을 안했는데 앞으로 사용할 것. 일일이 돌려볼 필요없이 테스트할 수 있어서 편리하기도 하고 프로젝트가 커질수록 필수적이다.
+
+#### 2. 생성자 주입으로 DI하기.
+
+- 필드 주입, settter 주입, 생성자 주입 총 3가지 방법
+- 필드가 가장 간편하고 테스트 코드에선 사용해도 된다.
+- 가능한 생성자 주입 DI를 사용하는 것이 좋다.
+
+> 원래 필드 주입 방법밖에 몰랐는데 앞으로는 생성자 주입 방식을 사용해야겠다.
+
+참고한 강의 : https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%9E%85%EB%AC%B8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8/lecture/49595?tab=curriculum
+
+
+
 ## param vs query vs body
 
 https://dar0m.tistory.com/222
@@ -314,8 +335,6 @@ https://dar0m.tistory.com/222
 ### LocalDateTime
 
 @RequestParam으로 년월일을 입력받을때 LocalDateTime으로 변환하려면 LocalDate로 변환하고 `atStartOfDay()` 메소드로 LocalDateTime으로 바꾸면 된다. https://stackoverflow.com/questions/27454025/unable-to-obtain-localdatetime-from-temporalaccessor-when-parsing-localdatetime
-
-
 
 
 
@@ -383,12 +402,4 @@ https://sanghaklee.tistory.com/57
 https://www.youtube.com/watch?v=9SGDpanrc8U&t=197s
 
 https://www.baeldung.com/spring-boot
-
-
-
-# 배포
-
-## docker
-
-설치 : https://www.lainyzine.com/ko/article/a-complete-guide-to-how-to-install-docker-desktop-on-windows-10/
 

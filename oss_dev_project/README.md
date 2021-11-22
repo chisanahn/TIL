@@ -1,4 +1,4 @@
-# Swing + MySQL + Spring Boot
+# Swing + mariaDB + Spring Boot
 
 > 팀플(오픈소스 개발 프로젝트)
 >
@@ -12,18 +12,18 @@
 
 1. Swing 제작
 2. Spring Boot로 백엔드 구축
-3. Spring Boot에 MySQL 연동
+3. Spring Boot에 MySQL 연동(mariaDB로 변경)
 4. http 연동
 
 
 
-### Swing
+## Swing
 
 https://www.javatpoint.com/java-swing
 
 > AWT 기반, 플랫폼 독립적, 더 가볍고 다양한 component, MVC
 
-#### 클래스 계층도
+### 클래스 계층도
 
 Object
 
@@ -42,7 +42,7 @@ Object
 
     - JList, JTable, ....
 
-#### component methods
+### component methods
 
 public void add(Component c)
 
@@ -54,12 +54,12 @@ public void setVisible(boolean b)
 
 > default: false
 
-#### Create Frame
+### Create Frame
 
 * create object of Frame class
 * extending Frame class
 
-#### 간단한 TODO list 앱 만들어보기
+### 간단한 TODO list 앱 만들어보기
 
 * IntelliJ IDEA Swing GUI designer
 
@@ -79,51 +79,6 @@ public void setVisible(boolean b)
 
 
 
-
-### Spring Boot
-
-백엔드 구축 + MySQL 연동
-
-https://github.com/chisan01/TIL/tree/main/Java_Spring
-
-
-
-### MySQL
-
-설치
-
-https://velog.io/@joajoa/MySQL-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%EB%B0%8F-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95
-
-https://www.mysqltutorial.org/what-is-mysql/
-
-튜토리얼
-
-https://opentutorials.org/course/195
-
-https://www.mysqltutorial.org/
-
-> MySQL은 무료로 사용하려면 GPL 라이선스를 따라야 한다.
->
-> 따라서 MariaDB를 사용하는 것으로 변경했다.
-
-
-
-### MariaDB로 변경
-
-카페에서 linux로 설치 시도. 책을 따라서 설치했는데 오류도 많이나고 결국 성공하지 못했다.
-
-오랜만에 linux를 사용해서 그런지 명령어도 많이 낯설고 개념도 좀 헷갈려서 더 어려움을 겪었다.
-
-[linux 사용자와 그룹](https://nolboo.kim/blog/2015/08/18/linux-users-groups/)
-
-https://linuxize.com/post/how-to-install-mariadb-on-ubuntu-20-04/ 를 참고해서 다시 시도.
-
-key를 받아오는 과정에서 오류가 발생하는데 검색해봐도 잘 나오지 않아서 wsl 설치를 잘못 했던것같다.
-
-다음에 다시 해보기로 하고 일단 윈도우에 설치해서 사용하기로 했다.
-
-
-
 ### http 연동
 
 https://zetcode.com/java/getpostrequest/
@@ -134,7 +89,7 @@ https://lts0606.tistory.com/455
 
 
 
-#### CRUD 예제
+### CRUD 예제
 
 https://zetcode.com/java/getpostrequest/
 
@@ -165,8 +120,7 @@ https://zetcode.com/java/getpostrequest/
   > 
   >
   > URI에 String으로 붙여서 사용하면 된다.
-  >
-  
+
 * ##### Read
 
   일정 추가 시 자동으로 일정들 불러오기
@@ -184,9 +138,9 @@ https://zetcode.com/java/getpostrequest/
 * ##### Delete
 
   선택한 일정 삭제, 해당 일정의 id를 저장하고 있어야한다.
-  
+
   https://stackoverflow.com/questions/1492217/how-to-make-a-columns-in-jtable-invisible-for-swing-java/1493233
-  
+
   DELETE에 body 넣어서 보내는 방법 https://stackoverflow.com/questions/57389571/httprequest-delete-with-body
 
 원래 body만 사용하다가 수정 후 HTTP 메소드 별로 사용한 request
@@ -200,21 +154,54 @@ DELETE - @PathVariable
 
 
 
+### Json -> 객체
+
+json nested object를 객체로 변환하는데 자꾸 오류가 생겨서 찾아봤는데 클래스만 잘 정의해두면 objectmapper가 알아서 잘 처리를 해준다.
+
+오류가 났던 원인은 LocalDateTime의 deserialize가 제대로 이루어지지 않았던 것이다.
+
+LocalDateTime 변수의 getter를 String을 받아서 `LocalDateTime.parse()` 메소드로 형변환해서 지정해주는 방식으로 수정해서 해결했다.
+
+그리고 objectMapper에서 사용자 정의된 getter를 사용하려면 해당 클래스에 빈 생성자가 정의 되어 있어야 하는 것 같다. (해당 클래스의 맴버 객체의 생성자도 빈 생성자가 정의되어 있어야 한다.)
 
 
-# RESTful API 문서 작성
+
+
+## Spring Boot
+
+백엔드 구축 + MySQL 연동
+
+https://github.com/chisan01/TIL/tree/main/Spring_Boot
+
+
+
+## MySQL -> mariaDB
+
+https://github.com/chisan01/TIL/tree/main/RDB
+
+>MySQL은 무료로 사용하려면 GPL 라이선스를 따라야 한다.
+>
+>따라서 MariaDB를 사용하는 것으로 변경했다.
+
+
+
+## DB 설계
+
+처음에 [엑셀](https://docs.google.com/spreadsheets/d/1Uga-Tb9KF_MPLcB1_6BPCuiY6ssJBIthgssPOSd58qc/edit#gid=0)로 작업했다가 가독성이 너무 안 좋아서 `Lucidchart`을 이용해서 [ERD 다이어그램](https://github.com/chisan01/TIL/tree/main/oss_dev_project/1M1S_DB.pdf)으로 다시 만들었다.
+
+
+
+## RESTful API 문서 작성
 
 참고자료: https://engineering.linecorp.com/ko/blog/document-engineering-api-documentation/
 
 Swagger를 사용하는 것도 괜찮아보인다. https://kim-jong-hyun.tistory.com/49
 
-github.io을 이용하는게 디자인도 괜찮고 커스터마이징하기도 좋고 가장 간단할 것 같아서 github.io를 사용하기로 결정했다. https://dreamgonfly.github.io/blog/jekyll-remote-theme/
+github.io을 이용하는게 디자인도 괜찮고 커스터마이징하기도 좋고 가장 간단할 것 같아서 github.io를 사용하기로 결정했다.
 
+https://github.com/chisan01/TIL/tree/main/github.io
 
-
-문서가 많아지다보니 확인하는데 어려움이 있어서 카테고리 별로 정리하는 기능을 추가하기로 했다. https://ansohxxn.github.io/blog/category/
-
-프로필이 꺼져있으면 사이드바도 표시가 안되는 것 같다.
+> 문서가 많아지다보니 확인하는데 어려움이 있어서 카테고리 별로 정리해서 표시하는 기능을 추가했다.
 
 
 
@@ -222,8 +209,7 @@ github.io을 이용하는게 디자인도 괜찮고 커스터마이징하기도 
 
 참고한 API 문서 : https://docs.microsoft.com/ko-kr/rest/api/sql/2021-02-01-preview/job-versions/get
 
----
-
+````markdown
 # 제목
 
 API 설명
@@ -258,6 +244,7 @@ API 설명
 `POST` `http://example.com/api/test`
 
 Request Body
+
 ```json
 {
     "name" : "Mr.Kim"
@@ -274,20 +261,15 @@ Status code: 200
     "name" : "Mr.Kim"
 }
 ```
+````
 
----
+
 
 # Swing에서 http 연동하는 방법 문서화
 
 https://github.com/1M1S/1M1S-client/issues/8
 
 API는 하나만 캡쳐해서 예시로 올리고, GET/POST/PUT/DELETE 별로 함수화해서 올려두는게 더 괜찮을 것 같다.
-
-
-
-# DB 구성
-
-처음에 [엑셀](https://docs.google.com/spreadsheets/d/1Uga-Tb9KF_MPLcB1_6BPCuiY6ssJBIthgssPOSd58qc/edit#gid=0)로 작업했다가 가독성이 너무 안 좋아서 `Lucidchart`을 이용해서 [ERD 다이어그램](https://github.com/chisan01/TIL/tree/main/oss_dev_project/1M1S_DB.pdf)으로 다시 만들었다.
 
 
 
