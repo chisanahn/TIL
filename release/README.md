@@ -102,12 +102,12 @@ lstat /var/lib/docker/tmp/buildkit-mount942646476/build/libs: no such file or di
 
 https://stackoverflow.com/questions/36180296/docker-lstat-no-such-file-or-directory-error-when-building-image-file-is-the
 
-### .dockerignore
+#### .dockerignore
 
 어떤 파일들을 제외시켜야할지 아직 잘 모르겠어서 .gitignore 만들듯이 github.io에서 만들었는데 이미지 생성에 필요한 build 디렉터리도 제외시켜버려서 일단 구글링했을때 나오는 예시를 참고했다.
 https://github.com/orzeh/spring-boot-gradle-docker-sample/blob/master/.dockerignore
 
-### 명령어
+#### 명령어
 
 * FROM
 
@@ -182,6 +182,136 @@ https://www.daleseo.com/docker-volumes-bind-mounts/
 https://velog.io/@1-blue/docker-volume-%EC%82%AC%EC%9A%A9%EB%B2%95
 
 https://darkrasid.github.io/docker/container/volume/2017/05/10/docker-volumes.html
+
+
+
+## Docker Compose
+
+여러 컨테이너를 모아서 관리하기 위한 툴
+
+`docker-compose.yml` 파일로 작성
+
+#### yaml 문법
+
+https://subicura.com/k8s/prepare/yaml.html#%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB%E1%84%86%E1%85%AE%E1%86%AB%E1%84%87%E1%85%A5%E1%86%B8
+
+- xx:yy 형식
+
+  > 시간으로 해석된다.
+  > 시간 외의 목적으로 기술할 경우 `""`로 묶어서 기술
+
+- 배열 형식
+
+  > 예시)
+  >
+  > environment:
+  > 	\- NAME=Chisan Ahn
+  > 	\- NICKNAME
+
+- 해시 형식
+
+  > 예시)
+  >
+  > environment:
+  > 	NAME: Chisan Ahn
+  > 	NICKNAME: 
+
+#### docker-compose.yml 파일 구성
+
+* services:
+
+  * 서비스명:
+
+    * build:
+
+      * context:
+
+        > 사용할 Dockerfile의 위치 지정.
+        > Git 리포지토리의 URL도 사용가능.
+
+      * dockerfile:
+
+      * args:
+
+        > 해시 형식으로 기술.
+        > ex) NAME: Chisan Ahn 
+
+    * command:
+      entrypoint:
+
+      > 컨테이너 안에서 작동하는 명령 지정
+      > 베이스 이미지에 지정되어 있는 명령을 덮어씀.
+      >
+      > 배열 형식으로 기술.
+
+    * links:
+
+      > 컨테이너간 연결
+      >
+      > 배열 형식으로 기술.
+      > `:이름`을 뒤에 붙여서 앨리어스명 지정 가능
+
+    * ports:
+
+      > <호스트 머신의 포트번호>:<컨테이너의 포트번호> or <컨테이너의 포트번호>
+      >
+      > 겹따옴표로 묶어서 배열 형식으로 기술.
+
+    * expose:
+
+      > 링크 기능을 사용하여 연결하는 컨테이너에게만 포트를 공개할 때 사용.
+      >
+      > ports와 마찬가지로 겹따옴표로 묶어서 배열 형식으로 기술.
+
+    * depends_on:
+
+      > 서비스 간의 의존관계 정의
+      > (컨테이너의 시작순서)
+      >
+      > 배열 형식으로 기술.
+
+    * environment: 
+
+      > 컨테이너 환경 변수 지정
+      >
+      > 배열형식, 해시형식 둘 다 사용 가능.
+
+    * env_file: 
+
+      > 다른 파일에 환경변수를 정의해서 사용.
+
+      > 비밀정보 관리 - 컨테이너 오케스트레이션 툴의 기능 사용 고려
+
+    * cotainer_name: 
+
+      > 컨테이너명 설정 (이름이 중복될 수 없다.)
+
+    * labels:
+
+      > 컨테이너 라벨 설정.
+      >
+      > 여러 개의 라벨을 붙일 경우 배열이나 해시형식으로 기술.
+      >
+      > 라벨 확인 명령어 : docker-compose config
+
+    * volumes:
+
+      > 볼륨 마운트 지정
+      >
+      > 배열 형식으로 기술.
+      > `:ro`를 뒤에 붙여서 읽기 전용으로 마운트 할 수 있음.
+
+    * volumes_from:
+
+      > \- <컨테이너명>
+      >
+      > 해당 컨테이너의 모든 볼륨을 마운트한다.
+      >
+      > 배열 형식으로 기술.
+
+
+
+
 
 
 

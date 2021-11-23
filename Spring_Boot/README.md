@@ -1,3 +1,5 @@
+# Spring Boot
+
 Java Spring에서 다양한 설정들을 자동으로 관리해주는 등 Spring 보다 개발을 더 편리하게 진행할 수 있을 것 같아서 스프링 부트를 공부하게 되었다.
 
 https://velog.io/@deannn/Spring-IntelliJ-Springboot-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%83%9D%EC%84%B1-%EB%B0%8F-%EC%8B%A4%ED%96%89
@@ -168,6 +170,8 @@ https://memostack.tistory.com/163
 
 SpringBoot에서 DB에 접근하기 위해 JPA, JDBC를 사용한다.
 
+
+
 ### 환경설정
 
 spring boot의 기본 DB는 `H2`로 다른 DB를 사용하려면 `application.properties`를 수정해줘야 한다.
@@ -181,6 +185,16 @@ spring boot의 기본 DB는 `H2`로 다른 DB를 사용하려면 `application.pr
 > DB url을 명시할때 주석처럼 명시하기 때문에 빠뜨리지 않도록 주의하자.
 
 https://www.mysqltutorial.org/
+
+
+
+### MariaDB로 변경
+
+https://goddaehee.tistory.com/205
+
+MySQL이랑 거의 똑같아서 드라이버만 바꿔주면 되는 것 같다.
+
+
 
 ### JPA annotation
 
@@ -243,11 +257,22 @@ public interface UserRepository extends JpaRepository<Entity, PrimaryKey타입>
 
 
 
-### MariaDB로 변경
+#### 기존에 존재하는 Entity를 수정했을때 DB에 반영이 안되는 문제
 
-https://goddaehee.tistory.com/205
+https://stackoverflow.com/questions/53129556/how-to-alter-table-by-changing-the-entity-in-jpa-with-auto-ddl-update 나와 완전히 같은 문제이지만 이해를 완전히 하지 못했다.
 
-MySQL이랑 거의 똑같아서 드라이버만 바꿔주면 되는 것 같다.
+지금 내가 알고있는 해결 방법은 크게 2가지이다.
+
+1. DB를 직접 수정하는 방법
+
+2. DB에서 해당 테이블을 삭제하고 다시 생성되도록 하는 방법.
+
+   이때, table을 그냥 삭제하면 jpa에서 entity를 기반으로 table을 다시 생성할때 foreign key constraints와 관련된 오류가 발생할 수 있는데 이런 오류가 나지 않도록 지우려면 이 글을 참고하자.
+   https://stackoverflow.com/questions/3476765/mysql-drop-all-tables-ignoring-foreign-keys
+
+> spring.jpa.hibernate.ddl-auto=update
+> spring.jpa.generate-ddl=true
+> 알아보기
 
 
 
@@ -320,6 +345,12 @@ https://sundries-in-myidea.tistory.com/91
 
 
 
+
+
+# 추가로 알게된 것들
+
+
+
 ## param vs query vs body
 
 https://dar0m.tistory.com/222
@@ -332,13 +363,13 @@ https://dar0m.tistory.com/222
 
 
 
-### LocalDateTime
+## LocalDateTime
 
 @RequestParam으로 년월일을 입력받을때 LocalDateTime으로 변환하려면 LocalDate로 변환하고 `atStartOfDay()` 메소드로 LocalDateTime으로 바꾸면 된다. https://stackoverflow.com/questions/27454025/unable-to-obtain-localdatetime-from-temporalaccessor-when-parsing-localdatetime
 
 
 
-### Request Body
+## Request Body
 
 request body에서 항목이 비어있을 경우 자동으로 null 값이 지정된다. 지금까지 PUT 요청을 보낼때 수정하지 않더라도 빈문자열을 값으로 지정해서 보냈는데 알고보니 그럴 필요가 없었다.
 
