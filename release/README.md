@@ -10,7 +10,7 @@ https://www.itworld.co.kr/news/215339
 
 ## 명령어
 
-dockr pull <이미지명>
+docker pull <이미지명>
 
 docker image
 
@@ -82,7 +82,6 @@ docker: Error response from daemon: driver failed programming external connectiv
 https://sas-study.tistory.com/399
 https://spring.io/guides/topicals/spring-boot-docker/
 docker hub에서 openjdk 버전 확인 https://hub.docker.com/_/openjdk
-docker-compose로 spring boot + mariaDB 배포하기 https://slog.website/post/11
 
 docker로 배포하기 전에 우선 jar파일로 빌드를 해야 한다. gradle을 사용하는 경우 다음과 같은 방법으로 빌드할 수 있다.
 
@@ -218,6 +217,10 @@ https://subicura.com/k8s/prepare/yaml.html#%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%
 
 #### docker-compose.yml 파일 구성
 
+참고 : [docker-compose로 spring boot + mariaDB 배포하기](https://slog.website/post/11)
+https://javatodev.com/docker-compose-for-spring-boot-with-mariadb/#da54d3217caf
+https://javachoi.tistory.com/m/400
+
 * services:
 
   * 서비스명:
@@ -339,7 +342,7 @@ https://ooeunz.tistory.com/70
 
 2020년 Git/GitHub 특강에서 강사님께서 추천해주신 블로그 https://42place.innovationacademy.kr/archives/5685
 
-
+[CI Tool 비교](https://elfinlas.github.io/2019/08/14/ci-tool/)
 
 
 
