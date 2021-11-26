@@ -186,6 +186,8 @@ https://darkrasid.github.io/docker/container/volume/2017/05/10/docker-volumes.ht
 
 ## Docker Compose
 
+https://docs.docker.com/compose/compose-file/compose-file-v3/
+
 여러 컨테이너를 모아서 관리하기 위한 툴
 
 `docker-compose.yml` 파일로 작성
@@ -312,9 +314,90 @@ https://javachoi.tistory.com/m/400
       >
       > 배열 형식으로 기술.
 
+#### 명령어
+
+docker compose
+
+* up : 컨테이너 생성
+* ps/logs : 컨테이너 확인
+* run : 컨테이너에서 명령 실행
+* start/stop/restart
+* pause/unpause
+* post/config
+* kill/rm
+
+#### 처음 시도할때 놓쳤던 부분들
+
+- db에서 MYSQL_ROOT_PASSWORD는 꼭 설정해줘야한다.
+
+- 로컬에서 구성할때와 달리 스프링에서 db 연결 url을 실제 ip 주소가 아닌 서비스명을 넣어줘야 한다.
+
+  그리고 원래 application.properties 파일에 db 관련 값들을 넣어줬는데 docker-compose.yml에 파일에 환경별수로 설정해주는게 더 좋을 것 같다.
+
+  ```yaml
+  environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://<서비스명>:<포트번호>/<DB명>?useUnicode=true
+      SPRING_DATASOURCE_USERNAME: 유저명
+      SPRING_DATASOURCE_PASSWORD: 비밀번호
+  ```
+
+#### 이미지 실행 후 DB에 직접 접근하는 방법
+
+```
+docker exec -it db /bin/bash
+```
+
+```
+mysql -u <유저명> -p
+> <비밀번호>
+```
 
 
 
+
+
+#### volume 설정
+
+https://int-i.github.io/sql/2020-12-31/mysql-docker-compose/
+
+엄밀히 말하자면 `volume`이 아니라 `bind-mount` 방식인거같다.
+
+`volume`을 생성해서 연결하는 방식은 좀 더 알아보기.
+
+
+
+#### image 이름 관련 이슈
+
+docker-compose로 생성되는 이미지명 지정하는 방법 : https://stackoverflow.com/questions/32230577/how-do-i-define-the-name-of-image-built-with-docker-compose
+
+그리고 dockerhub에 push 하려면 이미지 이름을 규칙에 맞게 생성해야 한다.
+https://stackoverflow.com/questions/41984399/denied-requested-access-to-the-resource-is-denied-docker
+
+docker image 이름 변경하는 방법 : https://stackoverflow.com/questions/25211198/docker-how-to-change-repository-name-or-rename-image
+
+> image 이름이 tag인데 tag는 한 이미지가 여러개를 가질 수 있다.
+
+
+
+
+
+#### 추후에 고려할점
+
+DB를 server랑 연결할때 `ports`로 연결할지 `links`로 연결할지.
+
+Docker 메모리 제한 설정해두기.
+
+> 노트북에 부담이 많이 된다.
+
+
+
+## 도커 허브 이용
+
+docker-compose로 이미지를 생성한뒤 docker hub에 pull 한뒤 나중에 ec2에서 해당 image를 push 받아 사용한다.
+
+https://www.lainyzine.com/ko/article/how-to-sign-in-to-docker-from-the-command-line/
+
+Docker Hub 계정 생성 https://www.lainyzine.com/ko/article/how-to-create-a-docker-hub-account/
 
 
 
@@ -326,13 +409,22 @@ https://perfectacle.github.io/2019/04/16/spring-boot-docker-image-optimization/
 
 
 
+### 
+
 
 
 # AWS
 
 https://ooeunz.tistory.com/70
 
+EC2 튜토리얼
+https://ooeunz.tistory.com/35?category=816210
 
+보안 그룹 설정
+https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#LaunchInstanceWizard:
+
+처음 instance 생성시 생성되는 유저명은 ubuntu의 경우 `ubuntu`이다.
+https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/managing-users.html
 
 
 

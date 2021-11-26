@@ -166,6 +166,14 @@ LocalDateTime 변수의 getter를 String을 받아서 `LocalDateTime.parse()` �
 
 
 
+### 객체 -> Json (ObjectMapper)
+
+LocalDateTime형 자료형이 객체로 전달되는 경우 server에서 deserialsize를 못해서 오류가 발생했다.
+
+Json으로 파싱할때 문자형으로 파싱되도록 설정하는 방법 : https://sas-study.tistory.com/386
+
+
+
 
 ## Spring Boot
 

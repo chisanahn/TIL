@@ -324,6 +324,21 @@ https://sundries-in-myidea.tistory.com/91
 
 
 
+### hibernate 설정
+
+- entity 수정된거 DB에 바로 반영하도록 하는 옵션
+
+  spring.jpa.hibernate.ddl-auto=update
+  spring.jpa.generate-ddl=true 알아보기
+
+  > 단 변경된 테이블에 있던 데이터들은 사라지므로 사용에 주의.
+
+- 입력된 query문들 log로 표시하는 방법
+
+  https://lannstark.tistory.com/14
+
+
+
 ## 개선할 점
 
 #### 1. 테스트 코드 활용하기
