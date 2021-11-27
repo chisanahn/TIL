@@ -49,3 +49,9 @@ key를 받아오는 과정에서 오류가 발생하는데 검색해봐도 잘 �
 #### 날짜 관련 함수
 
 > http://happycgi.com/community/bbs_detail.php?bbs_num=43&tb=board_man_story
+
+#### select로 받아올 row개수 제한
+
+> https://dirask.com/posts/MySQL-select-first-N-rows-1GBgbj
+>
+> 뒤에 `LIMIT 개수`를 추가해주면 된다.

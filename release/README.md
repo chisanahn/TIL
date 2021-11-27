@@ -253,61 +253,60 @@ https://javachoi.tistory.com/m/400
 
       > 컨테이너간 연결
       >
-      > 배열 형식으로 기술.
-      > `:이름`을 뒤에 붙여서 앨리어스명 지정 가능
-
+      > `docker-compose` v.2부턴 모든 컨테이너가 기본 네트워크에 연결되어서 링크가 거의 불필요하다.
+      
     * ports:
-
+    
       > <호스트 머신의 포트번호>:<컨테이너의 포트번호> or <컨테이너의 포트번호>
       >
       > 겹따옴표로 묶어서 배열 형식으로 기술.
-
+    
     * expose:
-
+    
       > 링크 기능을 사용하여 연결하는 컨테이너에게만 포트를 공개할 때 사용.
       >
       > ports와 마찬가지로 겹따옴표로 묶어서 배열 형식으로 기술.
-
+    
     * depends_on:
-
+    
       > 서비스 간의 의존관계 정의
       > (컨테이너의 시작순서)
       >
       > 배열 형식으로 기술.
-
+    
     * environment: 
-
+    
       > 컨테이너 환경 변수 지정
       >
       > 배열형식, 해시형식 둘 다 사용 가능.
-
+    
     * env_file: 
-
+    
       > 다른 파일에 환경변수를 정의해서 사용.
-
+    
       > 비밀정보 관리 - 컨테이너 오케스트레이션 툴의 기능 사용 고려
-
+    
     * cotainer_name: 
-
+    
       > 컨테이너명 설정 (이름이 중복될 수 없다.)
-
+    
     * labels:
-
+    
       > 컨테이너 라벨 설정.
       >
       > 여러 개의 라벨을 붙일 경우 배열이나 해시형식으로 기술.
       >
       > 라벨 확인 명령어 : docker-compose config
-
+    
     * volumes:
-
+    
       > 볼륨 마운트 지정
       >
       > 배열 형식으로 기술.
       > `:ro`를 뒤에 붙여서 읽기 전용으로 마운트 할 수 있음.
-
+    
     * volumes_from:
-
+    
       > \- <컨테이너명>
       >
       > 해당 컨테이너의 모든 볼륨을 마운트한다.
@@ -325,6 +324,7 @@ docker compose
 * pause/unpause
 * post/config
 * kill/rm
+* down
 
 #### 처음 시도할때 놓쳤던 부분들
 
@@ -397,7 +397,18 @@ docker-compose로 이미지를 생성한뒤 docker hub에 pull 한뒤 나중에 
 
 https://www.lainyzine.com/ko/article/how-to-sign-in-to-docker-from-the-command-line/
 
+```
+$ docker login -u [ID]
+Password:
+```
+
 Docker Hub 계정 생성 https://www.lainyzine.com/ko/article/how-to-create-a-docker-hub-account/
+
+docker push
+
+```
+docker push 
+```
 
 
 
@@ -409,22 +420,70 @@ https://perfectacle.github.io/2019/04/16/spring-boot-docker-image-optimization/
 
 
 
-### 
-
-
-
 # AWS
 
 https://ooeunz.tistory.com/70
 
-EC2 튜토리얼
-https://ooeunz.tistory.com/35?category=816210
+EC2 튜토리얼 https://ooeunz.tistory.com/35?category=816210
 
-보안 그룹 설정
-https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#LaunchInstanceWizard:
+보안 그룹 설정 https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#LaunchInstanceWizard:
 
-처음 instance 생성시 생성되는 유저명은 ubuntu의 경우 `ubuntu`이다.
-https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/managing-users.html
+처음 instance 생성시 생성되는 유저명은 ubuntu의 경우 `ubuntu`이다. https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/managing-users.html
+
+
+
+로컬에서는 이미지가 잘 동작해서 괜찮을 줄 알았는데 EC2에 올려서 배포하니깐 DB랑 제대로 연결이 안되면서 오류가 난다.
+
+```
+java.sql.SQLNonTransientConnectionException: Could not connect to address=(host=localhost)(port=3306)(type=master) : Socket fail to connect to host:localhost, port:3306. Connection refused (Connection refused)
+```
+
+인터넷에 검색해봐도 docker-compose에서 컨테이너별로 포트를 할당하는 예제를 찾기가 어려워서 결국 어제는 해결하지 못했다.
+
+우선 로컬에서 DB를 지운채로 docker-compose 환경을 구성해보고 docker-compose 배포 예제를 좀 더 찾아봐야겠다. https://www.google.com/search?q=docker+compose+%EB%B0%B0%ED%8F%AC&oq=docker+compose+%EB%B0%B0%ED%8F%AC&aqs=chrome..69i57j69i59j0i5i30j0i8i30j69i61l3.4530j0j7&sourceid=chrome&ie=UTF-8
+
+만약 결국 해결하지 못하면 DB를 따로 분리해서 관리하는 방법을 시도해보는게 좋을 것 같다. https://velog.io/@dohaeng0/AWS%EC%97%90-Spring-Boot-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%B0%B0%ED%8F%AC-1-RDS-MySQL-%EC%84%B8%ED%8C%85
+
+
+
+우선 배포를 더 해보기 전에 docker-compose 파일 문법부터 자세하게 알고 넘어가는게 좋을 것 같아서 찾아봤다.
+https://nirsa.tistory.com/79
+https://jojoldu.tistory.com/587
+
+* 포트번호를 입력할때 따옴표로 묶는걸 깜빡했었다. `"3306:3306"`
+* version으로 명시하는게 생성할 이미지의 버전인줄 알고 0.1로 명시했었는데 docker-compose 버전이였다 ㅋㅋㅋㅋㅋ version 2부터 depends_on 명령과 networking이 추가되었기 때문에 이 부분에서 오류가 났던것 같다. https://meetup.toast.com/posts/277 `version: "0.1"`
+
+* 처음에 조금 햇갈렸는데 docker compose의 버전과 docker compose file format 버전이 따로 있다.
+  https://docs.docker.com/compose/compose-file/compose-versioning/
+
+  ```
+  In addition to Compose file format versions shown in the table, the Compose itself is on a release schedule, as shown in Compose releases, but file format versions do not necessarily increment with each release. For example, Compose file format 3.0 was first introduced in Compose release 1.10.0, and versioned gradually in subsequent releases.
+  
+  The latest Compose file format is defined by the Compose Specification and is implemented by Docker Compose 1.27.0+.
+  ```
+
+  현재 latest 버전은 v2.2.1이고 window의 경우 docker desktop에 포함되어 있다.
+
+  리눅스의 경우 별도로 설치해줘야 한다. ec2에 이전에 1.24.0 버전을 설치해서 v1.27.0로 다시 설치해줬다.
+  https://stackoverflow.com/questions/49839028/how-to-upgrade-docker-compose-to-latest-version
+  https://docs.docker.com/compose/install/
+  https://github.com/docker/compose
+  latest는 v2.1.1인데 다운이 잘 안되서 일단 docker compose file format을 모두 지원하는 1.27.0을 설치했다.
+  
+  docker compose file fomat의 경우 version 3 공식 문서가 가장 잘 정리되어있는거 같아서 그 중 최신버전인 3.9를 사용하기로 결정했다.
+  https://docs.docker.com/compose/compose-file/compose-file-v3/
+  
+* 네트워크 관련 설정 옵션. 읽어보면 도움이 될 것 같다.
+  https://meetup.toast.com/posts/277
+
+* 
+
+
+
+DB 외부 접속 관련해서 설정을 해줘야 되나 하는 생각이 들기도 했다.
+https://docs.3rdeyesys.com/5.database/ncp_database_mariadb_access_from_remote_ubuntu/
+
+하지만 일단 서버와 DB는 docker-compose로 묶여있기때문에 굳이 외부 접속이 필요할 것 같진 않을거같다.
 
 
 

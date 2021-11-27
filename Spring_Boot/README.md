@@ -270,10 +270,6 @@ https://stackoverflow.com/questions/53129556/how-to-alter-table-by-changing-the-
    이때, table을 그냥 삭제하면 jpa에서 entity를 기반으로 table을 다시 생성할때 foreign key constraints와 관련된 오류가 발생할 수 있는데 이런 오류가 나지 않도록 지우려면 이 글을 참고하자.
    https://stackoverflow.com/questions/3476765/mysql-drop-all-tables-ignoring-foreign-keys
 
-> spring.jpa.hibernate.ddl-auto=update
-> spring.jpa.generate-ddl=true
-> 알아보기
-
 
 
 ### query문
@@ -326,12 +322,17 @@ https://sundries-in-myidea.tistory.com/91
 
 ### hibernate 설정
 
-- entity 수정된거 DB에 바로 반영하도록 하는 옵션
+- spring.jpa.hibernate.ddl 옵션
 
-  spring.jpa.hibernate.ddl-auto=update
-  spring.jpa.generate-ddl=true 알아보기
+  https://spring.io/guides/gs/accessing-data-mysql/
 
-  > 단 변경된 테이블에 있던 데이터들은 사라지므로 사용에 주의.
+  https://kyu9341.github.io/java/2020/04/14/java_springBootDBinit/
+
+  > create나 create-drop을 사용하면 기존에 존재하는 데이터들을 유지할 수 없고
+  >
+  > update를 사용하더라도 entity에셔 기존에 존재하지 않던 부분들만 추가되고 기존에 존재하던 부분의 수정사항까지 반영되지는 않는 것 같다.
+  >
+  > 조금 번거롭더라도 해당 테이블을 삭제하고 application을 다시 실행시키거나 직접 db에서 수정해야할 것 같다.
 
 - 입력된 query문들 log로 표시하는 방법
 
@@ -422,6 +423,16 @@ request body에서 항목이 비어있을 경우 자동으로 null 값이 지정
 String을 int형으로 변환하고 싶다면 `Integer.parseInt()` 메소드를 사용해야 한다.
 
 https://stackoverflow.com/questions/3123349/why-does-int-num-integer-getinteger123-throw-nullpointerexception
+
+
+
+## 빌드오류
+
+```
+Process finished with non-zero exit value 1
+```
+
+https://yjh5369.tistory.com/entry/intellij-%EC%8B%A4%ED%96%89-%EC%8B%9C-finished-with-non-zero-exit-value-1-%EC%98%A4%EB%A5%98
 
 
 
