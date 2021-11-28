@@ -31,6 +31,7 @@ public class TodoListGUI extends JFrame {
         // 1. 테이블 초기화
         dtm.setRowCount(0);
 
+
         // 2. GET - DB에서 일정 로드, 테이블 구성.
         try {
             HttpClient client = HttpClient.newHttpClient();
