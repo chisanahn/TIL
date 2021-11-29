@@ -49,9 +49,19 @@ docker container
 >
 > -d : 백그라운드에서 실행
 
+옵션 여러개 설정하는 방법 : https://stackoverflow.com/questions/30494050/how-do-i-pass-environment-variables-to-docker-containers
 
 
-### Nginx 서버 기동
+
+#### 도커 이미지 일괄 삭제하는 방법
+
+```
+$ docker rmi $(docker images -q)
+```
+
+https://eclipse4j.tistory.com/256
+
+
 
 #### -p 호스트의 포트 번호:컨테이너의 포트번호
 
@@ -181,6 +191,8 @@ https://www.daleseo.com/docker-volumes-bind-mounts/
 https://velog.io/@1-blue/docker-volume-%EC%82%AC%EC%9A%A9%EB%B2%95
 
 https://darkrasid.github.io/docker/container/volume/2017/05/10/docker-volumes.html
+
+https://st-soul.tistory.com/36
 
 
 
@@ -407,8 +419,10 @@ Docker Hub 계정 생성 https://www.lainyzine.com/ko/article/how-to-create-a-do
 docker push
 
 ```
-docker push 
+docker push [이미지명]
 ```
+
+> 이때 이미지명에 사용자이름이 포함되어있어야 한다. `사용자이름/리포지터리이름`
 
 
 
@@ -420,7 +434,7 @@ https://perfectacle.github.io/2019/04/16/spring-boot-docker-image-optimization/
 
 
 
-# AWS
+# AWS EC2 배포
 
 https://ooeunz.tistory.com/70
 
@@ -430,7 +444,7 @@ EC2 튜토리얼 https://ooeunz.tistory.com/35?category=816210
 
 처음 instance 생성시 생성되는 유저명은 ubuntu의 경우 `ubuntu`이다. https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/managing-users.html
 
-
+### 무지가 부른 참사
 
 로컬에서는 이미지가 잘 동작해서 괜찮을 줄 알았는데 EC2에 올려서 배포하니깐 DB랑 제대로 연결이 안되면서 오류가 난다.
 
@@ -444,13 +458,19 @@ java.sql.SQLNonTransientConnectionException: Could not connect to address=(host=
 
 만약 결국 해결하지 못하면 DB를 따로 분리해서 관리하는 방법을 시도해보는게 좋을 것 같다. https://velog.io/@dohaeng0/AWS%EC%97%90-Spring-Boot-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%B0%B0%ED%8F%AC-1-RDS-MySQL-%EC%84%B8%ED%8C%85
 
-
+### docker-compose 배포
 
 우선 배포를 더 해보기 전에 docker-compose 파일 문법부터 자세하게 알고 넘어가는게 좋을 것 같아서 찾아봤다.
 https://nirsa.tistory.com/79
 https://jojoldu.tistory.com/587
 
+* DB 외부 접속 관련해서 설정을 해줘야 되나 하는 생각이 들기도 했다.
+  https://docs.3rdeyesys.com/5.database/ncp_database_mariadb_access_from_remote_ubuntu/
+
+  하지만 일단 서버와 DB는 docker-compose로 묶여있기때문에 굳이 외부 접속이 필요할 것 같진 않을거같다.
+
 * 포트번호를 입력할때 따옴표로 묶는걸 깜빡했었다. `"3306:3306"`
+
 * version으로 명시하는게 생성할 이미지의 버전인줄 알고 0.1로 명시했었는데 docker-compose 버전이였다 ㅋㅋㅋㅋㅋ version 2부터 depends_on 명령과 networking이 추가되었기 때문에 이 부분에서 오류가 났던것 같다. https://meetup.toast.com/posts/277 `version: "0.1"`
 
 * 처음에 조금 햇갈렸는데 docker compose의 버전과 docker compose file format 버전이 따로 있다.
@@ -476,14 +496,205 @@ https://jojoldu.tistory.com/587
 * 네트워크 관련 설정 옵션. 읽어보면 도움이 될 것 같다.
   https://meetup.toast.com/posts/277
 
-* 
+* `ports`는 docker-compose up 명령으로 실행할때만 적용이 되므로 docker-compose run으로 실행할 때는 --service-ports 옵션을 넣어줘야 한다. 이미지를 pull 받아서 실행할때도 마찬가지려나? 그러다 문득 생각이 나서 로컬에서 `docker-compose start`가 아닌 docker-compose로 만들어진 image를 직접 실행해봤는데 database는 실행이 안되면서 ec2에서와 똑같은 오류가 발생했다. docker-compose로 만들어진 image에 db까지 모두 다 포함돼 있는줄 알았는데 build 되는 이미지만 새로 생성되는 것이였다.
+
+좀 찾아봤더니 docker-compose로 배포하려면 aws ec2에서 git clone 받아서 docker-compose로 실행시키는 방법 말고는 찾기가 어려웠다.
+https://qwlake.github.io/django/aws/docker/2020/03/17/django-deploy-at-aws-with-docker/ 
+`docker-compose context` 등의 방법이 있는거같지만 예시가 잘 없다.
+https://www.docker.com/blog/how-to-deploy-on-remote-docker-hosts-with-docker-compose/
+https://docs.docker.com/compose/production/
+
+보통 CI/CD도 같이 사용해서 무중단 배포 환경을 구성해서 사용하는 것 같다.
+
+google에 `release docker compose by using docker hub`으로 검색해봤더니 좀 더 잘 나오는 것 같다.
+https://docs.semaphoreci.com/examples/using-docker-compose-in-ci/
+server랑 db 각각의 이미지를 만들어서 dockerhub에 올리고 docker-compose 파일만 clone 받는 방식도 가능할 것 같다.
 
 
 
-DB 외부 접속 관련해서 설정을 해줘야 되나 하는 생각이 들기도 했다.
-https://docs.3rdeyesys.com/5.database/ncp_database_mariadb_access_from_remote_ubuntu/
+### .gitignore
 
-하지만 일단 서버와 DB는 docker-compose로 묶여있기때문에 굳이 외부 접속이 필요할 것 같진 않을거같다.
+특정 디렉토리가 추가되면 하위 디렉토리는 예외처리를 해도 무시된다.
+https://hyeonseok.com/blog/797
+
+이미 git에 추가되어있는 파일이나 디렉토리의 경우 .gitignore에 명시한다고 제거되지 않으므로 따로 제거해줘야한다. https://stackoverflow.com/questions/6030530/git-ignore-not-working-in-a-directory
+
+.gitignore에 db/data 항목을 추가했다.
+
+원래 build/libs도 .gitignore에 추가해서 사용하려고 gradle로 build해서 사용하는게 나을 것 같아서 ec2에 gradle도 설치해줬다.
+https://velog.io/@dsunni/AWS-EC2%EC%97%90-Spring-Boot-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0
+
+
+
+### ./gradlew build
+
+./gradlew build permisson denied
+https://stackoverflow.com/questions/17668265/gradlew-permission-denied
+
+ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+ubuntu에 corretto-11 설치하기 https://www.howtodojo.com/install-amazon-corretto-11-ubuntu-18-04/
+
+java 설치 후 `./gradlew build`를 실행했더니 잘되다가 오류가 났다.
+
+생각해보니 dependency 관리를 위해서 `gradle build` 먼저 실행해줘야 겠다는 생각이 들었고 gradle을 설치했다.
+https://linuxize.com/post/how-to-install-gradle-on-ubuntu-20-04/
+
+하지만 그래도 똑같은 오류가 발생했다.
+
+```
+> Task :test
+
+ApplicationTests > contextLoads() FAILED
+    java.lang.IllegalStateException at DefaultCacheAwareContextLoaderDelegate.java:132
+        Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException at ConstructorResolver.java:800
+            Caused by: org.springframework.beans.factory.BeanCreationException at ConstructorResolver.java:658
+                Caused by: org.springframework.beans.BeanInstantiationException at SimpleInstantiationStrategy.java:185
+                    Caused by: org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$DataSourceBeanCreationException at DataSourceProperties.java:298
+
+1 test completed, 1 failed
+
+> Task :test FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':test'.
+> There were failing tests. See the report at: file:///home/ubuntu/sample/1M1S-server/build/reports/tests/test/index.html
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+```
+
+아무래도 db연결을 docker-compose에서 정의해 놔서 해당 부분에서 오류가나는 것 같다.
+
+그래서 docker-compose로 실행해봤더니 
+
+```
+ERROR: Service 'server' failed to build : When using COPY with more than one source file, the destination must be a directory and end with a /
+```
+
+이런 오류가 나왔다. Dockerfile 만들때 해당 구문을 보고 이상함을 do느꼈지만 로컬에서는 문제없이 동작해서 COPY명령으로 2개 이상 옮기면 하나로 합쳐지나보다 하고 넘어갔는데 오류가 나버렸다.
+
+일단 Dockerfile을 다음과 같이 수정해봤다.
+
+```
+ARG JAR_FILE=target/1m1s-server-0.0.1-SNAPSHOT.jar
+```
+
+결국 메모리 과부하가 걸려서 오류가 났다.
+https://i5i5.tistory.com/316
+
+
+
+### docker-compose 없이 이미지 개별 실행
+
+우선 docker-compose 없이 sever랑 database 각각 이미지로 build하는 방식을 시도해봤다.
+
+```
+$ docker build -t [이미지명] -f [Dockerfile명] [context]
+$ docker build -t dkscltks/1m1s-server .
+$ docker build -t dkscltks/1m1s-db -f Dockerfile-db .
+```
+
+```
+$ docker container run -d -p 8080:8080 --name server dkscltks/1m1s-server
+$ docker container run -d --name database dkscltks/1m1s-db
+```
+
+Docker-compose와 달리 Dockerfile에서는 호스트 디렉토리 경로를 지정할 수 없고 컨테이너의 디렉토리 경로를 지정하면 자동으로 호스트의 `/var/lib/docker/volumes/{volume_name}`과 연결된다.
+https://darkrasid.github.io/docker/container/volume/2017/05/10/docker-volumes.html
+
+docker compose 시도해봤는데 따로따로 만들어서 실행했더니 DB랑 연결이 안된다.
+
+```
+java.sql.SQLNonTransientConnectionException: Could not connect to address=(host=database)(port=3306)(type=master) : Socket fail to connect to host:database, port:3306. database
+```
+
+docker-compose 없이 이미지를 별도로 나눠서 실행시키니깐 오류가 난다. 
+
+docker-compose에서는 default network로 기본적으로 컨테이너들을 연결해줘서 이러한 차이가 생기는건가?
+
+docker-compose에서 `database` service port를 따로 지정해주지 않고 실행해봤는데 잘 동작했다.
+
+`docker container inspect` 명령어로 확인해봤더니 server랑 database 모두 `1m1s-server_default` 네트워크에 연결되어있었다.
+
+네트워크 만들어서 추가해줬더니 성공했다.
+
+```
+docker network create 1m1s-network
+
+docker container run -d --name database --memory="150MiB" \
+-v $(pwd)/db/conf.d:/etc/mysql/conf.d \
+-v $(pwd)/db/initdb.d:/docker-entrypoint-initdb.d \
+-v $(pwd)/db/data:/var/lib/mysql \
+-v $(pwd)/db/log:/var/log/maria  dkscltks/1m1s-db
+
+docker network connect 1m1s-network database
+
+docker container run -d -p 80:8080 --name server --memory="450MiB" dkscltks/1m1s-server
+
+docker network connect 1m1s-network server
+```
+
+`docker container run` 옵션을 줄 때 복붙을 하면 오류가 나는 경우가 있다.
+https://stackoverflow.com/questions/45682010/docker-invalid-reference-format
+
+그리고 이전에 docker-compose를 사용했을때 메모리에 과부하 걸리면서 아예 접속이 안됐던 생각이 나서 로컬에서 `docker stats` 명령으로 메모리 사용량을 체크해보고 컨테이너별로 어느정도 메모리 제한을 걸어두었다.
+
+처음에 초기데이터를 추가하기에는 DB도 포트를 열어두는게 좋을 것 같다. 
+
+
+
+### docker 네트워크
+
+네트워크 생성
+
+```
+docker network create [네트워크명]
+```
+
+컨테이너에 네트워크 추가
+
+```
+docker network connect [네트워크명] [컨테이너명]
+```
+
+컨테이너 검사 (네트워크 확인 가능, 환경 변수랑 volume도 확인 가능)
+
+```
+docker container inspect [컨테이너명]
+```
+
+
+
+### docker commit
+
+https://nicewoong.github.io/development/2018/03/06/docker-commit-container/
+
+현재 실행중인 컨테이너를 이미지로 저장할 수 있다.
+
+직접해보니깐 포트바인딩이나 메모리 제한은 저장이 안되지만 volume이나 환경변수들은 저장되는 것 같아서 꽤 유용하게 사용할 수 있을 것 같다.
+
+예를 들어 -p 옵션만 변경해서 다시 실행하고 싶은 경우?
+
+
+
+### ec2 용량
+
+이것저것 설치하다보니 문득 용량이 괜찮을까 싶어 찾아보니 Free Tier 요금제의 경우 기본적으로 8GB의 저장공간을 제공한다.
+https://velog.io/@hyeonseop/ec2-%EC%9A%A9%EB%9F%89-full%EC%9D%BC-%EB%95%8C-%EB%8C%80%EC%B2%98%EB%B2%95
+하지만 DB에 데이터가 쌓이는걸 생각하면 DB는 Amazon RDS로 따로 분류하는게 좋을 것 같다.
+https://velog.io/@dohaeng0/AWS%EC%97%90-Spring-Boot-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%B0%B0%ED%8F%AC-1-RDS-MySQL-%EC%84%B8%ED%8C%85
+
+
+
+### DB 관리
+
+Security Group에서 포트를 관리할때 내 IP 주소의 접근만 허용하도록 할 수 있어서 DB의 경우 이렇게 설정해두고 HeidiSQL로 연결해서 관리하는게 편할 것 같다.
+
+그리고 초기 데이터들의 경우 .csv 파일로 insert 하는 것도 좋을 것 같다.
 
 
 
