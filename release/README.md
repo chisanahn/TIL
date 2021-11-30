@@ -696,6 +696,17 @@ Security Group에서 포트를 관리할때 내 IP 주소의 접근만 허용하
 
 그리고 초기 데이터들의 경우 .csv 파일로 insert 하는 것도 좋을 것 같다.
 
+ec2로 연결은 잘 되었는데 오히려 로컬에서 도커 컨테이너에서 실행중인 DB로 연결을 시도하면 `Can't connect to MySQL sever on '127.0.0.1' (10061)` 오류가 나온다.
+https://github.com/microsoft/WSL/issues/4369
+
+
+
+### jar 파일
+
+수정사항이 있다면 배포하기 전에 `./gralew build`로 jar 파일 다시 생성하기.
+
+Dockerfile에서 build된 jar 파일을 이용해서 배포하기 때문에 jar파일이 수정되지 않으면 배포 내용에도 변경사항이 생기지 않는다.
+
 
 
 # CI/CD

@@ -196,6 +196,14 @@ https://github.com/chisan01/TIL/tree/main/RDB
 ## DB 설계
 
 처음에 [엑셀](https://docs.google.com/spreadsheets/d/1Uga-Tb9KF_MPLcB1_6BPCuiY6ssJBIthgssPOSd58qc/edit#gid=0)로 작업했다가 가독성이 너무 안 좋아서 `Lucidchart`을 이용해서 [ERD 다이어그램](https://github.com/chisan01/TIL/tree/main/oss_dev_project/1M1S_DB.pdf)으로 다시 만들었다.
+https://gitmind.com/kr/er-diagram-tool.html
+
+
+
+### 날짜 및 시간 관리할때 사용할 java datatype 선정
+
+LocalDateTIme을 사용하기로 결정
+https://t3guild.com/2020/03/08/java%EC%9D%98-%EC%83%88%EB%A1%9C%EC%9A%B4-%EB%82%A0%EC%A7%9C-%EB%B0%8F-%EC%8B%9C%EA%B0%84-%EA%B4%80%EB%A6%AC-%EB%B0%A9%EB%B2%95%EA%B3%BC-json-%ED%86%B5%EC%8B%A0-%EB%B0%A9%EB%B2%95/
 
 
 
