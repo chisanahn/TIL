@@ -353,19 +353,6 @@ docker compose
       SPRING_DATASOURCE_PASSWORD: 비밀번호
   ```
 
-#### 이미지 실행 후 DB에 직접 접근하는 방법
-
-```
-docker exec -it db /bin/bash
-```
-
-```
-mysql -u <유저명> -p
-> <비밀번호>
-```
-
-
-
 
 
 #### volume 설정
@@ -388,18 +375,6 @@ https://stackoverflow.com/questions/41984399/denied-requested-access-to-the-reso
 docker image 이름 변경하는 방법 : https://stackoverflow.com/questions/25211198/docker-how-to-change-repository-name-or-rename-image
 
 > image 이름이 tag인데 tag는 한 이미지가 여러개를 가질 수 있다.
-
-
-
-
-
-#### 추후에 고려할점
-
-DB를 server랑 연결할때 `ports`로 연결할지 `links`로 연결할지.
-
-Docker 메모리 제한 설정해두기.
-
-> 노트북에 부담이 많이 된다.
 
 
 
@@ -690,22 +665,58 @@ https://velog.io/@dohaeng0/AWS%EC%97%90-Spring-Boot-%ED%94%84%EB%A1%9C%EC%A0%9D%
 
 
 
-### DB 관리
-
-Security Group에서 포트를 관리할때 내 IP 주소의 접근만 허용하도록 할 수 있어서 DB의 경우 이렇게 설정해두고 HeidiSQL로 연결해서 관리하는게 편할 것 같다.
-
-그리고 초기 데이터들의 경우 .csv 파일로 insert 하는 것도 좋을 것 같다.
-
-ec2로 연결은 잘 되었는데 오히려 로컬에서 도커 컨테이너에서 실행중인 DB로 연결을 시도하면 `Can't connect to MySQL sever on '127.0.0.1' (10061)` 오류가 나온다.
-https://github.com/microsoft/WSL/issues/4369
-
-
-
 ### jar 파일
 
 수정사항이 있다면 배포하기 전에 `./gralew build`로 jar 파일 다시 생성하기.
 
 Dockerfile에서 build된 jar 파일을 이용해서 배포하기 때문에 jar파일이 수정되지 않으면 배포 내용에도 변경사항이 생기지 않는다.
+
+
+
+### DB 관리
+
+#### 이미지 실행 후 DB에 직접 접근하는 방법
+
+```
+docker exec -it <컨테이너명> /bin/bash
+```
+
+```
+mysql -u <유저명> -p
+> <비밀번호>
+```
+
+Security Group에서 포트를 관리할때 내 IP 주소의 접근만 허용하도록 할 수 있어서 DB의 경우 이렇게 설정해두고 HeidiSQL로 연결해서 관리하는게 편할 것 같다.
+
+그리고 초기 데이터들의 경우 .csv 파일로 insert 하는 것도 좋을 것 같다.
+
+지금은 DB에 기초데이터들을 넣을때 heidisql에 연결해서 csv 파일을 import하는 방식으로 했지만 나중에 `mount`시킨 디렉터리에 `create_table.sql`이나 `load_data.sql`을 사용하는 방식도 한번 공부해보면 좋을 것 같다.
+https://int-i.github.io/sql/2020-12-31/mysql-docker-compose/
+
+#### 로컬에서 도커 컨테이너로 접속할때 오류
+
+ec2로 연결은 잘 되었는데 오히려 로컬에서 도커 컨테이너에서 실행중인 DB로 연결을 시도하면 `Can't connect to MySQL sever on '127.0.0.1' (10061)` 오류가 나온다.
+https://github.com/microsoft/WSL/issues/4369D
+
+#### csv import 오류
+
+heidisql에서 csv import에서 자꾸 `SQL Error (1366): Incorrect integer value: '1'` 오류가 나서 엑셀에서 저장할때 인코딩 형식이 따로 지정되지 않은 csv로 저장하고 import할때 로 바꿔서 저장하고, import 할때는 euckr 인코딩형식을 지정해서 저장했더니 잘 됐다.
+
+#### 한글 csv import 글자 깨짐
+
+db character set 부터 확인해봤는데 잘 되어있었고 혹시 몰라서 my.cnf 파일도 만들어서 저장해뒀다.
+https://dev.mysql.com/doc/refman/8.0/en/charset-database.html#:~:text=To%20see%20the%20default%20character,SELECT%20DEFAULT_CHARACTER_SET_NAME%2C%20DEFAULT_COLLATION_NAME%20FROM%20INFORMATION_SCHEMA.
+https://int-i.github.io/sql/2020-12-31/mysql-docker-compose/
+
+heidisql에서 csv import 할 때 client parser 옵션을 체크했더니 해결됐다. https://www.heidisql.com/forum.PHP?t=7662
+
+하지만 import 할때 다음과 같은 오류가 가끔 나온다.
+
+```
+Your file was imported but the server returned 5 warnings and/or notes. See the log panel for det
+```
+
+
 
 
 
