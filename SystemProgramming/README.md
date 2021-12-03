@@ -234,3 +234,19 @@ x/s $rax
 
 checkpw를 호출하기 직전에 rax가 가리키는 메모리에 `iamnotyours`가 저장되어 있고 rdx가 가리키는 메모리에 사용자로부터입력받은암호가 저장되어 있다.
 
+
+
+### 특정 명령어를 치면 gdb가 종료되는 문제
+
+info registers 같은 명령어를 치면 gdb가 그냥 종료되어 버린다.
+
+구글링을 좀 해보다가 잘 못 찾겠어서 stackoverflow에 질문해봤더니 8.2 이전버전에 있던 오류라고 버전을 업데이트 시켜주면 해결될 것이라는 답변을 받았다.
+https://stackoverflow.com/questions/70173176/gdb-terminated-after-info-registers
+
+하지만 window에서 gdb 8.2 이상 버전을 설치하는 방법을 찾기가 어려워서 포기하고 있다가 다시 생각나서 구글링을 해봤다.
+https://stackoverflow.com/questions/67574925/update-gdb-version-on-windows-10
+https://stackoverflow.com/questions/67848972/differences-between-msvcrt-ucrt-and-vcruntime-libraries
+
+성공.
+
+참고로 dev-c++ 설치할때 같이 설치되는 gdb 버전은 7.6.1인데 info registers를 입력하더라도 잘 동작한다.
