@@ -604,7 +604,7 @@ docker container run -d --name database --memory="150MiB" \
 -v $(pwd)/db/conf.d:/etc/mysql/conf.d \
 -v $(pwd)/db/initdb.d:/docker-entrypoint-initdb.d \
 -v $(pwd)/db/data:/var/lib/mysql \
--v $(pwd)/db/log:/var/log/maria  dkscltks/1m1s-db
+-v $(pwd)/db/log:/var/log/maria   dkscltks/1m1s-db
 
 docker network connect 1m1s-network database
 
