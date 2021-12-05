@@ -604,7 +604,7 @@ docker container run -d --name database --memory="150MiB" \
 -v $(pwd)/db/conf.d:/etc/mysql/conf.d \
 -v $(pwd)/db/initdb.d:/docker-entrypoint-initdb.d \
 -v $(pwd)/db/data:/var/lib/mysql \
--v $(pwd)/db/log:/var/log/maria   dkscltks/1m1s-db
+-v $(pwd)/db/log:/var/log/maria -p 3306:3306  dkscltks/1m1s-db
 
 docker network connect 1m1s-network database
 
@@ -620,7 +620,22 @@ https://stackoverflow.com/questions/45682010/docker-invalid-reference-format
 
 처음에 초기데이터를 추가하기에는 DB도 포트를 열어두는게 좋을 것 같다. 
 
+#### buildkit
 
+갑자기 빌드할때 오류가 난다.
+
+```
+ => => transferring context: 35B                                                                                   0.0s
+ => ERROR [internal] load metadata for docker.io/library/amazoncorretto:11                                         4.0s
+ => [auth] library/amazoncorretto:pull token for registry-1.docker.io                                              0.0s
+------
+ > [internal] load metadata for docker.io/library/amazoncorretto:11:
+------
+failed to solve with frontend dockerfile.v0: failed to create LLB definition: failed to authorize: rpc error: code = Unknown desc = failed to fetch oauth token: Get "https://auth.docker.io/token?scope=repository%3Alibrary%2Famazoncorretto%3Apull&service=registry.docker.io": dial tcp: lookup auth.docker.io on 172.20.128.1:53: dial udp 172.20.128.1:53: connect: network is unreachable
+```
+
+“buildkit” 옵션 값을 false로 바꾸니깐 정상적으로 동작했다.
+https://forums.docker.com/t/strange-docker-output-or-help-me-please-im-very-noob/100788
 
 ### docker 네트워크
 
@@ -717,6 +732,31 @@ Your file was imported but the server returned 5 warnings and/or notes. See the 
 ```
 
 
+
+### 로컬에서 ssh -i 방식으로 instance 접근오류
+
+원래 잘 됐었는데 로컬에서 ssh 명령어로 instance에 연결하려고 할때 계속 오류가 난다.
+
+```
+sudo ssh -i aws-ec2-key.pem ubuntu@3.135.231.171
+```
+
+```
+ssh: connect to host 3.135.231.171 port 22: Network is unreachable
+```
+
+좀 찾아보다가 ip route 결과에 문제가 있는것을 확인했다.
+https://github.com/microsoft/WSL/issues/5869
+
+```
+Error: ipv4: FIB table does not exist.
+Dump terminated
+```
+
+https://github.com/microsoft/WSL/issues/7127
+
+powershell로 ssh 연결을 해보니깐 정상적으로 동작했다.
+wsl2에서 제대로 동작하지 않는 원인이랑 ip route 결과에 error가 나오는것과 연관이 있는게 분명하다.
 
 
 
