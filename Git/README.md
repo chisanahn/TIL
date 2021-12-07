@@ -24,6 +24,23 @@
 
 
 
+### git branch -M
+
+브랜치 이름변경
+
+```
+git branch (-m | -M) [<oldbranch>] <newbranch>
+```
+
+
+
+### git push -u
+
+이 옵션을 주면 push 한 곳의 주소가 자동으로 upstream에 추가되기 때문에 한번 `git push -u` 를 사용하고 나면 그 뒤로는 `git push` 만 입력해도 된다는 것 같다.
+https://git-scm.com/docs/git-push#Documentation/git-push.txt--u
+
+
+
 ## githook
 
 CI/CD 적용할때 사용하는 것 같다. 나중에 좀 더 공부해보기.
