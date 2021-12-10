@@ -1,12 +1,10 @@
-# Swing + mariaDB + Spring Boot
+# 2021-2 오픈소스개발프로젝트 팀프로젝트
 
-> 팀플(오픈소스 개발 프로젝트)
->
-> 공부한 내용 정리
+> Swing / Spring Boot / mariaDB / Docker / AWS ec2 
 
 
 
-## 공부계획
+## Swing, Spring Boot, mariaDB 공부계획
 
 간단한 todolist 앱 제작.
 
