@@ -1,3 +1,7 @@
+# Git
+
+
+
 ### Git 하위폴더 새로운 repository로 분리
 
 깃헙에 올린 저장소에서 특정 파일들을 제거하고 싶은데 그냥 제거하면 커밋내역이 남고 다 지우기에는 다른 커밋내역이 날라가서 방법을 찾아보니 [repository의 하위폴더를 분리해서 새로운 repository를 만드는 방법](https://sustainable-dev.tistory.com/119)이 있었다.   
@@ -51,13 +55,28 @@ https://git-scm.com/docs/git-push#Documentation/git-push.txt--u
 
 
 
-## githook
+### .gitignore
+
+특정 디렉토리가 추가되면 하위 디렉토리는 예외처리를 해도 무시된다.
+https://hyeonseok.com/blog/797
+
+이미 git에 추가되어있는 파일이나 디렉토리의 경우 .gitignore에 명시한다고 제거되지 않으므로 따로 제거해줘야한다. https://stackoverflow.com/questions/6030530/git-ignore-not-working-in-a-directory
+
+```
+$ git rm --cached <파일, 디렉토리명>
+```
+
+
+
+
+
+# githook
 
 CI/CD 적용할때 사용하는 것 같다. 나중에 좀 더 공부해보기.
 
 
 
-## git sever
+# git sever
 
 처음에는 이게 뭔가 싶었는데 애초에 git은 버전관리 오픈소스 소프트웨어이고, 이걸 원격으로 관리하기 위해서 github 같은 git hosting 서비스를 사용하거나 git server를 이용해야 한다.
 기본적으로 git으로 관리하는걸 github이나 gitlab 같은 git server에 올려서 원격 리포지터리를 생성한다. 공개하고 싶지 않은 개인 프로젝트를 생성할때 gitlab을 사용하거나 개인적으로 git server를 만들어서 운영하는 것 같다.

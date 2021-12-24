@@ -67,3 +67,4 @@ bash script에 아예 cd문을 적어서 실행해야겠다.
 > 생각해보니 cd문이 실행되기 전에 z shell이 실행되어서 불가능하다.
 
 Startup폴더에 script 파일의 바로가기를 만들어서 넣어두고 .bashrc zshell 조건으로 `if(cd|grep -q "auto-commit")`을 사용했더니 정상적으로 작동한다.
+
