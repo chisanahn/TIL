@@ -1,0 +1,70 @@
+* {
+  vertical-align: middle;
+}
+
+body {
+  background-color: gainsboro;
+}
+
+header {
+  padding-left: 15px;
+	width: 100%;
+	height: 56px;
+  background: white;
+}
+
+img {
+  height: inherit;
+}
+
+.search_area {
+  display: inline-block;
+}
+
+nav {
+  background-color: beige;
+}
+
+.main {
+  align-items: vertical;
+}
+
+main {
+  background-color: yellowgreen;
+}
+
+.main_container>* {
+  display: inline-block;
+  vertical-align: top;
+}
+
+nav>button {
+  display: block;
+  position: relative;
+  height: 70px;
+  width: 70px;
+}
+
+article {
+  display: inline-block;
+  margin: 10px;
+  padding: 5px;
+  background-color: white;
+}
+
+.fa-user-circle {
+  vertical-align: top;
+  padding: 5px;
+}
+
+.video_explanation {
+  display: inline-block;
+  margin: 3px;
+}
+
+.video_explanation>p {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  font-size: small;
+}
