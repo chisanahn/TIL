@@ -15,7 +15,7 @@ div {
 .box {
 	background: blue;
 	color: white;
-	left: 20px;
-	top: 20px;
+	left: 0px;
+	top: 0px;
 	position: sticky;
 }
