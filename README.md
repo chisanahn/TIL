@@ -101,14 +101,9 @@ https://github.com/hammii
 
 ### md 접기/펼치기 버튼
 
-<details>
-    <summary>접기/펼치기 버튼</summary>
-    <div markdown="1">
+<details> <summary>접기/펼치기 버튼</summary><div markdown="1">
         html details 이용해서 접기/펼치기 버튼 만들기.
-    </div>
-</details>
-
-
+</div></details>
 https://inasie.github.io/it%EC%9D%BC%EB%B0%98/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4-expander-control/
 
 

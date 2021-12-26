@@ -1,21 +1,26 @@
-div {
-	width: 50px;
-	height: 50px;
-	margin-bottom: 20px;
-	background: red;
-}
-
 .container {
-	background: yellow;
-	left: 20px;
-	top: 20px;
-	position: relative;
+	background: beige;
+	height: 100vh;
+	display: flex;
+	flex-wrap: nowrap;
+	align-content: space-around;
 }
 
-.box {
-	background: blue;
-	color: white;
-	left: 0px;
-	top: 0px;
-	position: sticky;
+.item {
+	width: 40px;
+	height: 40px;
+	border: 1px solid black;
+}
+
+.item1 {
+	background-color: rgb(255, 113, 113);
+	flex-basis: 15%;
+}
+.item2 {
+	background-color: rgb(230, 189, 136);
+	flex-basis: 15%;
+}
+.item3 {
+	background-color: rgb(92, 160, 219);
+	flex-basis: 15%;
 }
