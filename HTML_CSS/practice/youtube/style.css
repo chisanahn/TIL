@@ -44,6 +44,7 @@ img {
 	height: inherit;
 }
 
+.search_area,
 .voice_search,
 .upload,
 .apps,
@@ -62,30 +63,14 @@ header button {
 	flex-shrink: 0;
 }
 
-.search_area > * {
-	border: 1px solid rgb(194, 194, 194);
-}
-
-.virtual_keyboard {
-	background-color: white;
-	border-left-width: 0px;
-	border-right-width: 0px;
-}
-
-input[type="text"] {
-	border-right-width: 0px;
-}
-
-.search_icon:hover {
-	background-color: rgb(228, 228, 228);
-}
-
-button:not(.search_icon, .virtual_keyboard) {
+header button:not(.search_icon),
+nav button {
 	border: 0px none black;
 	background-color: white;
 }
 
-button:not(.search_icon, .virtual_keyboard):hover {
+header button:not(.search_icon):hover,
+nav button:hover {
 	background-color: rgb(236, 236, 236);
 }
 
@@ -96,11 +81,34 @@ i:not(.fa-search, .fa-keyboard, .channel_profile) {
 .search_area {
 	display: flex;
 	flex-grow: 1;
+	position: relative;
+	align-items: center;
 }
 
 .search_area > input {
 	flex-grow: 1;
 	padding-left: 0.3em;
+	height: 30px;
+}
+
+.search_area > * {
+	border: 1px solid rgb(194, 194, 194);
+}
+
+.virtual_keyboard {
+	position: absolute;
+	right: 40px;
+	background-color: white;
+	height: fit-content;
+	width: fit-content;
+}
+
+input[type="text"] {
+	border-right-width: 0px;
+}
+
+.search_icon:hover {
+	background-color: rgb(228, 228, 228);
 }
 
 /* main ------------------------------------------------------------------------- */
@@ -112,6 +120,7 @@ i:not(.fa-search, .fa-keyboard, .channel_profile) {
 }
 
 main {
+	overflow: scroll;
 	display: flex;
 	justify-content: center;
 	padding: 15px;
@@ -137,4 +146,24 @@ article {
 .video_explanation {
 	display: inline-block;
 	margin: 3px;
+}
+
+/* etc ------------------ */
+
+.pop_up {
+	position: fixed;
+	height: 50px;
+	width: 50px;
+	background-color: greenyellow;
+	border: 3px solid green;
+	color: green;
+	font-weight: bold;
+	bottom: 30px;
+	right: 30px;
+}
+
+.pop_up:hover {
+	background-color: green;
+	color: white;
+	color: greenyellow;
 }
