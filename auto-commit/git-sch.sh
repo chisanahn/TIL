@@ -13,6 +13,7 @@ if (git log | grep -q $Ymd); then
 	echo not the first commit
 else
 	echo first commit
+	git pull -r origin main
 	git add .
 	git commit -m "$Ymd"
 	git push origin main

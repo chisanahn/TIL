@@ -1,49 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+const app = document.getElementById('root');
 
-    <title>Accessing Elements in the DOM</title>
+const logo = document.createElement('img');
+logo.src = 'https://github.com/taniarascia/sandbox/blob/master/ghibli/logo.png?raw=true';
 
-    <style>
-      html {
-        font-family: sans-serif;
-        color: #333;
-      }
-      body {
-        max-width: 500px;
-        margin: 0 auto;
-        padding: 0 15px;
-      }
-      div,
-      article {
-        padding: 10px;
-        margin: 5px;
-        border: 1px solid #dedede;
-      }
-    </style>
-  </head>
+const container = document.createElement('div');
+container.setAttribute('class', 'container');
 
-  <body>
-    <h1>Accessing Elements in the DOM</h1>
+app.appendChild(logo);
+app.appendChild(container);
 
-    <h2>ID (#demo)</h2>
-    <div id="demo">Access me by ID</div>
+// let request = new XMLHttpRequest();
+// request.open('GET', 'https://ghibliapi.herokuapp.com/films', true);
+// request.onload = function () {
+//   const data = JSON.parse(this.response);
+//   if (request.status == 200)
+//     data.forEach(movie => console.log(movie.title));
+//   else
+//     console.log('error');
+// }
+// request.send();
 
-    <h2>Class (.demo)</h2>
-    <div class="demo">Access me by class (1)</div>
-    <div class="demo">Access me by class (2)</div>
+async function getData() {
+	const response = await fetch("https://ghibliapi.herokuapp.com/films");
+  const data = await response.json();
+  if (response.status == 200)
+    data.forEach(movie => {
+      const card = document.createElement('div');
+      card.setAttribute('class', 'card');
 
-    <h2>Tag (article)</h2>
-    <article>Access me by tag (1)</article>
-    <article>Access me by tag (2)</article>
+      const h1 = document.createElement('h1');
+      h1.textContent = movie.title;
 
-    <h2>Query Selector</h2>
-    <div id="demo-query">Access me by query</div>
+      const p = document.createElement('p');
+      p.textContent = `${movie.description.substring(0, 300)}...`;
 
-    <h2>Query Selector All</h2>
-    <div class="demo-query-all">Access me by query all (1)</div>
-    <div class="demo-query-all">Access me by query all (2)</div>
-  </body>
-</html>
+      container.appendChild(card);
+      card.appendChild(h1);      
+      card.appendChild(p);      
+    });
+  else
+    console.log('error');
+}
+getData();
+
