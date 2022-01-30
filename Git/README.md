@@ -28,6 +28,22 @@
 
 
 
+## --root
+
+맨 처음 커밋을 가리키는 것
+
+`git rebase -i --root`를 하면 맨 처음 커밋까지 rebase 적용
+
+## git checkout --orphan
+
+새로운 root commit 생성
+
+> **참고자료**
+>
+> https://stackoverflow.com/questions/22992543/how-do-i-git-rebase-the-first-commit/23000315
+
+
+
 ### git branch -M
 
 브랜치 이름변경
@@ -49,9 +65,9 @@ https://git-scm.com/docs/git-push#Documentation/git-push.txt--u
 
 개인프로젝트를 할때는 main, feature 브랜치 정도로 나눠두고 main 브랜치 기준으로 CI/CD를 구축해두고 feature 브랜치에서 브랜치를 만들어서 기능을 만들고 배포가 필요할때 main에 머지하는 정도로 관리하면 좋을 것 같다.
 
-그리고 이번에 팀플하면서 브랜치이름으로 `prefix/{#이슈변호}` 형식을 사용했는데 직관성이 떨어져서 이게 맞나 싶었다.
+그리고 이번에 팀플하면서 브랜치이름으로 `prefix/{#이슈변호}` 형식을 사용했는데 직관성이 떨어져서 이게 맞나 싶었다. 브랜치에 이슈번호를 명시해둠으로써 얻는 이점이 뭔지 알아볼 필요가 있을 것 같다.
 
-브랜치에 이슈번호를 명시해둠으로써 얻는 이점이 뭔지 알아볼 필요가 있을 것 같다.
+GitHub의 경우 merge commit의 기본메시지가 `Merge pull request #[PR번호] from 리포지토리명/브랜치명`이라서 브랜치에 이슈번호를 명시해두면 merge commit이 issue에 연결된다.
 
 
 
