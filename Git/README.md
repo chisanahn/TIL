@@ -1,105 +1,157 @@
 # Git
 
+## git filter-branch
 
+필터에 적용된 파일만 가지고 히스토리를 다시 구축할 수 있다.
 
-### Git 하위폴더 새로운 repository로 분리
+* 디렉토리를 새로운 repostiory로 분리할때 사용할 수 있다.
+* 모든 커밋에서 특정 파일을 제거할 수 있다.
 
-깃헙에 올린 저장소에서 특정 파일들을 제거하고 싶은데 그냥 제거하면 커밋내역이 남고 다 지우기에는 다른 커밋내역이 날라가서 방법을 찾아보니 [repository의 하위폴더를 분리해서 새로운 repository를 만드는 방법](https://sustainable-dev.tistory.com/119)이 있었다.   
-
-
-
-### Git commit log 유지하면서 repository 합치기
-
-[Git Repository 합치기 (commit log 유지) - subtree 이용](http://yeoseon.kr/git-repository-habcigi-commit-log-yuji-subtree-iyong/)
-
-
-
-### rebase
-
-우아한형제들 기술블로그에서 git-flow 관련 글을 보다가 우연히 rebase에 관한 글을 읽었는데 rebase로 병합뿐만 아니라 과거 커밋들을 수정하거나 다른 브랜치들로 옮길 수도 있다는걸 알았다. https://suhwan.dev/2018/01/21/Git-Rebase-1/
-
-그 전에는 commit --amend로 바로 직전 커밋만 수정 가능하고 다른 작업은 못하는줄 알아서 한번 커밋할때 신중하게 해야되겠다고 생각했는데 이런 기능이 있을 줄이야...
-
-다음에 한번 rebase를 제대로 한번 사용해봐야겠다.
-
-> 단, 역시나 공동 프로젝트를 하는 경우에는 커밋내역이 꼬일 수 있기 때문에 안하는게 좋다.
+> **참고자료**
 >
-> 로컬 저장소에서 작업을 할 때 일단 최대한 자잘하게 나눠서 커밋을 하고 나중에 push 하기 전에 너무 자잘한 커밋들을 하나로 묶는 등 커밋 내역을 한번 관리하는 식으로 하면 되지 않을까 싶다.
+> git filter-branch로 저장소 분리하기. git filter-branch로 저장소 분리하기 :: Outsider’s Dev Story. Outsider’s Dev Story. Published October 29, 2016. Accessed January 30, 2022. https://blog.outsider.ne.kr/1249
 
+<br>
 
+## 서브디렉토리 새로운 repository로 분리
+
+subtree를 활용해서 서브디렉토리를 별도의 git repository로 분리할 수 있다.
+
+> **참고자료**
+>
+> Junimo. 레포지토리의 하위폴더를 분리해서 새로운 레포지토리로 만들기. 지속가능한 개발 블로그. Published March 7, 2020. Accessed January 30, 2022. https://sustainable-dev.tistory.com/119
+
+<br>
+
+## 모든 커밋에서 특정 파일제거하기
+
+```bash
+$ git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch 파일명' --prune-empty --tag-name-filter cat -- --all
+```
+
+> **참고자료**
+>
+> git 특정파일만 모든 커밋에서 제거하기. Velog.io. Published 2021. Accessed January 30, 2022. https://velog.io/@nohsangwoo/git-%ED%8A%B9%EC%A0%95%ED%8C%8C%EC%9D%BC%EB%A7%8C-%EB%AA%A8%EB%93%A0-%EC%BB%A4%EB%B0%8B%EC%97%90%EC%84%9C-%EC%A0%9C%EA%B1%B0%ED%95%98%EA%B8%B0
+
+<br>
+
+## commit log 유지하면서 repository 합치는 방법
+
+* merge 할때 `--allow-unrelated-histories` 옵션을 사용해서 합칠 수 있다.
+
+* subtree를 이용해서 합칠 수 있다.
+
+  ```bash
+  git subtree add --prefix=(해당 Repository 하위의 디렉터리 구조) (옮겨올 Repository 주소) (옮겨올 Repository의 branch)
+  ```
+
+> **참고자료**
+>
+> 1. Git - git-merge Documentation. Git-scm.com. Published 2022. Accessed January 30, 2022. https://git-scm.com/docs/git-merge#Documentation/git-merge.txt---allow-unrelated-histories
+> 2. 
+
+<br>
+
+## rebase
+
+rebase로 병합뿐만 아니라 과거 커밋들을 수정하거나 다른 브랜치들로 옮기는 등의 작업을 수행할 수 있다
+
+> **참고자료**
+>
+> Git Rebase (1). Suhwan.dev. Published 2018. Accessed January 30, 2022. https://suhwan.dev/2018/01/21/Git-Rebase-1/
+
+<br>
 
 ## --root
 
 맨 처음 커밋을 가리키는 것
 
-`git rebase -i --root`를 하면 맨 처음 커밋까지 rebase 적용
+`git rebase -i --root`를 통해서 맨 처음 커밋까지 rebase 할 수 있다.
 
 ## git checkout --orphan
 
-새로운 root commit 생성
+새로운 root commit 생성
 
 > **참고자료**
 >
-> https://stackoverflow.com/questions/22992543/how-do-i-git-rebase-the-first-commit/23000315
+> lxs. How do I git rebase the first commit? Stack Overflow. Published April 10, 2014. Accessed January 30, 2022. https://stackoverflow.com/questions/22992543/how-do-i-git-rebase-the-first-commit/23000315
 
+<br>
 
-
-### git branch -M
+## git branch -M
 
 브랜치 이름변경
 
-```
-git branch (-m | -M) [<oldbranch>] <newbranch>
-```
-
-
-
-### git push -u
-
-이 옵션을 주면 push 한 곳의 주소가 자동으로 upstream에 추가되기 때문에 한번 `git push -u` 를 사용하고 나면 그 뒤로는 `git push` 만 입력해도 된다는 것 같다.
-https://git-scm.com/docs/git-push#Documentation/git-push.txt--u
-
-
-
-### git 브랜칭 전략
-
-개인프로젝트를 할때는 main, feature 브랜치 정도로 나눠두고 main 브랜치 기준으로 CI/CD를 구축해두고 feature 브랜치에서 브랜치를 만들어서 기능을 만들고 배포가 필요할때 main에 머지하는 정도로 관리하면 좋을 것 같다.
-
-그리고 이번에 팀플하면서 브랜치이름으로 `prefix/{#이슈변호}` 형식을 사용했는데 직관성이 떨어져서 이게 맞나 싶었다. 브랜치에 이슈번호를 명시해둠으로써 얻는 이점이 뭔지 알아볼 필요가 있을 것 같다.
-
-GitHub의 경우 merge commit의 기본메시지가 `Merge pull request #[PR번호] from 리포지토리명/브랜치명`이라서 브랜치에 이슈번호를 명시해두면 merge commit이 issue에 연결된다.
-
-
-
-### .gitignore
-
-특정 디렉토리가 추가되면 하위 디렉토리는 예외처리를 해도 무시된다.
-https://hyeonseok.com/blog/797
-
-이미 git에 추가되어있는 파일이나 디렉토리의 경우 .gitignore에 명시한다고 제거되지 않으므로 따로 제거해줘야한다. https://stackoverflow.com/questions/6030530/git-ignore-not-working-in-a-directory
-
-```
-$ git rm --cached <파일, 디렉토리명>
+```bash
+$ git branch (-m | -M) [<oldbranch>] <newbranch>
 ```
 
+<br>
 
+## git push -u
 
+이 옵션을 한번 사용해서 push를 하고 나면 해당 branch의 `upstream branch`가 `branch.<name>.merge`에 추가된다.
 
+한번 추가된 뒤로는 해당 브랜치에서 git push / git pull 등의 명령어를 인자없이 사용하면 `-u` 옵션을 주고 사용했던 `upstream branch`가 기본값으로 적용된다.
 
-# githook
+> **참고자료**
+>
+> Git - git-push Documentation. Git-scm.com. Published 2022. Accessed January 30, 2022. https://git-scm.com/docs/git-push#Documentation/git-push.txt--u
+
+<br>
+
+## 브랜치 컨벤션
+
+GitHub의 경우 merge commit의 기본메시지가 `Merge pull request #[PR번호] from 리포지토리명/브랜치명`이라서 브랜치에 이슈번호를 명시해두면 merge commit이 issue에 연결된다.
+
+<br>
+
+## .gitignore
+
+### 예외처리
+
+한번 제외된 디렉토리 안의 내용물은 다시 추가되지 않는다. 따라서 다음과 같이 예외처리를 하더라도 exception.txt는 포함되지 않는다.
+
+```
+dir
+!dir/exception.txt
+```
+
+따라서 폴더 내에서 특정 파일만 제외하기 위해서는 디렉토리를 추가하면 안되고 디렉토리의 내용물을 모두 추가한뒤 특정 파일에 예외처리를 해주는 방식을 사용해야 한다.
+
+```
+dir/**
+!dir/exception.txt
+```
+
+### 이미 git에 추가되어있는 파일이나 디렉토리
+
+이미 git에 추가되어있는 파일이나 디렉토리의 경우 .gitignore에 명시한다고 제거되지 않으므로 우선 commit tree에서 제거해줘야 한다.
+
+```
+$ git rm -r --cached <파일, 디렉토리명>
+```
+
+> **참고자료**
+>
+> 1. Shin H.gitignore로 무시된 디렉토리 안의 특정 파일만 추가하는 방법 - 신현석(Hyeonseok Shin). Hyeonseok.com. Published 2016. Accessed January 30, 2022. https://hyeonseok.com/blog/797
+> 2. shin. git .ignore not working in a directory. Stack Overflow. Published May 17, 2011. Accessed January 30, 2022. https://stackoverflow.com/questions/6030530/git-ignore-not-working-in-a-directory
+
+<br>
+
+# git hook
 
 CI/CD 적용할때 사용하는 것 같다. 나중에 좀 더 공부해보기.
 
-
+<br>
 
 # git sever
 
-처음에는 이게 뭔가 싶었는데 애초에 git은 버전관리 오픈소스 소프트웨어이고, 이걸 원격으로 관리하기 위해서 github 같은 git hosting 서비스를 사용하거나 git server를 이용해야 한다.
-기본적으로 git으로 관리하는걸 github이나 gitlab 같은 git server에 올려서 원격 리포지터리를 생성한다. 공개하고 싶지 않은 개인 프로젝트를 생성할때 gitlab을 사용하거나 개인적으로 git server를 만들어서 운영하는 것 같다.
-https://hoodiejun.tistory.com/15
-https://teamlab.github.io/jekyllDecent/blog/tutorials/%EB%82%98%EB%A7%8C%EC%9D%98-Git-%EC%84%9C%EB%B2%84-Gitlab-%EA%B5%AC%EC%B6%95
+git을 원격으로 관리하기 위해서는 git hosting 서비스 또는 git server를 이용해야 한다. git hosting 서비스는 대표적으로 GitHub이 있고, git server는 GitLab을 이용하거나 직접 서버와 SSH를 이용해서 구축할 수 있다.
 
-> 토이 프로젝트를 만들때 한번 git server도 만들어보면 좋을 것 같다.
+> **참고자료**
+>
+> HoodieJun. 나만의 git 서버 만들기 (100% private 모드). 후디준. Published March 25, 2021. Accessed January 30, 2022. https://hoodiejun.tistory.com/15
 
-
+<br>
 
