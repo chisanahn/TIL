@@ -1,50 +1,48 @@
-function Person(name, age) {
-    this.name = name;
-    this.age = age;
+const obj = new Object();
+obj.a = 123;
+obj.b = 'hello';
+obj[Symbol('foo')] = '123';
+let sym = Symbol('foo');
+obj[sym] = "str";
+
+let symbolArr = Object.getOwnPropertySymbols(obj);
+
+console.log(symbolArr);
+
+console.log(Object.getOwnPropertyNames(obj));
+
+console.log(obj.a);
+console.log(obj.c);
+
+let foo = {unique_prop: 1}, bar = {unique_prop: 2}, object = {};
+object[foo] = 'value'
+console.log(foo.toString());
+console.log(bar.toString());
+console.log(object[bar])
+
+object;
+
+const obj2 = {};
+obj2[' '] = 1234;
+obj2['123'] = 1234;
+obj2['$&#(!(@'] = "wow";
+obj2;
+
+function Car(make, model, year) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+  }
+  
+const myCar = new Car('Eagle', 'Talon TSi', 1993);
+  
+console.log(myCar.make);
+console.log(myCar[0]);
+
+const myCar2 = {
+    0: 'make',
+    5: 'model',
+    'faewf@$&&%#': 'year'
 }
 
-Person.prototype.introduce = function () {
-    return `Hi my name is ${this.name}!`;
-}
-
-function Worker (name, age, job) {
-    Person.call(this, name, age);
-    this.job = job;
-}
-
-Worker.prototype.whatIsYourJob = function () {
-    return `My job is a ${this.job}`;
-}
-
-function Worker2 (name, age, job) {
-    Person.call(this, name, age);
-    this.job = job;
-}
-
-Worker2.prototype.whatIsYourJob = function () {
-    return `My job is a ${this.job}`;
-}
-
-Object.setPrototypeOf(Worker.prototype, Person.prototype);
-// Worker2.prototype.__proto__ = Person.prototype;
-Worker2.prototype.__proto__ = Object.create(Person.prototype);
-
-let joshua = new Person('joshua', 23);
-let kenny = new Worker("kenny", 31, "programmer");
-
-console.log(Worker.prototype.__proto__ === Worker2.prototype.__proto__);
-console.log(Worker2 instanceof Person)
-
-Worker2.prototype.__proto__.test = function () {
-    return "test";
-}
-
-console.log(Person.prototype);
-
-Person.prototype.test2 = function() {
-    return "test2";
-}
-
-let kenny2 = new Worker2("kenny", 31, "programmer");
-console.log(kenny2.introduce());
-console.log(kenny2.__proto__.__proto__.constructor === Person.prototype.constructor);
+console.log(myCar2['faewf@$&&%#']);

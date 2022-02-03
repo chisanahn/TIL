@@ -61,24 +61,24 @@ GET POST PUT DELETE 카테고리 링크가 실제로 존재하지 않아서 오�
 
   * [GItHub 공식문서](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
   * PR 제목에 이슈번호를 넣어도 링크가 되진 않는다.
-  * 다만 Close 등의 keyword를 통해 issue와 연결할 수 있다. 그리고 연결되고 나면 PR이 머지되면 issue도 자동으로 close된다.
+  * 다만 Close 등의 keyword를 통해 issue와 연결할 수 있다. 그리고 연결되고 나면 PR이 머지되면 issue도 자동으로 close된다.
 
 * ### template
 
   * [GitHub 공식문서](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository)
-  * issue와 달리 본문에 대한 템플릿만 만들 수 있다.
+  * issue와 달리 본문에 대한 템플릿만 만들 수 있다.
 
 * ### Merge Strategy
 
-  * repository 설정에서 허용할 전ㄹ
-
   * #### Merge Commit
 
-    기본메시지가 `Merge pull request #[PR번호] from 리포지토리명/브랜치명`이기 때문에 브랜치명에 이슈번호를 넣으면 머지 커밋과 이슈를 간단하게 연결할 수 있다.
+    기본메시지가 `Merge pull request #[PR번호] from 리포지토리명/브랜치명`이기 때문에 브랜치명에 이슈번호를 넣으면 머지 커밋과 이슈를 간단하게 연결할 수 있다.
 
   * #### Rebase
 
   * #### Squash
+
+  * GitHub repository 설정에서 어떤 전략들을 허용할지 선택할 수 있다.
 
 <br>
 

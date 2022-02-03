@@ -9,11 +9,194 @@
   let arr2 = new Array();
   ```
 
-<br><br>
+### 
 
-## Arrow Functions
+## Primitive
 
-* ## `this`
+객체가 아닌 데이터. primitive value, primitive data type이라고도 한다.
+
+* 총 7개가 존재한다. string, number, bigint, boolean, undefined, symbol, null
+
+* 모든 primitive는 **immutable**이다.
+
+  primitive가 할당된 변수와 primitive를 헷갈리지 않도록 주의하자.
+
+  primitive를 저장하는 변수는 새로운 primitive를 할당받을 수 있다. 하지만 primitive 그 자체는 객체와 달리 수정이 불가능하다.
+
+  ```js
+  let a = "str";
+  console.log(a); // str
+  
+  a.toUpperCase();
+  console.log(a); // str
+  
+  a = a.toUpperCase();
+  console.log(a); // str
+  ```
+
+* ### Wrapper Objects
+
+  primitive value를 저장하기 위한 객체
+
+  객체에 저장된 primitive value를 반환하는 `valueOf()` 메소드를 공통적으로 가지고 있다.
+
+### symbol
+
+**primitive**의 한 종류. **유일성**이 보장되는 값이다.
+
+`Symbol()` 을 이용해서 생성할 수 있고, description을 가질 수 있지만 디버깅 목적으로만 사용된다.
+
+* `symbol.description`<br>description 반환
+
+```js
+let Sym1 = Symbol("Sym")
+let Sym2 = Symbol("Sym")
+
+console.log(Sym1 === Sym2) // returns "false"
+```
+
+주로 객체에 유니크한 property key를 추가하기 위해 사용된다. Symbol은 유일하기 때문에 행여나 동일한 key를 사용하는 property가 존재할 가능성을 없앨 수 있다.
+
+* **hidden from any mechanisms** other code will typically use to access the object<br>예를 들어서 `for...in`이나 `Object.getOwnPropertyNames()`을 사용할때 Symbol을 key로 사용하는 property는 접근되지 않는다.
+
+  이는 약한 캡슐화, 정보은닉을 가능하게 해준다.
+
+* 객체에서 Symbol에 접근하기 위해서는 `Object.getOwnPropertySymbols()`를 사용해야 한다. Symbols
+
+* **`Symbol.for("key")`**은 key값에 항상 똑같은 Symbol을 반환해준다. key 값에 매칭되는 Symbol이 없는 경우 새로 생성해서 **global Symbol registry**에 등록한다.
+
+* 일반적인 객체와 달리 string으로 자동형변환 되지 않는다.<br>string으로 변환하고 싶다면 `symbol.toString()`을 이용해야 한다.
+
+* 일반적인 wrapper class와 달리 **`new` keyword**를 사용하면 `TypeError`가 발생한다.
+
+  ```js
+  let sym = new Symbol(); // TypeError
+  ```
+
+<br>
+
+> **참고자료**
+>
+> 1. Primitive - MDN Web Docs Glossary: Definitions of Web-related terms | MDN. Mozilla.org. Published October 8, 2021. Accessed February 2, 2022. https://developer.mozilla.org/en-US/docs/Glossary/Primitive
+> 2. Symbol - MDN Web Docs Glossary: Definitions of Web-related terms | MDN. Mozilla.org. Published October 8, 2021. Accessed February 2, 2022. https://developer.mozilla.org/en-US/docs/Glossary/Symbol
+> 3. Symbol - JavaScript | MDN. Mozilla.org. Published January 17, 2022. Accessed February 2, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
+
+### 
+
+## object
+
+### property
+
+간단하게 object에 첨부된 변수라고 생각하면 된다
+
+일반적인 JavaScript와 마찬가지로 이름은 camelCase를 따른다.
+
+#### property name
+
+property name으로 `string`이나 `symbol`을 사용할 수 있다.
+
+#### property 접근방법
+
+1. ##### dot notation
+
+   ```javascript
+   object.property
+   ```
+
+2. ##### bracket notation
+
+   ```javascript
+   object['property']
+   ```
+
+   * 괄호 안에 변수를 사용하는 것도 가능하다.<br>property name이 동적으로 결정될때 유용하게 사용할 수 있다.
+
+     ```js
+     let key = prompt('input key');
+     obj[key] = prompt('input value');
+     ```
+
+   * 또한 bracket notation을 사용할 경우 identifier 규칙과 무관하게 정말 모든 문자열을 property name으로 사용할 수 있다.
+
+     ```js
+     const obj2 = {};
+     obj2[' '] = 1234;
+     obj2['123'] = 1234;
+     obj2['$&#(!(@'] = "wow";
+     ```
+
+#### Enumerate the properties of an object
+
+참고로 다음과 같은 방식에서 hidden properties에 접근하지는 않는다.
+
+> hidden properties : prototype에 포함되어 있는 property
+
+* `for...in`
+* `Object.keys(o)`
+* `Object.getOwnPropertyNames(o)`
+
+#### Indexing object properties
+
+object property를 index를 기반으로 정의했으면 추후에 index를 통해서만 접근할 수 있고, name을 기반으로 정의했다면 추후에 name을 통해서만 접근할 수 있다는데 무슨 말인지 잘 모르겠다.
+
+> 실제로 실행시켜봤을때 별 다르
+
+### object initializer
+
+`,`로 여러가지 property를 구분해서 객체를 초기화 할 수 있다.
+
+```js
+const myCar = {
+  make: 'Ford',
+  model: 'Mustang',
+  year: 1969
+};
+```
+
+### Method binding
+
+javascript에서 method는 객체에 종속되지 않는다.
+
+정확히는 `this`가 가리키는 값이 함수가 호출될 때 정해진다.
+
+<br>
+
+> **참고자료**
+>
+> 1. Working with objects - JavaScript | MDN. Mozilla.org. Published January 7, 2022. Accessed February 2, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects
+> 2. Property accessors - JavaScript | MDN. Mozilla.org. Published July 20, 2021. Accessed February 2, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors
+
+### 
+
+## for 반복문
+
+### for...in
+
+### for...of
+
+### 
+
+## Function
+
+### `this`
+
+javascript에서 `this`가 가리키는 값은 함수가 어떻게 호출되느냐에 따라 달라진다.
+
+* #### `bind()`
+
+  함수가 호출되는 방식에 상관없이 `this`의 값을 설정할 수 있다.
+
+* #### arrow function
+
+  it retains the `this` value of the enclosing lexical context
+
+> **참고자료**
+>
+> this - JavaScript | MDN. Mozilla.org. Published July 20, 2021. Accessed February 2, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#method_binding
+
+### Arrow Functions
+
+* #### `this`
 
   arrow function에서 `this`는 lexical this. 즉, 상위 환경의 this를 그대로 계승한다.
 
@@ -21,7 +204,7 @@
   >
   > 김솔샤르. [자바스크립트] arrow function과 this. 김솔샤르의 인사이트. Published August 12, 2018. Accessed February 1, 2022. https://kim-solshar.tistory.com/57
 
-<br><br>
+### 
 
 ## Script Loading Strategies
 
@@ -57,7 +240,7 @@
 >
 > What is JavaScript? - Learn web development | MDN. Mozilla.org. Published December 28, 2021. Accessed January 27, 2022. https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript
 
-<br><br>
+### 
 
 ## Prototypes and Inheritance
 
@@ -79,7 +262,7 @@ Object.getPrototypeOf(arrPrototype); // Object.prototype
 
 모든 prototype chain의 끝은 `Object.prototype`이고, 여기서도 해당 property나 method를 찾지 못하면 `null`이 반환된다.
 
-* #### `prototype.isPrototypeOf()` & `instanceof`
+* #### `prototype.isPrototypeOf()` & `instanceof`
 
   객체의 prototype chain에 해당 prototype이 존재하는지, 즉 객체가 해당 prototype을 상속받았는지 체크해준다.
 
@@ -180,7 +363,7 @@ function Person(name, age) {
 let joshua = new Person('Joshua', 23);
 ```
 
-* #### `this` keyword
+* #### `this` keyword
 
   constructor 함수 안에서 `this`는 새롭게 생성되는 instance를 가리킨다.
 
@@ -218,7 +401,7 @@ let joshua = new Person('Joshua', 23);
 
 ES6부터 추가된 개념. prototype과 inheritance에 대한 **syntactical sugar**
 
-### `classical inheritance`와 `prototypal inheritance` 차이점
+### `classical inheritance`와 `prototypal inheritance` 차이점
 
 * https://stackoverflow.com/questions/19633762/classical-inheritance-vs-prototypal-inheritance-in-javascript/19640910#:~:text=Classical%20inheritance%20is%20limited%20to,also%20objects%20inheriting%20from%20prototypes.
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
@@ -239,10 +422,14 @@ ES6부터 추가된 개념. prototype과 inheritance에 대한 **syntactical sug
 > 9. Matt. Understanding the difference between Object.create() and new SomeFunction(). Stack Overflow. Published November 12, 2010. Accessed February 1, 2022. https://stackoverflow.com/questions/4166616/understanding-the-difference-between-object-create-and-new-somefunction
 > 10. Rascia T. Understanding Classes in JavaScript. DigitalOcean. Published May 4, 2018. Accessed January 27, 2022. https://www.digitalocean.com/community/tutorials/understanding-classes-in-javascript
 
-<br><br>
+### 
 
 ## Event
 
+### 
+
 ## Closure
+
+### 
 
 ## asynchronous JavaScript
