@@ -334,7 +334,7 @@ console.log(Sym1 === Sym2) // returns "false"
   console.log(obj); // { a: 1, b: 2, c: 3 }
   ```
 
-* #### `delete` operator
+* #### `delete` operator
 
   객체에서 property를 제거할 때 사용하는 연산자
 
@@ -345,7 +345,7 @@ console.log(Sym1 === Sym2) // returns "false"
   delete object['property']
   ```
 
-* #### `in` operator
+* #### `in` operator
 
   객체에 property가 있는지 확인할 때 사용하는 연산자
 
@@ -428,7 +428,28 @@ console.log(Sym1 === Sym2) // returns "false"
   let objClone = { ...obj }; // pass all key:value pairs from an object
   ```
 
+### destructing assignment
 
+array의 value나 object의 property들을 개별적인 변수에 할당할 수 있다.
+
+```js
+const foo = ['one', 'two', 'three'];
+
+const [red, yellow, green] = foo;
+console.log(red); // "one"
+console.log(yellow); // "two"
+console.log(green); // "three"
+```
+
+### Copy Objects
+
+* #### Shallow Copy
+
+  동일한 object에 대해서 reference만 복사하는 것
+
+* #### Deep Copy
+
+  내용만 동일한 object를 새로만드는 것
 
 <br>
 
@@ -442,6 +463,8 @@ console.log(Sym1 === Sym2) // returns "false"
 > 6. Object.assign() - JavaScript | MDN. Mozilla.org. Published September 17, 2021. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 > 7. Object.prototype.hasOwnProperty() - JavaScript | MDN. Mozilla.org. Published September 7, 2021. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
 > 8. delete operator - JavaScript | MDN. Mozilla.org. Published January 24, 2022. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
+> 9. Destructuring assignment - JavaScript | MDN. Mozilla.org. Published January 19, 2022. Accessed February 4, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+> 10. Gupta M. Deep and Shallow Copy in JavaScript - TechnoFunnel - Medium. Medium. Published September 13, 2019. Accessed February 4, 2022. https://medium.com/technofunnel/deep-and-shallow-copy-in-javascript-110f395330c5#:~:text=the%20object%20created.-,2.,copy%20prototype%20properties%20and%20methods.&text=This%20method%20does%20not%20create,shallow%20copy%20of%20the%20data
 
 <br><br>
 
@@ -468,6 +491,8 @@ Array나 Map의 경우 기본적으로 해당 메소드가 구현되어져 있�
 ### for...in
 
 객체의 enumerable property에 대해서 반복을 실행한다. (Symbol은 제외)
+
+상속받은 property에도 접근한다.
 
 ```js
 for (variable in object) {
@@ -498,13 +523,13 @@ for (const prop in obj) {
 
   index 순서대로 방문하는 것이 보장되지 않으므로 접근 순서가 중요할 경우 `Array.prototype.forEach()`나 `for...of`를 사용해야 한다.
 
-* propertyName을 확인할 수 있기 때문에 디버깅을 할 때 유용하게 사용된다.
+* property name을 확인할 수 있기 때문에 디버깅에 유용하게 사용된다.
 
 ### for...of
 
 iterable한 객체에 대해서 iterable을 수행하는 반복문을 만든다.
 
-> 예전에는 `for...of`가 property value에 대해서 반복을 수행하는건줄 알았는데 이는 iterable object가 어떻게 정의되어 있는가에 따라 다르다.
+> 예전에는 `for...of`가 property value에 대해서 반복을 수행하는건줄 알았는데 이는 iterable object가 어떻게 정의되어 있는가에 따라 다르다.
 
 ```js
 for (variable of iterable) {
