@@ -24,7 +24,7 @@ https://github.com/hammii
 
 <details><summary>접기/펼치기 버튼</summary>
 
-html `<details>`, `<summary>` 태그 이용해서 접기/펼치기 버튼 만들기.
+html `<details>`, `<summary>` 태그 이용해서 접기/펼치기 버튼 만들기.
 
 </details>
 
@@ -59,3 +59,39 @@ solarize dark theme도 적용하고 싶어서 찾아보던중 Windows New Termin
 z shell로 변경하고 나니 git log 등의 명령어를 수행할때 다른 창으로 이동한뒤 q로 닫고 나면 내용이 보이지 않아서 불편했다.
 git core.pager가 기본적으로 less로 설정되어 있는데 bash랑 달리 zsh를 사용하게 되면 pager로 열리게 된다. 따라서 설정을 조금 수정해주면 된다. https://serebrov.github.io/html/2014-01-04-git-log-and-less-keep-output.html
 
+<br>
+
+# 라이선스
+
+MDN 공식문서를 참고해서 공부하고, TIL을 작성하던 도중 저작권에 대해 궁금해져서 MDN GitHub repository에 들어가서 확인해봤는데 글의 경우 `CC-BY-SA 2.5` 라이선스를 따르고, code example과 snippets의 경우 2010.08.20일 이후로 작성된 경우 `CC0` 라이선스를 따르고, 그 이전에 작성된 경우 `MIT` 라이선스를 따른다고 한다.
+
+> 알고보니 MDN 홈페이지에서도 라이선스 관련 내용을 찾을 수 있다.
+
+<br>
+
+## CC
+
+### CC BY-SA
+
+저작자표시 - 동일조건변경허락
+
+자유로운 이용이 가능하지만, 원저작자 및 출처를 표시해야 하고, 동일한 라이선스를 적용해야 한다는 제약이 있다.
+
+### CC0
+
+**저작권이 소멸된 저작물**로 정말 아무런 제약없이 누구나 자유롭게 이용할 수 있다.
+
+<br>
+
+## MIT
+
+저작권 표시 및 허가 표시를 기재하고 사용해야 한다는 걸 제외하면 자유로운 이용이 가능하다.
+
+<br>
+
+> **참고자료**
+>
+> 1. mdn. content/LICENSE.md at main · mdn/content. GitHub. Published 2022. Accessed February 6, 2022. https://github.com/mdn/content/blob/main/LICENSE.md
+> 2. \01. CC 라이선스. 크리에이티브 커먼즈 라이선스. Published 2022. Accessed February 6, 2022. http://ccl.cckorea.org/about/
+> 3. 위키미디어 프로젝트 기여자. MIT 허가서. Wikipedia.org. Published July 22, 2007. Accessed February 6, 2022. https://ko.wikipedia.org/wiki/MIT_%ED%97%88%EA%B0%80%EC%84%9C#:~:text=MIT%20%ED%97%88%EA%B0%80%EC%84%9C(%EC%98%81%EC%96%B4%3A%20MIT%20License,License%EB%A1%9C%20%ED%91%9C%EA%B8%B0%EB%90%98%EA%B8%B0%EB%8F%84%20%ED%95%9C%EB%8B%A4.
+> 4. About MDN Web Docs - The MDN project | MDN. Mozilla.org. Published February 3, 2022. Accessed February 6, 2022. https://developer.mozilla.org/en-US/docs/MDN/About
