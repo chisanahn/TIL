@@ -208,7 +208,9 @@ function Worker (name, age, job) {
 
 ## Method
 
-효율성 증가와 코드 가독성을 위해 method는 따로 prototype에 추가하는 것이 일반적이다. prototype에 추가하고 나면 해당 prototype을 상속한 instance들은 모두 해당 method를 사용할 수 있다.
+효율성 증가와 코드 가독성을 위해 method는 construction에 포함하지 않고 이후에 따로 prototype에 추가하는 것이 일반적이다.
+
+prototype에 추가하고 나면 해당 prototype을 상속한 instance들은 모두 해당 method를 사용할 수 있다.
 
 ```js
 Person.prototype.introduce = function {
@@ -251,4 +253,4 @@ Java 등의 클래스 기반 언어에 익숙하다면 `class`를 이용해 기�
 > 7. Object.create() - JavaScript | MDN. Mozilla.org. Published February 2022. Accessed February 1, 2022. https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/create
 > 8. Jesus. Extends Object.setPrototypeOf() vs Object.create. Stack Overflow. Published October 14, 2019. Accessed February 1, 2022. https://stackoverflow.com/questions/58377377/extends-object-setprototypeof-vs-object-create
 > 9. Matt. Understanding the difference between Object.create() and new SomeFunction(). Stack Overflow. Published November 12, 2010. Accessed February 1, 2022. https://stackoverflow.com/questions/4166616/understanding-the-difference-between-object-create-and-new-somefunction
-> 10. Rascia T. Understanding Classes in JavaScript. DigitalOcean. Published May 4, 2018. Accessed January 27, 2022. https://www.digitalocean.com/community/tutorials/understanding-classes-in-javascript
+> 10. 
