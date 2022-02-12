@@ -1,3 +1,48 @@
+# 객체지향설계
+
+## SOLID 5원칙
+
+객체 지향 설계뿐만 아니라 애자일 개발에서도 핵심 철학을 형성한다
+
+* ### Single-responsibility principle
+
+  하나의 클래스가 하나의 책임만을 가져야 한다.
+
+* ### Open-closed principle
+
+  모든 클래스는 확장에는 열려있되, 수정에는 닫혀있어야 한다.
+
+  다시말해 객체는 소스코드의 변화없이 확장이 가능해야 한다.
+
+* ### Listov substitution principle
+
+  클래스는 해당 클래스를 상속받은 클래스로 교체될 수 있어야 한다.
+
+* ### Interface segregation principle
+
+  인터페이스는 client의 요구사항에 맞게 최대한 세세하게 나눠져있는것이 좋다.
+
+  객체지향 뿐만 아니라 분산시스템이나 마이크로서비스에서도 핵심적인 원칙이다.
+
+* ### Dependency inversion principle
+
+  구현체에 의존해서는 안된다. 인터페이스 등 추상적인 개념에 의존해야 한다.
+
+  특히 high-level 모듈은 low-level 모듈을 import해서는 안된다.
+
+  객체간의 결합도를 낮추기 위한 원칙이다.
+
+  <br>
+
+> **참고자료**
+>
+> 1. 대학생Devlog. [Java] 객체지향 설계 5원칙 - SOLID란 무엇일까? Gyun’s 개발일지. Published August 20, 2021. Accessed February 11, 2022. https://devlog-wjdrbs96.tistory.com/380
+> 2. Wikipedia Contributors. SOLID. Wikipedia. Published February 1, 2022. Accessed February 11, 2022. https://en.wikipedia.org/wiki/SOLID
+> 3. Wikipedia Contributors. Open–closed principle. Wikipedia. Published January 17, 2022. Accessed February 11, 2022. https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle
+> 4. Wikipedia Contributors. Liskov substitution principle. Wikipedia. Published February 1, 2022. Accessed February 11, 2022. https://en.wikipedia.org/wiki/Liskov_substitution_principle
+
+<br><br>
+
 # 정규식
 
 [강의](https://www.youtube.com/watch?v=t3M6toIflyQ) 및 연습
@@ -65,7 +110,7 @@ git core.pager가 기본적으로 less로 설정되어 있는데 bash랑 달리 
 
 MDN 공식문서를 참고해서 공부하고, TIL을 작성하던 도중 저작권에 대해 궁금해져서 MDN GitHub repository에 들어가서 확인해봤는데 글의 경우 `CC-BY-SA 2.5` 라이선스를 따르고, code example과 snippets의 경우 2010.08.20일 이후로 작성된 경우 `CC0` 라이선스를 따르고, 그 이전에 작성된 경우 `MIT` 라이선스를 따른다고 한다.
 
-> 알고보니 MDN 홈페이지에서도 라이선스 관련 내용을 찾을 수 있다.
+> 알고보니 MDN 홈페이지에서도 라이선스 관련 내용을 찾을 수 있다.
 
 <br>
 
