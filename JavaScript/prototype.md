@@ -230,11 +230,72 @@ ES6부터 추가된 개념. prototype inheritance에 대한 **syntactical sugar*
 
 Java 등의 클래스 기반 언어에 익숙하다면 `class`를 이용해 기존의 prototype inheritance를 보다 직관적인 문법으로 사용할 수 있다.
 
+* 함수의 일종이다. 따라서 함수와 선언하는 방법도 비슷하고 `name` property도 갖는다.
 
+* ### constructor
+
+  * 해당 클래스의 instance를 생성할때 사용되는 특별한 메소드
+  * class는 하나의 constructor만을 가질 수 있다.
+
+* ### class body
+
+  * strict mode에서 실행된다
+  
+* ### static
+
+  * instance가 아닌 클래스가 자체적으로 갖는 property
+
+    instance에서 호출할 수 없다.
+
+  * `this`를 명시하지 않을 경우, class의 body 부분은 항상strict mode에서 처리되기 때문에 `this`로 `undefined`가 사용된다.
+  
+    ```js
+    class Animal {
+      speak() {
+        return this;
+      }
+      static eat() {
+        return this;
+      }
+    }
+    
+    let obj = new Animal();
+    obj.speak(); // the Animal object
+    let speak = obj.speak;
+    speak(); // undefined
+    
+    Animal.eat() // class Animal
+    let eat = Animal.eat;
+    eat(); // undefined
+    ```
+  
+  * static initialization block들을 통해 유연하게 static property들을 초기화 할 수 있다.
+  
+    ```js
+    class ClassWithStaticInitializationBlock {
+      static staticProperty1 = 'Property 1';
+      static staticProperty2;
+      static {
+        this.staticProperty2 = 'Property 2';
+      }
+    }
+    ```
+  
+    
+
+
+> **참고자료**
+>
+> 1. Classes - JavaScript | MDN. Mozilla.org. Published January 19, 2022. Accessed February 12, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+> 2. Class static initialization blocks - JavaScript | MDN. Mozilla.org. Published January 19, 2022. Accessed February 12, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Class_static_initialization_blocks
 
 <br>
 
-## `classical inheritance`와 `prototypal inheritance` 차이점
+## `classical inheritance` vs `prototypal inheritance`
+
+`📕 객체지향의 사실과 오해`를 읽다가 생각 난건데 클래스간에 상속 관계가 형성되는 것이 아니라 객체 간에 상속 관계가 형성되는 것이기 때문에 상위 객체가 변동되면 하위 객체에 직접적인 영향이 있다는 차이점도 있을 것 같다.
+
+> 클래스 간의 상속관계가 있더라도 해당 클래스로부터 생성된 객체끼리는 상태가 변동되더라도 서로 영향을 주지 않을 거라는 생각이 들었다.
 
 * https://stackoverflow.com/questions/19633762/classical-inheritance-vs-prototypal-inheritance-in-javascript/19640910#:~:text=Classical%20inheritance%20is%20limited%20to,also%20objects%20inheriting%20from%20prototypes.
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
@@ -253,4 +314,3 @@ Java 등의 클래스 기반 언어에 익숙하다면 `class`를 이용해 기�
 > 7. Object.create() - JavaScript | MDN. Mozilla.org. Published February 2022. Accessed February 1, 2022. https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/create
 > 8. Jesus. Extends Object.setPrototypeOf() vs Object.create. Stack Overflow. Published October 14, 2019. Accessed February 1, 2022. https://stackoverflow.com/questions/58377377/extends-object-setprototypeof-vs-object-create
 > 9. Matt. Understanding the difference between Object.create() and new SomeFunction(). Stack Overflow. Published November 12, 2010. Accessed February 1, 2022. https://stackoverflow.com/questions/4166616/understanding-the-difference-between-object-create-and-new-somefunction
-> 10. 

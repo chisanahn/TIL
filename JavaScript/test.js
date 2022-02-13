@@ -1,17 +1,31 @@
-const propertyName = 'abc';
+// 'use strict';
 
-const CustomObj = {
-	a: 1,
-	b: 2,
+function Animal() { }
 
-	constructor: function (a, b) {
-		this.a = a;
-		this.b = b;
-	},
-
-	[propertyName] () {
-		return this.a + this.b;
-	}
+Animal.prototype.speak = function() {
+  return this;
 }
 
-CustomObj;
+Animal.eat = () => {
+  return this;
+}
+
+let obj = new Animal();
+let speak = obj.speak;
+speak(); // global object (in non–strict mode)
+
+console.log(Animal.eat())
+
+let eat = Animal.eat;
+console.log(eat()); // global object (in non-strict mode)
+
+const func = function () {
+	return this;
+}
+
+const func2 = () => {
+	return this;
+}
+
+console.log(func());
+console.log(func2());

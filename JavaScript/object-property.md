@@ -152,7 +152,7 @@ const obj = {
 }
 ```
 
-이제는 `property name (매개변수)` 형식으로 `: function` 부분을 생략해서 간략하게 사용할 수 있다.
+이제는 `property name (매개변수)` 형식으로 `: function` 부분을 생략해서 간략하게 사용할 수 있다.
 
 ```js
 const obj = {
@@ -177,6 +177,30 @@ const obj = {
 **주의** : method definitions로 정의된 함수는 constructor로 사용할 수 없다
 
 [자세한 내용은 MDN 문서를 참고하자.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions)
+
+#### getter & setter
+
+`get` keyword를 이용해서 해당 property가 호출될때 해당 함수가 실행되도록 할 수 있다.
+
+그리고 `set` keyword를 이용해서 해당 property의 값이 변경될때 해당 함수가 실행되도록 할 수 있다.
+
+```js
+const obj = {
+	a: [1, 3, 2],
+	get sortedA() {
+		return this.a.sort((a, b) => a - b);
+	},
+	set setFirstItemOfA(newValue) {
+		this.a[0] = newValue;
+	}
+};
+
+obj.setFirstItemOfA = 10;
+
+console.log(obj.a); // [ 10, 3, 2 ]
+
+console.log(obj.sortedA); // [ 2, 3, 10 ]
+```
 
 <br>
 
@@ -435,4 +459,6 @@ console.log(arr); // [1,3,2]
 > 6. Object.prototype.hasOwnProperty() - JavaScript | MDN. Mozilla.org. Published September 7, 2021. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
 > 7. delete operator - JavaScript | MDN. Mozilla.org. Published January 24, 2022. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete
 > 8. Destructuring assignment - JavaScript | MDN. Mozilla.org. Published January 19, 2022. Accessed February 4, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-> 9. Method definitions - JavaScript | MDN. Mozilla.org. Published July 20, 2021. Accessed February 6, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions‌
+> 9. Method definitions - JavaScript | MDN. Mozilla.org. Published July 20, 2021. Accessed February 6, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions
+> 10. getter - JavaScript | MDN. Mozilla.org. Published January 19, 2022. Accessed February 12, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
+> 11. setter - JavaScript | MDN. Mozilla.org. Published September 17, 2021. Accessed February 12, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set

@@ -3,11 +3,18 @@
  lightweight interpreted programming language
 
 * 인터프리터 언어로 코드가 줄 단위로 바로바로 실행된다.
+
 * 성능을 위해서 **just-in-time compiling** 기술을 사용한다.
+
+* ES6에서 많은 변화가 일어났기 때문에 최소한 ES6 (ES2015) 문법을 이해하고 있는 것이 좋다.
+
+  > 채용공고만 보더라도 `ES6+`를 심심치않게 볼 수 있다.
 
 > **참고자료**
 >
-> What is JavaScript? - Learn web development | MDN. Mozilla.org. Published December 28, 2021. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript
+> 1. What is JavaScript? - Learn web development | MDN. Mozilla.org. Published December 28, 2021. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript
+> 2. Morelli B. JavaScript — WTF is ES6, ES8, ES 2017, ECMAScript… ? Medium. Published August 28, 2017. Accessed February 12, 2022. https://codeburst.io/javascript-wtf-is-es6-es8-es-2017-ecmascript-dca859e4821c
+> 3. ES6 Syntax and Feature Overview. Taniarascia.com. Published 2015. Accessed February 12, 2022. https://www.taniarascia.com/es6-syntax-and-feature-overview/
 
 <br><br>
 
@@ -291,9 +298,17 @@ for (variable of iterable) {
 
 ## Function
 
+### `name` property
+
+함수의 이름을 나타내는 property. 함수를 생성하는 방법에 따라 자동으로 지정된다.
+
 ### `this`
 
 javascript에서 `this`가 가리키는 값은 함수가 어떻게 호출되느냐에 따라 달라진다.
+
+* 기본적으로 `global object`로 autobinding된다.
+
+  strict mode에서는 autobinding되지 않기 때문에 따로 지정하지 않는다면 `undefined` 값을 갖는다.
 
 * #### `bind()`
 
@@ -331,6 +346,8 @@ javascript에서 `this`가 가리키는 값은 함수가 어떻게 호출되느�
 > 1. this - JavaScript | MDN. Mozilla.org. Published July 20, 2021. Accessed February 2, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#method_binding
 > 2. 김솔샤르. [자바스크립트] arrow function과 this. 김솔샤르의 인사이트. Published August 12, 2018. Accessed February 1, 2022. https://kim-solshar.tistory.com/57
 > 3. Rest parameters - JavaScript | MDN. Mozilla.org. Published January 7, 2022. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
+> 4. Function.name - JavaScript | MDN. Mozilla.org. Published January 28, 2022. Accessed February 12, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name
+> 5. Classes - JavaScript | MDN. Mozilla.org. Published January 19, 2022. Accessed February 12, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
 
 <br><br>
 
