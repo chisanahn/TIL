@@ -1,31 +1,24 @@
-// 'use strict';
-
-function Animal() { }
-
-Animal.prototype.speak = function() {
-  return this;
+const rect = {
+  x: 10,
+  y: 10,
+  getSize() {
+    return this.x * this.y;
+  }
 }
 
-Animal.eat = () => {
-  return this;
-}
+const rect2 = Object.create(rect);
+console.log(rect.getSize()); // 10*10 = 100
+console.log(rect2.getSize()); // 10*10 = 100
 
-let obj = new Animal();
-let speak = obj.speak;
-speak(); // global object (in non–strict mode)
 
-console.log(Animal.eat())
+rect2.x = 5;
+console.log(rect.getSize()); // 10*10 = 100
+console.log(rect2.getSize()); // 5*10 = 50
 
-let eat = Animal.eat;
-console.log(eat()); // global object (in non-strict mode)
+Object.getPrototypeOf(rect2).y = 3;
+console.log(rect.getSize()); // 10*3 = 30
+console.log(rect2.getSize()); // 5*3 = 15
 
-const func = function () {
-	return this;
-}
-
-const func2 = () => {
-	return this;
-}
-
-console.log(func());
-console.log(func2());
+Object.getPrototypeOf(rect2).x = 3;
+console.log(rect.getSize()); // 3*3 = 9
+console.log(rect2.getSize()); // 5*3 = 15

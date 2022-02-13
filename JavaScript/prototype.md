@@ -2,7 +2,7 @@
 
 JavaScript는 **prototype** 기반 언어이다. 따라서 java 등의 class 기반 언어와는 좀 다르다.
 
-클래스 간의 상속관계가 형성되고, 해당 클래스로부터 객체를 생성해서 사용하는 것이 아닌, **prototype**이라는 개념을 통해 객체와 객체 간의 직접적인 상속 관계가 형성된다.
+java에서는 클래스 간의 상속관계가 형성되고, 해당 클래스로부터 인스턴스를 생성해서 사용했었다. 하지만 JavaScript에서는 객체마다 **prototype**이라고 불리는 객체와의 `link`를 private property로 가지고 있는데 이를 통해서 객체 간의 직접적인 상속 관계가 형성된다.
 
 > ES6부터 `class`가 추가되었지만 이는 단순히 prototype을 class처럼 사용할 수 있게 해주는 syntactical sugar에 불과하다.
 
@@ -12,7 +12,13 @@ JavaScript는 **prototype** 기반 언어이다. 따라서 java 등의 class 기
 
 ### prototype chain
 
-객체의 property(메소드 포함)를 접근할때 객체 -> 객체의 prototype -> 연결된 객체의 prototype -> ... 순으로 접근한다.
+prototype을 통해 형성된 상속 관계를 prototype chian이라고 한다.
+
+JavaScript에서 객체의 property에 접근할때 객체 -> 객체의 prototype -> 연결된 객체의 prototype -> ... -> `null` 순으로 접근한다.
+
+따라서 객체의 property가 prototype chain에 없어서 `null`에 도달했을 경우 `undefined`가 반환된다.
+
+> 거의 모든 객체는 Object를 상속받아서 사용하기 때문에 `null`이전에 `Object.prototype`을 prototype chain에 가지고 있는 경우가 많다.
 
 우리가 기본적으로 제공되는 `Array` 객체에서 `sort()` 등 다양한 메소드를 활용할 수 있는 이유도 `Array.prototype`에 이러한 메소드들이 정의되어 있기 때문이다.
 
@@ -20,45 +26,72 @@ JavaScript는 **prototype** 기반 언어이다. 따라서 java 등의 class 기
 Object.getPrototypeOf(arr) === Array.prototype; // true
 ```
 
-모든 prototype chain의 끝은 `Object.prototype`이고, 여기서도 해당 property를 찾지 못하면 `null`이 반환된다.
+그리고 property 값을 수정할때에는 prototype chain을 타고가서 값을 찾지 않고 own property로만 취급한다는 점에 주의.
 
-> property와 prototype을 헷갈리지 않도록 주의하자.
->
-> 예를 들어 constructor function의 prototype은 `Function.prototype`이다.
->
-> ```js
-> Object.getPrototypeOf(Array) === Function.prototype; // true
-> Array instanceof Function; // true
-> ```
+```js
+const rect = {
+  x: 10,
+  y: 10,
+  getSize() {
+    return this.x * this.y;
+  }
+}
+
+const rect2 = Object.create(rect);
+console.log(rect.getSize()); // 10*10 = 100
+console.log(rect2.getSize()); // 10*10 = 100
+
+rect2.x = 5; // rect2에 x라는 own property가 생성되고 5라는 값이 할당됨
+console.log(rect.getSize()); // 10*10 = 100
+console.log(rect2.getSize()); // 5*10 = 50
+
+Object.getPrototypeOf(rect2).y = 3;
+console.log(rect.getSize()); // 10*3 = 30
+console.log(rect2.getSize()); // 5*3 = 15
+
+Object.getPrototypeOf(rect2).x = 3;
+console.log(rect.getSize()); // 3*3 = 9
+console.log(rect2.getSize()); // 5*3 = 15. 아까 rect2에 x라는 own property가 생성되었기 때문에 prototype인 rect의 x property 대신 자신의 x property를 사용하기 때문에 9가 아닌 15가 출력된다.
+```
 
 <br>
 
-### `prototype` vs `__proto__`
+### `prototype` vs `[[prototype]]`
 
 처음 공부한다면 헷갈리기 쉬운 개념
 
+```js
+console.log(Array.prototype.__proto__ === Object.prototype); // true
+```
+
 * **`Object.prototype`**
 
-  해당 함수로부터 생성된 객체의 prototype을 가리키는 property
+  해당 함수를 생성자로 갖는 객체를 가리키는 property
 
   ```js
   console.log(Array.prototype.constructor === Array); // true
   ```
 
-* **`Object.__proto__`**
+* **`Object.[[prototype]]`**
 
   객체의 prototype을 저장하는 내부 property
 
+  예전에는 웹브라우저와의 호환성을 위해 javascript 내에서 `__proto__`를 사용했었지만 현재는 사용이 권장되지 않는다. `Object.getPrototypeOf()`을 사용하자.
+  
   ```js
   let arr = [];
   console.log(arr.__proto__ === Array.prototype); // true
+  console.log(Object.getPrototypeOf(arr) === Array.prototype); // true
   ```
+  
+* 특히나 `constructor` 함수에서 헷갈리기 쉬우므로 주의하자.
 
-  그리고 `__proto__`는 예전에 웹브라우저와의 호환성을 위해 이용되던 것으로 현재는 사용이 권장되지 않는다. `Object.getPrototypeOf()`을 사용하자.
+  예를 들어 `constructor` function의 `[[prototype]`은 `Function.prototype`이다.
 
-```js
-console.log(Array.prototype.__proto__ === Object.prototype); // true
-```
+  ```js
+  Object.getPrototypeOf(Array) === Function.prototype  // true
+  Object.getPrototypeOf(Array) === Array.prototype     // false
+  ```
 
 <br>
 
@@ -175,7 +208,7 @@ console.log(Array.prototype.__proto__ === Object.prototype); // true
 
 새로운 객체를 설계할때 사용되는 함수. 이름의 첫글자를 대문자로 사용하는것이 일반적이다.
 
-instance 옆에서 `new` 연산자와 함께 사용된다. 이때 `new` 연산자는 constructor 함수에 기반하여 새로운 instance를 만들어준다.
+instance 옆에서 `new` 연산자와 함께 사용된다. 이때 `new` 연산자는 `this`가 새롭게 생성되는 instance를 가리키도록 만들어준다.
 
 ```js
 function Person(name, age) {
@@ -185,10 +218,6 @@ function Person(name, age) {
 
 let joshua = new Person('Joshua', 23);
 ```
-
-### `this` keyword
-
-constructor 함수 안에서 `this`는 새롭게 생성되는 instance를 가리킨다.
 
 ### Chain Constructor
 
@@ -212,12 +241,30 @@ function Worker (name, age, job) {
 
 prototype에 추가하고 나면 해당 prototype을 상속한 instance들은 모두 해당 method를 사용할 수 있다.
 
+그리고 `this`의 특성상 `this`가 해당 메소드를 property로 갖는 객체를 가리키지 않고, 해당 메소드를 호출한 객체를 가리키기 때문에 자연스러운 상속이 가능하다.
+
 ```js
-Person.prototype.introduce = function {
-    return `Hi my name is ${this.name}!`;
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+Person.prototype.introduce = function () {
+  return `Hi my name is ${this.name}!`;
 }
 
-joshua.introduce(); // Hi my name is Joshua!
+let joshua = new Person('Joshua', 23);
+console.log(joshua.introduce()); // Hi my name is Joshua!
+
+function Worker (name, age, job) {
+  Person.call(this, name, age);
+
+  this.job = job;
+}
+
+Object.setPrototypeOf(Worker.prototype, Person.prototype);
+
+const james = new Worker('james', 24, 'programmer');
+console.log(james.introduce()); // Hi my name is james!
 ```
 
 **이때 method를 arrow function으로 만들어서는 안된다는 것에 주의하자.**<br>arrow function의 특성상 `this`가 해당 객체가 아닌 전역 객체를 가리키게 된다.
@@ -271,6 +318,8 @@ Java 등의 클래스 기반 언어에 익숙하다면 `class`를 이용해 기�
   
   * static initialization block들을 통해 유연하게 static property들을 초기화 할 수 있다.
   
+    > 단 safari, samsung internet 등 static initialization block이 지원되지 않는 브라우저가 꽤 있기 때문에 사용에 주의하는게 좋을 것 같다.
+    
     ```js
     class ClassWithStaticInitializationBlock {
       static staticProperty1 = 'Property 1';
@@ -280,8 +329,89 @@ Java 등의 클래스 기반 언어에 익숙하다면 `class`를 이용해 기�
       }
     }
     ```
-  
     
+  
+* ### field declarations
+
+  * instance property들을 명시적으로 선언할 수 있다.
+
+  * default값을 지정하는 것도 가능하다.
+
+  * fields 앞에 `#`을 붙여서 private하게 선언할 수 있다.
+
+    그리고 private field는 field declaration을 통해서만 선언할 수 있다.
+
+    ```js
+    class MyClass {
+        a = 0;
+        #b;
+        constructor(a, b) {
+            this.a = a;
+            this.b = b;
+        }
+    }
+    ```
+
+* ### sub classing with `extends`
+
+  * 클래스 간의 상속 관계를 위해 `extends` 키워드가 제공된다.
+
+  * `extends` 키워드를 사용해 상속받은 클래스를 명시하면, `super` 키워드를 통해 부모 클래스의 constructor를 사용할 수 있다. 그리고 부모 클래스가 자식 클래스의 prototype으로 자동으로 지정된다.
+
+  * `extends` 키워드는 클래스에서만 사용이 가능하고 construct가 가능하지 않은 객체는 상속받을 수 없다.
+
+  * 추가 개념
+
+    * `Symbol.species`를 이용해서 `map()` 등의 함수 결과가 도출될때 사용할 constructor 함수를 지정할 수 있다.
+
+    * 기본적으로 javascript는 다중상속을 지원하지 않지만 superclass를 입력받아서 해당 superclass를 상속받은 subclass를 반환하는 함수를 이용해 여러 개의 tooling 클래스를 상속받은 `mix-in`을 구현할 수 있다.
+
+      ```js
+      let calculatorMixin = Base => class extends Base {
+        calc() { }
+      };
+      
+      let randomizerMixin = Base => class extends Base {
+        randomize() { }
+      };
+      
+      class Foo { }
+      class Bar extends calculatorMixin(randomizerMixin(Foo)) { }
+      ```
+
+* ### `super` keyword
+
+  * constructor 뿐만 아니라 다른 메소드 또한 불러올 수 있다.
+
+* 그리고 동일한 이름의 클래스를 여러 번 선언할 수 없다.
+
+* 위의 `Person`, `Worker` 예제를 `class`를 이용해 작성한 코드를 보면서 확인해보자.
+
+  ```js
+  class Person {
+  	constructor(name, age) {
+  		this.name = name;
+  		this.age = age;
+  	}
+  
+  	introduce() {
+  		return `Hi my name is ${this.name}!`;
+  	}
+  }
+  
+  let joshua = new Person("Joshua", 23);
+  console.log(joshua.introduce()); // Hi my name is Joshua!
+  
+  class Worker extends Person {
+    constructor(name, age, job) {
+      super(name, age);
+      this.job = job;
+    }
+  }
+  
+  const james = new Worker("james", 24, "programmer");
+  console.log(james.introduce()); // Hi my name is james!
+  ```
 
 
 > **참고자료**
@@ -291,15 +421,37 @@ Java 등의 클래스 기반 언어에 익숙하다면 `class`를 이용해 기�
 
 <br>
 
-## `classical inheritance` vs `prototypal inheritance`
+## prototypal inheritance
 
-`📕 객체지향의 사실과 오해`를 읽다가 생각 난건데 클래스간에 상속 관계가 형성되는 것이 아니라 객체 간에 상속 관계가 형성되는 것이기 때문에 상위 객체가 변동되면 하위 객체에 직접적인 영향이 있다는 차이점도 있을 것 같다.
-
-> 클래스 간의 상속관계가 있더라도 해당 클래스로부터 생성된 객체끼리는 상태가 변동되더라도 서로 영향을 주지 않을 거라는 생각이 들었다.
+javascript는 prototype 기반 언어로 prototypal inheritance를 지원한다. 이는 java 등의 언어에서 지원하는 classical inheritance와 차이점이 있다.
 
 * https://stackoverflow.com/questions/19633762/classical-inheritance-vs-prototypal-inheritance-in-javascript/19640910#:~:text=Classical%20inheritance%20is%20limited%20to,also%20objects%20inheriting%20from%20prototypes.
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
-* https://www.geeksforgeeks.org/explain-prototype-inheritance-in-javascript/
+
+  * https://stackoverflow.com/questions/2800964/benefits-of-prototypal-inheritance-over-classical
+
+    * 초기에 만들어질때 java와 비슷해 보이기 위해 constructor 패턴을 사용해서 만들어졌지만 prototypal 패턴을 사용함으로써 얻을수있는 이점이 더 많다.
+
+    * ### dynamic
+
+      실행 중에 prototype의 property를 자유롭게 추가, 수정할 수 있다.
+
+    * ### powerful & less redundant
+
+      다중 상속이 가능하기 때문
+
+    * ### simple
+
+      객체와 객체간의 연결만이 존재한다
+
+  * http://aaditmshah.github.io/why-prototypal-inheritance-matters/
+
+    `new` keyword를 사용해서 객체를 생성하면 `apply()`를 사용할 수 없는 등 javascript의 함수형 측면을 활용할 수 없다.
+
+    따라서 prototypal inheritance를 이용하고, `new` keyword는 가급적 사용하지 않는 것이 좋다고 한다.
+
+* `📕 객체지향의 사실과 오해`를 읽다가 생각 난건데 클래스간에 상속 관계가 형성되는 것이 아니라 객체 간에 상속 관계가 형성되는 것이기 때문에 상위 객체가 변동되면 하위 객체에 직접적인 영향이 있다는 차이점도 있을 것 같다.
+
+  > 클래스 간의 상속관계가 있더라도 해당 클래스로부터 생성된 객체끼리는 상태가 변동되더라도 서로 영향을 주지 않을 거라는 생각이 들었다.
 
 <br><br>
 

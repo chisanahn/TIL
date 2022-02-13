@@ -20,8 +20,6 @@ property name으로 `string`이나 `symbol`을 사용할 수 있다.
 
 <br>
 
-
-
 ### property 접근 방법
 
 #### 1. dot notation

@@ -3,9 +3,15 @@
 -   [종만북](https://github.com/chisan01/TIL/tree/main/Algorithm/JongmanBook)
 -   [ICPC 준비 - 2021 SW개발능력향상 프로그램](https://github.com/chisan01/TIL/tree/main/Algorithm/ICPC)
 -   [BOJ](https://github.com/chisan01/TIL/tree/main/Algorithm/BOJ)
--   ## 기타
+-   프로그래머스
 
 ### 알고리즘 공부 전략
+
+* 예전에 C++로 한창 준비했었고, 한동안 java를 주로 사용하다가 요즘은 javascript를 공부 중이다.
+
+  구체적인 문법들은 공식문서를 찾아보면서 하면 코딩하는데 문제가 있지는 않지만 확실히 문제푸는데 시간이 좀 오래 걸린다.
+
+  알고리즘에 한해서는 언어를 하나 정해서 반복 숙달할 필요가 있을 듯.
 
 https://plzrun.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C%ED%92%80%EC%9D%B4PS-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0
 

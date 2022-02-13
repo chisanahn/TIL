@@ -298,6 +298,8 @@ for (variable of iterable) {
 
 ## Function
 
+JavaScript에서 함수도 기본적으로 객체이기 때문에 property들을 가질 수 있다. 대표적인 property로는 `prototype`이 있다.
+
 ### `name` property
 
 함수의 이름을 나타내는 property. 함수를 생성하는 방법에 따라 자동으로 지정된다.
