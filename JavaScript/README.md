@@ -18,14 +18,49 @@
 
 <br><br>
 
-## Array
+## Types
 
-* ### 선언방법
+* ### Primitive
 
-  ```js
-  let arr = [];
-  let arr2 = new Array();
-  ```
+  * #### Number
+
+  * #### BigInt
+
+  * #### String 
+
+  * #### null
+
+  * #### undefined
+
+  * #### Boolean
+
+  * #### [Symbol](./symbol.md)
+
+* ### Object
+
+  * #### Function
+
+  * #### Array
+
+  * #### Date
+
+  * #### RegExp
+
+  * #### Error
+
+  * #### Math
+
+<br><br>
+
+## Hoisting
+
+`var`로 선언된 변수나 함수의 선언은 해당 scope의 맨 위로 옮겨진다.
+
+변수의 경우 초기화는 되지 않는다.
+
+> **참고자료**
+>
+> Rascia T. Understanding Variables, Scope, and Hoisting in JavaScript. Digitalocean.com. Published February 20, 2018. Accessed February 13, 2022. https://www.digitalocean.com/community/tutorials/understanding-variables-scope-hoisting-in-javascript
 
 <br><br>
 
@@ -58,91 +93,47 @@
 
   객체에 저장된 primitive value를 반환하는 `valueOf()` 메소드를 공통적으로 가지고 있다.
 
-### symbol
-
-**primitive**의 한 종류. **유일성**이 보장되는 값이다.
-
-`Symbol()` 을 이용해서 생성할 수 있고, description을 가질 수 있지만 디버깅 목적으로만 사용된다.
-
-```js
-let Sym1 = Symbol("Sym")
-let Sym2 = Symbol("Sym")
-
-console.log(Sym1 === Sym2) // returns "false"
-```
-
-* `symbol.description`<br>description 반환
-
-* 일반적인 wrapper class와 달리 **`new` keyword**를 사용하면 `TypeError`가 발생한다.
-
-  ```js
-  let sym = new Symbol(); // TypeError
-  ```
-
-주로 객체에 유니크한 property key를 추가하기 위해 사용된다. Symbol은 유일하기 때문에 행여나 동일한 key를 사용하는 property가 존재할 가능성을 없앨 수 있다.
-
-* **hidden from any mechanisms** other code will typically use to access the object<br>예를 들어서 `for...in`이나 `Object.getOwnPropertyNames()`을 사용할때 Symbol을 key로 사용하는 property는 접근되지 않는다.
-
-  이는 약한 캡슐화, 정보은닉을 가능하게 해준다.
-
-* 객체에서 Symbol에 접근하기 위해서는 `Object.getOwnPropertySymbols()`를 사용해야 한다. Symbols
-
-* #### global Symbol registry
-
-  key값마다 Symbol을 하나씩 등록해서 공유해서 사용할 수 있다.
-
-  * **`Symbol.for("key")`**<br>key 값에 매칭되는 global symbol 반환<br>없는 경우 symbol을 새로 생성해서 global Symbol registry에 등록한다.
-  * **`Symbol.keyFor(sym)`**<br>해당 symbol에 해당되는 shared symbol key 반환<br>없는 경우 undefined 반환
-
-* **`Symbol.for("key")`**은 key값에 항상 똑같은 Symbol을 반환해준다. key 값에 매칭되는 Symbol이 없는 경우 새로 생성해서 **global Symbol registry**에 등록한다.
-
-* 일반적인 객체와 달리 string으로 자동형변환 되지 않는다.<br>string으로 변환하고 싶다면 `symbol.toString()`을 이용해야 한다.
-
-* #### Constants
-
-  Symbol 클래스는 `well-known symbols`라고 불리는 상수들을 가지고 있다.
-
-  * `Symbol.iterator`
-
-    객체가 iterate되어야 할때 `@@iterator` 메소드가 호출된다.
-
-    인자가 없고 interator를 반환하는 함수이다.
-
-    예시: `Array.prototype[@@iterator]()`
-    
-    ```js
-    var arr = ['a', 'b', 'c'];
-    var eArr = arr[Symbol.iterator]();
-    console.log(eArr.next().value); // a
-    console.log(eArr.next().value); // b
-    console.log(eArr.next().value); // c
-    ```
-    
-    참고로 `Array.prototype.values()`와 동일한 함수다.
-    
-    ```js
-    Array.prototype.values === Array.prototype[Symbol.iterator]      //true
-    ```
-  
-  <br>
+<br>
 
 > **참고자료**
 >
-> 1. Primitive - MDN Web Docs Glossary: Definitions of Web-related terms | MDN. Mozilla.org. Published October 8, 2021. Accessed February 2, 2022. https://developer.mozilla.org/en-US/docs/Glossary/Primitive
-> 2. Symbol - MDN Web Docs Glossary: Definitions of Web-related terms | MDN. Mozilla.org. Published October 8, 2021. Accessed February 2, 2022. https://developer.mozilla.org/en-US/docs/Glossary/Symbol
-> 3. Symbol - JavaScript | MDN. Mozilla.org. Published January 17, 2022. Accessed February 2, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
-> 4. Symbol.for() - JavaScript | MDN. Mozilla.org. Published July 20, 2021. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/for
-> 5. Symbol.keyFor() - JavaScript | MDN. Mozilla.org. Published July 20, 2021. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/keyFor
-> 6. Symbol.iterator - JavaScript | MDN. Mozilla.org. Published July 20, 2021. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/iterator
-> 7. Array.prototype[@@iterator]() - JavaScript | MDN. Mozilla.org. Published July 20, 2021. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/@@iterator
+> Primitive - MDN Web Docs Glossary: Definitions of Web-related terms | MDN. Mozilla.org. Published October 8, 2021. Accessed February 2, 2022. https://developer.mozilla.org/en-US/docs/Glossary/Primitive
 
 <br><br>
 
 ## Object
 
+* ### [property](./object-property.md)
+
+* ### JSON
+
+  JavaScript Object Notation
+
+  * ##### 일반적인 JavaScript 객체와의 차이점
+
+    * key가 quotes로 둘러싸여 있다.
+
+    * function을 value로 가질 수 없는 등 value에 제약이 있다.
+
+  * ##### JSON methods
+
+    * `JSON.stringify()` : JSON 객체 -> JSON 문자열
+
+    * `JSON.parse()` : JSON 문자열 -> JSON 객체
+    
+      <br>
+  
+  > **참고자료**
+  >
+  > Tagliaferri L. How To Work with JSON in JavaScript. Digitalocean.com. Published December 9, 2016. Accessed February 13, 2022. https://www.digitalocean.com/community/tutorials/how-to-work-with-json-in-javascript
+
 <br><br>
 
 ## [Immutability](./immutability.md)
+
+<br><br>
+
+## [Prototypes and Inheritance](./prototype.md)
 
 <br><br>
 
@@ -205,163 +196,18 @@ Array나 Map의 경우 기본적으로 해당 메소드가 구현되어져 있�
 
 <br><br>
 
-## for 반복문
+## [for 반복문](./for-loop.md)
 
-### for...in
-
-객체의 enumerable property에 대해서 반복을 실행한다. (Symbol은 제외)
-
-상속받은 property에도 접근한다.
-
-```js
-for (variable in object) {
-    // statement
-}
-```
-
-`variable`에는 `propertyName`이 할당된다.
-
-```js
-var obj = {a: 1, b: 2, c: 3};
-
-for (const prop in obj) {
-  console.log(`obj.${prop} = ${obj[prop]}`);
-}
-
-// Output:
-// "obj.a = 1"
-// "obj.b = 2"
-// "obj.c = 3"
-```
-
-* 메소드도 일종의 property이다. 하지만 예를 들어 String의 경우 `indexOf()` 등의 메소드는 non-enumerable property로 정의되어 있기 때문에 접근되지 않는다.
-
-* 반복 도중에 현재 방문한 property 외에 해당 객체의 property를 추가, 수정, 삭제하면 오류가 날 수 있으므로 하지 않는 것이 좋다.
-
-* #### Array iteration
-
-  index 순서대로 방문하는 것이 보장되지 않으므로 접근 순서가 중요할 경우 `Array.prototype.forEach()`나 `for...of`를 사용해야 한다.
-
-* property name을 확인할 수 있기 때문에 디버깅에 유용하게 사용된다.
-
-### for...of
-
-iterable한 객체에 대해서 iterable을 수행하는 반복문을 만든다.
-
-> 예전에는 `for...of`가 property value에 대해서 반복을 수행하는건줄 알았는데 이는 iterable object가 어떻게 정의되어 있는가에 따라 다르다.
-
-```js
-for (variable of iterable) {
-  statement
-}
-```
-
-* `NodeList` 등의 `DOM collection`에 대해서도 수행할 수 있다.
-
-  ```js
-  const articleParagraphs = document.querySelectorAll('article > p');
-  
-  for (const paragraph of articleParagraphs) {
-    paragraph.classList.add('read');
-  }
-  ```
-
-* generators에 대해서도 수행할 수 있다.
-
-  ```js
-  function* fibonacci() { // a generator function
-    let [prev, curr] = [0, 1];
-    while (true) {
-      [prev, curr] = [curr, prev + curr];
-      yield curr;
-    }
-  }
-  
-  for (const n of fibonacci()) {
-    console.log(n);
-    // truncate the sequence at 1000
-    if (n >= 1000) {
-      break;
-    }
-  }
-  ```
-
-
-<br>
-
-> **참고자료**
->
-> 1. for...in - JavaScript | MDN. Mozilla.org. Published January 5, 2022. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
-> 2. for...of - JavaScript | MDN. Mozilla.org. Published January 21, 2022. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of
+* for...in
+* for...of
 
 <br><br>
 
-## Function
-
-JavaScript에서 함수도 기본적으로 객체이기 때문에 property들을 가질 수 있다. 대표적인 property로는 `prototype`이 있다.
-
-### `name` property
-
-함수의 이름을 나타내는 property. 함수를 생성하는 방법에 따라 자동으로 지정된다.
-
-### `this`
-
-javascript에서 `this`가 가리키는 값은 함수가 어떻게 호출되느냐에 따라 달라진다.
-
-* 기본적으로 `global object`로 autobinding된다.
-
-  strict mode에서는 autobinding되지 않기 때문에 따로 지정하지 않는다면 `undefined` 값을 갖는다.
-
-* #### `bind()`
-
-  함수가 호출되는 방식에 상관없이 `this`의 값을 설정할 수 있다.
-
-* #### arrow function
-
-  it retains the `this` value of the enclosing lexical context
-
-### Arrow Functions
-
-* #### `this`
-
-  arrow function에서 `this`는 lexical this. 즉, 상위 환경의 this를 그대로 계승한다.
-
-### arguments
-
-* #### Rest parameters
-
-  여러 개의 인자를 **Array** 형태로 받는다.
-
-  * 함수 인자 개수를 유연하게 가져갈 수 있다.
-  * Array의 method를 사용할 수 있다.
-
-  ```js
-  function f(a, b, ...theArgs) {
-    // ...
-  }
-  ```
-
-<br>
-
-> **참고자료**
->
-> 1. this - JavaScript | MDN. Mozilla.org. Published July 20, 2021. Accessed February 2, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#method_binding
-> 2. 김솔샤르. [자바스크립트] arrow function과 this. 김솔샤르의 인사이트. Published August 12, 2018. Accessed February 1, 2022. https://kim-solshar.tistory.com/57
-> 3. Rest parameters - JavaScript | MDN. Mozilla.org. Published January 7, 2022. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
-> 4. Function.name - JavaScript | MDN. Mozilla.org. Published January 28, 2022. Accessed February 12, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name
-> 5. Classes - JavaScript | MDN. Mozilla.org. Published January 19, 2022. Accessed February 12, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+## [Array](./array.md)
 
 <br><br>
 
-## [Script Loading Strategies](./script_loading_strategies.md)
-
-<br><br>
-
-## [Prototypes and Inheritance](./prototype.md)
-
-<br><br>
-
-## Event
+## [Function](./funct)
 
 <br><br>
 
@@ -370,6 +216,10 @@ javascript에서 `this`가 가리키는 값은 함수가 어떻게 호출되느�
 <br><br>
 
 ## [Ajax](./ajax.md)
+
+<br><br>
+
+## [Script Loading Strategies](./script_loading_strategies.md)
 
 <br><br>
 
@@ -382,3 +232,20 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 ## Client-side web APIs
 
 https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs
+
+<br><br>
+
+## [Event](./event.md)
+
+<br><br>
+
+## 기타
+
+### CSS vs JS animation performance
+
+기본적으로 성능면에서 차이는 없지만 CSS의 경우 GPU를 통해 처리할 수 있기 때문에 성능면에서 더 뛰어나다. 따라서 가능한 CSS를 사용하는 것이 좋다.
+
+> **참고자료**
+>
+> CSS and JavaScript animation performance - Web Performance | MDN. Mozilla.org. Published February 2, 2022. Accessed February 13, 2022. https://developer.mozilla.org/en-US/docs/Web/Performance/CSS_JavaScript_animation_performance
+

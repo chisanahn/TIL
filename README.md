@@ -1,3 +1,13 @@
+# 프로그래밍 언어
+
+* ### C++
+
+* ### Java
+
+* ### [JavaScript](./JavaScript/README.md)
+
+<br>
+
 # [Algorithm](https://github.com/chisan01/TIL/tree/main/Algorithm)
 
 * ### 알고리즘 개념
@@ -5,7 +15,7 @@
   * DP
   * ...
 
-* ### 언어별 알아둬야 할 문법
+* ### 언어별 헷갈리는 문법
 
   * C++
     * pair
@@ -31,10 +41,6 @@
 <br>
 
 # 웹
-
-* 개발 로드맵
-  * https://roadmap.sh/
-  * https://www.youtube.com/watch?v=NeEaTeYcFhE&list=PLv2d7VI9OotQ1F92Jp9Ce7ovHEsuRQB3Y
 
 * ### web architecture 101
 

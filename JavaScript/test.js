@@ -1,10 +1,13 @@
-const rect = {
-  x: 10,
-  y: 10,
-  getSize() {
-    return this.x * this.y;
-  }
+const MyRect = function (x, y) {
+  this.x = x;
+  this.y = y;
 }
+
+MyRect.prototype.getSize = function() {
+  return this.x * this.y;
+}
+
+const rect = new MyRect(10, 20);
 
 const rect2 = Object.create(rect);
 console.log(rect.getSize()); // 10*10 = 100

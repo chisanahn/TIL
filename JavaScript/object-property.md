@@ -204,7 +204,7 @@ console.log(obj.sortedA); // [ 2, 3, 10 ]
 
 ### Enumerability and ownership of properties
 
-property의 enumeraibility와 ownership에 따라 메소드 별로 해당 property에 접근할 수 있는지 여부가 결정된다.
+property의 enumeraibility와 ownership에 따라 메소드별로 해당 property에 접근할 수 있는지 여부가 결정된다.
 
 [MDN에 메소드별로 어떤 property들을 접근할 수 있는지 표 형식으로 잘 정리되어 있다](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties#detection_table)
 
@@ -370,9 +370,13 @@ prop in object
 빈 객체를 생성한 후 property를 추가하는 식으로 객체를 생성할 수 있다.
 
 ```js
-const obj = new Object();
-const obj2 = {};
-const obj3 = Object.create(null);
+const rect = new Object(); // const obj = {};
+
+rect['x'] = 10;
+rect.y = 10;
+rect.getSize = function() {
+    return this.x * this.y;
+}
 ```
 
 ### 1. object initializer
@@ -380,14 +384,31 @@ const obj3 = Object.create(null);
 `,`로 여러가지 property를 구분해서 객체를 초기화 할 수 있다.
 
 ```js
-const myCar = {
-  make: 'Ford',
-  model: 'Mustang',
-  year: 1969
-};
+const rect = {
+  x: 10,
+  y: 10,
+  getSize() {
+    return this.x * this.y;
+  }
+}
 ```
 
 ### 2. Construction 함수 이용
+
+```js
+const MyRect = function (x, y) {
+    this.x = x;
+    this.y = y;
+}
+
+MyRect.prototype.getSize = function() {
+    return this.x * this.y;
+}
+
+const rect = new MyRect(10, 20);
+```
+
+
 
 <br><br>
 

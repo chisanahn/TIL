@@ -1,14 +1,30 @@
 # Immutability
 
+<br>
+
 ## Primitive datatype
 
 JavaScript에서 primitive datatype은 모두 immutable하다.
 
 <br>
 
+## `const`
+
+`const` keyword를 사용해 immutable한 변수를 선언할 수 있다.
+
+여기서 immutable한 변수라는 것은 변수의 값을 변경할 수 없다는 것을 의미하고, 객체의 참조변수인 경우 해당 객체가 immutable하지 않은 경우 객체를 수정하는 것은 가능하다.
+
+```js
+const obj = {};
+obj.a = 10;
+obj = {}; // fail
+```
+
+<br>
+
 ## Object
 
-그리고 객체의 경우 내용을 수정할 수 없는 객체를 **immutable object**라고 한다.<br>immutable object를 사용함으로써 다음과 같은 장점을 얻을 수 있다.
+그리고 객체의 경우 내용을 수정할 수 없는 객체를 **immutable object**라고 한다.<br>immutable object를 사용함으로써 다음과 같은 장점을 얻을 수 있다.
 
 * **성능 개선**<br>추후에 내용이 변경될 가능성이 없기 때문
 * **메모리 사용량 감소**<br>동일한 내용의 객체를 여러 개 사용할 이유가 없다.
