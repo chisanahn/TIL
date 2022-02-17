@@ -225,3 +225,31 @@ https://ilsognobella.tistory.com/29
   `Ctrl+P` 눌러서 명령팔레트로 이동 후 `#`을 입력한 뒤 메소드 이름 검색.
 
   https://stackoverflow.com/questions/45440198/how-search-for-method-in-vscode
+  
+* #### Quick fix
+
+  const 추가 등의 작업을 빠르게 수행할 수 있다.
+
+  단축키 `Ctrl+,`. 
+
+<br>
+
+## 상태관리 라이브러리 getX
+
+https://pub.dev/packages/get
+
+* 상태관리자
+
+* 반응형 상태관리자
+
+  stateless widget에서도 변화를 줄 수 있다.
+
+* Stream Builder보다 더 간편하게 실시간 데이터 변경사항을 처리할 수 있다.
+
+React에도 `Redux`라고 상태관리라이브러리가 있는데 react와 flutter에서 상태가 동일한 개념일지, `Redux`와 `getX`가 언어가 다르고 비슷한 기능을 수행한는건지 궁금해졌다.
+
+<br>
+
+## Google play store에 앱출시
+
+https://play.google.com/console/about/?utm_source=google&utm_medium=cpc&utm_campaign=Console2020-Branded&utm_term=google%20play%20console%7ce&utm_content=454036411622&gclid=Cj0KCQiAu62QBhC7ARIsALXijXTftvBqRaAUIweLw-yvJxrbkAho92eh1VPrKzP7a7mDZY4fCN3woNwaAh-zEALw_wcB
