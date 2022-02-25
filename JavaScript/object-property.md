@@ -2,6 +2,8 @@
 
 object는 단순하게 생각하면 property의 집합이라고 할 수 있다.
 
+<br>
+
 ## Property
 
 간단하게 object에 첨부된 변수라고 생각하면 된다
