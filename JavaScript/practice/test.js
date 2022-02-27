@@ -1,27 +1,36 @@
-const MyRect = function (x, y) {
-  this.x = x;
-  this.y = y;
+function timeoutPromiseResolve(interval) {
+	return new Promise((resolve, reject) => {
+		setTimeout(function () {
+			resolve("successful");
+		}, interval);
+	});
 }
 
-MyRect.prototype.getSize = function() {
-  return this.x * this.y;
+function timeoutPromiseReject(interval) {
+	return new Promise((resolve, reject) => {
+		setTimeout(function () {
+			reject("error");
+		}, interval);
+	});
 }
 
-const rect = new MyRect(10, 20);
+async function timeTest() {
+	const timeoutPromiseResolve1 = timeoutPromiseResolve(5000);
+	const timeoutPromiseReject2 = timeoutPromiseReject(2000);
+	const timeoutPromiseResolve3 = timeoutPromiseResolve(3000);
 
-const rect2 = Object.create(rect);
-console.log(rect.getSize()); // 10*10 = 100
-console.log(rect2.getSize()); // 10*10 = 100
+	await timeoutPromiseResolve1;
+	await timeoutPromiseReject2;
+	await timeoutPromiseResolve3;
+}
 
+let startTime = Date.now();
 
-rect2.x = 5;
-console.log(rect.getSize()); // 10*10 = 100
-console.log(rect2.getSize()); // 5*10 = 50
-
-Object.getPrototypeOf(rect2).y = 3;
-console.log(rect.getSize()); // 10*3 = 30
-console.log(rect2.getSize()); // 5*3 = 15
-
-Object.getPrototypeOf(rect2).x = 3;
-console.log(rect.getSize()); // 3*3 = 9
-console.log(rect2.getSize()); // 5*3 = 15
+timeTest()
+	.then(() => {})
+	.catch((e) => {
+		console.log(e);
+		let finishTime = Date.now();
+		let timeTaken = finishTime - startTime;
+		console.log("Time taken in milliseconds: " + timeTaken);
+	});

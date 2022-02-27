@@ -430,6 +430,8 @@ const rect = new MyRect(10, 20);
 
 array의 value나 object의 property들을 쪼개서 개별적인 변수에 할당할 수 있다.
 
+배열은 `[]`, 객체는 `{}`를 사용하는 것에 주의하자.
+
 ```js
 const foo = ['one', 'two', 'three'];
 
@@ -437,6 +439,10 @@ const [red, yellow, green] = foo;
 console.log(red); // "one"
 console.log(yellow); // "two"
 console.log(green); // "three"
+
+({ a, b } = { a: 10, b: 20 });
+console.log(a); // 10
+console.log(b); // 20
 ```
 
 여러 개의 변수에 동시에 값을 할당할때에도 유용하게 사용할 수 있다.
