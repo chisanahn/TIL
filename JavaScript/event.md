@@ -4,8 +4,9 @@
 
 ## event handler & event listener
 
-* `addEventListener()`
+* `addEventListener()`를 이용해서 특정 이벤트에 대한 eventlistener를 추가할 수 있다.
 * event가 발생하면 `Event` 객체가 eventlistener에 전달된다.
+* `removeEventListener()`를 이용해서 특정 이벤트에 대한 eventlistener를 제거할 수 있다.
 
 <br>
 
