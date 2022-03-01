@@ -20,50 +20,74 @@ Ajax를 통해 웹페이지에 필요한 부분만 동적으로 수정하는 것
 
 ## web API
 
-* ### async callback
+### async callback
 
-  * event listener	
+* event listener	
 
-  * XMLHttpRequest
+* XMLHttpRequest
 
-  * 일정 시간 뒤에 실행되는 함수
+* 일정 시간 뒤에 실행되는 함수
 
-    이전에 말했듯이 자바스크립트는 싱글 쓰레드 언어이기 때문에 메인 쓰레드에 자리가 생겨야 실행될 수 있다. 따라서 사용자가 지정한 시간이 끝나더라도 메인 쓰레드에 자리가 없다면 곧바로 실행되지 않는다.
+  이전에 말했듯이 자바스크립트는 싱글 쓰레드 언어이기 때문에 메인 쓰레드에 자리가 생겨야 실행될 수 있다. 따라서 사용자가 지정한 시간이 끝나더라도 메인 쓰레드에 자리가 없다면 곧바로 실행되지 않는다.
 
-    또한 모든 작업은 메인 쓰레드에서 실행되기 때문에 남용할 경우 프로그램이 느려질 수 있으므로 주의해야 한다.
-    
-    * **`setTimeout()`**
-    
-      설정한 시간 뒤에 콜백 함수가 실행된다.
-    
-      `clearTimeout()`으로 실행 도중에 중지시킬 수 있다.
-    
-    * **`setInterval()`**
-    
-      설정한 시간 간격을 갖고 콜백 함수가 계속 실행된다.
-    
-      `clearInterval()`로 실행 도중에 중지시킬 수 있다.
-    
-    * **`requestAnimationFrame()`**
-    
-      애니메이션을 만들기에 최적화된 함수.
-    
-      기본적으로 화면이 repaint 되기 전 인자로 전달받은 콜백 함수를 실행시키고, 사용환경 등을 고려해서 60fps에 최대한 맞춰서 실행된다.
-    
-      인자로 전달할 콜백함수는 `timestamp`라는 `requestAnimationFrame()`이 시작된 시간을 parameter로 전달받아서 사용할 수 있다.
-    
-      `cancleAnimationFrame()`로 실행 도중에 중지시킬 수 있다.
-
-* ### fetch
-
-  최근 XMLHttpRequest보다 많이 사용되는 Web API. Promise를 반환한다. 성공적으로 완료될 경우, response 객체를 반환한다.
+  또한 모든 작업은 메인 쓰레드에서 실행되기 때문에 남용할 경우 프로그램이 느려질 수 있으므로 주의해야 한다.
   
-  * response.ok
-  * response.status
+  * **`setTimeout()`**
+  
+    설정한 시간 뒤에 콜백 함수가 실행된다.
+  
+    `clearTimeout()`으로 실행 도중에 중지시킬 수 있다.
+  
+  * **`setInterval()`**
+  
+    설정한 시간 간격을 갖고 콜백 함수가 계속 실행된다.
+  
+    `clearInterval()`로 실행 도중에 중지시킬 수 있다.
+  
+  * **`setTimeout()` 재귀적으로 호출 vs `setInterval()`**
+  
+    * `setTimeout()` 재귀적 사용
+  
+      콜백 함수가 종료되는 시간을 기준으로 동작
+  
+      콜백 함수가 다시 실행되기까지 걸리는 시간이 무조건 설정한 시간보다 길다.
+  
+    * `setInterval()`
+  
+      콜백 함수가 실행되는 시간을 기준으로 동작
+  
+      따라서 콜백 함수가 다시 실행되기까지 걸리는 시간이 설정한 시간보다 짧을 수 있다.
+  
+    따라서 콜백 함수가 실행하는데 오래 걸리는 경우, `setTimeout()`을 재귀적으로 사용하는 것이 더 좋다.
+  
+  * **`requestAnimationFrame()`**
+  
+    애니메이션을 만들기에 최적화된 함수.
+  
+    기본적으로 화면이 repaint 되기 전 인자로 전달받은 콜백 함수를 실행시키고, 사용환경 등을 고려해서 60fps에 최대한 맞춰서 실행된다.
+  
+    인자로 전달할 콜백함수는 `timestamp`라는 `requestAnimationFrame()`이 시작된 시간을 parameter로 전달받아서 사용할 수 있다.
+  
+    `cancleAnimationFrame()`로 실행 도중에 중지시킬 수 있다.
+
+이러한 callback 함수를 사용하는 API들은 promise 이전에 등장한 개념이기 때문에 동시에 병렬적으로 처리가 되지 않는 등 효율성이나 유연성이 떨어진다. 꼭 필요한 경우에만 사용하자.
+
+### fetch
+
+XMLHttpRequest과 하는 역할은 비슷하지만 Promise를 반환한다.
+
+성공적으로 완료될 경우, response 객체를 반환한다.
+
+* response.ok
+* response.status
+
+<br>
 
 ## Promises
 
 연산이 완료되기 전, 연산의 중간 상태를 나타내는 객체
+
+> 예전에 Promise와 Web API에 대해서 좀 헷갈렸는데 Promise는 Web API 등 비동기적인 작업들을 보다 쉽게 처리하기 위한 일종의 도구라고 생각하면 될 것 같다.
 
 * pending : 작업이 처리되고 있는 상태
 * resolved : 작업이 완료된 상태
@@ -132,7 +156,7 @@ Promise를 좀 더 간편하게 사용할 수 있게 도와주는 synctactic sug
 
   `await`을 사용하면 해당 함수의 promise가 resolve되기 전까지 다음 줄로 넘어가지 않는다.
   
-  함수가 fullfill되고 나면 결과값을 반환한다.
+  함수가 fullfill되고 나면 결과값을 반환한다.
 
 * `async` 함수는 promise를 반환하기 때문에 `await`와 `then`, `catch` 등 기존 promise 처리 방식을 결합해서 좀 더 유연하게 코드를 작성하는 것도 가능하다.
 
@@ -165,9 +189,6 @@ Promise를 좀 더 간편하게 사용할 수 있게 도와주는 synctactic sug
   }
   ```
 
-  
-
-
 
 <br><br>
 
@@ -197,30 +218,6 @@ Promise를 좀 더 간편하게 사용할 수 있게 도와주는 synctactic sug
 
 <br>
 
-##### Q. Promise라는 개념은 web api와는 다르게 동작하나?
-
-##### Q. web API가 아닌 사용자 정의 함수 async, await 함수는 어떤 방식으로 처리될까?
-
-promise는 aysnc operation을 보다 간편하게 처리하기 위한 도구에 불과하고 비동기적인 작업은 모두 web API를 통해서 이루어지는건가?
-
-<br>
-
-##### Q. `setTimeout()`을 재귀적으로 호출 vs `setInterval()`
-
-* **`setInterval()`**
-
-  콜백 함수가 실행되는 시간을 기준으로 동작
-
-  따라서 콜백 함수가 다시 실행되기까지 걸리는 시간이 설정한 시간보다 짧을 수 있다.
-
-* **`setTimeout()` 재귀적 사용**
-
-  콜백 함수가 종료되는 시간을 기준으로 동작
-
-  콜백 함수가 다시 실행되기까지 걸리는 시간이 무조건 설정한 시간보다 길다.
-  
-  <br>
-
 ##### Q. setTimeout() 콜백 함수에 parameter 전달시 주의사항
 
 ```js
@@ -237,7 +234,7 @@ setTimeout(alert, 1000, "Hello"); // 작동 O
 
 1, 3번째 코드는 잘 동작하는데, 2번째 코드는 잘 동작하지 않는다.
 
-어떻게 구글링을 해야할지도 감이 잘 안 잡혀서 stackoverflow에 질문을 올렸다. https://stackoverflow.com/questions/71273265/why-do-i-have-to-use-an-anonymous-function-instead-of-passing-an-additional-argu
+어떻게 구글링을 해야할지도 감이 잘 안 잡혀서 [stackoverflow에 질문을 올렸다](https://stackoverflow.com/questions/71273265/why-do-i-have-to-use-an-anonymous-function-instead-of-passing-an-additional-argu). 다행히 어떤 분께서 답변을 친절하게 잘 해주셨다.
 
 * `rAf`는 number primitive를 가리키고 있는 값이다. 따라서 2번째처럼 `setTimeout`의 parameter로 전달하는 경우 `setTimeout()`이 호출되었을때의 값으로 `rAf`값이 고정되고, 따라서 타이머가 끝난뒤에는 `rAf`와 콜백함수가 가리키는 코드가 달라지면서 정상적으로 동작하지 않게 된다.
 
@@ -263,7 +260,7 @@ setTimeout(alert, 1000, "Hello"); // 작동 O
   setTimeout(cancelTiming, 1500, timing);
   ```
 
-  
+* 그리고 [JavaScript에서 값이 어떻게 전달되는지와 관련된 stackoverflow 질문](https://stackoverflow.com/questions/518000/is-javascript-a-pass-by-reference-or-pass-by-value-language)도 이를 이해하는데 은근 도움이 되었다.
 
 따라서 콜백 함수에 전달하는 매개변수의 값이 타이머가 동작하는 도중 값이 바뀔 가능성이 있는 경우, 화살표 함수나 익명 함수로 감싸서 사용해야 한다.
 
