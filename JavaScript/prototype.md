@@ -6,6 +6,8 @@ java에서는 클래스 간의 상속관계가 형성되고, 해당 클래스로
 
 > ES6부터 `class`가 추가되었지만 이는 단순히 prototype을 class처럼 사용할 수 있게 해주는 syntactical sugar에 불과하다.
 
+prototype도 객체의 일종이기 때문에 런타임 중에도 수정이 가능하고, 기본적으로 제공되는 객체인 `String` 등의 prototype도 수정할 수 있다.
+
 <br>
 
 ## Prototype
@@ -208,7 +210,7 @@ console.log(Array.prototype.__proto__ === Object.prototype); // true
 
 새로운 객체를 설계할때 사용되는 함수. 이름의 첫글자를 대문자로 사용하는것이 일반적이다.
 
-instance 옆에서 `new` 연산자와 함께 사용된다. 이때 `new` 연산자는 `this`가 새롭게 생성되는 instance를 가리키도록 만들어준다.
+instance 옆에서 `new` 연산자와 함께 사용된다. 이때 `new` 연산자는 `this`가 새롭게 생성되는 instance를 가리키도록 만들어준다.
 
 ```js
 function Person(name, age) {

@@ -1,6 +1,6 @@
 # Object
 
-object는 단순하게 생각하면 property의 집합이라고 할 수 있다.
+object는 단순하게 생각하면 name-value pairs의 집합, 즉 property의 집합이라고 할 수 있다.
 
 <br>
 
@@ -430,7 +430,7 @@ const rect = new MyRect(10, 20);
 
 array의 value나 object의 property들을 쪼개서 개별적인 변수에 할당할 수 있다.
 
-배열은 `[]`, 객체는 `{}`를 사용하는 것에 주의하자.
+배열은 `[]`, 객체는 `{}`를 사용하는 것에 주의하자.
 
 ```js
 const foo = ['one', 'two', 'three'];

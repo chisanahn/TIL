@@ -1,7 +1,5 @@
 # for 반복문
 
-<br>
-
 ## for...in
 
 객체의 enumerable property에 대해서 반복을 실행한다. (Symbol은 제외)

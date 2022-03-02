@@ -9,6 +9,8 @@
 * ES6에서 많은 변화가 일어났기 때문에 최소한 ES6 (ES2015) 문법을 이해하고 있는 것이 좋다.
 
   > 채용공고만 보더라도 `ES6+`를 심심치않게 볼 수 있다.
+  
+  [ES6에 추가된 문법들을 간략하게 잘 설명해주는 글](https://www.taniarascia.com/es6-syntax-and-feature-overview/)이 있으니 참고하면 좋을 것 같다.
 
 > **참고자료**
 >
@@ -16,46 +18,85 @@
 > 2. Morelli B. JavaScript — WTF is ES6, ES8, ES 2017, ECMAScript… ? Medium. Published August 28, 2017. Accessed February 12, 2022. https://codeburst.io/javascript-wtf-is-es6-es8-es-2017-ecmascript-dca859e4821c
 > 3. ES6 Syntax and Feature Overview. Taniarascia.com. Published 2015. Accessed February 12, 2022. https://www.taniarascia.com/es6-syntax-and-feature-overview/
 
-<br><br>
+<br>
 
-## Types
+### Types
 
-* ### Primitive
+* #### [Primitive](./primitive.md)
 
-  * #### Number
+  * **Number**
 
-    * 메소드
-    * `toFixed()` : 설정한 소수점자리까지 반올림한 결과
+    기본적으로 실수형식으로 저장된다
 
-  * #### BigInt
+    * `toFixed()` : 설정한 소수점자리까지 반올림한 결과
 
-  * #### String 
+    * `parseInt(string);`
 
-  * #### null
+    * `parseFloat(string);`
 
-  * #### undefined
+      parseInt나 parseFloat은 문자열에 숫자가 아닌 문자가 포함되어 있어도 그전까지의 숫자를 Number로 변환해서 리턴해준다.
 
-  * #### Boolean
+    * `+ 'string'`
 
-  * #### [Symbol](./symbol.md)
+      string 앞에 `+`를 붙이면 Number로 변환된다.<br/>parseInt나 parseFloat와 달리 문자열에 숫자가 아닌 문자가 포함되어 있으면 NaN 리턴
 
-* ### Object
+    * `Number.isNan(value)`
 
-  * #### Function
+      isNan(value)은 반환값이 직관적이지 않다
 
-  * #### Array
+    * `isFinite(testValue)`
 
-  * #### Date
+  * BigInt
 
-  * #### RegExp
+  * **String** (UTF-16)
 
-  * #### Error
+    * `length`
+    * `String.prototype.charAt(index)`
+    * `String.prototype.replace(searchFor, replaceWith)`
+    * `String.prototype.toUpperCase()`
 
-  * #### Math
+  * **null** : deliberate non-value
 
-<br><br>
+  * **undefined** : uninitialized variable
 
-## Hoisting
+    > null이랑 undefined는 값이 아니라 Type의 일종임에 주의
+
+  * **Boolean**
+
+    * false : `false`, `0`, `""`(empty string), `NaN`, `null`, `undefined`
+    * true : all values except false values
+
+  * [**Symbol**](./symbol.md)
+
+* #### Object
+
+  * **Function**
+  * [**Array**](./array.md)
+  * [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
+  * [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
+  * [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
+  * Math
+  * [**JSON**](./json.md)
+
+> **참고자료**
+>
+> A re-introduction to JavaScript (JS tutorial) - JavaScript | MDN. Mozilla.org. Published February 18, 2022. Accessed March 1, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript
+
+<br>
+
+### 변수
+
+* `let` : 블록을 기준으로 범위가 설정되는 변수
+* `const` : 블록을 기준으로 범위가 설정되는 상수
+* `var` : 함수를 기준으로 범위가 설정되는 변수
+
+원래는 `var` 밖에 없었고, 블록이 따로 범위를 갖지 않았고, `let`, `const`는 ECMAScript 2015에 처음 등장했다.
+
+변수를 선언한채 값을 지정해주지 않는다면 변수의 타입은 `undefined`로 설정된다.
+
+<br>
+
+### Hoisting
 
 `var`로 선언된 변수나 함수의 선언은 해당 scope의 맨 위로 옮겨진다.
 
@@ -65,186 +106,181 @@
 >
 > Rascia T. Understanding Variables, Scope, and Hoisting in JavaScript. Digitalocean.com. Published February 20, 2018. Accessed February 13, 2022. https://www.digitalocean.com/community/tutorials/understanding-variables-scope-hoisting-in-javascript
 
-<br><br>
+<br>
 
-## Primitive
+### Template literals
 
-객체가 아닌 데이터. primitive value, primitive data type이라고도 한다.
+`\``으로 감싼 문자열
 
-* 총 7개가 존재한다. string, number, bigint, boolean, undefined, symbol, null
-
-* 모든 primitive는 **immutable**이다.
-
-  primitive가 할당된 변수와 primitive를 헷갈리지 않도록 주의하자.
-
-  primitive를 저장하는 변수는 새로운 primitive를 할당받을 수 있다. 하지만 primitive 그 자체는 객체와 달리 수정이 불가능하다.
+* 문자열에서 변수 값을 간단하게 사용할 수 있다.
 
   ```js
-  let a = "str";
-  console.log(a); // str
-  
-  a.toUpperCase();
-  console.log(a); // str
-  
-  a = a.toUpperCase();
-  console.log(a); // str
+  let name = "Josh";
+  let text = `Hi my name is ${name}`; // Hi my name is Josh
   ```
 
-* ### Wrapper Objects
+* 개행문자 `\n` 없이도 여러 줄로 이루어진 문자열을 다룰 수 있다.
 
-  primitive value를 저장하기 위한 객체
-
-  객체에 저장된 primitive value를 반환하는 `valueOf()` 메소드를 공통적으로 가지고 있다.
-
-<br>
+  ```js
+  let multilineText = `dsjkalf
+  sdajkflds
+  fdsajklf`;
+  ```
 
 > **참고자료**
 >
-> Primitive - MDN Web Docs Glossary: Definitions of Web-related terms | MDN. Mozilla.org. Published October 8, 2021. Accessed February 2, 2022. https://developer.mozilla.org/en-US/docs/Glossary/Primitive
-
-<br><br>
-
-## Object
-
-* ### [property](./object-property.md)
-
-* ### JSON
-
-  JavaScript Object Notation
-
-  * ##### 일반적인 JavaScript 객체와의 차이점
-
-    * key가 quotes로 둘러싸여 있다.
-
-    * function을 value로 가질 수 없는 등 value에 제약이 있다.
-
-  * ##### JSON methods
-
-    * `JSON.stringify()` : JSON 객체 -> JSON 문자열
-
-    * `JSON.parse()` : JSON 문자열 -> JSON 객체
-    
-      <br>
-  
-  > **참고자료**
-  >
-  > Tagliaferri L. How To Work with JSON in JavaScript. Digitalocean.com. Published December 9, 2016. Accessed February 13, 2022. https://www.digitalocean.com/community/tutorials/how-to-work-with-json-in-javascript
-
-<br><br>
-
-## [Immutability](./immutability.md)
-
-<br><br>
-
-## [Prototypes and Inheritance](./prototype.md)
-
-<br><br>
-
-## Iteration
-
-### Iteration protocols
-
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators#iterables
-
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterable_protocol
-
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator
-
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*
-
-ECMAScript 2015부터 추가된 개념
-
-#### The iterable protocol
-
-객체가 iterable 하기 위해서는 `@@iterator` 메소드를 구현해야만 한다.
-
-Array나 Map의 경우 기본적으로 해당 메소드가 구현되어져 있다.
-
-`Symbol.iterator`
-
-#### Spread syntax (...)
-
-`iterable`한 Object 앞에 `...`을 붙여서 여러 인자로 나눠서 전달할 수 있다.
-
-* 함수호출시 사용
-
-  Object의 모든 element를 함수에 인자로 전달한다.
-
-  `Function.prototype.apply()` 대신 유용하게 사용할 수 있다.
-
-  ```js
-  myFunction(...iterableObj);
-  // pass all elements of iterableObj as arguments to function myFunction
-  ```
-
-* For array literals:
-
-  ```js
-  [...iterableObj, '4', 'five', 6]; // combine two arrays by inserting all elements from iterableObj
-  ```
-
-* For object literals (new in ECMAScript 2018):
-
-  ```js
-  let objClone = { ...obj }; // pass all key:value pairs from an object
-  ```
+> Template literals (Template strings) - JavaScript | MDN. Mozilla.org. Published February 18, 2022. Accessed March 1, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#expression_interpolation
 
 <br>
 
+### 연산자
+
+##### String + Number
+
+String과 Number를 더하면 String이 반환된다.
+
+```javascript
+'3' + 4 + 5; // = "345"
+3 + 4 + '5' // = "75"
+```
+
+##### 비교연산자
+
+type까지 비교하기 위해서는 `===`를 사용해야 한다.
+
+```javascript
+123 == '123'; // true
+123 === '123'; // false
+```
+
+##### 논리 연산자
+
+```javascript
+// null check
+var name = o && o.getName();
+// caching
+var name  cachedName || (cachedName = getName());
+```
+
+왼쪽에서 -> 오른쪽 순서로 검사. 따라서 조건을 배치하는 순서에도 유의해서 작성해야 한다.
+
+피연산자가 2개인 논리 연산의 경우 첫번째 피연산자만 가지고 결과가 나올 경우 첫번째 피연산자를 리턴한다.
+
+* `expr1 && expr2` 반환값
+
+  : `expr1`이 false일 경우 `expr1` 리턴. 그 외에는 `expr2` 리턴
+
+* `expr1 || expr2` 반환값
+
+  : `expr1`이 true일 경우 `expr1` 리턴, 그 외에는 `expr2` 리턴
+
 > **참고자료**
 >
-> 1. Iteration protocols - JavaScript | MDN. Mozilla.org. Published July 20, 2021. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterable_protocol
-> 2. Spread syntax (...) - JavaScript | MDN. Mozilla.org. Published January 21, 2022. Accessed February 3, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
-> 3. 
+> 1. 드림코딩 by 엘리. 자바스크립트 4. 코딩의 기본 operator, if, for loop 코드리뷰 팁 | 프론트엔드 개발자 입문편 (JavaScript ES6). *YouTube*. Published online April 15, 2020. Accessed March 1, 2022. https://www.youtube.com/watch?v=YBjufjBaxHo&t=478s
+> 2. Expressions and operators - JavaScript | MDN. Mozilla.org. Published February 24, 2022. Accessed March 1, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#logical_operators
 
-<br><br>
+<br>
 
-## [for 반복문](./for-loop.md)
+### 제어문
+
+##### switch
+
+문자열도 사용 가능하다.
+
+```js
+switch (action) {
+    case 'draw':
+        // action
+        break;
+    default:
+        // action
+}
+```
+
+##### [for 반복문](./for-loop.md)
 
 * for...in
 * for...of
 
-<br><br>
+<br>
 
-## [Array](./array.md)
+### [Object](./object.md)
 
-<br><br>
+* **property**
+  * property descriptor
 
-## [Function](./funct)
+* 객체 생성
+* 객체 복사
+* destructuring assignment
 
-<br><br>
+<br>
 
-## Closure
+### [Immutability](./immutability.md)
 
-<br><br>
+<br>
 
-## [Ajax](./ajax.md)
+### [Prototypes and Inheritance](./prototype.md)
 
-<br><br>
+<br>
 
-## [Script Loading Strategies](./script_loading_strategies.md)
+### [Iteration](.)
 
-<br><br>
+<br>
 
-## Strict mode
+### [Function](./function.md)
+
+* arguments
+  * rest parameter
+  * `apply()`
+* 익명함수
+* IIFE (Immediately Invoked Function Expression)
+* 재귀함수
+* 화살표함수
+
+* [**Closure**](./closure.md)
+  * 활용방안
+    * function factory
+    * module design pattern - private methods
+  * 반복문 안에서의 closure
+  * 성능 고려
+
+<br>
+
+### [Ajax](./ajax.md)
+
+<br>
+
+### [Script Loading Strategies](./script_loading_strategies.md)
+
+<br>
+
+### Strict mode
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 
-<br><br>
+<br>
 
-## Client-side web APIs
+### Client-side web APIs
 
 https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs
 
-<br><br>
+<br>
 
-## [Event](./event.md)
+### [Event](./event.md)
 
-<br><br>
+<br>
 
-## 기타
+### Modules
 
-### CSS vs JS animation performance
+* ##### [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
+
+* ##### [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+
+<br>
+
+### 기타
+
+##### CSS vs JS animation performance
 
 기본적으로 성능면에서 차이는 없지만 CSS의 경우 GPU를 통해 처리할 수 있기 때문에 성능면에서 더 뛰어나다. 따라서 가능한 CSS를 사용하는 것이 좋다.
 

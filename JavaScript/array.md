@@ -1,5 +1,13 @@
 # Array
 
+JavaScript에서 배열은 길이가 고정되어 있지 않고, Type에 관계없이 item을 넣을 수 있다.
+
+```js
+var a = ['dog', 'cat'];
+a[100] = 3123124;
+a.length; // 101
+```
+
 <br>
 
 ## 선언방법
@@ -11,7 +19,30 @@ let arr2 = new Array();
 
 <br>
 
-## mutator methods
+## Spread Syntax
+
+```js
+myFunction(...iterableObj);
+```
+
+배열을 분해해서 각각의 item들을 인자로 전달할 수 있다.
+
+```js
+let arr = [1, 2];
+const sum = (a, b) => a + b;
+
+console.log(sum(...arr)); // 3
+```
+
+> **참고자료**
+>
+> Spread syntax (...) - JavaScript | MDN. Mozilla.org. Published February 18, 2022. Accessed March 1, 2022. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+
+<br>
+
+## Methods
+
+### mutator methods
 
 * `isArray()` : 배열인지 아닌지 확인
 
@@ -33,9 +64,7 @@ let arr2 = new Array();
 
 * `reverse()` : 순서 바꾸기
 
-<br>
-
-## accessor methods
+### accessor methods
 
 * `concat(value0, value1, ... , valueN)` : array 여러개 연결
 
@@ -54,9 +83,7 @@ let arr2 = new Array();
 * `indexOf(searchElement, fromIndex)` : elementrk 처음 등장하는 위치를 찾는 메소드. `fromIndex`(검색을 시작할 인덱스) optional. 
 * `lastIndexOf(searchElement, fromIndex)` : 마지막으로 등장하는 위치를 찾는다는 점을 제외하면 `indexOf()`와 동일.
 
-<br>
-
-## iteration methods
+### iteration methods
 
 * `forEach(callbackFn)` : 모든 요소에 대해 `callbackFn` 수행. `for`문을 사용하는 것보다 가독성이 좋다.
 
