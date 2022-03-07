@@ -2,17 +2,17 @@
 
 ## SOLID 5원칙
 
-객체 지향 설계뿐만 아니라 애자일 개발에서도 핵심 철학을 형성한다
+객체 지향 설계뿐만 아니라 애자일 개발에서도 핵심 철학을 형성한다
 
 * ### Single-responsibility principle
 
-  하나의 클래스가 하나의 책임만을 가져야 한다.
+  하나의 클래스가 하나의 책임만을 가져야 한다.
 
 * ### Open-closed principle
 
   모든 클래스는 확장에는 열려있되, 수정에는 닫혀있어야 한다.
 
-  다시말해 객체는 소스코드의 변화없이 확장이 가능해야 한다.
+  다시말해 객체는 소스코드의 변화없이 확장이 가능해야 한다.
 
 * ### Listov substitution principle
 
@@ -22,13 +22,13 @@
 
   인터페이스는 client의 요구사항에 맞게 최대한 세세하게 나눠져있는것이 좋다.
 
-  객체지향 뿐만 아니라 분산시스템이나 마이크로서비스에서도 핵심적인 원칙이다.
+  객체지향 뿐만 아니라 분산시스템이나 마이크로서비스에서도 핵심적인 원칙이다.
 
 * ### Dependency inversion principle
 
   구현체에 의존해서는 안된다. 인터페이스 등 추상적인 개념에 의존해야 한다.
 
-  특히 high-level 모듈은 low-level 모듈을 import해서는 안된다.
+  특히 high-level 모듈은 low-level 모듈을 import해서는 안된다.
 
   객체간의 결합도를 낮추기 위한 원칙이다.
 
@@ -51,7 +51,7 @@
 >
 > https://regexone.com/problem/matching_decimal_numbers
 
-<br>
+<br><br>
 
 # md 문법
 
@@ -80,7 +80,7 @@ html `<details>`, `<summary>` 태그 이용해서 접기/펼치기 버튼 만들
 - [x] item1
 - [ ] item2
 
-<br/>
+<br/><br>
 
 # window에서 z-shell 설치
 
@@ -104,7 +104,7 @@ solarize dark theme도 적용하고 싶어서 찾아보던중 Windows New Termin
 z shell로 변경하고 나니 git log 등의 명령어를 수행할때 다른 창으로 이동한뒤 q로 닫고 나면 내용이 보이지 않아서 불편했다.
 git core.pager가 기본적으로 less로 설정되어 있는데 bash랑 달리 zsh를 사용하게 되면 pager로 열리게 된다. 따라서 설정을 조금 수정해주면 된다. https://serebrov.github.io/html/2014-01-04-git-log-and-less-keep-output.html
 
-<br>
+<br><br>
 
 # 라이선스
 

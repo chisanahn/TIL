@@ -1,5 +1,19 @@
 # Git
 
+## squash merge시 주의할 점
+
+알고리즘 스터디 할때 사용하는 리포지토리에서 README 수정이라서 간과했던 부분인데
+
+일단 기본적으로 작업할때 따로 브랜치를 만들어서 작업하고 main 브랜치에 머지하는게 좋고
+
+만약 `origin`의 main 브랜치에서 `upstream` main 브랜치에 PR을 날릴 경우 squash 머지를 사용하면 커밋 내역이 충돌날 수 있기 때문에 주의해야 한다.
+
+> 그때 당시에는 커밋 내역을 깔끔하게 할 수 있을 것 같아서 squash 머지를 사용했는데 충돌나는건 미처 생각하지 못했다.
+
+우선 지금은 아직 소스코드가 그런게 올라와있지 않은 상태라서 origin을 upstream 저장소로 덮어씌우는게 좋을 것 같다.
+
+<br>
+
 ## git filter-branch
 
 필터에 적용된 파일만 가지고 히스토리를 다시 구축할 수 있다.
@@ -92,7 +106,7 @@ $ git branch (-m | -M) [<oldbranch>] <newbranch>
 
 이 옵션을 한번 사용해서 push를 하고 나면 해당 branch의 `upstream branch`가 `branch.<name>.merge`에 추가된다.
 
-한번 추가된 뒤로는 해당 브랜치에서 git push / git pull 등의 명령어를 인자없이 사용하면 `-u` 옵션을 주고 사용했던 `upstream branch`가 기본값으로 적용된다.
+한번 추가된 뒤로는 해당 브랜치에서 git push / git pull 등의 명령어를 인자없이 사용하면 `-u` 옵션을 주고 사용했던 `upstream branch`가 기본값으로 적용된다.
 
 > **참고자료**
 >
@@ -100,7 +114,7 @@ $ git branch (-m | -M) [<oldbranch>] <newbranch>
 
 <br>
 
-## 브랜치 컨벤션
+## 브랜치 컨벤션
 
 GitHub의 경우 merge commit의 기본메시지가 `Merge pull request #[PR번호] from 리포지토리명/브랜치명`이라서 브랜치에 이슈번호를 명시해두면 merge commit이 issue에 연결된다.
 
@@ -124,7 +138,7 @@ dir/**
 !dir/exception.txt
 ```
 
-### 이미 git에 추가되어있는 파일이나 디렉토리
+### 이미 git에 추가되어있는 파일이나 디렉토리
 
 이미 git에 추가되어있는 파일이나 디렉토리의 경우 .gitignore에 명시한다고 제거되지 않으므로 우선 commit tree에서 제거해줘야 한다.
 
