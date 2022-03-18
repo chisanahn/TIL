@@ -1,3 +1,28 @@
+## user와 user profile을 하나의 테이블에 저장해도 될까?
+
+성능, 유지보수를 고려해서 테이블을 분리해서 저장하는 것이 좋다.
+
+* 자주 변경이 일어나는 정보들과 그렇지 않은 정보들을 구분해서 저장하면 정보의 특성에 맞게 최적화 할 수 있다.
+* full-scan을 자주해야하는 테이블의 경우, 테이블의 크기가 커지면 성능에 안좋은 영향이 있을 수 있다.
+
+> **참고자료**
+>
+> 1. https://stackoverflow.com/questions/3889797/mysql-user-profile-details-table-setup-best-practice
+> 2. https://softwareengineering.stackexchange.com/questions/241089/keep-user-and-user-profile-in-different-tables
+> 3. https://stackoverflow.com/questions/5671562/storing-user-profile-data-in-the-users-table-or-separate-profile-table
+
+<br>
+
+## 외래키를 Primary Key로 사용해도 될까?
+
+1대1 관계에서는 사용해도 무관하다.
+
+> **참고자료**
+>
+> https://stackoverflow.com/questions/10982992/is-it-fine-to-have-foreign-key-as-primary-key#:~:text=It%20is%20perfectly%20fine%20to,one%2Dto%2Dmany%20relationship.
+
+<br>
+
 ## MySQL
 
 설치
@@ -85,4 +110,4 @@ key를 받아오는 과정에서 오류가 발생하는데 검색해봐도 잘 �
 
 * heidisql에서 특정 유저로 로그인하게 되면 권한이 부여된 데이터베이스에 한해서만 보여진다.
 
-  따라서 프로젝트를 할때 관련있는 데이터베이스에서만 권한이 부여된 유저를 따로 생성해서 관리하는 것이 편하다.
+  따라서 프로젝트를 할때 관련있는 데이터베이스에서만 권한이 부여된 유저를 따로 생성해서 관리하는 것이 편하다.

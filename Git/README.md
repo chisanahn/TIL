@@ -74,6 +74,12 @@ rebase로 병합뿐만 아니라 과거 커밋들을 수정하거나 다른 브�
 >
 > Git Rebase (1). Suhwan.dev. Published 2018. Accessed January 30, 2022. https://suhwan.dev/2018/01/21/Git-Rebase-1/
 
+과거의 커밋을 2개로 나눠서 작성할 필요가 있어서 찾아봤는데 이 작업도 `rebase`를 이용해서 간단하게 처리할 수 있다.
+
+> **참고자료**
+>
+> https://stackoverflow.com/questions/6217156/break-a-previous-commit-into-multiple-commits
+
 <br>
 
 ## --root
