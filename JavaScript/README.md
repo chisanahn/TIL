@@ -288,3 +288,12 @@ https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs
 >
 > CSS and JavaScript animation performance - Web Performance | MDN. Mozilla.org. Published February 2, 2022. Accessed February 13, 2022. https://developer.mozilla.org/en-US/docs/Web/Performance/CSS_JavaScript_animation_performance
 
+<br>
+
+## JavaScript Scope와 Closure 기초
+
+https://unikys.tistory.com/295
+
+* 반복문 안에서 콜백 함수를 호출할때 발생하는 Scope 문제를 Closure를 이용해서 해결할 수 있다.
+
+  with문을 이용해서도 해결할 수 있지만 with문은 사용안하는게 좋음. https://unikys.tistory.com/304
