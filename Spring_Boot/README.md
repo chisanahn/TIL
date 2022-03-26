@@ -170,7 +170,7 @@ https://memostack.tistory.com/163
 
 SpringBoot에서 DB에 접근하기 위해 JPA, JDBC를 사용한다.
 
-
+<br>
 
 ### 환경설정
 
@@ -186,7 +186,7 @@ spring boot의 기본 DB는 `H2`로 다른 DB를 사용하려면 `application.pr
 
 https://www.mysqltutorial.org/
 
-
+<br>
 
 ### MariaDB로 변경
 
@@ -194,7 +194,9 @@ https://goddaehee.tistory.com/205
 
 MySQL이랑 거의 똑같아서 드라이버만 바꿔주면 되는 것 같다.
 
+<br>
 
+## JPA
 
 ### JPA annotation
 
@@ -223,6 +225,8 @@ MySQL이랑 거의 똑같아서 드라이버만 바꿔주면 되는 것 같다.
 > https://velog.io/@leyuri/Spring-boot-JPA-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98-Entity-Table-Column-Id-Lombok
 
 이때 Entity를 통해 실제로 생성되는 테이블 이름은 소문자로만 이루어지는 것 같다.
+
+<br>
 
 ### JpaRepository
 
