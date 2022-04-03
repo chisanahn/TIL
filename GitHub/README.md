@@ -1,5 +1,17 @@
 # GitHub
 
+<br>
+
+## branch protection rule
+
+해당 브랜치로 merge 하기전에 무조건 PR을 생성하도록 하거나, 최소 1개의 approve를 받아야 PR을 머지시킬 수 있도록 하는 등 여러 규칙을 생성할 수 있다.
+
+> **참고자료**
+>
+> Require multiple reviewers for pull requests | The GitHub Blog. The GitHub Blog. Published March 23, 2018. Accessed April 3, 2022. https://github.blog/2018-03-23-require-multiple-reviewers/#:~:text=To%20require%20multiple%20reviewers%20for,pull%20request%20to%20that%20branch.
+
+<br>
+
 ## GitHub Pages
 
 원래부터 TIL을 블로그화해서 기술 블로그를 만들 생각은 있었다.
@@ -92,3 +104,5 @@ GET POST PUT DELETE 카테고리 링크가 실제로 존재하지 않아서 오�
 ## Organizations
 
 * organization은 무한대로 만들 수 있다.
+
+<br>
