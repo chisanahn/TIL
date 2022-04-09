@@ -140,3 +140,11 @@ MDN 공식문서를 참고해서 공부하고, TIL을 작성하던 도중 저작
 > 2. \01. CC 라이선스. 크리에이티브 커먼즈 라이선스. Published 2022. Accessed February 6, 2022. http://ccl.cckorea.org/about/
 > 3. 위키미디어 프로젝트 기여자. MIT 허가서. Wikipedia.org. Published July 22, 2007. Accessed February 6, 2022. https://ko.wikipedia.org/wiki/MIT_%ED%97%88%EA%B0%80%EC%84%9C#:~:text=MIT%20%ED%97%88%EA%B0%80%EC%84%9C(%EC%98%81%EC%96%B4%3A%20MIT%20License,License%EB%A1%9C%20%ED%91%9C%EA%B8%B0%EB%90%98%EA%B8%B0%EB%8F%84%20%ED%95%9C%EB%8B%A4.
 > 4. About MDN Web Docs - The MDN project | MDN. Mozilla.org. Published February 3, 2022. Accessed February 6, 2022. https://developer.mozilla.org/en-US/docs/MDN/About
+
+<br><br>
+
+## android studio avd 한글 키보드 설치
+
+1. AVD-24이상 설치 버전 다운로드<br>https://codedragon.tistory.com/1146
+2. `%LOCALAPPDATA%\Android\sdk\platform-tools` 경로로 이동<br>https://stackoverflow.com/questions/35854238/where-is-adb-exe-in-windows-10-located
+3. 설치<br>https://codedragon.tistory.com/1318
