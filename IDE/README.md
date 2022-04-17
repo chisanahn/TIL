@@ -1,3 +1,11 @@
+## breakpoint condition
+
+breakpoint를 설정한뒤, breakpoint를 오른쪽 클릭하면 특정 조건에서만 break되도록 설정할 수 있다.
+
+chrome 개발자 도구에서도 지원해주고 왠만한 IDE에서는 모두 지원해주는듯하다.
+
+<br>
+
 # visual studio
 
 ##### # disable context menu for open in visual studio
