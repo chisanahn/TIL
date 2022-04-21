@@ -22,7 +22,7 @@ https://plzrun.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%
 
 <br><br>
 
-## 문제풀이 TIP
+## 문제풀이 TIP
 
 <br>
 
@@ -32,7 +32,7 @@ https://plzrun.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%
 
 <br>
 
-### 게임 이론 문제 TIP
+### 게임 이론 문제 TIP
 
 게임 이론 문제의 경우, 규칙을 찾아서 푸는 것이 가장 편한 방법이다. 심지어 입력 값이 커서 규칙없이는 풀 수 없는 문제도 있다.
 
@@ -44,3 +44,22 @@ https://plzrun.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%
 
 <br>
 
+### 문제 꼼꼼히 잘 읽기
+
+정말 기본적인거지만 풀다보면 실수를 하는 경우가 꽤 많았다.
+
+처음 문제를 읽을때 꼼꼼하게 읽는 것도 중요하지만
+
+문제를 풀다가 막히면 다시 한번 문제를 꼼꼼하게 읽는 습관을 들일 필요도 있는 것 같다.
+
+> 특히 풀이는 맞는 것 같은데 오답이 나오는 경우 **문제 다시 읽기**
+
+<br>
+
+### 디버깅 TIP
+
+* **breakpoint condition**
+
+  거의 모든 IDE에서 breakpoint를 오른쪽 클릭해서 특정 조건에서만 break되도록 설정할 수 있다.
+
+<br>

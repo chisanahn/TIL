@@ -47,7 +47,7 @@ sort((a, b) -> {
 
 <br>
 
-## StringBuilder
+### StringBuilder
 
 String은 immutable object라서 문자열에 대한 연산을 수행할때 StringBuilder를 사용하는 것이 성능 면에서 더 좋다.
 
@@ -57,5 +57,21 @@ String은 immutable object라서 문자열에 대한 연산을 수행할때 Stri
 
 <br>
 
+### 클래스를 따로 만들지 않고 푸는 방법
 
+class를 따로 만들지 않고 Main 클래스 안에서만 푸는 경우 변수나 함수에 static을 붙여서 정의해야되는데 public static void main 함수 안에서 Main 클래스의 객체를 생성해서 함수를 실행하면 static 같은걸 붙이지 않고 간단하게 풀이할 수 있다.
+
+빠르게 풀어야하는 경우 상당히 유용할 것 같다.
+
+```java
+public static void main(String[] args) throws Exception {
+    new Main().solution();
+}
+```
+
+> **참고**
+>
+> Nahwasa. 백준 2225 자바 - 합분해 (BOJ 2225 JAVA). Nahwasa. Published December 30, 2021. Accessed April 21, 2022. https://nahwasa.com/entry/%EB%B0%B1%EC%A4%80-2225-%EC%9E%90%EB%B0%94-%ED%95%A9%EB%B6%84%ED%95%B4-BOJ-2225-JAVA
+
+<br>
 
