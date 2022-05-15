@@ -12,9 +12,18 @@ JPA에서 DB 데이터를 변경하는 경우에 `@Transactional`을 사용해�
 
 영속성 컨텍스트와 Lazy Loading이라는 단어가 나오는데 이게 뭔지 한번 공부해봐야할 것 같다.
 
-* 영속성 컨텍스트 : https://velog.io/@neptunes032/JPA-%EC%98%81%EC%86%8D%EC%84%B1-%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%9E%80
+* 영속성 컨텍스트 : https://velog.io/@neptunes032/JPA-%EC%98%81%EC%86%8D%EC%84%B1-%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%9E%80
 
-이후에 https://velog.io/@giantim/5 글도 한번 다시 보면 좋을 것 같다.
+이후에 https://velog.io/@giantim/5 글도 한번 다시 보면 좋을 것 같다.
 
 <br><br>
 
+## Entity에서 외래키에 대해서 id만 저장하는 것이 가능한가?
+
+가능하다. 다만, hibernate의 장점을 누리기 위해선 object를 저장해서 사용하는 것이 더 좋다는 답변도 있고, lazy loading 같은 개념에 대해서 더 공부해봐야 어떤 장단점이 있는지 알 수 있을 것 같다.
+
+> **참고자료**
+>
+> https://stackoverflow.com/questions/6311776/hibernate-foreign-keys-instead-of-entities/6312018#6312018
+>
+> https://stackoverflow.com/questions/2111294/is-it-possible-to-have-foreign-key-enforced-without-object-to-object-mapping?noredirect=1&lq=1

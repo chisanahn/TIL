@@ -12,7 +12,7 @@
 
 > `@DataJpaTest`에 `@Transactional`도 포함하기 때문에 DB에 커밋되지 않고 롤백된다.
 >
-> 심지어 기본적으로 내장된 임베디드 데이터베이스를 사용해서 테스트를 진행한다고 한다.
+> 심지어 기본적으로 내장된 임베디드 데이터베이스를 사용해서 테스트를 진행한다고 한다.
 
 그리고 `@ExtendWith(SpringExtension.class)`, `@ExtendWith(MockitoExtension.class)` 어노테이션을 사용하던데 이게 어떤건지에 대해서도 공부해봐야겠다.
 
@@ -37,3 +37,5 @@
 > 1. Bluemiv. SpringBoot, Junit5에서 Service 테스트. MemoStack. Published January 13, 2021. Accessed April 4, 2022. https://memostack.tistory.com/196
 > 2. GOCHEAT. gocheat. [INFO] DEVELOP LOG. Published April 10, 2021. Accessed April 4, 2022. https://gocheat.github.io/spring/spring_test-1/
 > 3. demonic_. [springboot] 데이터 사용 Service를 mockito로 테스트하기. side impact. Published February 11, 2020. Accessed April 4, 2022. https://lemontia.tistory.com/915
+
+<br><br>

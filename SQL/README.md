@@ -16,3 +16,20 @@
 
 > 1. MySQL Joins. W3schools.com. Published 2022. Accessed March 5, 2022. https://www.w3schools.com/mysql/mysql_join.asp
 > 2. 미래학자. [MySQL] 7장 조인 : JOIN (INNER, LEFT, RIGHT). 미래학자. Published November 22, 2016. Accessed March 5, 2022. https://futurists.tistory.com/17
+
+<br><br>
+
+## table을 초기화하고 싶은 경우
+
+```sql
+SET FOREIGN_KEY_CHECKS = 0;
+
+TRUNCATE table1;
+TRUNCATE table2;
+
+SET FOREIGN_KEY_CHECKS = 1;
+```
+
+> **참고자료**
+>
+> https://stackoverflow.com/questions/5452760/how-to-truncate-a-foreign-key-constrained-table
