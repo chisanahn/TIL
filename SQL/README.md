@@ -19,7 +19,7 @@
 
 <br><br>
 
-## table을 초기화하고 싶은 경우
+### table을 초기화하고 싶은 경우
 
 ```sql
 SET FOREIGN_KEY_CHECKS = 0;
@@ -33,3 +33,36 @@ SET FOREIGN_KEY_CHECKS = 1;
 > **참고자료**
 >
 > https://stackoverflow.com/questions/5452760/how-to-truncate-a-foreign-key-constrained-table
+
+<br><br>
+
+### pivot
+
+row data를 column으로 옮기고 싶을때 사용하는 방식
+
+| id   | preference | preferenceCount |
+| ---- | ---------- | --------------- |
+| 1    | DISLIKE    | 2               |
+| 1    | LIKE       | 3               |
+
+이런 table에서 id별로 DISLIKE 개수와 LIKE 개수를 한 row에 표시하고 싶을때 pivot을 사용할 수 있다.
+
+```sql
+SELECT
+	id,
+	MAX(case when preference='DISLIKE' then preferenceCount ELSE 0 END) AS dislikeCount,
+	MAX(case when preference='LIKE' then preferenceCount ELSE 0 END) AS likeCount
+FROM table
+GROUP BY id
+```
+
+실행 결과
+
+| id   | dislikeCount | likeCount |
+| ---- | ------------ | --------- |
+| 1    | 2            | 3         |
+
+> **참고자료**
+>
+> https://www.databasestar.com/mysql-pivot/
+
