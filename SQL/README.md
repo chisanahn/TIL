@@ -66,3 +66,12 @@ GROUP BY id
 >
 > https://www.databasestar.com/mysql-pivot/
 
+<br><br>
+
+### insert or ignore into
+
+field 값에 unique 제약을 부여했을때 `insert into` 대신 `insert or ignore into`를 사용하면 unique constraint failed exception이 뜨지 않도록 할 수 있다.
+
+> **참고자료**
+>
+> https://stackoverflow.com/questions/65650852/how-to-handle-unique-constraint-failed-exception-in-sqlite

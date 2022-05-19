@@ -28,6 +28,18 @@ Build Tools -> Gradle 설정에서 Run Tests using 값을 `Gradle`에서 `Intell
 >
 > https://seosh817.tistory.com/183
 
+<br>
+
+## Intellij Could not find or load main
+
+Build 메뉴에서 rebuild를 해보면 문제가 왜 발생하는지 알 수 있다.
+
+참고로 프로젝트 경로에 한글이 포함되어서 그럴 확률이 높다.
+
+> **참고자료**
+>
+> https://stackoverflow.com/questions/10654120/error-could-not-find-or-load-main-class-in-intellij-ide
+
 <br><br>
 
 # visual studio
