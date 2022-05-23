@@ -62,7 +62,6 @@ $ git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch 파
 > **참고자료**
 >
 > 1. Git - git-merge Documentation. Git-scm.com. Published 2022. Accessed January 30, 2022. https://git-scm.com/docs/git-merge#Documentation/git-merge.txt---allow-unrelated-histories
-> 2. 
 
 <br>
 
