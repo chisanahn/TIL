@@ -8,17 +8,59 @@
 
 ## 홈 서버 구축
 
-우선 외부에서 우리 서버로 접속할 수 있도록 공유기에 포트포워딩 설정을 해줬다.
+* https://varins.com/library/server/install-ubuntu-server/#%eb%a9%94%ec%9d%b8%eb%b3%b4%eb%93%9c-bios-%ec%84%a4%ec%a0%95
+
+  > 추후에 nginx를 사용해서 프록시를 구축해서 사용하는 연습도 해보면 좋을 것 같다.
+
+* https://www.whatwant.com/m/entry/notebook-ubuntu-server
+
+<br>
+
+### linux server 설치
+
+안 쓰던 구식 노트북에서 만약을 대비해서 윈도우를 살리기 위해서 디스크 파티션을 나눈 뒤에 설치해줬다.
+
+https://ubuntu.com/server/docs/install/step-by-step
+
+<br>
+
+### 보안 설정
+
+* 간단한 방화벽 설정 (UFW)
+
+  https://webdir.tistory.com/206
+
+* 해외 IP 차단
+
+  https://shutcoding.tistory.com/24
+
+* 공개키 생성 + 비밀번호 로그인 제한
+
+  https://tttap.tistory.com/131
+
+* 로그인 내역 확인 명령어 `last`
+
+  https://www.baeldung.com/linux/last-command
+
+* ssh 보안 설정
+
+  https://zipi.me/601
+
+<br>
+
+### 공유기 포트포워딩 설정
+
+우선 외부에서 우리 서버로 접속할 수 있도록 공유기에서 서버에 고정 IP를 할당해주고, 포트포워딩 설정을 해줬다.
 
 우리집의 경우 SKT로 모뎀이 연결되어있어서 모뎀에서 해당 설정을 해줬다.
-
-https://comterman.tistory.com/1408
 
 * 서버 관리를 위해서 22번 포트를 열어주고
 
   > 보안으로 인해서 외부적으로 노출되는 포트는 다른 포트를 사용했다.
 
 * 배포할 서비스를 위해서 80번 포트를 열어줬다.
+
+https://comterman.tistory.com/1408
 
 <br><br>
 
