@@ -1,4 +1,4 @@
-# 프로그래밍 언어
+## 프로그래밍 언어
 
 * ### C++
 
@@ -8,120 +8,38 @@
 
 <br>
 
-# [Algorithm](https://github.com/chisan01/TIL/tree/main/Algorithm)
+## [Algorithm](./Algorithm)
 
-* ### 알고리즘 개념
-
-  * DP
-  * ...
-
-* ### 언어별 헷갈리는 문법
-
-  * C++
-    * pair
-    * vector
-    * stack
-  * Java
-    * stream
-    * lamda
-    * string method
-    * Collections
-  * JavaScript
-    * array method
-    * string method
-
-* 문제풀이 기록
-
-  * 종만북
-
-  - ICPC 준비 - 2021 SW개발능력향상 프로그램
-
-  - BOJ
+* ### 문제풀이 기록
+  -   [백준](./Algorithm/BOJ)
+  -   [프로그래머스](./Algorithm/Programmers)
 
 <br>
 
-# 웹
+## 프로젝트 기록
 
-* ### web architecture 101
-
-* ### 프론트엔드
-
-  * HTML
-    * semantic structure
-  * CSS
-    * flex
-    * grid
-    * display
-    * transition
-  * JavaScript (+DOM)
-    * script loading stratgies
-    * Event
-    * Closure
-    * asynchronous JavaScript
-  * React
-
-* ### 백엔드
-
-  * [Spring Boot](https://github.com/chisan01/TIL/tree/main/Spring_Boot)
-    * Testing
-    * DI
-    * Bean
-    * JPA
-
-* 디자인패턴
-
-  * MCV 패턴
-
-* ### [DevOps](https://github.com/chisan01/TIL/tree/main/DevOps)
-
-  * RDB
-    * ERD
-    * query
-  * Docker
-    * yaml 문법
-    * container
-  * AWS EC2
-
-<br>
-
-## Git
-
-* git subtree
-* git rebase
-* git branch -M
-* git push -u
-* git branching strategy
-* .gitignore
-* git hook
-* git server
-
-
-
-<br>
-
-### IDE
-
-* visual studio
-* visual sutdio code
-* intellij
-
-<br>
-
-### 기타
-
-* 정규식
-* md 문법
-  * GitHub 프로필 꾸미기
-  * 접기/펼치기 버튼
-  * 체크박스
-* window 환경에서 Z shell 사용하기
-
-<br/>
-
-### 프로젝트
-
-* 21-2학기 오픈소스개발프로젝트
+* ### 21-2학기 오픈소스개발프로젝트
   * Swing
   * RDB(mariaDB) 설계
   * API 설계 및 문서화
   * java http 연동
+  * [`SpringBoot + mariaDB` AWS EC2에 Docker로  배포](./project-record/oss-dev-project.md)
+
+<br>
+
+* ### 22-1학기 오픈소스 웹소프트웨어
+  - 백엔드 구축
+    - JDBC
+    - 테스트 코드 시도
+    - Properties 파일로 설정값 관리
+  - [`JSP + tomcat + mySQL` ubuntu server로 배포](./project-record/web-oss.md)
+
+<br>
+
+* ### 22-1학기 오픈소스 전문 프로젝트
+  - DB 관리
+    - android 내장 DB로 SQLite 사용(Room 라이브러리 이용)
+  - GitHub 관리
+  - [GitHub Actions를 활용한 CI/CD pipeline 구축](./project-record/oss-android.md)
+
+<br>
