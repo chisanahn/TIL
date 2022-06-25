@@ -2,11 +2,15 @@
 
 <br>
 
-## 알고리즘 문제 풀이 기록
--   [백준](./BOJ)
--   [프로그래머스](./Programmers)
--   [종만북](./JongmanBook)
--   [ICPC 준비 - 2021 SW개발능력향상 프로그램](./ICPC)
+
+## [알고리즘 문제 풀이 기록](./PS_history)
+-   [백준](./PS_history/BOJ)
+-   [프로그래머스](./PS_history/Programmers)
+-   [종만북](./PS_history/JongmanBook)  
+
+<br>
+
+[ICPC 준비 - 2021 SW개발능력향상 프로그램](./ICPC)
 
 <br>
 
