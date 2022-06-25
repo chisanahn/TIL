@@ -2,7 +2,6 @@
 
 <br>
 
-
 ## [알고리즘 문제 풀이 기록](./PS_history)
 -   [백준](./PS_history/BOJ)
 -   [프로그래머스](./PS_history/Programmers)

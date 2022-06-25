@@ -27,3 +27,16 @@ JPA에서 DB 데이터를 변경하는 경우에 `@Transactional`을 사용해�
 > https://stackoverflow.com/questions/6311776/hibernate-foreign-keys-instead-of-entities/6312018#6312018
 >
 > https://stackoverflow.com/questions/2111294/is-it-possible-to-have-foreign-key-enforced-without-object-to-object-mapping?noredirect=1&lq=1
+
+<br><br>
+
+## Entity 생성, 업데이트 날짜 관련 Annotation
+
+query가 실행됨에 따라 자동으로 timestamp 값을 업데이트해준다.
+
+> 이런 것도 있다니 신기했다.
+
+* `@CreationTimestamp`
+* `@UpdateTimestamp`
+
+https://velog.io/@koo8624/Spring-CreationTimestamp-UpdateTimestamp
