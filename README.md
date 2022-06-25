@@ -1,18 +1,28 @@
 ## 프로그래밍 언어
 
-* ### C++
+* C++
 
-* ### Java
+* Java
 
-* ### [JavaScript](./JavaScript/README.md)
+* [JavaScript](./JavaScript)
 
 <br>
 
 ## [Algorithm](./Algorithm)
 
-* ### 문제풀이 기록
-  -   [백준](./Algorithm/BOJ)
-  -   [프로그래머스](./Algorithm/Programmers)
+* ### [문제풀이 기록](./Algorithm/PS_history)
+  -   [백준](./Algorithm/PS_history/BOJ)
+  -   [프로그래머스](./Algorithm/PS_history/Programmers)
+
+<br>
+
+## Etc
+
+* [Git](./Git)
+
+* [GitHub](./GitHub)
+
+* [commit & push 자동화](./auto-commit)
 
 <br>
 
