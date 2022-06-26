@@ -1,0 +1,6 @@
+# redis를 이용한 caching
+
+`@Cacheable`, `@CacheEvict` 어노테이션을 활용해서 cache를 관리할 수 있다.
+
+https://ckddn9496.tistory.com/110
+
