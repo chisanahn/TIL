@@ -64,6 +64,8 @@ git push origin main
 
 3. PR을 통해 upstream에 변경될 내용을 확인 후, merge 합니다.
 
+    > 이때, 실수를 줄이기 위해서 다른 팀원에게 merge 할 내용을 확인받고 merge를 진행하는 것이 일반적입니다.
+
     ![merge](./merge-PR.png)
 
 ### 4-1. PR conflict
