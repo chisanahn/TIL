@@ -1,5 +1,19 @@
 # Git
 
+## git-cofig
+
+### core.pager
+
+`git log` 등의 결과를 terminal에서 어떻게 출력할지 설정할 수 있다.
+
+개인적으로는 `less -FX`로 설정해두는게 편한 것 같다.
+
+> git을 설치했을때 기본값은 `cat`으로 설정되어 있는 것 같다.
+
+https://medium.com/pragmatic-programmers/git-config-core-pager-807e17d64243
+
+<br>
+
 ## squash merge시 주의할 점
 
 알고리즘 스터디 할때 사용하는 리포지토리에서 README 수정이라서 간과했던 부분인데

@@ -1,3 +1,16 @@
+## @JoinColumn default value
+
+`@JoinColumn`으로 외래키 이름을 명시하지 않는 경우 JPA에서 다음과 같은 규칙으로 자동으로 외래키 이름을 지정해준다.
+
+```
+<field_name>_<id_column_name>
+```
+
+https://stackoverflow.com/questions/34788151/is-joincolumn-annotation-mandatory-in-hibernate
+
+<br>
+
+
 ## JPA 사용시 테스트 코드에서 `@Transactional` 사용 주의
 
 JPA에서 DB 데이터를 변경하는 경우에 `@Transactional`을 사용해야 한다고 한다.
