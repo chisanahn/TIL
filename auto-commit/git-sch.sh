@@ -1,18 +1,16 @@
 # git-sch.sh
 
-Y=$(date +%Y -d "yesterday")
-M=$(date +%m -d "yesterday")
-D=$(date +%d -d "yesterday")
+Ymd=$(date -v -1d '+%Y-%m-%d')
 
-Ymd=$Y-$M-$D
-
-GitDir="C:/Users/chisanahn/Desktop/TIL"
+GitDir="/Users/anchisan/Projects/TIL"
 
 cd $GitDir
 if (git log | grep -q $Ymd); then
+	echo
 	echo not the first commit
 else
-	echo first commit
+	echo
+	echo first commit at $Ymd
 	git add .
 	git commit -m "$Ymd"
 	git pull -r origin main

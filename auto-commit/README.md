@@ -68,3 +68,12 @@ bash script에 아예 cd문을 적어서 실행해야겠다.
 
 Startup폴더에 script 파일의 바로가기를 만들어서 넣어두고 .bashrc zshell 조건으로 `if(cd|grep -q "auto-commit")`을 사용했더니 정상적으로 작동한다.
 
+<br>
+
+## bash script 자동실행 in macOS
+
+https://stackoverflow.com/questions/6442364/running-script-upon-login-in-mac-os-x/13372744#13372744
+
+### demon log 관련 설정
+
+https://serverfault.com/questions/183589/how-do-i-activate-launchd-logging-on-os-x
