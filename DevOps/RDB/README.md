@@ -1,3 +1,8 @@
+## m1 mysql 설치
+https://velog.io/@haleyjun/MySQL-Mac%EC%97%90-MySQL-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0-M1%EC%B9%A9
+
+<br>
+
 ## `order` 테이블 오류
 
 `order`는 sql 예약어로 테이블명으로 order를 사용하면 sql문을 사용할때 오류가 발생한다.
