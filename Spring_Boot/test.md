@@ -1,3 +1,11 @@
+## Exception test
+
+JUnit에서 method에서 발생하는 Exception들을 체크할 수 있는 메소드를 제공해준다.
+
+https://www.baeldung.com/junit-assert-exception
+
+<br>
+
 ## JPA unit test
 
 다른 테이블과 연관관계가 있는 테이블의 경우 unit test를 어떻게 작성할 수 있을지 감이 잘 안왔는데
@@ -30,7 +38,13 @@
 
 `Mockito`는 Mock을 생성해주는 프레임워크 중 하나.
 
-`given`을 사용해서 생성된 가짜 객체의 메소드의 반환값을 지정해서 사용하는 것 같다.
+- `@Mock`으로 가짜 객체를 생성하고
+- `@InjectMock`으로 가짜 객체를 주입할 객체를 지정해서 사용한다.
+
+> ex) Unit test를 위해서 가짜 `Repository` 객체를 만들고 `Service` 객체에 주입해서 사용한다.
+
+- `given`을 사용해서 생성된 가짜 객체의 메소드의 반환값을 지정한다.
+
 
 > **참고자료**
 >
