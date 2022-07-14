@@ -1,6 +1,14 @@
 ## m1 mysql 설치
 https://velog.io/@haleyjun/MySQL-Mac%EC%97%90-MySQL-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0-M1%EC%B9%A9
 
+* window와 달리 mac의 경우 mysql이랑 mariadb를 동시에 설치해서 사용할 수 없는 것 같다.
+
+    https://stackoverflow.com/questions/51189634/installing-mariadb-with-mysql-on-mac
+
+* mariadb는 되고, mysql에서는 되지 않는게 있다는 얘기에 기존에 설치되어있던 mysql을 지우고 mariadb를 설치했는데 이 과정에서 시행착오를 꽤 겪었다.
+
+    https://light-tree.tistory.com/245
+
 <br>
 
 ## `order` 테이블 오류
