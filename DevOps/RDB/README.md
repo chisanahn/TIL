@@ -5,9 +5,32 @@ https://velog.io/@haleyjun/MySQL-Mac%EC%97%90-MySQL-%EC%84%A4%EC%B9%98%ED%95%98%
 
     https://stackoverflow.com/questions/51189634/installing-mariadb-with-mysql-on-mac
 
+    대신, `jdbc:mysql` driver로 mariadb도 접속할 수 있고, 내부 엔진도 엄청 차이가 나진 않아서 로컬 환경에서 돌려보는 용도로는 `mariaDB`만 사용해도 충분할 것 같다.
+
 * mariadb는 되고, mysql에서는 되지 않는게 있다는 얘기에 기존에 설치되어있던 mysql을 지우고 mariadb를 설치했는데 이 과정에서 시행착오를 꽤 겪었다.
 
     https://light-tree.tistory.com/245
+
+    재설치하고 실행하니깐 이런 오류가 발생한다.
+
+    ```
+    ERROR 2002 (HY000): Can't connect to local server through socket '/tmp/mysql.sock' (2)
+    ```
+
+    [공식문서](https://mariadb.com/kb/en/what-to-do-if-mariadb-doesnt-start/)를 참고해서 로그를 찍어보니 다음과 같은 로그가 보인다.
+
+    ```
+    [ERROR] mysqld: unknown variable 'mysqlx-bind-address=127.0.0.1'
+    ```
+
+    homebrew를 통해 설치한 경우, 재설치할때 오류가 발생하면 `/opt/homebrew`에 존재하는 mysql 관련 파일들을 지워줘야 한다.
+
+    * `/opt/homebrew/Cellar`
+    * `/opt/homebrew/var/mysql`
+    * `/opt/hombbrew/etc/my.cnf`
+    등등
+
+    https://stackoverflow.com/questions/58245118/warning-the-post-install-step-did-not-complete-successfully-when-trying-to-ins
 
 <br>
 
