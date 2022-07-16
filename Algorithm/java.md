@@ -2,6 +2,18 @@
 
 <br>
 
+### `StringBuilder` - 출력 시간 최적화
+
+그동안 출력 시간 최적화를 위해서 `BufferedWriter`를 사용했었는데 `BufferedWriter`는 동기화 처리 때문에 더 무거워서 PS의 경우에는 `StringBuilder`를 사용하는게 일반적이라고 한다.
+
+https://velog.io/@donghokim1998/JAVA-BufferedReader-BufferedWriter
+
+https://algopoket.tistory.com/9
+
+> 백준에서 기존에 `BufferedReader`를 사용했던 문제를 `StringBuilder`로 수정해서 제출해봤지만 실행 시간이 더 오래나왔다. 하지만 원래 백준의 경우 제출할때마다 수행 시간이나 메모리가 조금씩 달라져서 그런 것 같다.
+
+<br>
+
 ### `Scanner` 대신 `BufferedReader` & `StringTokenizer`
 
 BufferedReader를 버퍼를 이용해서 입출력을 실행하기 때문에 Scanner에 비해서 실행시간이 상당히 빠르다.
