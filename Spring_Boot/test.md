@@ -1,3 +1,11 @@
+## Array 값 test
+
+https://www.baeldung.com/java-assert-lists-equality-ignore-order
+
+`AssertJ`에서 제공해주는 `assertThat(first).hasSameElementsAs(second)` 메소드를 이용해서 간편하게 배열의 아이템들을 순서 상관없이 완전히 동일한지 비교할 수 있다.
+
+<br>
+
 ## Exception test
 
 JUnit에서 method에서 발생하는 Exception들을 체크할 수 있는 메소드를 제공해준다.
