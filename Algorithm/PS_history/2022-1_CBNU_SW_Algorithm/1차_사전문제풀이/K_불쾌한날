@@ -1,0 +1,65 @@
+# Problem K - 불쾌한 날(Bad Hair Day)
+
+## 성공. 약 30분
+
+우선순위 큐를 사용해서 `greedy`하게 풀 수 있는 문제
+
+> `greedy` 문제는 이제 어느 정도 감을 잡은 것 같다
+
+<details><summary>소스코드</summary>
+
+```java
+import java.io.*;
+import java.util.*;
+
+class Cow implements Comparable<Cow> {
+    public int index, height;
+
+    public Cow(int index, int height) {
+        this.index = index;
+        this.height = height;
+    }
+
+    @Override
+    public int compareTo(Cow o) {
+        return this.height - o.height;
+    }
+}
+
+class Main {
+
+    int N;
+
+    void run() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        N = Integer.parseInt(br.readLine());
+
+        long answer = 0;
+        PriorityQueue<Cow> PQ = new PriorityQueue<>();
+
+        for (int i = 0; i < N; i++) {
+            int curH = Integer.parseInt(br.readLine());
+            while (!PQ.isEmpty() && PQ.peek().height <= curH) {
+                Cow cow = PQ.poll();
+                answer += (i - cow.index - 1);
+            }
+            PQ.add(new Cow(i, curH));
+        }
+        while (!PQ.isEmpty()) {
+            Cow cow = PQ.poll();
+            answer += (N - cow.index - 1);
+        }
+
+        System.out.println(answer);
+
+        br.close();
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main().run();
+    }
+}
+```
+
+</details>
