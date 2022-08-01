@@ -3,6 +3,8 @@
 - ch6. 무식하게 풀기
 - 난이도 : 하
 
+https://algospot.com/judge/problem/read/PICNIC
+
 <br>
 
 ## 성공

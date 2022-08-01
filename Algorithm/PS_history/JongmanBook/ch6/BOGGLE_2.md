@@ -3,6 +3,8 @@
 - ch6. 무식하게 풀기
 - 난이도 : 하
 
+https://algospot.com/judge/problem/read/BOGGLE
+
 <br>
 
 왠지 DP로 해결할 수 있을 것 같아서 다시 도전해봤다.
