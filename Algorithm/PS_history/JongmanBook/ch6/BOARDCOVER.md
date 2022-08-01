@@ -118,7 +118,8 @@ class Main {
 
 <details><summary>소스코드</summary>
 
-```javaimport java.io.*;
+```java
+import java.io.*;
 import java.util.StringTokenizer;
 
 class Main {
@@ -184,6 +185,134 @@ class Main {
                 for (int j = 0; j < W; j++) {
                     board[i][j] = rows.charAt(j);
                     if(board[i][j] == '.') whiteCnt++;
+                }
+            }
+
+            if(whiteCnt % 3 != 0) sb.append("0\n");
+            else {
+                int answer = f(0, 0, whiteCnt);
+                sb.append(answer).append("\n");
+            }
+        }
+        System.out.print(sb.toString());
+
+        br.close();
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main().run();
+    }
+}
+```
+
+</details>
+
+## 공부 후 리팩토링
+
+책에 기재되어있는 풀이를 참고해서 풀이를 개선했다.
+
+> `set`함수 참고
+
+<details><summary>소스코드</summary>
+
+```java
+import java.io.*;
+import java.util.*;
+
+class Main {
+
+    final int WHITE = 0;
+    final int BLACK = 1;
+
+    final int[][][] block = {
+            {{0, 0}, {1, 0}, {0, 1}},
+            {{0, 0}, {0, 1}, {1, 1}},
+            {{0, 0}, {1, 0}, {1, 1}},
+            {{0, 0}, {1, 0}, {1, -1}}
+    };
+
+    int H, W;
+    int[][] board;
+
+    boolean isOutside(int y, int x) {
+        return y < 0 || y >= H || x < 0 || x >= W;
+    }
+
+    boolean check(int y, int x, int type) {
+        boolean ret = true;
+        for (int i = 0; i < 3; i++) {
+            int nY = y + block[type][i][0];
+            int nX = x + block[type][i][1];
+
+            if(isOutside(nY, nX)) {
+                ret = false;
+                continue;
+            }
+            if(board[nY][nX] == BLACK) ret = false;
+
+            board[nY][nX]++;
+        }
+        return ret;
+    }
+
+    void recover(int y, int x, int type) {
+        for (int i = 0; i < 3; i++) {
+            int nY = y + block[type][i][0];
+            int nX = x + block[type][i][1];
+
+            if(isOutside(nY, nX)) continue;
+
+            board[nY][nX]--;
+        }
+    }
+
+    int f(int y, int x, int whiteCnt) {
+        if (whiteCnt == 0) return 1;
+        if (isOutside(y, x)) return 0;
+
+        int nX = x + 1;
+        int nY = y;
+        if (nX == W) {
+            nX = 0;
+            nY++;
+        }
+
+        if (board[y][x] == BLACK) return f(nY, nX, whiteCnt);
+
+        int ret = 0;
+        for (int type = 0; type < 4; type++) {
+            if(check(y, x, type)) {
+                ret += f(nY, nX, whiteCnt - 3);
+            }
+            recover(y, x, type);
+        }
+        return ret;
+    }
+
+    void run() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+
+        int T = Integer.parseInt(br.readLine().trim());
+        for (int test = 0; test < T; test++) {
+            StringTokenizer st = new StringTokenizer(br.readLine().trim());
+            H = Integer.parseInt(st.nextToken());
+            W = Integer.parseInt(st.nextToken());
+
+            board = new int[H][W];
+            int whiteCnt = 0;
+            for (int i = 0; i < H; i++) {
+                String rows = br.readLine().trim();
+                for (int j = 0; j < W; j++) {
+                    switch (rows.charAt(j)) {
+                        case '.':
+                            board[i][j] = WHITE;
+                            whiteCnt++;
+                            break;
+                        case '#':
+                            board[i][j] = BLACK;
+                            break;
+                    }
                 }
             }
 
