@@ -1,6 +1,6 @@
 # 쿼드 트리 뒤집기
 
-- ch6. 무식하게 풀기
+- ch7. 분할 정복
 - 난이도 : 하
 
 https://algospot.com/judge/problem/read/QUADTREE
