@@ -1,3 +1,9 @@
+## 스프링 통합 테스팅 시 기본 프로필 설정
+
+https://stackoverflow.com/questions/39690094/spring-boot-default-profile-for-integration-tests
+
+<br>
+
 ## Array 값 test
 
 https://www.baeldung.com/java-assert-lists-equality-ignore-order
