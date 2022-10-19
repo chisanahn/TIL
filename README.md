@@ -1,31 +1,3 @@
-## 프로그래밍 언어
-
-* C++
-
-* Java
-
-* [JavaScript](./JavaScript)
-
-<br>
-
-## [Algorithm](./Algorithm)
-
-* ### [문제풀이 기록](./Algorithm/PS_history)
-  -   [백준](./Algorithm/PS_history/BOJ)
-  -   [프로그래머스](./Algorithm/PS_history/Programmers)
-
-<br>
-
-## Etc
-
-* [Git](./Git)
-
-* [GitHub](./GitHub)
-
-* [commit & push 자동화](./auto-commit)
-
-<br>
-
 ## 프로젝트 기록
 
 * ### 21-2학기 오픈소스개발프로젝트
@@ -51,5 +23,42 @@
     - android 내장 DB로 SQLite 사용(Room 라이브러리 이용)
   - GitHub 관리
   - [GitHub Actions를 활용한 CI/CD pipeline 구축](./project-record/oss-android.md)
+
+<br>
+
+- ### 2022 여름방학 동아리 홈페이지 리뉴얼 프로젝트 참여
+
+  - GitHub branch protection rule 설정
+
+    > 미연의 실수 방지. 안정적인 개발 환경 구축
+
+  - [ATDD 도입 & embedded redis를 이용한 통합/로컬 테스트 환경 구축](./project-record/sammaru-server/2022-10-13.md) - 진행 중
+
+    > 개발 생산성 향상
+
+
+
+<br>
+
+- ### 22-2학기 산학 프로젝트
+
+  - Kotlin 공부
+  
+    https://www.udacity.com/course/kotlin-bootcamp-for-programmers--ud9011
+
+    - [generics 개념 정리 <br> (+ JAVA generics & wild card 복습)](./Kotlin/generic-and-wildcard.md)
+
+    - [JAVA - Lambda에서 사용되는 local 변수가 final이거나 effectivley final이어야 하는 이유](./JAVA/local-variable-in-lambda.md)
+
+
+<br><br>
+
+## Etc
+
+* [Git](./Git)
+
+* [GitHub](./GitHub)
+
+* [commit & push 자동화](./auto-commit)
 
 <br>
