@@ -105,6 +105,154 @@ int main() {
 
 </details>
 
+java로도 풀어봤지만 시간초과를 받았다.
+
+<details><summary>java 소스코드</summary>
+
+```java
+import java.io.*;
+import java.util.*;
+
+class Complex {
+    private final double r, i;
+
+    public Complex(double real, double imaginary) {
+        this.r = real;
+        this.i = imaginary;
+    }
+
+    public double getReal() {
+        return r;
+    }
+
+    public double getImaginary() {
+        return i;
+    }
+
+    public Complex add(Complex other) {
+        return add(this, other);
+    }
+
+    public Complex subtract(Complex other) {
+        return subtract(this, other);
+    }
+
+    public Complex multiply(Complex other) {
+        return multiply(this, other);
+    }
+
+    public Complex divide(Complex other) {
+        return divide(this, other);
+    }
+
+    public static Complex add(Complex a, Complex b) {
+        return new Complex(a.r + b.r, a.i + b.i);
+    }
+
+    public static Complex subtract(Complex a, Complex b) {
+        return new Complex(a.r - b.r, a.i - b.i);
+    }
+
+    public static Complex multiply(Complex a, Complex b) {
+        return new Complex(a.r * b.r - a.i * b.i, a.r * b.i + a.i * b.r);
+    }
+
+    public static Complex divide(Complex c1, Complex c2) {
+        double r = (c1.r * c2.r + c1.i * c2.i) / (c2.r * c2.r + c2.i * c2.i);
+        double c = (c1.i * c2.r - c1.r * c2.i) / (c2.r * c2.r + c2.i * c2.i);
+        return new Complex(r, c);
+    }
+}
+
+class Main {
+
+    void FFT(List<Complex> f, Complex w) {
+        int n = f.size();
+        if (n == 1) return;
+
+        List<Complex> even = new ArrayList<>(), odd = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (i % 2 == 0) even.add(f.get(i));
+            else odd.add(f.get(i));
+        }
+        FFT(even, w.multiply(w));
+        FFT(odd, w.multiply(w));
+
+        Complex wp = new Complex(1, 0);
+        for (int i = 0; i < n / 2; i++) {
+            Complex curEven = even.get(i), curOdd = odd.get(i);
+            f.set(i, curEven.add(wp.multiply(curOdd)));
+            f.set(i + n / 2, curEven.subtract(wp.multiply(curOdd)));
+            wp = wp.multiply(w);
+        }
+    }
+
+    List<Integer> multiply(List<Complex> A, List<Complex> B) {
+        int n = 1;
+        while (n < A.size() + 1 || n < B.size() + 1) n *= 2;
+        n *= 2;
+        while (n > A.size()) A.add(new Complex(0, 0));
+        while (n > B.size()) B.add(new Complex(0, 0));
+
+        Complex w = new Complex(Math.cos(2 * Math.PI / n), Math.sin(2 * Math.PI / n));
+        FFT(A, w);
+        FFT(B, w);
+        List<Complex> C = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            Complex a = A.get(i), b = B.get(i);
+            C.add(a.multiply(b));
+        }
+
+        FFT(C, new Complex(1, 0).divide(w));
+        for (int i = 0; i < n; i++) {
+            Complex c = C.get(i);
+            C.set(i, c.divide(new Complex(n, 0)));
+        }
+        List<Integer> ret = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            ret.add((int) Math.round(C.get(i).getReal()));
+        }
+        return ret;
+    }
+
+    void solution() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+
+        int T = Integer.parseInt(br.readLine());
+        for (int t = 0; t < T; t++) {
+            String members = br.readLine();
+            List<Complex> A = new ArrayList<>();
+            for (int i = 0; i < members.length(); i++) {
+                if(members.charAt(i) == 'F') A.add(new Complex(0, 0));
+                else A.add(new Complex(1, 0));
+            }
+            String fans = br.readLine();
+            List<Complex> B = new ArrayList<>();
+            for (int i = fans.length() - 1; i >= 0; i--) {
+                if(fans.charAt(i) == 'F') B.add(new Complex(0, 0));
+                else B.add(new Complex(1, 0));
+            }
+
+            List<Integer> ret = multiply(A, B);
+            int allHugs = fans.length() - members.length() + 1;
+            for (int i = 0; i < fans.length() - members.length() + 1; i++) {
+                if (ret.get(members.length() - 1 + i) > 0) allHugs--;
+            }
+            sb.append(allHugs).append("\n");
+        }
+        System.out.print(sb.toString());
+        br.close();
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main().solution();
+    }
+}
+```
+
+</details>
+
 <br>
 
 ## 비트마스킹을 이용한 풀이
