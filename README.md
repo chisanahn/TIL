@@ -22,7 +22,7 @@
   - DB 관리
     - android 내장 DB로 SQLite 사용(Room 라이브러리 이용)
   - GitHub 관리
-  - [GitHub Actions를 활용한 CI/CD pipeline 구축](./project-record/oss-android.md)
+  - [GitHub Actions를 활용한 android 앱 배포 자동화](./project-record/oss-android.md)
 
 <br>
 
