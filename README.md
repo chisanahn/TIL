@@ -54,6 +54,8 @@
     - [배열 복사](./Kotlin/array-copy.md)
        - subList()는 복사가 아닌 view를 반환한다
 
+    - [Scope Functions (when, let, run, apply, also) 올바르게 사용하기](./Kotlin/scope-functions.md)
+
 <br>
 
 ### 🖥 지속 가능한 SW 개발을 위한 코드리뷰 (2022-04 우아한테크세미나)
