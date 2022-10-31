@@ -56,6 +56,10 @@
 
     - [Scope Functions (when, let, run, apply, also) 올바르게 사용하기](./Kotlin/scope-functions.md)
 
+  - Android 공부 (android 공식문서 [tutorial](https://developer.android.com/kotlin/androidbasics) 활용)
+
+    - [state-hoisting](./Android/state-hoisting.md)
+
 <br>
 
 ### 🖥 지속 가능한 SW 개발을 위한 코드리뷰 (2022-04 우아한테크세미나)
