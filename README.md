@@ -56,6 +56,8 @@
 
     - [Scope Functions (when, let, run, apply, also) 올바르게 사용하기](./Kotlin/scope-functions.md)
 
+    - [`yield()`](./Kotlin/yield.md)
+
   - Android 공부 (android 공식문서 [tutorial](https://developer.android.com/kotlin/androidbasics) 활용)
 
     - [state-hoisting](./Android/state-hoisting.md)
