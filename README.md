@@ -64,6 +64,8 @@
 
     - [import에 주의하기](./Android/wrong-import.md)
 
+    - [Coroutine Scope](./Kotlin/coroutine-scope.md)
+
 <br>
 
 ### 🖥 지속 가능한 SW 개발을 위한 코드리뷰 (2022-04 우아한테크세미나)
