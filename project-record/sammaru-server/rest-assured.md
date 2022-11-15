@@ -33,22 +33,4 @@ https://github.com/msbaek/atdd-example)를 보고 ATDD를 한번 적용해봐야
 
 login 로직에서 redis에 직접적으로 접근하는 부분이 있는데, 현재 로컬 환경에서는 redis 환경 설정이 되어 있지 않아서 오류가 발생하는 것이었다.
 
-<br>
-
-## 로컬/통합 테스트 - 메모리 내장 Redis 사용 환경 구축
-
-redis를 직접적으로 사용하는 일이 없도록 추상화하거나, test용 redis를 단순한 로컬용으로 바꿔서 사용하는게 좋을 것 같은데 아무래도 해본 적이 없어서 어려움도 많을 것 같고 이번 기회에 메모리내장 redis를 테스트 환경에서 사용할 수 있도록 구축해보려고 한다.
-
-https://jojoldu.tistory.com/297
-
-https://dev-racoon.tistory.com/35
-
-<br>
-
-`RestAssuredMockMvc`를 사용하면 `@WithSecurityContext`를 사용할 수 있을 것 같다.
-
-- https://github.com/spring-projects/spring-security/issues/3721
-
-- https://www.youtube.com/watch?v=1rkoFTxJhNk&ab_channel=rieckpil
-
-찐 통합 테스트는 아니지만 인증 부분을 생략할 수 있어서 좋을 것 같다.
+> [로컬/테스트 환경에서 내장 메모리 redis를 사용하도록 개발환경을 구축함으로써 해결했다.](./embedded-redis.md)
